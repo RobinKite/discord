@@ -1,5 +1,3 @@
-function App() {
-  return null;
+export function App() {
+  return <></>;
 }
-
-export default App;
