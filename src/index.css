@@ -1,5 +1,6 @@
 *,
-*::before *::after {
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,12 +9,12 @@
 :root {
   font-family: Inter, system-ui, sans-serif;
   line-height: 1.5;
-  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  background-color: #242424;
 }
 
 body {
