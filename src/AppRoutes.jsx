@@ -23,13 +23,17 @@ const AppRoutes = () => {
 						element={<Home />}
 					/>
 					<Route
-						path="channels"
+						path="channels/@me"
 						element={<p>Channel</p>}
 					/>
-					{/* <Route
-						path="channels/:textChannelId"
-						element={<p></p>}
-					/> */}
+					<Route
+						path="channels/:channelId/:textChannelId"
+						element={<></>}
+					/>
+					<Route
+						path="channels/:channelId/:voiceChannelId"
+						element={<></>}
+					/>
 				</Route>
 
 				<Route

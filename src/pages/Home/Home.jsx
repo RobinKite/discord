@@ -5,7 +5,7 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		navigate("/channels", { replace: true });
+		navigate("/channels/@me", { replace: true });
 	}, []);
 	return <p>Home</p>;
 };
