@@ -3,6 +3,7 @@ import PublicLayout from "./components/Layout/PublicLayout";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
 
 const AppRoutes = () => {
 	return (
@@ -18,9 +19,17 @@ const AppRoutes = () => {
 
 				<Route element={<RequireAuth />}>
 					<Route
-						path="channels"
-						element={<></>}
+						path="/"
+						element={<Home />}
 					/>
+					<Route
+						path="channels"
+						element={<p>Channel</p>}
+					/>
+					{/* <Route
+						path="channels/:textChannelId"
+						element={<p></p>}
+					/> */}
 				</Route>
 
 				<Route
