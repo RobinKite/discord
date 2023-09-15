@@ -1,0 +1,15 @@
+{
+  "editor.tabSize": 2,
+  "editor.linkedEditing": true,
+
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "html.format.extraLiners": "none",
+  "html.format.indentInnerHtml": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
+}
