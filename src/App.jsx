@@ -1,3 +1,4 @@
+import ClientSidebar from "./components/ClientSidebar/ClientSidebar";
 import AppRoutes from "./AppRoutes";
 // import axios from "axios";
 // import { useEffect } from "react";
@@ -26,6 +27,7 @@ export function App() {
 
 	return (
 		<>
+     <ClientSidebar />
 			<AppRoutes />
 		</>
 	);
