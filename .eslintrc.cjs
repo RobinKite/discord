@@ -13,7 +13,7 @@ module.exports = {
 	settings: { react: { version: "18.2" } },
 	plugins: ["react-refresh"],
 	rules: {
-		indent: ["error", "tab"],
+		indent: ["error", 2],
 		quotes: ["error", "double"],
 		semi: ["error", "always"],
 		"react-refresh/only-export-components": [
