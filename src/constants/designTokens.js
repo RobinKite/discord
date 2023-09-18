@@ -14,6 +14,7 @@ export const darkTextLighter = "#ffffff";
 export const darkText = "#dbded1";
 export const darkBg = "#23272a";
 export const darkChannelName = "#949ba4";
+export const darkTooltip = "#111214";
 
 // light theme
 export const lightActive = "#e5e5e5";
