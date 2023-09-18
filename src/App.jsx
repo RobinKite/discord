@@ -1,6 +1,6 @@
 import { Layout as ServerLayout } from "@/features/server";
 import ClientSidebar from "./components/ClientSidebar/ClientSidebar";
-import AppRoutes from "./AppRoutes";
+// import AppRoutes from "./AppRoutes";
 // import axios from "axios";
 // import { useEffect } from "react";
 
@@ -30,7 +30,7 @@ export function App() {
 		<div className="flex">
 			<ClientSidebar />
 			<ServerLayout />
-			<AppRoutes />
+			{/* <AppRoutes /> */}
 		</div>
 	);
 }
