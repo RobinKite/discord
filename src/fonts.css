@@ -1,23 +1,23 @@
 @font-face {
-  font-family: "NotoSans";
+  font-family: NotoSans;
   font-weight: 400;
   src: url("@/assets/fonts/NotoSans-Regular.woff2");
 }
 
 @font-face {
-  font-family: "NotoSans";
+  font-family: NotoSans;
   font-weight: 500;
   src: url("@/assets/fonts/NotoSans-Medium.woff2");
 }
 
 @font-face {
-  font-family: "NotoSans";
+  font-family: NotoSans;
   font-weight: 600;
   src: url("@/assets/fonts/NotoSans-SemiBold.woff2");
 }
 
 @font-face {
-  font-family: "NotoSans";
+  font-family: NotoSans;
   font-weight: 700;
   src: url("@/assets/fonts/NotoSans-Bold.woff2");
 }

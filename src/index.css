@@ -1,5 +1,4 @@
 @import "fonts";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +12,7 @@
 }
 
 :root {
-  font-family: "NotoSans", system-ui, sans-serif;
+  font-family: NotoSans, system-ui, sans-serif;
   line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizelegibility;
