@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
 const indicatorHeightMap = {
   active: "h-10",

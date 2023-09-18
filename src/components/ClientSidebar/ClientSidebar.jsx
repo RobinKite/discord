@@ -1,4 +1,3 @@
-import React from "react";
 import ButtonPlus from "../Buttons/ButtonPlus";
 import ButtonServer from "../Buttons/ButtonServer";
 import { SiDiscord } from "react-icons/si";
