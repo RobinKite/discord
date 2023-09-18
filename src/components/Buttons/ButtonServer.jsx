@@ -2,6 +2,7 @@ import { Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { blurple, darkServerIconBg } from "@/constants/designTokens";
 
 const indicatorHeightMap = {
 	active: "h-10",
@@ -10,7 +11,7 @@ const indicatorHeightMap = {
 	hidden: "h-0",
 };
 
-const ButtonServer = ({ children, title }) => {
+const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
 	const [indicatorState, setIndicatorState] = useState(null);
 	const [notification, setNotification] = useState(false); //mock redux notification
 
@@ -46,12 +47,11 @@ const ButtonServer = ({ children, title }) => {
 			onMouseEnter={handleEnter}
 			onMouseLeave={handleLeave}
 			onClick={handleActive}>
-			{
-				<span
-					className={`absolute top-1/2 -translate-y-1/2 left-0 w-1 bg-white rounded-r-lg transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}></span>
-			}
+			<span
+				className={`absolute top-1/2 -translate-y-1/2 left-0 w-1 bg-white rounded-r-lg transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
+			/>
 			<Tooltip
-				title={title ?? children}
+				title={title || children}
 				arrow
 				placement="right"
 				componentsProps={{
@@ -67,23 +67,23 @@ const ButtonServer = ({ children, title }) => {
 				<Button
 					variant="text"
 					sx={{
-						color: "white",
-						fontSize: 10,
+						color,
+						fontSize,
 						textTransform: "initial",
 						borderRadius: "50%",
-						bgcolor: "#2c2f33",
+						bgcolor: darkServerIconBg,
 						whiteSpace: "nowrap",
 						width: 48,
 						height: 48,
 						transition: "all 300ms",
 						minWidth: "auto",
 						"&:hover": {
-							bgcolor: "#5865f2",
+							bgcolor,
 							color: "#fff",
 							borderRadius: 4,
 						},
 						"&:focus": {
-							bgcolor: "#5865f2",
+							bgcolor,
 							color: "#fff",
 							borderRadius: 4,
 						},
@@ -98,10 +98,16 @@ const ButtonServer = ({ children, title }) => {
 export default ButtonServer;
 
 ButtonServer.propTypes = {
-	children: PropTypes.element.isRequired,
+	children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 	title: PropTypes.string,
+	color: PropTypes.string,
+	bgcolor: PropTypes.string,
+	fontSize: PropTypes.number,
 };
 
 ButtonServer.defaultProps = {
 	title: "",
+	color: "#fff",
+	bgcolor: blurple,
+	fontSize: 10,
 };

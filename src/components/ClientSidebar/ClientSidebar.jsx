@@ -1,21 +1,34 @@
-import ButtonPlus from "../Buttons/ButtonPlus";
+import { LiaPlusSolid } from "react-icons/lia";
 import ButtonServer from "../Buttons/ButtonServer";
 import { SiDiscord } from "react-icons/si";
+import {
+	darkServerIconBg,
+	darkSidebar,
+	darkText,
+	green,
+} from "@/constants/designTokens";
 
 const ClientSidebar = () => {
 	return (
-		<div className="h-screen py-3 w-20 flex flex-col gap-y-2 items-center bg-[#1E1F22] inset-y-0">
-			<ButtonServer title={"Private messages"}>
-				<SiDiscord
-					color={"#edeaea"}
-					size={34}
-				/>
+		<div
+			className={`h-screen py-3 flex flex-col gap-y-2 items-center bg-[${darkSidebar}] min-w-[4.5rem]`}>
+			<ButtonServer
+				title={"Private messages"}
+				color={darkText}>
+				<SiDiscord size={26} />
 			</ButtonServer>
-			<div className="w-10 h-0.5 bg-[#2c2f33] mx-auto rounded-md"></div>
+			<div
+				className={`w-8 h-0.5 bg-[${darkServerIconBg}] mx-auto rounded-md`}
+			/>
 			<ButtonServer>server 1</ButtonServer>
 			<ButtonServer>server 2</ButtonServer>
 			<ButtonServer>server 3</ButtonServer>
-			<ButtonPlus />
+			<ButtonServer
+				title="Add a Server"
+				bgcolor={green}
+				color={green}>
+				<LiaPlusSolid size={28} />
+			</ButtonServer>
 		</div>
 	);
 };

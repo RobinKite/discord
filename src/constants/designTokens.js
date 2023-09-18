@@ -1,5 +1,5 @@
-export const blurple = "#5865f2"; // accent
-export const green = "#57f287";
+export const blurple = "#5865f2";
+export const green = "#23A559";
 export const yellow = "#fee75c";
 export const fuchsia = "#eb459e";
 export const red = "#ed4245";
@@ -8,7 +8,8 @@ export const red = "#ed4245";
 export const darkActive = "#99aab5";
 export const darkUsersList = "#2b2d31";
 export const darkUserSection = "#232428";
-export const darkSidebar = "#2c2f33";
+export const darkServerIconBg = "#2c2f33";
+export const darkSidebar = "#1E1F22";
 export const darkTextLighter = "#ffffff";
 export const darkText = "#dbded1";
 export const darkBg = "#23272a";
