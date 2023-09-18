@@ -5,17 +5,18 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
-		<Provider store={store}>
-			<BrowserRouter>
-				<AuthProvider>
-					<Routes>
-						<Route path="/*" element={<App />} />
-					</Routes>
-				</AuthProvider>
-			</BrowserRouter>
-		</Provider>
-	</StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 );

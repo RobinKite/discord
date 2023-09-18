@@ -13,6 +13,21 @@ function RegistrationForm() {
     lastName: "",
   };
 
+  // const { setAuth } = useAuth();
+
+	// const navigate = useNavigate();
+	// const location = useLocation();
+	// const from = location.state?.from?.pathname || "/";
+
+	// const handleSubmit = () => {
+	// 	try {
+	// 		setAuth({ user: "Alex" }); //replace with real username
+	// 		navigate(from, { replace: true });
+	// 	} catch (e) {
+	// 		console.error(e);
+	// 	}
+	// };
+
   const onSubmit = (values, actions) => {
     console.log(values);
 
