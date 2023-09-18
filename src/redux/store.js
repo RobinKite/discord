@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
 import profileReducer from "./slices/profileSlice";
-import chatReducer from "./slices/chatSlice";
+import serverReducer from "./slices/serverSlice";
 import notificationsReducer from "./slices/notificationsSlice";
 import friendsReducer from "./slices/friendsSlice";
 import settingsReducer from "./slices/settingsSlice";
@@ -13,7 +13,7 @@ const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		profile: profileReducer,
-		chat: chatReducer,
+		server: serverReducer,
 		notifications: notificationsReducer,
 		friends: friendsReducer,
 		settings: settingsReducer,

@@ -27,7 +27,7 @@ export function App() {
 
 	return (
 		<>
-     <ClientSidebar />
+			<ClientSidebar />
 			<AppRoutes />
 		</>
 	);

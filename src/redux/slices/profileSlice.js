@@ -9,6 +9,10 @@ const profileSlice = createSlice({
 		setProfile: (state, action) => {
 			state.userProfile = action.payload;
 		},
+		updateProfileField: (state, action) => {
+			const { field, value } = action.payload;
+			state.userProfile[field] = value;
+		},
 	},
 });
 

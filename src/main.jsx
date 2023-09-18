@@ -9,17 +9,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-    <Provider store={store}>
-		  <BrowserRouter>
-			  <AuthProvider>
-				  <Routes>
-					  <Route
-						  path="/*"
-						  element={<App />}
-					  />
-				  </Routes>
-			  </AuthProvider>
-		  </BrowserRouter>
-    </Provider>
+		<Provider store={store}>
+			<BrowserRouter>
+				<AuthProvider>
+					<Routes>
+						<Route
+							path="/*"
+							element={<App />}
+						/>
+					</Routes>
+				</AuthProvider>
+			</BrowserRouter>
+		</Provider>
 	</StrictMode>
 );

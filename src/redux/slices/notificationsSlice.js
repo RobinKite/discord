@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateNotificationCount } from "./serverSlice";
 
 const notificationsSlice = createSlice({
 	name: "notifications",
@@ -7,7 +8,15 @@ const notificationsSlice = createSlice({
 	},
 	reducers: {
 		addNotification: (state, action) => {
-			state.notifications.push(action.payload);
+			const { id, message, type, serverId } = action.payload;
+			state.notifications.push({ id, message, type, serverId });
+			updateNotificationCount(serverId);
+		},
+		removeNotification: (state, action) => {
+			const notificationId = action.payload;
+			state.notifications = state.notifications.filter(
+				(notification) => notification.id !== notificationId
+			);
 		},
 		clearNotifications: (state) => {
 			state.notifications = [];
@@ -15,6 +24,6 @@ const notificationsSlice = createSlice({
 	},
 });
 
-export const { addNotification, clearNotifications } =
+export const { addNotification, clearNotifications, removeNotification } =
 	notificationsSlice.actions;
 export default notificationsSlice.reducer;
