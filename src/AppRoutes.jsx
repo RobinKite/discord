@@ -9,36 +9,21 @@ import { Layout as ServerLayout } from "@/features/server";
 const AppRoutes = () => {
 	return (
 		<Routes>
-			<Route
-				exact
-				path="/"
-				element={<PublicLayout />}>
-				<Route
-					path="login"
-					element={<Login />}
-				/>
+			<Route exact path="/" element={<PublicLayout />}>
+				<Route path="login" element={<Login />} />
 
 				<Route element={<RequireAuth />}>
 					<Route path="channels/">
-						<Route
-							path="@me"
-							element={<ServerLayout />}
-						/>
+						<Route path="@me" element={<ServerLayout />} />
 						<Route
 							path=":serverId/:channelId"
 							element={<p>Server channel</p>}
 						/>
 					</Route>
-					<Route
-						path="/"
-						element={<Home />}
-					/>
+					<Route path="/" element={<Home />} />
 				</Route>
 
-				<Route
-					path="*"
-					element={<Default />}
-				/>
+				<Route path="*" element={<Default />} />
 			</Route>
 		</Routes>
 	);

@@ -20,12 +20,22 @@ const Login = () => {
 	return (
 		<>
 			{/* Replace this with login page */}
-			<p className="text-white text-center mt-7 text-xl">Login Page</p>
-			<button
-				onClick={handleSubmit}
-				className="text-white mx-auto mt-7 text-xl block hover:text-[red]">
-				Log in
-			</button>
+			<div
+				style={{
+					height: "100vh",
+					backgroundImage: "url(\"../src/assets/registration_image.jpg\")",
+					backraundSize: "cover",
+				}}
+			>
+				<LoginForm />
+				<button
+					onClick={handleSubmit}
+					className="text-white mx-auto mt-7 text-xl block hover:text-[red]"
+				>
+					Log in
+				</button>
+				;
+			</div>
 		</>
 	);
 };
