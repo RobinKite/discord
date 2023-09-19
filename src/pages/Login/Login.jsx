@@ -25,7 +25,7 @@ const Login = () => {
 				style={{
 					height: "100vh",
 					backgroundImage: "url(\"src/assets/registration_image.jpg\")",
-					backraundSize: "cover",
+					backgroundSize: "cover",
 				}}
 			>
 				<LoginForm />
