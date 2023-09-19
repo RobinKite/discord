@@ -10,21 +10,21 @@ import websocketReducer from "./slices/websocketSlice";
 import errorReducer from "./slices/errorSlice";
 
 const store = configureStore({
-	reducer: {
-		auth: authReducer,
-		profile: profileReducer,
-		server: serverReducer,
-		notifications: notificationsReducer,
-		friends: friendsReducer,
-		settings: settingsReducer,
-		ui: uiReducer,
-		websocket: websocketReducer,
-		error: errorReducer,
-	},
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({
-			serializableCheck: false,
-		}),
+  reducer: {
+    auth: authReducer,
+    profile: profileReducer,
+    server: serverReducer,
+    notifications: notificationsReducer,
+    friends: friendsReducer,
+    settings: settingsReducer,
+    ui: uiReducer,
+    websocket: websocketReducer,
+    error: errorReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
