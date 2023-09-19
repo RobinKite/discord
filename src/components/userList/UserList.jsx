@@ -1,6 +1,5 @@
 import { setUserStatus } from "@/redux/slices/userStatusSlice";
 import Roles from "../Roles/Roles";
-import User from "../User/User";
 import { useDispatch } from "react-redux";
 
 export default function UserList() {
@@ -21,7 +20,7 @@ export default function UserList() {
 			userName: "Wendy",
 			userId: "3",
 			role: "role-2",
-			status: "sleep",
+			status: "idle",
 		},
 		{
 			userName: "Kenny",
@@ -29,13 +28,23 @@ export default function UserList() {
 			role: null,
 			status: "invisible",
 		},
+		{
+			userName: "Kyle",
+			userId: "5",
+			role: null,
+			status: "offline",
+		},
+		{
+			userName: "Chef",
+			userId: "6",
+			role: null,
+			status: "online",
+		},
 	];
 
 	const dispatch = useDispatch();
-	users.forEach((user) => {
-		console.log(user);
-		dispatch(setUserStatus(user));
-	});
+
+	dispatch(setUserStatus(users));
 
 	return (
 		<div className="flex flex-col min-w-[240px] h-screen px-[8px] pt-6  bg-[#2b2d31]">
