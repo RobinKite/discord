@@ -13,9 +13,9 @@ export function Layout() {
 				<main className={styles.content}>
 					<Sidebar fullname="User" username="username" />
 					<Chat />
+					<UserList />;
 				</main>
 			</div>
-			<UserList />
 		</div>
 	);
 }
