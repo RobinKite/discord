@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import User from "../User/User";
+import { BiMinus } from "react-icons/bi";
 
 export default function Roles() {
 	const users = useSelector((state) => state.userStatus.users);
@@ -45,18 +46,26 @@ export default function Roles() {
 	return roles.map((role) => (
 		<div key={role.name}>
 			{role.users.length > 0 && (
-				<>
-					<h2 className="text-[#959ba3] uppercase flex">
-						{role.name} - {role.users.length}
+				<div>
+					<h2 className="flex text-[#959ba3] uppercase text-xs items-center font-semibold  ">
+						{role.name}&nbsp;
+						<BiMinus />
+						&nbsp;{role.users.length}
 					</h2>
 					<ul className="flex flex-col">
 						{role.users.map((user) => (
-							<li key={user.userId}>
+							<li
+								key={user.userId}
+								className={
+									role.name === "offline" &&
+									"transition-opacity opacity-30 hover:opacity-100"
+								}
+							>
 								<User user={user} />
 							</li>
 						))}
 					</ul>
-				</>
+				</div>
 			)}
 		</div>
 	));
