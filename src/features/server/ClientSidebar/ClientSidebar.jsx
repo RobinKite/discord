@@ -1,5 +1,5 @@
 import { LiaPlusSolid } from "react-icons/lia";
-import ButtonServer from "../Buttons/ButtonServer";
+import ButtonServer from "../../../components/Buttons/ButtonServer";
 import { SiDiscord } from "react-icons/si";
 import {
   darkServerIconBg,
