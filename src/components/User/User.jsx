@@ -19,15 +19,9 @@ export default function User({ user }) {
 		<div className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative ">
 			<div className="flex rounded-[50%] bg-[#5d64f4] w-[32px] h-[32px] mr-2 justify-center items-center ">
 				{userAvatar ? (
-					<img
-						src={userAvatar}
-						alt="user avatar"
-					/>
+					<img src={userAvatar} alt="user avatar" />
 				) : (
-					<SiDiscord
-						size={20}
-						className="text-white"
-					/>
+					<SiDiscord size={20} className="text-white" />
 				)}
 			</div>
 			{isOffline && (

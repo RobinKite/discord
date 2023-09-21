@@ -13,7 +13,7 @@ export function Layout() {
 				<main className={styles.content}>
 					<Sidebar fullname="User" username="username" />
 					<Chat />
-					<UserList />;
+					<UserList />
 				</main>
 			</div>
 		</div>
