@@ -23,5 +23,5 @@ const uiSlice = createSlice({
 });
 
 export const { openModal, closeModal, startLoading, stopLoading } =
-	uiSlice.actions;
+  uiSlice.actions;
 export default uiSlice.reducer;

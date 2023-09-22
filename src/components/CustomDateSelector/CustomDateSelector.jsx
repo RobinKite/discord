@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { daysArray, monthNames } from "@/constants";
 import { grey } from "@/constants/designTokens";
 import PropTypes from "prop-types";
+import { useField } from "formik";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   "&": {
@@ -36,7 +37,6 @@ const CustomDateSelector = () => {
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
   };
-
   return (
     <>
       <fieldset className="grid grid-cols-3 justify-between mb-6 gap-3">
@@ -75,6 +75,7 @@ const CustomDateSelector = () => {
 
 const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
   const [yearOptions, setYearOptions] = useState([]);
+  const [field] = useField({ name: "year" });
 
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -114,13 +115,16 @@ const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
       value={selectedYear}
       onChange={handleYearChange}
       label="Year"
-      renderValue={handleYearRenderValue}>
+      renderValue={handleYearRenderValue}
+      {...field}>
       {yearOptions}
     </CustomSelect>
   );
 };
 
 const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
+  const [field] = useField({ name: "month" });
+
   const handleMonthRenderValue = (selected) => {
     if (!selected) return "Month";
     const index = Number(selected) - 1;
@@ -133,7 +137,8 @@ const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
       value={selectedMonth}
       onChange={handleMonthChange}
       label="Month"
-      renderValue={handleMonthRenderValue}>
+      renderValue={handleMonthRenderValue}
+      {...field}>
       <MenuItem
         disabled
         value="">
@@ -151,6 +156,8 @@ const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
 };
 
 const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
+  const [field] = useField({ name: "day" });
+
   const handleDayRenderValue = (selected) => {
     if (!selected) return "Day";
     return selected;
@@ -162,7 +169,8 @@ const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
       value={selectedDay}
       onChange={handleDayChange}
       label="Day"
-      renderValue={handleDayRenderValue}>
+      renderValue={handleDayRenderValue}
+      {...field}>
       <MenuItem
         disabled
         value="">

@@ -20,7 +20,7 @@ function LoginForm() {
     console.log(values);
 
     try {
-      setAuth({ user: "Alex" }); //replace with real username
+      setAuth({ token: "AAA" });
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {

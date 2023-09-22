@@ -10,9 +10,9 @@ function RegistrationForm() {
     username: "",
     password: "",
     name: "",
-    day: 0,
-    month: 0,
-    year: 0,
+    day: null,
+    month: null,
+    year: null,
   };
 
   const onSubmit = (values, actions) => {
@@ -25,7 +25,7 @@ function RegistrationForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}>
-      {(form) => (
+      {({ isValid, setFieldValue }) => (
         <Form>
           <div className="w-[480px] grid grid-cols-1 bg-[#2c2f33] p-8 rounded">
             <h1 className="text-center text-white font-medium text-2xl mb-5">
@@ -56,9 +56,9 @@ function RegistrationForm() {
               name="password"
               required
             />
-            <CustomDateSelector />
+            <CustomDateSelector setFieldValue={setFieldValue} />
             <button
-              disabled={!form.isValid}
+              disabled={!isValid}
               type="submit"
               className="bg-[#5865f2] hover:bg-[#4752c4] disabled:bg-[#4752c4] text-white mb-2 py-[10px] leading-6 rounded">
               Continue
