@@ -1,12 +1,13 @@
 import { SiDiscord } from "react-icons/si";
+import PropTypes from "prop-types";
 import { statusMap } from "@/constants";
 import { offlineRoles } from "@/constants";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useState, useRef } from "react";
 import PopUp from "../PopUp/PopUp";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
 export default function User({ user }) {
-  const { userName = "No name", userAvatar = null, status, role } = user;
+  const { userName = "No name", userAvatar = null, status } = user;
   const isOffline = !offlineRoles.includes(status);
 
   const [isPopUpOpen, setIsPopupOpen] = useState(false);
@@ -49,3 +50,7 @@ export default function User({ user }) {
     </div>
   );
 }
+
+User.propTypes = {
+  user: PropTypes.string,
+};
