@@ -35,7 +35,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
     } else if (indicatorState === "hover") setIndicatorState("hidden");
   };
 
-  const handleActive = (e) => {
+  const handleActive = () => {
     setNotification(true);
     setIndicatorState("active");
   };
@@ -50,6 +50,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
 
   useEffect(() => {
     setAdjusted(adjustText(children));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,8 +58,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
       className="flex justify-center items-center w-full relative"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      onClick={handleActive}
-    >
+      onClick={handleActive}>
       <span
         className={`absolute top-1/2 -translate-y-1/2 left-0 w-1 bg-white rounded-r-lg transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />
@@ -81,8 +81,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
               },
             },
           },
-        }}
-      >
+        }}>
         <Button
           variant="text"
           sx={{
@@ -109,8 +108,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
             "&:active": {
               transform: "translateY(2px)",
             },
-          }}
-        >
+          }}>
           {adjusted?.serverName}
         </Button>
       </Tooltip>
