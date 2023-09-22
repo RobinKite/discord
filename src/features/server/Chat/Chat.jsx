@@ -1,9 +1,8 @@
 import { ChatMessage } from "@/features/server";
-import styles from "./Chat.module.css";
 
 export function Chat() {
   return (
-    <div className={styles.chat}>
+    <div className="grow bg-[#313338] relative">
       <ChatMessage
         avatarUrl={"/"}
         authorName="User1"
