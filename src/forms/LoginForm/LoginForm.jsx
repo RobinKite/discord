@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { Typography, Button, Box } from "@mui/material";
 import validationSchema from "./validationSchema";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import useAuth from "@/hooks/useAuth";
@@ -21,7 +20,7 @@ function LoginForm() {
     console.log(values);
 
     try {
-      setAuth({ user: "Alex" }); //replace with real username
+      setAuth({ token: "AAA" });
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {
@@ -34,81 +33,51 @@ function LoginForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}>
-      {(form) => {
-        return (
-          <Form>
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr",
-                gap: 2,
-                backgroundColor: "#2c2f33",
-                minWidth: "320px",
-                maxWidth: "400px",
-                p: 2,
-                mx: "auto",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                mr: "-50%",
-                transform: "translate(-50%, -50%)",
-              }}>
-              <Typography
-                align="center"
-                variant="h2"
-                sx={{ color: "#ffffff", fontSize: "24px", my: "0" }}>
-                Create an account
-              </Typography>
-              <Typography
-                align="center"
-                variant="p"
-                sx={{ color: "#ffffff", fontSize: "14px", my: "0" }}>
-                We are so exited to see you again
-              </Typography>
-
-              <CustomInput
-                id="email"
-                label="Email"
-                type="email"
-                name="email"
-              />
-              <CustomInput
-                id="password"
-                label="Password"
-                type="password"
-                name="password"
-              />
-
-              <Button
-                disabled={!form.isValid}
-                variant="contained"
-                fullWidth
-                type="submit"
-                sx={{
-                  backgroundColor: "#5865f2",
-                  textTransform: "none",
-                  "&:hover": { backgroundColor: "#5865f2dd" },
-                  "&:disabled": { backgroundColor: "#5865f299" },
-                }}>
-                Login
-              </Button>
-
-              <p style={{ color: "#ffffffbb", fontSize: "12px" }}>
-                Need an account? &#32;
-                <Link
-                  to="/register"
-                  style={{
-                    color: "#1E90FFcc",
-                    fontSize: "12px",
-                    textDecoration: "none",
-                  }}>
-                  Register
-                </Link>
-              </p>
-            </Box>
-          </Form>
-        );
-      }}
+      {(form) => (
+        <Form>
+          <div className="w-[480px] grid grid-cols-1 bg-[#2c2f33] p-8 rounded">
+            <h2 className="text-center text-white font-medium text-2xl mb-1">
+              Welcome back!
+            </h2>
+            <p className="text-center text-[#ffffffa9] mb-5">
+              We&apos;re so exited to see you again!
+            </p>
+            <CustomInput
+              id="email"
+              label="E-mail"
+              type="email"
+              name="email"
+              required
+            />
+            <CustomInput
+              id="password"
+              label="Password"
+              type="password"
+              name="password"
+              required
+            />
+            <a
+              href="#"
+              className="text-[#00a8fc] mb-[18px] font-medium text-sm">
+              Forgot your password?
+            </a>
+            <button
+              disabled={!form.isValid}
+              type="submit"
+              className="bg-[#5865f2] hover:bg-[#4752c4] disabled:bg-[#4752c4] text-white mb-2 py-[10px] leading-6 rounded">
+              Log In
+            </button>
+            <p className="text-[#949ba4] text-sm">
+              Need an account? &#32;
+              <NavLink
+                to="/register"
+                className="text-[#00a8fc] text-sm font-medium">
+                Register
+              </NavLink>
+            </p>
+          </div>
+        </Form>
+      )}
     </Formik>
   );
 }
