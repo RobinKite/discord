@@ -81,7 +81,13 @@ function RegistrationForm() {
               type="submit"
               className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]"
             >
-              Continue
+              {isLoading ? (
+                <span className="flex justify-center">
+                  <Oval width={20} height={20} />
+                </span>
+              ) : (
+                "Continue"
+              )}
             </button>
             <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
