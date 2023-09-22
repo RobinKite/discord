@@ -5,7 +5,6 @@ import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import { Layout as ServerLayout } from "@/features/server";
-import Register from "./pages/Register/Register";
 
 const AppRoutes = () => {
   return (
@@ -20,9 +19,9 @@ const AppRoutes = () => {
         />
         <Route
           path="register"
-          element={<Register />}
+          element={<Login />}
         />
-        ;
+
         <Route element={<RequireAuth />}>
           <Route path="channels/">
             <Route

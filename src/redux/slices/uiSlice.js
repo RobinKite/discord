@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    modalIsOpen: false,
+    modalStack: [],
     isLoading: false,
   },
   reducers: {
-    openModal: (state) => {
-      state.modalIsOpen = true;
+    openModal: (state, action) => {
+      state.modalStack.push(action.payload);
     },
     closeModal: (state) => {
-      state.modalIsOpen = false;
+      state.modalStack.pop();
     },
     startLoading: (state) => {
       state.isLoading = true;
