@@ -2,7 +2,11 @@
 export default {
   content: ["./src/**/*.{html,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        star: ["Roboto", "Helvetica", "Arial", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

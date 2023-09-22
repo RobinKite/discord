@@ -25,7 +25,7 @@ const authSlice = createSlice({
       state.firstName = firstName;
       state.lastName = lastName;
     },
-    logoutUser: state => {
+    logoutUser: (state) => {
       state.token = null;
       state.isLoggedIn = false;
       state.email = null;
@@ -37,7 +37,7 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-    clearToken: state => {
+    clearToken: (state) => {
       state.token = null;
     },
     updateUserProfile: (state, action) => {
