@@ -1,7 +1,6 @@
-import { Header, Sidebar, Chat } from "@/features/server";
-import styles from "./Layout.module.css";
-import ClientSidebar from "@/components/ClientSidebar/ClientSidebar";
-import UserList from "@/components/userList/UserList";
+import { Header, UserSidebar, Chat } from "@/features/server";
+import ClientSidebar from "@/features/server/ClientSidebar/ClientSidebar";
+import UserList from "@/components/UserList/UserList";
 
 export function Layout() {
   return (

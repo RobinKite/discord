@@ -24,7 +24,8 @@ function RegistrationForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       {({ isValid, setFieldValue }) => (
         <Form>
           <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
@@ -56,7 +57,8 @@ function RegistrationForm() {
             <button
               disabled={!isValid}
               type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]"
+            >
               Continue
             </button>
             <p className="mb-5 text-xs text-[#ffffffbb]">

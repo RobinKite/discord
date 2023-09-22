@@ -57,16 +57,15 @@ const Settings = () => {
               <SettingsTabContainer
                 key={childName}
                 header={childName}
-                isActive={activeTab === childName}></SettingsTabContainer>
+                isActive={activeTab === childName}
+              ></SettingsTabContainer>
             ))}
           </ul>
           <button
             className="absolute right-0 top-[60px] rounded-full hover:bg-[#4e50584c]"
-            onClick={handleCloseModal}>
-            <IoCloseCircleOutline
-              color="#fff"
-              size={44}
-            />
+            onClick={handleCloseModal}
+          >
+            <IoCloseCircleOutline color="#fff" size={44} />
           </button>
         </div>
       </div>
@@ -112,7 +111,8 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
         className={`w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white ${
           isActive ? "bg-[#4e505899] text-white" : ""
         }`}
-        onClick={handleClick}>
+        onClick={handleClick}
+      >
         {name}
       </button>
     </li>
