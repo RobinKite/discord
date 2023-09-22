@@ -30,44 +30,50 @@ const CustomInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     borderRadius: 4,
     position: "relative",
-    backgroundColor: theme.palette.mode === "dark" ? "#ffffff80" : grey[900],
+    backgroundColor: theme.palette.mode === "dark" ? "#fff" : "#1e1f22",
     border: "none",
-    color: theme.palette.mode === "dark" ? grey[900] : "#ffffff80",
-    fontSize: 16,
-    width: "100%",
-    padding: "10px 12px",
+    color: theme.palette.mode === "dark" ? grey[900] : "#dcdee1",
+    fontSize: 18,
+    padding: "12px",
     outline: "none",
   },
 }));
 
 export default function CustomizedInputsStyled(props) {
-  const { pathname } = useLocation();
   const [field, meta] = useField(props.name);
-  const { label, id, type } = props;
+  const { label, id, type, required } = props;
+
+  const SelectLabel = styled(InputLabel)(() => ({
+    "& .MuiFormLabel-asterisk": {
+      color: "#dd3f41",
+    },
+  }));
 
   return (
-    <FormControl variant="standard">
-      <InputLabel shrink htmlFor={id} style={{ color: "#ffffffbb" }}>
+    <FormControl variant="standard" sx={{ marginBottom: 3 }}>
+      <SelectLabel
+        shrink
+        htmlFor={id}
+        required={required}
+        sx={{
+          color: "#ffffffaa",
+          textTransform: "uppercase",
+          fontWeight: "900",
+          fontSize: "20px",
+        }}
+      >
         {label}
-      </InputLabel>
-      <CustomInput id={id} type={type ? type : "text"} {...field} {...props} />
+      </SelectLabel>
+      <CustomInput
+        id={id}
+        type={type ? type : "text"}
+        {...field}
+        {...props}
+        sx={{ width: "100%", fontSize: "20px", color: "#fff" }}
+      />
 
       {meta.touched && meta.error ? (
-        <div style={{ color: "#DC143C", fontSize: "12px" }}>
-          {pathname === "/login" && field.name === "password" ? (
-            <a
-              href="#"
-              style={{
-                color: "#DC143C",
-                fontSize: "12px",
-              }}
-            >
-              Forgot your password?
-            </a>
-          ) : (
-            meta.error
-          )}
-        </div>
+        <div style={{ color: "#fa777c", fontSize: "12px" }}>{meta.error}</div>
       ) : null}
     </FormControl>
   );
