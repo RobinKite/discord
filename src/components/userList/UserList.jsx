@@ -43,7 +43,6 @@ export default function UserList() {
   ];
 
   const dispatch = useDispatch();
-
   dispatch(setUserStatus(users));
 
   return (
