@@ -57,8 +57,9 @@ export default function Roles() {
               <li
                 key={user.userId}
                 className={
-                  role.name === "offline" &&
-                  "transition-opacity opacity-30 hover:opacity-100"
+                  role.name === "offline"
+                    ? "transition-opacity opacity-30 hover:opacity-100"
+                    : ""
                 }
               >
                 <User user={user} />

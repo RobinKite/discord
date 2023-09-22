@@ -1,26 +1,24 @@
-import useAuth from "@/hooks/useAuth";
+import { SETTINGS_MODAL } from "@/constants";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import Settings from "../Settings/Settings";
 
 const ProtectedLayout = () => {
-  const { setAuth } = useAuth();
+  const modalStack = useSelector((state) => state.ui.modalStack);
+  const isSettingsModalOpen = modalStack.includes(SETTINGS_MODAL);
 
-	const handleLogout = () => {
-		try {
-			setAuth(null);
-		} catch (e) {
-			console.error(e);
-		}
-	};
+  useEffect(() => {
+    if (isSettingsModalOpen)
+      document.getElementById("root").classList.add("overflow-hidden");
+    if (!isSettingsModalOpen)
+      document.getElementById("root").classList.remove("overflow-hidden");
+  }, [isSettingsModalOpen]);
 
-	return (
-		<>
-			<Outlet />
-			<button
-				onClick={handleLogout}
-				className="absolute bottom-3 left-2 text-[red]"
-			>
-				Log out
-      </button>
+  return (
+    <>
+      <Outlet />
+      {isSettingsModalOpen && <Settings />}
     </>
   );
 };

@@ -5,14 +5,13 @@ import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import { Layout as ServerLayout } from "@/features/server";
-import Register from "./pages/Register/Register";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route exact path="/" element={<PublicLayout />}>
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<Login />} />
 
         <Route element={<RequireAuth />}>
           <Route path="channels/">
