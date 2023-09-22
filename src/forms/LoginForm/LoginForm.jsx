@@ -1,4 +1,3 @@
-
 import { NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
@@ -11,22 +10,12 @@ function LoginForm() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const { setAuth } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const initialValues = {
     email: "",
     password: "",
   };
-  const initialValues = {
-    email: "",
-    password: "",
-  };
 
-  const handleSubmit = (values, actions) => {
-    console.log(values);
   const handleSubmit = (values, actions) => {
     console.log(values);
 
