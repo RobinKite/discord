@@ -42,7 +42,8 @@ const CustomDateSelector = () => {
       <fieldset className="mb-6 grid grid-cols-3 justify-between gap-3">
         <legend
           required
-          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]">
+          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]"
+        >
           Date of birth
           <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
             *
@@ -91,7 +92,7 @@ const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
       options.push(
         <MenuItem key={year} value={year}>
           {year}
-        </MenuItem>,
+        </MenuItem>
       );
     }
 
@@ -111,7 +112,8 @@ const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
       onChange={handleYearChange}
       label="Year"
       renderValue={handleYearRenderValue}
-      {...field}>
+      {...field}
+    >
       {yearOptions}
     </CustomSelect>
   );
@@ -133,7 +135,8 @@ const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
       onChange={handleMonthChange}
       label="Month"
       renderValue={handleMonthRenderValue}
-      {...field}>
+      {...field}
+    >
       <MenuItem disabled value="">
         <em>Month</em>
       </MenuItem>
@@ -161,7 +164,8 @@ const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
       onChange={handleDayChange}
       label="Day"
       renderValue={handleDayRenderValue}
-      {...field}>
+      {...field}
+    >
       <MenuItem disabled value="">
         <em>Day</em>
       </MenuItem>

@@ -11,11 +11,7 @@ const RequireAuth = () => {
   return isLoggedIn ? (
     <ProtectedLayout />
   ) : (
-    <Navigate
-      to="/login"
-      state={{ from: location }}
-      replace
-    />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 
