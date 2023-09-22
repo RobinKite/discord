@@ -8,6 +8,7 @@ import settingsReducer from "./slices/settingsSlice";
 import uiReducer from "./slices/uiSlice";
 import websocketReducer from "./slices/websocketSlice";
 import errorReducer from "./slices/errorSlice";
+import userStatusReducer from "./slices/userStatusSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,8 +21,9 @@ const store = configureStore({
     ui: uiReducer,
     websocket: websocketReducer,
     error: errorReducer,
+    userStatus: userStatusReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
