@@ -10,9 +10,9 @@ function RegistrationForm() {
     username: "",
     password: "",
     name: "",
-    day: null,
-    month: null,
-    year: null,
+    day: "",
+    month: "",
+    year: "",
   };
 
   const onSubmit = (values, actions) => {
