@@ -1,8 +1,14 @@
 import { Stack, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { blurple, darkServerIconBg } from "@/constants/designTokens";
+import {
+  blurple,
+  darkServerIconBg,
+  darkText,
+  darkTooltip,
+} from "@/constants/designTokens";
+import { adjustText } from "@/utils";
 
 const indicatorHeightMap = {
   active: "h-10",
@@ -11,9 +17,10 @@ const indicatorHeightMap = {
   hidden: "h-0",
 };
 
-const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
+const ButtonServer = ({ children, title, bgcolor, color }) => {
   const [indicatorState, setIndicatorState] = useState(null);
   const [notification, setNotification] = useState(false); //mock redux notification
+  const [adjusted, setAdjusted] = useState({});
 
   const handleEnter = () => {
     if (indicatorState === "active") return;
@@ -40,6 +47,11 @@ const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
   //       if (!notification) setIndicator(false);
   //     }, 3000);
   // }, [indicatorState]);
+
+  useEffect(() => {
+    setAdjusted(adjustText(children));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Stack
@@ -73,9 +85,15 @@ const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
         componentsProps={{
           tooltip: {
             sx: {
-              bgcolor: "common.black",
+              maxWidth: "300px",
+              padding: "10px",
+              left: "6px",
+              fontSize: "18px",
+              fontWeight: "700",
+              color: darkText,
+              bgcolor: darkTooltip,
               "& .MuiTooltip-arrow": {
-                color: "common.black",
+                color: "#111214",
               },
             },
           },
@@ -85,7 +103,7 @@ const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
           variant="text"
           sx={{
             color,
-            fontSize,
+            fontSize: adjusted?.fontSize,
             textTransform: "initial",
             borderRadius: "50%",
             bgcolor: darkServerIconBg,
@@ -104,9 +122,12 @@ const ButtonServer = ({ children, title, bgcolor, color, fontSize }) => {
               color: "#fff",
               borderRadius: 4,
             },
+            "&:active": {
+              transform: "translateY(2px)",
+            },
           }}
         >
-          {children}
+          {adjusted?.serverName}
         </Button>
       </Tooltip>
     </Stack>
@@ -120,12 +141,10 @@ ButtonServer.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
   bgcolor: PropTypes.string,
-  fontSize: PropTypes.number,
 };
 
 ButtonServer.defaultProps = {
   title: "",
   color: "#fff",
   bgcolor: blurple,
-  fontSize: 10,
 };
