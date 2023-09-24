@@ -2,11 +2,12 @@ import { NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import CustomInput from "../../components/CustomInput/CustomInput";
-import useAuth from "@/hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login, setUser } from "@/redux/slices/authSlice";
 
 function LoginForm() {
-  const { setAuth } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -20,7 +21,15 @@ function LoginForm() {
     console.log(values);
 
     try {
-      setAuth({ token: "AAA" });
+      // dispatch(
+      //   setUser({
+      //     userName: "",
+      //     email: values.email,
+      //     name: "",
+      //     isLoggedIn: true,
+      //   })
+      // );
+      dispatch(login(values));
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {

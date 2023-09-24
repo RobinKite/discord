@@ -3,8 +3,12 @@ import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import CustomInput from "@/components/CustomInput/CustomInput";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import { useDispatch } from "react-redux";
+import { register } from "@/redux/slices/authSlice";
 
 function RegistrationForm() {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     username: "",
@@ -16,7 +20,8 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    console.log(values);
+    // console.log(values);
+    dispatch(register(values));
     actions.resetForm();
   };
 

@@ -53,17 +53,20 @@ export default function Roles() {
             &nbsp;{role.users.length}
           </h2>
           <ul className="flex flex-col">
-            {role.users.map((user) => (
-              <li
-                key={user.userId}
-                className={
-                  role.name === "offline"
-                    ? "transition-opacity opacity-30 hover:opacity-100"
-                    : ""
-                }>
-                <User user={user} />
-              </li>
-            ))}
+            {role.users.map((user) => {
+              console.log(user);
+              return (
+                <li
+                  key={user.userId}
+                  className={
+                    role.name === "offline"
+                      ? "transition-opacity opacity-30 hover:opacity-100"
+                      : ""
+                  }>
+                  <User user={user} />
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

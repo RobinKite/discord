@@ -1,10 +1,10 @@
 import { SETTINGS_MODAL } from "@/constants";
-import useAuth from "@/hooks/useAuth";
 import { closeModal } from "@/redux/slices/uiSlice";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useState } from "react";
+import { logoutUser } from "@/redux/slices/authSlice";
 
 const tabsMap = {
   user: {
@@ -96,10 +96,10 @@ const SettingsNavSection = ({ header, items, activeTab, setActiveTab }) => (
 );
 
 const SettingsNavItem = ({ name, isActive, onClick }) => {
-  const { setAuth } = useAuth();
+  const dispatch = useDispatch();
   const handleLogout = () => {
     try {
-      setAuth(null);
+      dispatch(logoutUser());
       onClick();
     } catch (e) {
       console.error(e);
