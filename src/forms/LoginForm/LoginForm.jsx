@@ -4,7 +4,7 @@ import validationSchema from "./validationSchema";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/slices/authSlice";
+import { login } from "@/redux/slices/authSlice";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -21,7 +21,15 @@ function LoginForm() {
     console.log(values);
 
     try {
-      dispatch(setUser());
+      // dispatch(
+      //   setUser({
+      //     userName: "",
+      //     email: values.email,
+      //     name: "",
+      //     isLoggedIn: true,
+      //   })
+      // );
+      dispatch(login(values));
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {
