@@ -1,11 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { api } from "@/services/client";
+// import { setAuthToken, setRefreshToken } from "@/utils/auth";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     userName: null,
     email: null,
-    password: null,
     name: null,
     token: null,
     isLoggedIn: false,
@@ -14,10 +15,18 @@ const authSlice = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
+      const { email, userName, name } = action.payload;
       state.isLoggedIn = true;
+      state.email = email;
+      state.userName = userName;
+      state.name = name;
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
+      state.email = null;
+      state.userName = null;
+      state.password = null;
+      state.name = null;
     },
     setToken: (state, action) => {
       state.token = action.payload;
@@ -36,6 +45,32 @@ const authSlice = createSlice({
     },
   },
 });
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async (data /* thunkAPI */) => {
+    const result = await api.post("auth/login", data);
+    // const { token, refreshToken } = result;
+    // setAuthToken(token);
+    // setRefreshToken(refreshToken);
+    console.log(data, result);
+    // thunkAPI.dispatch(setUser(...data));
+    // return result;
+  }
+);
+
+export const register = createAsyncThunk(
+  "auth/register",
+  async (data /* thunkAPI */) => {
+    const result = await api.post("auth/register", data);
+    // const { token, refreshToken } = result;
+    // setAuthToken(token);
+    // setRefreshToken(refreshToken);
+    console.log(data, result);
+    // thunkAPI.dispatch(setUser(...data));
+    // return result;
+  }
+);
 
 export const {
   setUser,
