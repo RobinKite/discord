@@ -27,8 +27,8 @@ function RegistrationForm() {
       onSubmit={onSubmit}>
       {({ isValid, setFieldValue }) => (
         <Form>
-          <div className="w-[480px] grid grid-cols-1 bg-[#2c2f33] p-8 rounded">
-            <h1 className="text-center text-white font-medium text-2xl mb-5">
+          <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
+            <h1 className="mb-5 text-center text-2xl font-medium text-white">
               Create an account
             </h1>
             <CustomInput
@@ -38,11 +38,7 @@ function RegistrationForm() {
               name="email"
               required
             />
-            <CustomInput
-              id="name"
-              label="Display name"
-              name="name"
-            />
+            <CustomInput id="name" label="Display name" name="name" />
             <CustomInput
               id="username"
               label="Username"
@@ -60,26 +56,20 @@ function RegistrationForm() {
             <button
               disabled={!isValid}
               type="submit"
-              className="bg-[#5865f2] hover:bg-[#4752c4] disabled:bg-[#4752c4] text-white mb-2 py-[10px] leading-6 rounded">
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
               Continue
             </button>
-            <p className="text-xs mb-5 text-[#ffffffbb]">
+            <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
-              <a
-                href="#"
-                className="text-[#00a8fc]">
+              <a href="#" className="text-[#00a8fc]">
                 Term&apos;s of Service&#32;
               </a>
               and &#32;
-              <a
-                href="#"
-                className="text-[#00a8fc]">
+              <a href="#" className="text-[#00a8fc]">
                 Privacy Policy.
               </a>
             </p>
-            <NavLink
-              to="/login"
-              className="text-[#00a8fc] text-sm font-medium">
+            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
           </div>

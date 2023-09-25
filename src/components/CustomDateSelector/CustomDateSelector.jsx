@@ -39,12 +39,12 @@ const CustomDateSelector = () => {
   };
   return (
     <>
-      <fieldset className="grid grid-cols-3 justify-between mb-6 gap-3">
+      <fieldset className="mb-6 grid grid-cols-3 justify-between gap-3">
         <legend
           required
-          className="text-xs uppercase text-[#ffffffaa] mb-2 font-bold">
+          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]">
           Date of birth
-          <span className="text-[#dd3f41] text-xs font-star leading-[1.4375em] tracking-[0.00938em] whitespace-nowrap ml-[3px]">
+          <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
             *
           </span>
         </legend>
@@ -82,21 +82,16 @@ const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
     const startYear = currentYear - 100;
 
     const options = [
-      <MenuItem
-        key=""
-        value=""
-        disabled>
+      <MenuItem key="" value="" disabled>
         Year
       </MenuItem>,
     ];
 
     for (let year = currentYear; year >= startYear; year--) {
       options.push(
-        <MenuItem
-          key={year}
-          value={year}>
+        <MenuItem key={year} value={year}>
           {year}
-        </MenuItem>
+        </MenuItem>,
       );
     }
 
@@ -139,15 +134,11 @@ const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
       label="Month"
       renderValue={handleMonthRenderValue}
       {...field}>
-      <MenuItem
-        disabled
-        value="">
+      <MenuItem disabled value="">
         <em>Month</em>
       </MenuItem>
       {monthNames.map((month, index) => (
-        <MenuItem
-          key={index + 1}
-          value={index + 1}>
+        <MenuItem key={index + 1} value={index + 1}>
           {month}
         </MenuItem>
       ))}
@@ -171,15 +162,11 @@ const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
       label="Day"
       renderValue={handleDayRenderValue}
       {...field}>
-      <MenuItem
-        disabled
-        value="">
+      <MenuItem disabled value="">
         <em>Day</em>
       </MenuItem>
       {daysArray.map((day) => (
-        <MenuItem
-          key={day}
-          value={day}>
+        <MenuItem key={day} value={day}>
           {day}
         </MenuItem>
       ))}

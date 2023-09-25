@@ -6,8 +6,8 @@ const Login = () => {
   const { pathname } = useLocation();
   return (
     <>
-      <div className="fixed top-0 left-0 h-full w-full bg-cover bg-[url('src/assets/bg_img.svg')]"></div>
-      <div className="w-full h-full flex items-center justify-center absolute min-h-[540px] top-0 left-0">
+      <div className="fixed left-0 top-0 h-full w-full bg-[url('@/assets/bg_img.svg')] bg-cover"></div>
+      <div className="absolute left-0 top-0 flex h-full min-h-[540px] w-full items-center justify-center">
         {pathname === "/register" ? <RegistrationForm /> : <LoginForm />}
       </div>
     </>

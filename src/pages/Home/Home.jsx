@@ -6,8 +6,7 @@ const Home = () => {
 
   useEffect(() => {
     navigate("/channels/@me", { replace: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate]);
   return <p>Home</p>;
 };
 
