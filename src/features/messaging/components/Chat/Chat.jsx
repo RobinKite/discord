@@ -1,15 +1,15 @@
-import { ChatMessage } from "@/features/server";
+import { Message } from "@/features/messaging/components";
 
 export function Chat() {
   return (
-    <div className="grow bg-[#313338] relative">
-      <ChatMessage
+    <div className="relative grow bg-[#313338]">
+      <Message
         avatarUrl={"/"}
         authorName="User1"
         timestamp={1694970000}
         text="Text"
       />
-      <ChatMessage
+      <Message
         avatarUrl={"/"}
         authorName="User2"
         timestamp={1694970600}

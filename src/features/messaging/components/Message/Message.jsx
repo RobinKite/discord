@@ -2,19 +2,16 @@ import Avatar from "@mui/material/Avatar";
 import PropTypes from "prop-types";
 import { convertTimestampToDateString } from "@/utils";
 
-export function ChatMessage({ authorName, avatarUrl, timestamp, text }) {
+export function Message({ authorName, avatarUrl, timestamp, text }) {
   return (
-    <div className="flex gap-x-4 py-1 pr-12 pl-4 mt-5 text-[#dcdee1]">
-      <Avatar
-        sx={{ bgcolor: "#7076f1" }}
-        src={avatarUrl}
-      />
+    <div className="mt-5 flex gap-x-4 py-1 pl-4 pr-12 text-sm text-[#dcdee1]">
+      <Avatar sx={{ bgcolor: "#7076f1" }} src={avatarUrl} />
       <div className="grow">
         <h3>
-          <span className="text-[#7076f1] font-medium">{authorName}</span>
-          <small className="ml-2 text-[#959ba3]">
+          <span className="font-medium text-[#7076f1]">{authorName}</span>
+          <span className="ml-2 text-xs text-[#959ba3]">
             {convertTimestampToDateString(timestamp)}
-          </small>
+          </span>
         </h3>
         <p>{text}</p>
       </div>
@@ -22,7 +19,7 @@ export function ChatMessage({ authorName, avatarUrl, timestamp, text }) {
   );
 }
 
-ChatMessage.propTypes = {
+Message.propTypes = {
   authorName: PropTypes.string,
   avatarUrl: PropTypes.string,
   timestamp: PropTypes.number,
