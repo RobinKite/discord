@@ -12,17 +12,11 @@ export function Header() {
       </div>
       <div className="flex grow justify-between bg-[#313338] px-4 py-3">
         <div className="flex items-center gap-x-1">
-          <BiHash
-            color="#80848e"
-            size={24}
-          />
+          <BiHash color="#80848e" size={24} />
           <h2 className="font-medium">{channelName}</h2>
         </div>
         <div>
-          <BiSolidHelpCircle
-            color="#b5bac1"
-            size={24}
-          />
+          <BiSolidHelpCircle color="#b5bac1" size={24} />
         </div>
       </div>
     </header>

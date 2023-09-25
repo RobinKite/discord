@@ -41,14 +41,9 @@ export function Chat() {
 
   return (
     <div className="flex grow flex-col justify-between bg-[#313338]">
-      <div
-        ref={chatRef}
-        className="relative grow overflow-y-auto">
+      <div ref={chatRef} className="relative grow overflow-y-auto">
         {messages.map((message) => (
-          <Message
-            key={message.timestamp}
-            {...message}
-          />
+          <Message key={message.timestamp} {...message} />
         ))}
       </div>
       <Input submitCallback={createMessage} />
