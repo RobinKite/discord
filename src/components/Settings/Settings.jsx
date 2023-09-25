@@ -1,10 +1,10 @@
-import { SETTINGS_MODAL } from "@/constants";
-import useAuth from "@/hooks/useAuth";
+import { Modal } from "@/constants";
 import { closeModal } from "@/redux/slices/uiSlice";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useState } from "react";
+import { logoutUser } from "@/redux/slices/authSlice";
 
 const tabsMap = {
   user: {
@@ -32,12 +32,12 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState("My Account");
 
   const handleCloseModal = () => {
-    dispatch(closeModal(SETTINGS_MODAL));
+    dispatch(closeModal(Modal.SETTINGS));
   };
 
   return (
-    <div className="box-border flex absolute left-0 right-0 top-0 bottom-0 z-50">
-      <div className="flex grow shrink-0 basis-[218px] justify-end bg-[#2b2d31]">
+    <div className="absolute inset-0 z-50 box-border flex">
+      <div className="flex shrink-0 grow basis-[218px] justify-end bg-[#2b2d31]">
         <nav className="py-[60px] pl-5 pr-[6px]">
           {Object.entries(tabsMap).map(([key, value]) => (
             <SettingsNavSection
@@ -50,8 +50,8 @@ const Settings = () => {
           ))}
         </nav>
       </div>
-      <div className="flex grow shrink basis-[800px] justify-start bg-[#313338]">
-        <div className="px-10 pt-[60px] pb-20 relative max-w-[740px] min-w-[460px]">
+      <div className="flex shrink grow basis-[800px] justify-start bg-[#313338]">
+        <div className="relative min-w-[460px] max-w-[740px] px-10 pb-20 pt-[60px]">
           <ul>
             {allTabs.map((childName) => (
               <SettingsTabContainer
@@ -61,7 +61,7 @@ const Settings = () => {
             ))}
           </ul>
           <button
-            className="absolute right-0 top-[60px] hover:bg-[#4e50584c] rounded-full"
+            className="absolute right-0 top-[60px] rounded-full hover:bg-[#4e50584c]"
             onClick={handleCloseModal}>
             <IoCloseCircleOutline
               color="#fff"
@@ -77,7 +77,7 @@ const Settings = () => {
 const SettingsNavSection = ({ header, items, activeTab, setActiveTab }) => (
   <>
     {header && (
-      <h2 className="uppercase text-[#949ba4] px-[10px] py-[6px] text-xs">
+      <h2 className="px-[10px] py-[6px] text-xs uppercase text-[#949ba4]">
         {header}
       </h2>
     )}
@@ -91,15 +91,15 @@ const SettingsNavSection = ({ header, items, activeTab, setActiveTab }) => (
         />
       ))}
     </ul>
-    <div className="box-border mx-2 my-2.5 h-px content-[''] block bg-[#949ba448]"></div>
+    <div className="mx-2 my-2.5 box-border block h-px bg-[#949ba448] content-['']"></div>
   </>
 );
 
 const SettingsNavItem = ({ name, isActive, onClick }) => {
-  const { setAuth } = useAuth();
+  const dispatch = useDispatch();
   const handleLogout = () => {
     try {
-      setAuth(null);
+      dispatch(logoutUser());
       onClick();
     } catch (e) {
       console.error(e);
@@ -109,7 +109,7 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
   return (
     <li>
       <button
-        className={`text-[#B5BAC1] px-[10px] py-[6px] hover:text-white hover:bg-[#4e50584c] rounded-[4px] w-full text-left ${
+        className={`w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white ${
           isActive ? "bg-[#4e505899] text-white" : ""
         }`}
         onClick={handleClick}>
@@ -123,7 +123,7 @@ const SettingsTabContainer = ({ header, isActive, children }) => (
   <div>
     {isActive && (
       <>
-        <h2 className="text-[#f2f3f5] font-[600] mb-5">{header}</h2>
+        <h2 className="mb-5 font-[600] text-[#f2f3f5]">{header}</h2>
         {children}
       </>
     )}

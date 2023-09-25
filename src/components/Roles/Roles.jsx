@@ -39,7 +39,7 @@ export default function Roles() {
       [
         { name: "offline", users: [] },
         { name: "online", users: [] },
-      ]
+      ],
     )
     .reverse();
 
@@ -47,7 +47,7 @@ export default function Roles() {
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>
-          <h2 className="flex text-[#959ba3] uppercase text-xs items-center font-semibold px-1.5">
+          <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
             {role.name}&nbsp;
             <BiMinus />
             &nbsp;{role.users.length}
@@ -58,7 +58,7 @@ export default function Roles() {
                 key={user.userId}
                 className={
                   role.name === "offline"
-                    ? "transition-opacity opacity-30 hover:opacity-100"
+                    ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }>
                 <User user={user} />

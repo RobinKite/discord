@@ -46,7 +46,7 @@ export default function UserList() {
   dispatch(setUserStatus(users));
 
   return (
-    <div className="flex flex-col min-w-[240px] px-[8px] pt-6 gap-5 bg-[#2b2d31]">
+    <div className="flex min-w-[240px] flex-col gap-5 bg-[#2b2d31] px-[8px] pt-6">
       <Roles />
     </div>
   );

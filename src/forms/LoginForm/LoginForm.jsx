@@ -2,11 +2,12 @@ import { NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import CustomInput from "../../components/CustomInput/CustomInput";
-import useAuth from "@/hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/authSlice";
 
 function LoginForm() {
-  const { setAuth } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -20,7 +21,7 @@ function LoginForm() {
     console.log(values);
 
     try {
-      setAuth({ token: "AAA" });
+      dispatch(setUser());
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {
@@ -35,11 +36,11 @@ function LoginForm() {
       onSubmit={handleSubmit}>
       {(form) => (
         <Form>
-          <div className="w-[480px] grid grid-cols-1 bg-[#2c2f33] p-8 rounded">
-            <h2 className="text-center text-white font-medium text-2xl mb-1">
+          <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
+            <h2 className="mb-1 text-center text-2xl font-medium text-white">
               Welcome back!
             </h2>
-            <p className="text-center text-[#ffffffa9] mb-5">
+            <p className="mb-5 text-center text-[#ffffffa9]">
               We&apos;re so exited to see you again!
             </p>
             <CustomInput
@@ -58,20 +59,20 @@ function LoginForm() {
             />
             <a
               href="#"
-              className="text-[#00a8fc] mb-[18px] font-medium text-sm">
+              className="mb-[18px] text-sm font-medium text-[#00a8fc]">
               Forgot your password?
             </a>
             <button
               disabled={!form.isValid}
               type="submit"
-              className="bg-[#5865f2] hover:bg-[#4752c4] disabled:bg-[#4752c4] text-white mb-2 py-[10px] leading-6 rounded">
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
               Log In
             </button>
-            <p className="text-[#949ba4] text-sm">
+            <p className="text-sm text-[#949ba4]">
               Need an account? &#32;
               <NavLink
                 to="/register"
-                className="text-[#00a8fc] text-sm font-medium">
+                className="text-sm font-medium text-[#00a8fc]">
                 Register
               </NavLink>
             </p>
