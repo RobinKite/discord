@@ -20,13 +20,13 @@ export function Chat() {
     const handleResize = () => {
       chatRef.current.style.maxHeight = null;
       [...chatRef.current.children].forEach(
-        (element) => (element.style.display = "none"),
+        (element) => (element.style.display = "none")
       );
 
       const maxHeight = chatRef.current.offsetHeight;
       chatRef.current.style.maxHeight = `${maxHeight}px`;
       [...chatRef.current.children].forEach(
-        (element) => (element.style.display = null),
+        (element) => (element.style.display = null)
       );
     };
     handleResize();
