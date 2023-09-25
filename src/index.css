@@ -3,14 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   font-family: NotoSans, system-ui, sans-serif;
   line-height: 1.5;
@@ -26,16 +18,4 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  font-family: inherit;
-}
-
-a {
-  text-decoration: none;
 }
