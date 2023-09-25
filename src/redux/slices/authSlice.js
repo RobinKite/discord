@@ -1,5 +1,5 @@
 import { api } from "@/services/client";
-// import { setAuthToken, setRefreshToken } from "@/utils/auth";
+import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
@@ -8,18 +8,18 @@ const authSlice = createSlice({
     userName: null,
     email: null,
     name: null,
-    token: null,
     isLoggedIn: false,
     roles: [],
     permissions: [],
   },
   reducers: {
     setUser: (state, action) => {
-      const { email, userName, name } = action.payload;
+      const { id, email, avatar, name, userName } = action.payload;
       state.isLoggedIn = true;
       state.email = email;
       state.userName = userName;
       state.name = name;
+      state.id = id;
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
@@ -27,12 +27,6 @@ const authSlice = createSlice({
       state.userName = null;
       state.password = null;
       state.name = null;
-    },
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-    clearToken: (state) => {
-      state.token = null;
     },
     updateUserProfile: (state, action) => {
       state.userName = { ...state.userName, ...action.payload };
@@ -46,29 +40,32 @@ const authSlice = createSlice({
   },
 });
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (data /* thunkAPI */) => {
-    const result = await api.post("auth/login", data);
-    // const { token, refreshToken } = result;
-    // setAuthToken(token);
-    // setRefreshToken(refreshToken);
-    console.log(data, result);
-    // thunkAPI.dispatch(setUser(...data));
-    // return result;
-  }
-);
+export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
+  console.log("waiting...");
+  const result = await api.post("auth/login", data);
+  console.log("done");
+  const { access_token, refresh_token } = result.data;
+  const { id, email, avatar, name, userName } = result.data.user;
+  thunkAPI.dispatch(setUser({ id, email, avatar, name, userName }));
+
+  setAuthToken(access_token);
+  setRefreshToken(refresh_token);
+  return result;
+});
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (data /* thunkAPI */) => {
+  async (data, thunkAPI) => {
+    console.log("waiting...");
     const result = await api.post("auth/register", data);
-    // const { token, refreshToken } = result;
-    // setAuthToken(token);
-    // setRefreshToken(refreshToken);
+    console.log("done");
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
     console.log(data, result);
-    // thunkAPI.dispatch(setUser(...data));
-    // return result;
+    thunkAPI.dispatch(setUser({ id, email, avatar, name, userName }));
+    return result;
   }
 );
 

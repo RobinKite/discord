@@ -21,17 +21,10 @@ function LoginForm() {
     console.log(values);
 
     try {
-      // dispatch(
-      //   setUser({
-      //     userName: "",
-      //     email: values.email,
-      //     name: "",
-      //     isLoggedIn: true,
-      //   })
-      // );
-      dispatch(login(values));
-      navigate(from, { replace: true });
-      actions.resetForm();
+      dispatch(login(values)).then(() => {
+        navigate(from, { replace: true });
+        actions.resetForm();
+      });
     } catch (e) {
       console.error(e);
     }

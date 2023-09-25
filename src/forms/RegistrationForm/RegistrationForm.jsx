@@ -20,7 +20,7 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    // console.log(values);
+    console.log(values);
     dispatch(register(values));
     actions.resetForm();
   };
