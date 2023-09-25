@@ -52,5 +52,5 @@ export default function User({ user }) {
 }
 
 User.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.object.isRequired,
 };

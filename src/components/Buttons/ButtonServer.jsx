@@ -76,7 +76,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
         }}
       ></Typography> */}
       <span
-        className={`absolute top-1/2 -translate-y-1/2 left-0 w-1 bg-white rounded-r-lg transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
+        className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />
       <Tooltip
         title={title || children}

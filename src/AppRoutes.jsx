@@ -4,7 +4,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
-import { Layout as ServerLayout } from "@/features/server";
+import { Layout as ServerLayout } from "@/features/channels/components";
 
 const AppRoutes = () => {
   return (
