@@ -1,4 +1,4 @@
-import { SETTINGS_MODAL } from "@/constants";
+import { Modal } from "@/constants";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
@@ -6,7 +6,7 @@ import Settings from "../Settings/Settings";
 
 const ProtectedLayout = () => {
   const modalStack = useSelector((state) => state.ui.modalStack);
-  const isSettingsModalOpen = modalStack.includes(SETTINGS_MODAL);
+  const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
 
   useEffect(() => {
     if (isSettingsModalOpen)

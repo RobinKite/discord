@@ -25,14 +25,10 @@ export default function CustomizedInputsStyled(props) {
 
   return (
     <>
-      <CustomLabel
-        htmlFor={id}
-        required={required}>
+      <CustomLabel htmlFor={id} required={required}>
         {label}
       </CustomLabel>
-      <FormControl
-        variant="standard"
-        sx={{ marginBottom: "20px" }}>
+      <FormControl variant="standard" sx={{ marginBottom: "20px" }}>
         <CustomInput
           id={id}
           type={type ? type : "text"}
@@ -40,7 +36,7 @@ export default function CustomizedInputsStyled(props) {
           {...props}
         />
         {meta.touched && meta.error ? (
-          <p className="text-[#fa777c] text-sm text-thin h-full">
+          <p className="text-thin h-full text-sm text-[#fa777c]">
             {meta.error}
           </p>
         ) : null}
