@@ -1,20 +1,48 @@
-import { Message } from "@/features/messaging/components";
+import { useState, useRef, useEffect } from "react";
+import { SAMPLE_MESSAGES } from "@/constants";
+import { Message, Input } from "@/features/messaging/components";
 
 export function Chat() {
+  const [messages, setMessages] = useState(SAMPLE_MESSAGES);
+  const chatRef = useRef(null);
+
+  const createMessage = (messageText) => {
+    const message = {
+      avatarUrl: "/",
+      authorName: "User",
+      timestamp: Date.now(),
+      text: messageText,
+    };
+    setMessages((prev) => [...prev, message]);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      chatRef.current.style.maxHeight = null;
+      [...chatRef.current.children].forEach(
+        (element) => (element.style.display = "none"),
+      );
+
+      const maxHeight = chatRef.current.offsetHeight;
+      chatRef.current.style.maxHeight = `${maxHeight}px`;
+      [...chatRef.current.children].forEach(
+        (element) => (element.style.display = null),
+      );
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="relative grow bg-[#313338]">
-      <Message
-        avatarUrl={"/"}
-        authorName="User1"
-        timestamp={1694970000}
-        text="Text"
-      />
-      <Message
-        avatarUrl={"/"}
-        authorName="User2"
-        timestamp={1694970600}
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime."
-      />
+    <div className="flex grow flex-col justify-between bg-[#313338]">
+      <div ref={chatRef} className="relative grow overflow-y-auto">
+        {messages.map((message) => (
+          <Message key={message.timestamp} {...message} />
+        ))}
+      </div>
+      <Input submitCallback={createMessage} />
     </div>
   );
 }
