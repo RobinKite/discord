@@ -3,14 +3,15 @@ import { BsCircleFill } from "react-icons/bs";
 import PropTypes from "prop-types";
 import { IoMdMoon } from "react-icons/io";
 import { BsRecordCircleFill } from "react-icons/bs";
+import { Status } from "@/constants";
 
 const statusMap = {
-  online: <BsCircleFill className="text-[green]" />,
-  offline: <BsCircleFill className="text-stone-500" />,
-  invisible: <BsRecordCircleFill className="text-stone-500" />,
-  idle: <IoMdMoon className="text-yellow-500 rotate-[270deg]" />,
+  [Status.ONLINE]: <BsCircleFill className="text-[green]" />,
+  [Status.OFFLINE]: <BsCircleFill className="text-stone-500" />,
+  [Status.INVISIBLE]: <BsRecordCircleFill className="text-stone-500" />,
+  [Status.IDLE]: <IoMdMoon className="rotate-[270deg] text-yellow-500" />,
 };
-const offlineRoles = ["offline", "invisible"];
+const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
 // import { useSelector } from "react-redux";
 
 export default function User({ user }) {
@@ -19,8 +20,8 @@ export default function User({ user }) {
   const isOffline = !offlineRoles.includes(status);
 
   return (
-    <div className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative ">
-      <div className="flex rounded-[50%] bg-[#5d64f4] w-[32px] h-[32px] mr-2 justify-center items-center ">
+    <div className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative">
+      <div className="flex rounded-[50%] bg-[#5d64f4] w-[32px] h-[32px] mr-2 justify-center items-center">
         {userAvatar ? (
           <img
             src={userAvatar}
