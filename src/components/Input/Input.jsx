@@ -20,7 +20,6 @@ export const Input = memo((props) => {
           <Typography
             type="p"
             variant="body2"
-            // color="palette.error.main"
             text-xs="true"
             sx={(theme) => ({
               color: theme.extendPalette.red,
