@@ -52,7 +52,11 @@ function RegistrationForm() {
               name="email"
               required
             />
-            <CustomInput id="name" label="Display name" name="name" />
+            <CustomInput
+              id="name"
+              label="Display name"
+              name="name"
+            />
             <CustomInput
               id="username"
               label="Username"
@@ -92,15 +96,21 @@ function RegistrationForm() {
             </button>
             <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
-              <a href="#" className="text-[#00a8fc]">
+              <a
+                href="#"
+                className="text-[#00a8fc]">
                 Term&apos;s of Service&#32;
               </a>
               and &#32;
-              <a href="#" className="text-[#00a8fc]">
+              <a
+                href="#"
+                className="text-[#00a8fc]">
                 Privacy Policy.
               </a>
             </p>
-            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
+            <NavLink
+              to="/login"
+              className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
           </div>
