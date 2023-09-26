@@ -1,47 +1,13 @@
 import { useSelector } from "react-redux";
 import User from "../User/User";
 import { BiMinus } from "react-icons/bi";
+import { Status } from "@/constants";
+import { mapUserData } from "@/utils/user";
 
 export default function Roles() {
   const users = useSelector((state) => state.userStatus.users);
 
-  const roles = users
-    .reduce(
-      (result, user) => {
-        const { userName, userId, role, status } = user;
-
-        if (status === "offline" || status === "invisible") {
-          const statusGroup = result.find((group) => group.name === "offline");
-          statusGroup.users.push({ userName, userId, role, status });
-          return result;
-        }
-        if (!role) {
-          const statusGroup = result.find((group) => group.name === "online");
-          statusGroup.users.push({ userName, userId, role, status });
-          return result;
-        }
-
-        // Find or create the group based on role
-        let roleGroup = result.find((group) => group.name === role);
-
-        if (!roleGroup) {
-          result.push({ name: role, users: [] });
-          roleGroup = result.find((group) => group.name === role);
-        }
-
-        // Push the user to the appropriate group(s)
-        if (roleGroup) {
-          roleGroup.users.push({ userName, userId, role, status });
-        }
-
-        return result;
-      },
-      [
-        { name: "offline", users: [] },
-        { name: "online", users: [] },
-      ]
-    )
-    .reverse();
+  const roles = mapUserData(users);
 
   return roles.map((role) => (
     <div key={role.name}>
@@ -53,20 +19,17 @@ export default function Roles() {
             &nbsp;{role.users.length}
           </h2>
           <ul className="flex flex-col">
-            {role.users.map((user) => {
-              console.log(user);
-              return (
-                <li
-                  key={user.userId}
-                  className={
-                    role.name === "offline"
-                      ? "transition-opacity opacity-30 hover:opacity-100"
-                      : ""
-                  }>
-                  <User user={user} />
-                </li>
-              );
-            })}
+            {role.users.map((user) => (
+              <li
+                key={user.userId}
+                className={
+                  role.name === Status.OFFLINE
+                    ? "opacity-30 transition-opacity hover:opacity-100"
+                    : ""
+                }>
+                <User user={user} />
+              </li>
+            ))}
           </ul>
         </div>
       )}
