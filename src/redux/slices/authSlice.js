@@ -11,6 +11,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     roles: [],
     permissions: [],
+    isLoading: false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -20,6 +21,7 @@ const authSlice = createSlice({
       state.userName = userName;
       state.name = name;
       state.id = id;
+      state.isLoading = false;
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
@@ -27,6 +29,10 @@ const authSlice = createSlice({
       state.userName = null;
       state.password = null;
       state.name = null;
+      state.isLoading = false;
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
     updateUserProfile: (state, action) => {
       state.userName = { ...state.userName, ...action.payload };
@@ -77,5 +83,6 @@ export const {
   updateUserProfile,
   setUserRoles,
   setUserPermissions,
+  setIsLoading,
 } = authSlice.actions;
 export default authSlice.reducer;

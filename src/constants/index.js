@@ -1,5 +1,4 @@
-export const daysArray = [...Array(31).keys()].map((day) => day + 1);
-export const monthNames = [
+export const monthsArray = [
   "January",
   "February",
   "March",

@@ -1,13 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import CustomInput from "@/components/CustomInput/CustomInput";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
-import { useDispatch } from "react-redux";
-import { register } from "@/redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { register, setIsLoading } from "@/redux/slices/authSlice";
+import { Oval } from "react-loader-spinner";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
   const initialValues = {
     email: "",
@@ -21,8 +27,11 @@ function RegistrationForm() {
 
   const onSubmit = (values, actions) => {
     console.log(values);
-    dispatch(register(values));
-    actions.resetForm();
+    dispatch(register(values)).then(() => {
+      navigate(from, { replace: true });
+      actions.resetForm();
+      dispatch(setIsLoading(false));
+    });
   };
 
   return (
@@ -30,7 +39,7 @@ function RegistrationForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}>
-      {({ isValid, setFieldValue }) => (
+      {({ isValid }) => (
         <Form>
           <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
             <h1 className="mb-5 text-center text-2xl font-medium text-white">
@@ -57,12 +66,29 @@ function RegistrationForm() {
               name="password"
               required
             />
-            <CustomDateSelector setFieldValue={setFieldValue} />
+            <CustomDateSelector
+              dayId="day"
+              monthId="month"
+              yearId="year"
+              dayLabel="Day"
+              monthLabel="Month"
+              yearLabel="Year"
+              required={true}
+            />
             <button
               disabled={!isValid}
               type="submit"
               className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
-              Continue
+              {isLoading ? (
+                <span className="flex justify-center">
+                  <Oval
+                    width={20}
+                    height={20}
+                  />
+                </span>
+              ) : (
+                "Continue"
+              )}
             </button>
             <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
