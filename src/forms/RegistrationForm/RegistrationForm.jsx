@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
-import CustomInput from "@/components/CustomInput/CustomInput";
+import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
 
 function RegistrationForm() {
@@ -24,28 +24,24 @@ function RegistrationForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       {({ isValid, setFieldValue }) => (
         <Form>
           <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
             <h1 className="mb-5 text-center text-2xl font-medium text-white">
               Create an account
             </h1>
-            <CustomInput
+            <Input
               id="email"
               label="E-mail"
               type="email"
               name="email"
               required
             />
-            <CustomInput id="name" label="Display name" name="name" />
-            <CustomInput
-              id="username"
-              label="Username"
-              name="username"
-              required
-            />
-            <CustomInput
+            <Input id="name" label="Display name" name="name" />
+            <Input id="username" label="Username" name="username" required />
+            <Input
               id="password"
               label="Password"
               type="password"
@@ -53,12 +49,9 @@ function RegistrationForm() {
               required
             />
             <CustomDateSelector setFieldValue={setFieldValue} />
-            <button
-              disabled={!isValid}
-              type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
+            <Button disabled={!isValid} type="submit" sx={{ mb: 2 }}>
               Continue
-            </button>
+            </Button>
             <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
               <a href="#" className="text-[#00a8fc]">

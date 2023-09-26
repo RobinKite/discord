@@ -39,7 +39,7 @@ export default function Roles() {
       [
         { name: "offline", users: [] },
         { name: "online", users: [] },
-      ],
+      ]
     )
     .reverse();
 
@@ -60,7 +60,8 @@ export default function Roles() {
                   role.name === "offline"
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
-                }>
+                }
+              >
                 <User user={user} />
               </li>
             ))}
