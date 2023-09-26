@@ -16,10 +16,10 @@ const ProtectedLayout = () => {
   }, [isSettingsModalOpen]);
 
   return (
-    <>
+    <div>
       <Outlet />
       {isSettingsModalOpen && <Settings />}
-    </>
+    </div>
   );
 };
 

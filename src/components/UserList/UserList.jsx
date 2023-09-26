@@ -8,7 +8,7 @@ export default function UserList() {
       userName: "Eric",
       userId: "1",
       role: "role-1",
-      status: "online",
+      status: "sleep",
     },
     {
       userName: "Stan",
