@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import { Link, Stack, Typography } from "@mui/material";
 
 function RegistrationForm() {
   const initialValues = {
@@ -28,10 +29,38 @@ function RegistrationForm() {
     >
       {({ isValid, setFieldValue }) => (
         <Form>
-          <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
-            <h1 className="mb-5 text-center text-2xl font-medium text-white">
+          <Stack
+            bgcolor="#2c2f33"
+            p="28px"
+            direction="column"
+            justifyContent="flex-start"
+            sx={{
+              borderRadius: { xs: 0, sm: 1 },
+              maxWidth: {
+                xs: "480px",
+              },
+              minWidth: {
+                xs: "100vw",
+                sm: "480px",
+              },
+              height: {
+                xs: "100vh",
+                sm: "auto",
+              },
+            }}
+          >
+            <Typography
+              variant="h2"
+              mb="12px"
+              sx={{
+                textAlign: "center",
+                fontWeight: "medium",
+                color: "#fff",
+                fontSize: "1.5rem",
+              }}
+            >
               Create an account
-            </h1>
+            </Typography>
             <Input
               id="email"
               label="E-mail"
@@ -48,24 +77,24 @@ function RegistrationForm() {
               name="password"
               required
             />
-            <CustomDateSelector setFieldValue={setFieldValue} />
-            <Button disabled={!isValid} type="submit" sx={{ mb: 2 }}>
+            <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
+            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               Continue
             </Button>
-            <p className="mb-5 text-xs text-[#ffffffbb]">
+            <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
-              <a href="#" className="text-[#00a8fc]">
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Term&apos;s of Service&#32;
-              </a>
+              </Link>
               and &#32;
-              <a href="#" className="text-[#00a8fc]">
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Privacy Policy.
-              </a>
-            </p>
+              </Link>
+            </Typography>
             <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
-          </div>
+          </Stack>
         </Form>
       )}
     </Formik>
