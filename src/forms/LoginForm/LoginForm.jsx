@@ -7,6 +7,12 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/authSlice";
 import { Box, Link, Typography, Stack } from "@mui/material";
 
+const StyledStackXS = {
+  maxWidth: {
+    xs: "480px",
+  },
+};
+
 function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,13 +44,24 @@ function LoginForm() {
     >
       {(form) => (
         <Form>
-          <Box
+          <Stack
+            bgcolor="#2c2f33"
+            p="28px"
+            direction="column"
+            justifyContent="flex-start"
             sx={{
-              display: "grid",
-              borderRadius: 1,
-              p: 4,
-              bgcolor: "#2c2f33",
-              width: "480px",
+              borderRadius: { xs: 0, sm: 1 },
+              maxWidth: {
+                xs: "480px",
+              },
+              minWidth: {
+                xs: "100vw",
+                sm: "480px",
+              },
+              height: {
+                xs: "100vh",
+                sm: "auto",
+              },
             }}
           >
             <Typography
@@ -76,7 +93,7 @@ function LoginForm() {
               name="email"
               required
             />
-            <Stack sx={{ position: "relative", mb: "18px" }}>
+            <Stack sx={{ position: "relative", mb: 5 }}>
               <Input
                 id="password"
                 label="Password"
@@ -92,13 +109,16 @@ function LoginForm() {
                   bottom: "-2px",
                   textDecoration: "none",
                   color: "#00a8fc",
+                  fontSize: "14px",
                 }}
               >
                 Forgot your password?
               </Link>
             </Stack>
-            <Button disabled={!form.isValid}>Log In</Button>
-            <Typography sx={{ mt: 2, fontSize: "0.875rem", color: "#949ba4" }}>
+            <Button disabled={!form.isValid} sx={{ mb: 3 }}>
+              Log In
+            </Button>
+            <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
               Need an account? &#32;
               <NavLink
                 to="/register"
@@ -107,7 +127,7 @@ function LoginForm() {
                 Register
               </NavLink>
             </Typography>
-          </Box>
+          </Stack>
         </Form>
       )}
     </Formik>
