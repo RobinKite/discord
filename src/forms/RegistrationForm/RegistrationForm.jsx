@@ -5,6 +5,25 @@ import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
 import { Link, Stack, Typography } from "@mui/material";
 
+const StyledStackSX = {
+  direction: "column",
+  justifyContent: "flex-start",
+  p: "28px",
+  bgcolor: "#2c2f33",
+  borderRadius: { xs: 0, sm: 1 },
+  maxWidth: {
+    xs: "480px",
+  },
+  minWidth: {
+    xs: "100vw",
+    sm: "450px",
+  },
+  height: {
+    xs: "100vh",
+    sm: "auto",
+  },
+};
+
 function RegistrationForm() {
   const initialValues = {
     email: "",
@@ -29,26 +48,7 @@ function RegistrationForm() {
     >
       {({ isValid, setFieldValue }) => (
         <Form>
-          <Stack
-            bgcolor="#2c2f33"
-            p="28px"
-            direction="column"
-            justifyContent="flex-start"
-            sx={{
-              borderRadius: { xs: 0, sm: 1 },
-              maxWidth: {
-                xs: "480px",
-              },
-              minWidth: {
-                xs: "100vw",
-                sm: "480px",
-              },
-              height: {
-                xs: "100vh",
-                sm: "auto",
-              },
-            }}
-          >
+          <Stack sx={StyledStackSX}>
             <Typography
               variant="h2"
               mb="12px"
