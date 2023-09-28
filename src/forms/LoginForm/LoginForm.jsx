@@ -5,12 +5,35 @@ import { Input, Button } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/authSlice";
-import { Box, Link, Typography, Stack } from "@mui/material";
+import { Link, Typography, Stack } from "@mui/material";
 
-const StyledStackXS = {
+const StyledStackSX = {
+  direction: "column",
+  justifyContent: "flex-start",
+  // justifyContent: "center",
+  p: "28px",
+  bgcolor: "#2c2f33",
+  borderRadius: { xs: 0, sm: 1 },
   maxWidth: {
     xs: "480px",
   },
+  minWidth: {
+    xs: "100vw",
+    sm: "450px",
+  },
+  height: {
+    xs: "100vh",
+    sm: "auto",
+  },
+};
+
+const StyledLink = {
+  position: "absolute",
+  left: 0,
+  bottom: "-2px",
+  textDecoration: "none",
+  color: "#00a8fc",
+  fontSize: "14px",
 };
 
 function LoginForm() {
@@ -44,26 +67,7 @@ function LoginForm() {
     >
       {(form) => (
         <Form>
-          <Stack
-            bgcolor="#2c2f33"
-            p="28px"
-            direction="column"
-            justifyContent="flex-start"
-            sx={{
-              borderRadius: { xs: 0, sm: 1 },
-              maxWidth: {
-                xs: "480px",
-              },
-              minWidth: {
-                xs: "100vw",
-                sm: "480px",
-              },
-              height: {
-                xs: "100vh",
-                sm: "auto",
-              },
-            }}
-          >
+          <Stack sx={StyledStackSX}>
             <Typography
               component="h2"
               variant="h2"
@@ -101,21 +105,11 @@ function LoginForm() {
                 name="password"
                 required
               />
-              <Link
-                href="#"
-                sx={{
-                  position: "absolute",
-                  left: 0,
-                  bottom: "-2px",
-                  textDecoration: "none",
-                  color: "#00a8fc",
-                  fontSize: "14px",
-                }}
-              >
+              <Link href="#" sx={StyledLink}>
                 Forgot your password?
               </Link>
             </Stack>
-            <Button disabled={!form.isValid} sx={{ mb: 3 }}>
+            <Button disabled={!form.isValid} sx={{ mb: 3 }} type="submit">
               Log In
             </Button>
             <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
