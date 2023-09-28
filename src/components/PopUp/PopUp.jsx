@@ -1,18 +1,10 @@
-// import User from "../User/User";
-// import Roles from "../Roles/Roles";
-import React, { useState } from "react";
-// import Box from "@mui/material/Box";
-//import TextField from "@mui/material/TextField";
-
+import { useState } from "react";
+import { styled } from "@mui/system";
+import { Link, Stack, Tooltip, Typography } from "@mui/material";
+import { statusMap } from "@/constants";
 import { SiDiscord } from "react-icons/si";
 import { BsFillCircleFill } from "react-icons/bs";
 import { FaHashtag } from "react-icons/fa";
-// import { IoMdMoon } from "react-icons/io";
-// import { BsRecordCircleFill } from "react-icons/bs";
-import { darkServerIconBg } from "@/constants/designTokens";
-
-import { styled } from "@mui/system";
-import { Link, Tooltip } from "@mui/material";
 
 const CustomNoteTextField = styled("input")({
   fontSize: "12px",
@@ -43,36 +35,62 @@ const PopUp = () => {
   const [user, setUser] = useState({
     name: "Tetiana",
     userName: "tadimm",
-    registrationDate: "07.07.2007",
+    userRegistrationDate: "07.07.2007",
     role: "front-end",
     note: "",
+    avatar: (
+      <SiDiscord
+        className="bg-[#5d64f4] rounded-[50%] p-3 border-[6px] border-[#232328] absolute top-3 left-3"
+        size={86}
+      />
+    ),
+    status: statusMap.invisible,
+    serverRegistrationDate: "09.09.2023",
+    serverName: "Ks",
   });
 
   const handleNoteChange = (ev) => {
     setUser((prevUser) => ({ ...prevUser, note: ev.target.value }));
   };
 
-  const formatRegistrationdate = (dateString) => {
+  const formatRegistrationDate = (dateString) => {
     const date = new Date(dateString);
     const options = { month: "short", day: "numeric", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };
 
   return (
-    <div className="w-[340px] absolute top-[30%] left-[40%] text-[#f2f3f5] bg-[#232328] rounded-lg overflow-hidden">
-      <div>
-        <div className="h-[60px] bg-[#5d64f4]"></div>
-        <SiDiscord
-          className="bg-[#5d64f4] rounded-[50%] p-3 border-[6px] border-[#232328] absolute top-3 left-3"
-          size={86}
-        />
-        <BsFillCircleFill
-          className="text-[#23A559] border-[6px] border-[#232328] absolute top-[70px] left-[66px] rounded-[50%]"
+    <Stack
+      sx={{
+        width: "340px",
+        position: "absolute",
+        top: 0,
+        left: "-360px",
+        color: "#f2f3f5",
+        backgroundColor: "#232328",
+        borderRadius: "8px",
+        overflow: "hidden",
+      }}
+    >
+      <Stack>
+        <Stack sx={{ height: "60px", backgroundColor: "#5d64f4" }}></Stack>
+        {user.avatar}
+        <Stack
+          sx={{
+            border: "6px solid #232428",
+            backgroundColor: "#232428",
+            position: "absolute",
+            top: "70px",
+            left: "66px",
+            borderRadius: "50%",
+          }}
           size={28}
-        />
-      </div>
+        >
+          {user.status}
+        </Stack>
+      </Stack>
       <Tooltip
-        title={`Originally known as Tetiana`}
+        title={`Originally known as ${user.name}`}
         arrow
         placement="top"
         componentsProps={{
@@ -86,34 +104,186 @@ const PopUp = () => {
           },
         }}
       >
-        <div className="bg-[#111214] p-2 flex justify-center items-center absolute right-4 top-[70px] rounded-[8px]">
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            bgcolor: "#111214",
+            padding: 2,
+            position: "absolute",
+            right: "16px",
+            top: "70px",
+            borderRadius: "8px",
+          }}
+        >
           <Link
             href="#"
-            className="bg-[#1abc9d] inline-block rounded-[50%] w-[16px] h-[16px] p-[3.5px]"
+            sx={{
+              backgroundColor: "#1abc9d",
+              display: "inline-block",
+              borderRadius: "50%",
+              width: "16px",
+              height: "16px",
+              padding: "3.5px",
+            }}
           >
             <FaHashtag className="text-black" size={9} />
           </Link>
-        </div>
+        </Stack>
       </Tooltip>
-      <div className="bg-[#111214] p-3 mt-16 mb-4 ml-4 mr-4 rounded-lg">
-        <h1 className="text-xl font-semibold">{user.name}</h1>
-        <p className="text-sm mb-3">{user.userName}</p>
-        <div className={`w-[100%] h-[1px] bg-[${darkServerIconBg}] mx-auto`} />
-        <h2 className="pt-3 font-bold text-xs mb-1.5 uppercase">
+      <Stack
+        sx={{
+          backgroundColor: "#111214",
+          padding: 3,
+          margin: "64px 16px 16px",
+          borderRadius: "8px",
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="h1"
+          sx={{ fontSize: "20px", fontWeight: "700" }}
+        >
+          {user.name}
+        </Typography>
+        <Typography sx={{ fontSize: "14px", marginBottom: 3 }}>
+          {user.userName}
+        </Typography>
+        <Stack
+          sx={{
+            width: "100%",
+            height: "1px",
+            backgroundColor: "#2c2f33",
+            mx: "auto",
+          }}
+        />
+        <Typography
+          variant="h6"
+          sx={{
+            paddingTop: 3,
+            marginBottom: "6px",
+            fontSize: "12px",
+            fontWeight: "700",
+            textTransform: "uppercase",
+          }}
+        >
           Member Since
-        </h2>
-        <div className="flex align-center gap-x-2 text-sm mb-1.5">
-          <SiDiscord className="w-7 h-5 rounded-[50%] text-[#b5bac1]" />
-          <span className="text-[#dbdee1]">
-            {formatRegistrationdate(user.registrationDate)}
-          </span>
-        </div>
-        <h2 className="text-sm uppercase font-bold mb-1.5">Role</h2>
-        <div className="inline-flex items-center mb-3 pt-1 pr-2 pb-1 pl-1 bg-[#1E1F22] rounded-md">
+        </Typography>
+        <Stack
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          sx={{ mb: "12px" }}
+        >
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            sx={{ fontSize: "14px", marginBottom: "6px" }}
+          >
+            <Tooltip
+              title="Discord"
+              arrow
+              placement="top"
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    bgcolor: "common.black",
+                    "& .MuiTooltip-arrow": {
+                      color: "common.black",
+                    },
+                  },
+                },
+              }}
+            >
+              <Stack>
+                <SiDiscord className="w-7 h-5 rounded-[50%] text-[#b5bac1]" />
+              </Stack>
+            </Tooltip>
+            <Typography variant="span" sx={{ color: "#dbdee1" }}>
+              {formatRegistrationDate(user.userRegistrationDate)}
+            </Typography>
+          </Stack>
+          <Typography
+            variant="span"
+            sx={{
+              bgcolor: "#34383c",
+              width: "4px",
+              height: "4px",
+              borderRadius: "50%",
+            }}
+          />
+          <Tooltip
+            title={`${user.serverName}`}
+            arrow
+            placement="top"
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  bgcolor: "common.black",
+                  "& .MuiTooltip-arrow": {
+                    color: "common.black",
+                  },
+                },
+              },
+            }}
+          >
+            <Stack
+              sx={{
+                width: "16px",
+                height: "16px",
+                borderRadius: "50%",
+                color: "#dbdee1",
+                bgcolor: "#34383c",
+                textAlign: "center",
+                fontSize: "8px",
+                p: 0.5,
+              }}
+            >
+              {user.serverName}
+            </Stack>
+          </Tooltip>
+          <Typography variant="span" sx={{ color: "#dbdee1" }}>
+            {formatRegistrationDate(user.serverRegistrationDate)}
+          </Typography>
+        </Stack>
+        <Typography
+          variant="h2"
+          sx={{
+            fontSize: "12px",
+            textTransform: "uppercase",
+            fontWeight: "700",
+            marginBottom: 1.5,
+          }}
+        >
+          Role
+        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          sx={{
+            marginBottom: "12px",
+            padding: "4px 8px 4px 4px",
+            backgroundColor: "#1e1f22",
+            borderRadius: "6px",
+            width: "86px",
+          }}
+        >
           <BsFillCircleFill className="text-[#5d64f4] m-1" size={12} />
-          <p className="text-xs">{user.role}</p>
-        </div>
-        <h2 className="text-xs uppercase font-bold mb-1.5">Note</h2>
+          <Typography sx={{ fontSize: "12px" }}>{user.role}</Typography>
+        </Stack>
+        <Typography
+          variant="h2"
+          sx={{
+            fontSize: "12px",
+            textTransform: "uppercase",
+            fontWeight: "700",
+            marginBottom: 1.5,
+          }}
+        >
+          Note
+        </Typography>
         <CustomNoteTextField
           id="outlined-basic"
           placeholder="Click to add a note"
@@ -125,8 +295,8 @@ const PopUp = () => {
           placeholder={`Message @${user.name}`}
           size="small"
         />
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 };
 
