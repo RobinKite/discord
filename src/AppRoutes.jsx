@@ -27,6 +27,20 @@ const AppRoutes = () => {
       </Route>
     </Routes>
   );
+        <Route element={<RequireAuth />}>
+          <Route path="channels/">
+            <Route path="@me" element={<ServerLayout />} />
+            <Route
+              path=":serverId/:channelId"
+              element={<p>Server channel</p>}
+            />
+          </Route>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route path="*" element={<Default />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default AppRoutes;
