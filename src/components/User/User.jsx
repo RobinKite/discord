@@ -15,11 +15,12 @@ export const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
 import { useState, useRef } from "react";
 import PopUp from "../PopUp/PopUp";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import PropTypes from "prop-types";
 import { fillPopupContent } from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
 
 export default function User({ user }) {
-  const isOffline = offlineRoles.includes(user.status);
+  const isOffline = !offlineRoles.includes(user.status);
   const [isPopUpOpen, setIsPopupOpen] = useState(false);
   const containerRef = useRef(null);
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ export default function User({ user }) {
 
   return (
     <div
+      onClick={() => handleModalOpen(user)}
       ref={containerRef}
       onClick={() => handleModalOpen(user)}
       className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative"
