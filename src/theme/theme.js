@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import extendPalette from "./designTokens";
+import extendPalette, { darkText, darkTooltip } from "./designTokens";
 
 const { buttonBgHover, buttonBgDefault, buttonBgDisabled, white } =
   extendPalette;
@@ -69,6 +69,23 @@ const theme = createTheme({
           outline: "none",
           marginBottom: "6px",
         }),
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: darkTooltip,
+          fontSize: "12px",
+          fontWeight: "500",
+          padding: "8px 12px",
+          color: darkText,
+          "& .MuiTooltip-arrow": {
+            color: darkTooltip,
+          },
+        },
+      },
+      defaultProps: {
+        placement: "top",
       },
     },
   },

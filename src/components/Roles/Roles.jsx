@@ -4,59 +4,30 @@ import { BiMinus } from "react-icons/bi";
 
 export default function Roles() {
   const users = useSelector((state) => state.userStatus.users);
-  const users = useSelector((state) => state.userStatus.users);
 
   const roles = users
     .reduce(
       (result, user) => {
-        const { userName, userId, role, status } = user;
-  const roles = users
-    .reduce(
-      (result, user) => {
-        const { userName, userId, role, status } = user;
-
-        if (status === "offline" || status === "invisible") {
+        if (user.status === "offline" || user.status === "invisible") {
           const statusGroup = result.find((group) => group.name === "offline");
-          statusGroup.users.push({ userName, userId, role, status });
+          statusGroup.users.push({ ...user });
           return result;
         }
-        if (!role) {
+        if (!user.role) {
           const statusGroup = result.find((group) => group.name === "online");
-          statusGroup.users.push({ userName, userId, role, status });
-          return result;
-        }
-        if (status === "offline" || status === "invisible") {
-          const statusGroup = result.find((group) => group.name === "offline");
-          statusGroup.users.push({ userName, userId, role, status });
-          return result;
-        }
-        if (!role) {
-          const statusGroup = result.find((group) => group.name === "online");
-          statusGroup.users.push({ userName, userId, role, status });
+          statusGroup.users.push({ ...user });
           return result;
         }
 
-        // Find or create the group based on role
-        let roleGroup = result.find((group) => group.name === role);
-        // Find or create the group based on role
-        let roleGroup = result.find((group) => group.name === role);
+        let roleGroup = result.find((group) => group.name === user.role);
 
         if (!roleGroup) {
-          result.push({ name: role, users: [] });
-          roleGroup = result.find((group) => group.name === role);
-        }
-        if (!roleGroup) {
-          result.push({ name: role, users: [] });
-          roleGroup = result.find((group) => group.name === role);
+          result.push({ name: user.role, users: [] });
+          roleGroup = result.find((group) => group.name === user.role);
         }
 
-        // Push the user to the appropriate group(s)
         if (roleGroup) {
-          roleGroup.users.push({ userName, userId, role, status });
-        }
-        // Push the user to the appropriate group(s)
-        if (roleGroup) {
-          roleGroup.users.push({ userName, userId, role, status });
+          roleGroup.users.push({ ...user });
         }
 
         return result;

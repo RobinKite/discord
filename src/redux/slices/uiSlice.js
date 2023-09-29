@@ -5,6 +5,7 @@ const uiSlice = createSlice({
   initialState: {
     modalStack: [],
     isLoading: false,
+    popupContent: {},
   },
   reducers: {
     openModal: (state, action) => {
@@ -19,9 +20,17 @@ const uiSlice = createSlice({
     stopLoading: (state) => {
       state.isLoading = false;
     },
+    fillPopupContent: (state, action) => {
+      state.popupContent = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal, startLoading, stopLoading } =
-  uiSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  startLoading,
+  stopLoading,
+  fillPopupContent,
+} = uiSlice.actions;
 export default uiSlice.reducer;

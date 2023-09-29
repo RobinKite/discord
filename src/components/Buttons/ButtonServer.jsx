@@ -80,21 +80,13 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
       />
       <Tooltip
         title={title || children}
-        arrow
         placement="right"
+        arrow
         componentsProps={{
           tooltip: {
             sx: {
               maxWidth: "300px",
-              padding: "10px",
               left: "6px",
-              fontSize: "18px",
-              fontWeight: "700",
-              color: darkText,
-              bgcolor: darkTooltip,
-              "& .MuiTooltip-arrow": {
-                color: "#111214",
-              },
             },
           },
         }}

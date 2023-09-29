@@ -1,10 +1,13 @@
-import { useState } from "react";
 import { styled } from "@mui/system";
 import { Link, Stack, Tooltip, Typography } from "@mui/material";
-import { statusMap } from "@/constants";
+import { statusMap } from "@/constants/statusMap";
 import { SiDiscord } from "react-icons/si";
 import { BsFillCircleFill } from "react-icons/bs";
 import { FaHashtag } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { fillPopupContent } from "@/redux/slices/uiSlice";
+import { adjustText } from "@/utils";
+import { formatRegistrationDate } from "@/utils/date";
 
 const CustomNoteTextField = styled("input")({
   fontSize: "12px",
@@ -32,32 +35,20 @@ const CustomMessageTextField = styled("input")({
 });
 
 const PopUp = () => {
-  const [user, setUser] = useState({
-    name: "Tetiana",
-    userName: "tadimm",
-    userRegistrationDate: "07.07.2007",
-    role: "front-end",
-    note: "",
-    avatar: (
-      <SiDiscord
-        className="bg-[#5d64f4] rounded-[50%] p-3 border-[6px] border-[#232328] absolute top-3 left-3"
-        size={86}
-      />
-    ),
-    status: statusMap.invisible,
-    serverRegistrationDate: "09.09.2023",
-    serverName: "Ks",
-  });
+  const user = useSelector((state) => state.ui.popupContent);
+  const dispatch = useDispatch();
 
   const handleNoteChange = (ev) => {
-    setUser((prevUser) => ({ ...prevUser, note: ev.target.value }));
+    dispatch(fillPopupContent({ ...user, note: ev.target.value }));
+    console.log(ev.target.value);
   };
 
-  const formatRegistrationDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = { month: "short", day: "numeric", year: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  };
+  const userRegistrationDate = formatRegistrationDate(
+    user.userRegistrationDate
+  );
+  const serverRegistrationDate = formatRegistrationDate(
+    user.serverRegistrationDate
+  );
 
   return (
     <Stack
@@ -74,7 +65,14 @@ const PopUp = () => {
     >
       <Stack>
         <Stack sx={{ height: "60px", backgroundColor: "#5d64f4" }}></Stack>
-        {user.avatar}
+        {user.avatar ? (
+          user.avatar
+        ) : (
+          <SiDiscord
+            className="bg-[#5d64f4] rounded-[50%] p-3 border-[6px] border-[#232328] absolute top-3 left-3"
+            size={86}
+          />
+        )}
         <Stack
           sx={{
             border: "6px solid #232428",
@@ -86,24 +84,10 @@ const PopUp = () => {
           }}
           size={28}
         >
-          {user.status}
+          {statusMap[user.status]}
         </Stack>
       </Stack>
-      <Tooltip
-        title={`Originally known as ${user.name}`}
-        arrow
-        placement="top"
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: "common.black",
-              "& .MuiTooltip-arrow": {
-                color: "common.black",
-              },
-            },
-          },
-        }}
-      >
+      <Tooltip title={`Originally known as ${user.name}`}>
         <Stack
           direction="column"
           justifyContent="center"
@@ -128,7 +112,7 @@ const PopUp = () => {
               padding: "3.5px",
             }}
           >
-            <FaHashtag className="text-black" size={9} />
+            <FaHashtag color="black" size={9} />
           </Link>
         </Stack>
       </Tooltip>
@@ -182,27 +166,13 @@ const PopUp = () => {
             spacing={2}
             sx={{ fontSize: "14px", marginBottom: "6px" }}
           >
-            <Tooltip
-              title="Discord"
-              arrow
-              placement="top"
-              componentsProps={{
-                tooltip: {
-                  sx: {
-                    bgcolor: "common.black",
-                    "& .MuiTooltip-arrow": {
-                      color: "common.black",
-                    },
-                  },
-                },
-              }}
-            >
+            <Tooltip title="Discord">
               <Stack>
                 <SiDiscord className="w-7 h-5 rounded-[50%] text-[#b5bac1]" />
               </Stack>
             </Tooltip>
             <Typography variant="span" sx={{ color: "#dbdee1" }}>
-              {formatRegistrationDate(user.userRegistrationDate)}
+              {userRegistrationDate}
             </Typography>
           </Stack>
           <Typography
@@ -214,21 +184,7 @@ const PopUp = () => {
               borderRadius: "50%",
             }}
           />
-          <Tooltip
-            title={`${user.serverName}`}
-            arrow
-            placement="top"
-            componentsProps={{
-              tooltip: {
-                sx: {
-                  bgcolor: "common.black",
-                  "& .MuiTooltip-arrow": {
-                    color: "common.black",
-                  },
-                },
-              },
-            }}
-          >
+          <Tooltip title={`${user.serverName}`}>
             <Stack
               sx={{
                 width: "16px",
@@ -241,38 +197,42 @@ const PopUp = () => {
                 p: 0.5,
               }}
             >
-              {user.serverName}
+              {adjustText(user.serverName, 2, false).serverName}
             </Stack>
           </Tooltip>
           <Typography variant="span" sx={{ color: "#dbdee1" }}>
-            {formatRegistrationDate(user.serverRegistrationDate)}
+            {serverRegistrationDate}
           </Typography>
         </Stack>
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: "12px",
-            textTransform: "uppercase",
-            fontWeight: "700",
-            marginBottom: 1.5,
-          }}
-        >
-          Role
-        </Typography>
-        <Stack
-          direction="row"
-          alignItems="center"
-          sx={{
-            marginBottom: "12px",
-            padding: "4px 8px 4px 4px",
-            backgroundColor: "#1e1f22",
-            borderRadius: "6px",
-            width: "86px",
-          }}
-        >
-          <BsFillCircleFill className="text-[#5d64f4] m-1" size={12} />
-          <Typography sx={{ fontSize: "12px" }}>{user.role}</Typography>
-        </Stack>
+        {user.role && (
+          <>
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: "12px",
+                textTransform: "uppercase",
+                fontWeight: "700",
+                marginBottom: 1.5,
+              }}
+            >
+              Role
+            </Typography>
+            <Stack
+              direction="row"
+              alignItems="center"
+              sx={{
+                marginBottom: "12px",
+                padding: "4px 8px 4px 4px",
+                backgroundColor: "#1e1f22",
+                borderRadius: "6px",
+                width: "86px",
+              }}
+            >
+              <BsFillCircleFill className="text-[#5d64f4] m-1" size={12} />
+              <Typography sx={{ fontSize: "12px" }}>{user.role}</Typography>
+            </Stack>
+          </>
+        )}
         <Typography
           variant="h2"
           sx={{
@@ -289,6 +249,7 @@ const PopUp = () => {
           placeholder="Click to add a note"
           size="small"
           onChange={handleNoteChange}
+          value={user.note}
         />
         <CustomMessageTextField
           id="outlined-basic"
