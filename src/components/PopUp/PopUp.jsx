@@ -56,7 +56,8 @@ const PopUp = () => {
         width: "340px",
         position: "absolute",
         top: 0,
-        left: "-360px",
+        left: "-20px",
+        transform: "translateX(-100%)",
         color: "#f2f3f5",
         backgroundColor: "#232328",
         borderRadius: "8px",
@@ -64,12 +65,30 @@ const PopUp = () => {
       }}
     >
       <Stack>
-        <Stack sx={{ height: "60px", backgroundColor: "#5d64f4" }}></Stack>
+        <Stack
+          backgroundColor={user.backgroundBanner}
+          sx={{ height: "60px" }}
+        />
         {user.avatar ? (
-          user.avatar
+          <img
+            src={user.avatar}
+            alt="user avatar"
+            width="86"
+            className={`p-3 rounded-[50%] border-[6px] border-[#232328] absolute top-3 left-3`}
+            style={{ backgroundColor: user.backgroundBanner }}
+          />
         ) : (
           <SiDiscord
-            className="bg-[#5d64f4] rounded-[50%] p-3 border-[6px] border-[#232328] absolute top-3 left-3"
+            color="white"
+            style={{
+              backgroundColor: user.backgroundBanner,
+              borderRadius: "50%",
+              padding: "12px",
+              border: "6px solid #232328",
+              position: "absolute",
+              top: "12px",
+              left: "12px",
+            }}
             size={86}
           />
         )}
@@ -87,7 +106,7 @@ const PopUp = () => {
           {statusMap[user.status]}
         </Stack>
       </Stack>
-      <Tooltip title={`Originally known as ${user.name}`}>
+      <Tooltip title={`Originally known as ${user.name} #${user.userId}`}>
         <Stack
           direction="column"
           justifyContent="center"
@@ -168,7 +187,7 @@ const PopUp = () => {
           >
             <Tooltip title="Discord">
               <Stack>
-                <SiDiscord className="w-7 h-5 rounded-[50%] text-[#b5bac1]" />
+                <SiDiscord className="w-7 h-5 rounded-[50%]" color="#b5bac1" />
               </Stack>
             </Tooltip>
             <Typography variant="span" sx={{ color: "#dbdee1" }}>
@@ -245,14 +264,14 @@ const PopUp = () => {
           Note
         </Typography>
         <CustomNoteTextField
-          id="outlined-basic"
+          id="user-note"
           placeholder="Click to add a note"
           size="small"
           onChange={handleNoteChange}
           value={user.note}
         />
         <CustomMessageTextField
-          id="outlined-basic"
+          id="user-message"
           placeholder={`Message @${user.name}`}
           size="small"
         />

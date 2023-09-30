@@ -7,9 +7,10 @@ import ButtonServer from "@/components/Buttons/ButtonServer";
 export function ClientSidebar() {
   return (
     <div
-      className={`bg-[${darkSidebar}] flex h-screen min-w-[4.5rem] flex-col items-center gap-y-2 py-3`}>
+      className={`bg-[${darkSidebar}] flex h-screen min-w-[4.5rem] flex-col items-center gap-y-2 py-3`}
+    >
       <ButtonServer title={"Private messages"} color={darkText}>
-        <SiDiscord size={26} />
+        <SiDiscord size={26} color="white" />
       </ButtonServer>
       <div
         className={`bg-[${darkServerIconBg}] mx-auto h-0.5  w-8 rounded-md`}

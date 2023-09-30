@@ -20,3 +20,8 @@ export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
     return { serverName, fontSize };
   }
 };
+
+export const getRandomColor = () => {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${randomColor}`;
+};

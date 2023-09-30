@@ -4,9 +4,7 @@ export const useOnClickOutside = (ref, handler) => {
   const handleClick = useCallback(
     (event) => {
       const el = ref?.current;
-      if (!el || el.contains(event.target)) {
-        return;
-      }
+      if (!el || el.contains(event.target)) return;
 
       event && event.preventDefault();
       event && event.stopPropagation();

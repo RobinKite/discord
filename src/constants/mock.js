@@ -1,15 +1,19 @@
+import { getRandomColor } from "@/utils";
+import icon from "@/assets/amongus.png";
+
 export const users = [
   {
     userId: "1",
     name: "Eric",
     userName: "eric54",
     userRegistrationDate: "07.07.2018",
-    avatar: null,
+    avatar: icon,
     role: "role-1",
     note: "",
     status: "idle",
     serverRegistrationDate: "09.09.2023",
-    serverName: "Ks",
+    serverName: "Bounderies",
+    backgroundBanner: getRandomColor(),
   },
   {
     userId: "2",
@@ -20,8 +24,9 @@ export const users = [
     role: "role-1",
     status: "offline",
     serverRegistrationDate: "09.09.2023",
-    serverName: "Ks",
+    serverName: "Bounderies",
     note: "",
+    backgroundBanner: getRandomColor(),
   },
   {
     userId: "3",
@@ -32,20 +37,22 @@ export const users = [
     role: "role-2",
     status: "idle",
     serverRegistrationDate: "09.09.2023",
-    serverName: "Ks",
+    serverName: "Bond",
     note: "",
+    backgroundBanner: getRandomColor(),
   },
   {
     userId: "4",
     name: "Kenny",
     userName: "007kenny",
-    userRegistrationDate: "27.07.2021",
+    userRegistrationDate: "07.27.2021",
     avatar: null,
     role: "role-2",
     status: "invisible",
     serverRegistrationDate: "09.09.2023",
     serverName: "Ks",
     note: "",
+    backgroundBanner: getRandomColor(),
   },
   {
     userId: "5",
@@ -58,17 +65,19 @@ export const users = [
     status: "offline",
     serverRegistrationDate: "09.09.2023",
     note: "",
+    backgroundBanner: getRandomColor(),
   },
   {
     userId: "6",
     name: "Chef",
     userName: "chef80",
     userRegistrationDate: "12.17.2019",
-    serverName: "Ks",
+    serverName: "Bond",
     avatar: null,
     role: null,
     status: "online",
     serverRegistrationDate: "09.09.2023",
     note: "",
+    backgroundBanner: getRandomColor(),
   },
 ];

@@ -50,14 +50,7 @@ export default function Roles() {
           </h2>
           <ul className="flex flex-col">
             {role.users.map((user) => (
-              <li
-                key={user.userId}
-                className={
-                  role.name === "offline"
-                    ? "opacity-30 transition-opacity hover:opacity-100"
-                    : ""
-                }
-              >
+              <li key={user.userId}>
                 <User user={user} />
               </li>
             ))}
