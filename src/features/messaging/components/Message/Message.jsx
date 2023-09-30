@@ -4,7 +4,7 @@ import { convertTimestampToDateString } from "@/utils";
 
 export function Message({ authorName, avatarUrl, timestamp, text }) {
   return (
-    <div className="mb-2 mt-5 flex max-w-full gap-x-4 py-1 pl-4 pr-12 text-sm text-[#dcdee1]">
+    <div className="mb-2 mt-5 flex gap-x-4 py-1 pl-4 pr-12 text-sm text-[#dcdee1]">
       <Avatar sx={{ bgcolor: "#7076f1" }} src={avatarUrl} />
       <div className="grow">
         <h3>
@@ -13,7 +13,7 @@ export function Message({ authorName, avatarUrl, timestamp, text }) {
             {convertTimestampToDateString(timestamp)}
           </span>
         </h3>
-        <p>{text}</p>
+        <p className="break-all">{text}</p>
       </div>
     </div>
   );
