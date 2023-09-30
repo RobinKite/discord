@@ -1,6 +1,8 @@
 import { getRandomColor } from "@/utils";
 import icon from "@/assets/amongus.png";
 import { Status } from ".";
+import { getRandomColor } from "@/utils";
+import icon from "@/assets/amongus.png";
 
 export const SAMPLE_CHANNELS = [
   { id: "1", name: "general", type: "text" },
