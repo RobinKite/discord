@@ -3,14 +3,14 @@ import InputBase from "@mui/material/InputBase";
 import FormControl from "@mui/material/FormControl";
 import { useField } from "formik";
 import PropTypes from "prop-types";
-import { Typography, InputLabel } from "@mui/material";
+import { Typography, InputLabel, Stack } from "@mui/material";
 
 export const Input = memo((props) => {
   const { label, id, type, required, name } = props;
   const [field, meta] = useField(name);
 
   return (
-    <>
+    <Stack sx={{ display: "grid", gridTemplateColumns: "1fr", gap: "8px" }}>
       <InputLabel htmlFor={id} required={required}>
         {label}
       </InputLabel>
@@ -29,7 +29,7 @@ export const Input = memo((props) => {
           </Typography>
         ) : null}
       </FormControl>
-    </>
+    </Stack>
   );
 });
 

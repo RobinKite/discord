@@ -34,6 +34,7 @@ const theme = createTheme({
         }),
       },
     },
+
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -41,7 +42,7 @@ const theme = createTheme({
           color: "#ffffffaa",
           textTransform: "uppercase",
           fontWeight: "700",
-          marginBottom: "8px",
+          // marginBottom: "8px",
 
           "& .MuiFormLabel-asterisk": {
             color: "#dd3f41",
@@ -49,6 +50,7 @@ const theme = createTheme({
         },
       },
     },
+
     MuiInputBase: {
       styleOverrides: {
         root: ({
