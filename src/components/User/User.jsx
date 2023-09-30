@@ -1,11 +1,10 @@
 import { SiDiscord } from "react-icons/si";
 import PropTypes from "prop-types";
-import { statusMap } from "@/constants";
-import { offlineRoles } from "@/constants";
+import { statusMap } from "@/constants/statusMap";
+import { offlineRoles } from "@/constants/statusMap";
 import { useState, useRef } from "react";
 import PopUp from "../PopUp/PopUp";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import PropTypes from "prop-types";
 import { fillPopupContent } from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
 
