@@ -15,7 +15,6 @@ export const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
 import { useState, useRef } from "react";
 import PopUp from "../PopUp/PopUp";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import PropTypes from "prop-types";
 import { fillPopupContent } from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
 
