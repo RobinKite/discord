@@ -2,7 +2,7 @@ import { api } from "@/services/client";
 
 export const getTokens = () => {
   return {
-    accessToken: localStorage.getItem("authToken"),
+    accessToken: localStorage.getItem("accessToken"),
     refreshToken: localStorage.getItem("refreshToken"),
   };
 };
@@ -10,10 +10,10 @@ export const getTokens = () => {
 export const setAuthToken = (token) => {
   if (token) {
     api.defaults.headers.common.Authorization = `${token}`;
-    localStorage.setItem("authToken", token);
+    localStorage.setItem("accessToken", token);
   } else {
     delete api.defaults.headers.common.Authorization;
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("accessToken");
   }
 };
 

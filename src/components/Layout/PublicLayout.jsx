@@ -14,11 +14,9 @@ const PublicLayout = () => {
 
   useEffect(() => {
     hasTokens &&
-      dispatch(
-        setUser().then(() => {
-          navigate("/login", { replace: true });
-        })
-      );
+      dispatch(setUser()).then(() => {
+        navigate("/login", { replace: true });
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
