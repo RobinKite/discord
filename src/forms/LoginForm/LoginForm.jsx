@@ -1,11 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Input, Button } from "@/components";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/slices/authSlice";
 import { Link, Typography, Stack } from "@mui/material";
+import { logIn } from "@/services/client";
 
 const StyledStackSX = {
   direction: "column",
@@ -49,14 +48,21 @@ function LoginForm() {
 
   const handleSubmit = (values, actions) => {
     console.log(values);
-
+    const { email, password } = values;
     try {
-      dispatch(setUser());
+      dispatch(
+        logIn({
+          email,
+          password,
+        })
+      );
       navigate(from, { replace: true });
       actions.resetForm();
     } catch (e) {
       console.error(e);
     }
+
+    actions.resetForm();
   };
 
   return (

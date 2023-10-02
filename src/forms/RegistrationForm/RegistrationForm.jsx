@@ -1,9 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
 import { Link, Stack, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { register } from "@/services/client";
 
 const StyledStackSX = {
   direction: "column",
@@ -25,6 +27,11 @@ const StyledStackSX = {
 };
 
 function RegistrationForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const initialValues = {
     email: "",
     username: "",
@@ -35,8 +42,20 @@ function RegistrationForm() {
     year: "",
   };
 
-  const onSubmit = (values, actions) => {
-    console.log(values);
+  const onSubmit = async (values, actions) => {
+    const { email, username, name, password } = values;
+    const registrationResult = await dispatch(
+      register({
+        email,
+        username,
+        name,
+        password,
+      })
+    );
+
+    if (registrationResult.payload.success) {
+      navigate("channels/@me");
+    }
     actions.resetForm();
   };
 
