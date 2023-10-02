@@ -23,7 +23,7 @@ export const AppearanceTabContainer = () => {
         min={12}
         max={24}
         step={1}
-        // value={16}
+        defaultValue={16}
         list="fontMarkers"
       />
       <datalist id="fontMarkers">
@@ -63,7 +63,7 @@ export const AppearanceTabContainer = () => {
         min={0}
         max={24}
         step={4}
-        // value={16}
+        defaultValue={16}
         list="spaceMarkers"
       />
       <datalist id="spaceMarkers">

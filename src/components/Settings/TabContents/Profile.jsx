@@ -7,6 +7,7 @@ export const ProfileTabContent = () => {
       <SettingsLine />
       <h3>Avatar</h3>
       <button>Change Avatar</button>
+      <button>Remove Avatar</button>
       <SettingsLine />
       <label htmlFor="bannerColor">Banner Color</label>
       <input

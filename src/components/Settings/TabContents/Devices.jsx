@@ -7,7 +7,7 @@ export const DevicesTabContent = () => {
       <div>*current device*</div>
       <SettingsLine />
       <h3>Other Devices</h3>
-      <div>*other device*</div>
+      <div>*other devices*</div>
     </>
   );
 };

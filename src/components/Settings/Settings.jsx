@@ -13,6 +13,9 @@ import SettingsTabContainer from "./SettingsTabContainer";
 const Settings = () => {
   const dispatch = useDispatch();
 
+  const appVersion = "Alpha 0.0.1"; //mocking
+  const OCVersion = "*oc version*"; //mocking
+
   const initialActiveTabState = {
     header: Object.keys(tabsMap)[0],
     content: Object.values(tabsMap)[0].content,
@@ -70,8 +73,8 @@ const Settings = () => {
             Log out
           </button>
           <SettingsLine />
-          <p>Alpha 0.0.1</p>
-          <p>*oc version*</p>
+          <p>{appVersion}</p>
+          <p>{OCVersion}</p>
         </nav>
       </div>
       <div className="flex shrink grow basis-[800px] justify-start bg-[#313338]">
