@@ -2,6 +2,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Button, Input } from "@/components";
+import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
 import { Link, Stack, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -65,8 +66,21 @@ function RegistrationForm() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
+      onSubmit={onSubmit}
+    >
       {({ isValid, setFieldValue }) => (
         <Form>
+          <Stack sx={StyledStackSX}>
+            <Typography
+              variant="h2"
+              mb="12px"
+              sx={{
+                textAlign: "center",
+                fontWeight: "medium",
+                color: "#fff",
+                fontSize: "1.5rem",
+              }}
+            >
           <Stack sx={StyledStackSX}>
             <Typography
               variant="h2"
@@ -81,12 +95,17 @@ function RegistrationForm() {
               Create an account
             </Typography>
             <Input
+            </Typography>
+            <Input
               id="email"
               label="E-mail"
               type="email"
               name="email"
               required
             />
+            <Input id="name" label="Display name" name="name" />
+            <Input id="username" label="Username" name="username" required />
+            <Input
             <Input id="name" label="Display name" name="name" />
             <Input id="username" label="Username" name="username" required />
             <Input
@@ -98,21 +117,31 @@ function RegistrationForm() {
             />
             <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
             <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
+            <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
+            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               Continue
+            </Button>
+            <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
             </Button>
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
               <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Term&apos;s of Service&#32;
+              </Link>
               </Link>
               and &#32;
               <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Privacy Policy.
+              </Link>
+            </Typography>
               </Link>
             </Typography>
             <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
+          </Stack>
           </Stack>
         </Form>
       )}
