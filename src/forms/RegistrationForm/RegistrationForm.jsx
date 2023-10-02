@@ -116,3 +116,5 @@ function RegistrationForm() {
     </Formik>
   );
 }
+
+export default RegistrationForm;
