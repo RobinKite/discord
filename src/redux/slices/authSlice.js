@@ -1,5 +1,6 @@
+import { Endpoint } from "@/constants/api";
 import { api } from "@/services/client";
-import { getTokens, setAuthToken, setRefreshToken } from "@/utils/auth";
+import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
@@ -49,34 +50,30 @@ const authSlice = createSlice({
   },
 });
 
-export const setUser = createAsyncThunk("auth/me", async (_, thunkAPI) => {
-  // TODO: remove next code
-  // const tokens = getTokens();
-  // const headers = {
-  //   Authorization: `Bearer ${tokens.accessToken}`,
-  // };
-  // const result = await api.get("/auth/me", { headers });
-  // TODO: "/auth/me" create api constants
-  const result = await api.get("/auth/me");
+export const setUser = createAsyncThunk(Endpoint.ME, async (_, thunkAPI) => {
+  const result = await api.get(Endpoint.ME);
   const { id, email, avatar, name, userName } = result.data;
   thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
   return result;
 });
 
-export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
-  const result = await api.post("auth/login", data);
-  const { access_token, refresh_token } = result.data;
-  const { id, email, avatar, name, userName } = result.data.user;
-  thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-  setAuthToken(access_token);
-  setRefreshToken(refresh_token);
-  return result;
-});
+export const login = createAsyncThunk(
+  Endpoint.LOGIN,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.LOGIN, data);
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
+    return result;
+  }
+);
 
 export const register = createAsyncThunk(
-  "auth/register",
+  Endpoint.REGISTER,
   async (data, thunkAPI) => {
-    const result = await api.post("auth/register", data);
+    const result = await api.post(Endpoint.REGISTER, data);
     const { access_token, refresh_token } = result.data;
     const { id, email, avatar, name, userName } = result.data.user;
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));

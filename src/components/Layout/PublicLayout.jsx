@@ -5,25 +5,18 @@ import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const PublicLayout = () => {
-  const hasTokens =
-    Boolean(getTokens().accessToken) && Boolean(getTokens().refreshToken);
+  const hasToken = Boolean(getTokens().accessToken);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(hasTokens);
-
   useEffect(() => {
-    hasTokens &&
+    hasToken &&
       dispatch(setUser()).then(() => {
-        navigate("/login", { replace: true });
+        navigate("/", { replace: true });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 };
 
 export default PublicLayout;

@@ -5,11 +5,10 @@ import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 
 export default function Roles() {
-  const users = useSelector((state) => state.userStatus.users);
+  const users = useSelector((state) => state.server.currentServer.users);
+  const sortedUsers = mapUserData(users);
 
-  const roles = mapUserData(users);
-
-  return roles.map((role) => (
+  return sortedUsers.map((role) => (
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>

@@ -12,16 +12,15 @@ const statusMap = {
   [Status.IDLE]: <IoMdMoon className="rotate-[270deg] text-yellow-500" />,
 };
 const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
-// import { useSelector } from "react-redux";
 
 export default function User({ user }) {
   // const username = useSelector(state => state?.user?.userName) || "No name";
-  const { userName = "No name", userAvatar = null, status, role } = user;
+  const { userName = "No name", userAvatar = null, status } = user;
   const isOffline = !offlineRoles.includes(status);
 
   return (
-    <div className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative">
-      <div className="flex rounded-[50%] bg-[#5d64f4] w-[32px] h-[32px] mr-2 justify-center items-center">
+    <div className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
+      <div className="mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] bg-[#5d64f4]">
         {userAvatar ? (
           <img
             src={userAvatar}
@@ -35,7 +34,7 @@ export default function User({ user }) {
         )}
       </div>
       {isOffline && (
-        <span className="absolute flex justify-center items-center p-[3px] w-[14px] h-[14px] rounded-[50%] bg-inherit bottom-1 left-7">
+        <span className="absolute bottom-1 left-7 flex h-[14px] w-[14px] items-center justify-center rounded-[50%] bg-inherit p-[3px]">
           {statusMap[status]}
         </span>
       )}

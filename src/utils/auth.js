@@ -1,26 +1,27 @@
+import { Tokens } from "@/constants";
 import { api } from "@/services/client";
 
 export const getTokens = () => {
   return {
-    accessToken: localStorage.getItem("accessToken"),
-    refreshToken: localStorage.getItem("refreshToken"),
+    accessToken: localStorage.getItem(Tokens.ACCESS),
+    refreshToken: localStorage.getItem(Tokens.REFRESH),
   };
 };
 
 export const setAuthToken = (token) => {
   if (token) {
     api.defaults.headers.common.Authorization = `${token}`;
-    localStorage.setItem("accessToken", token);
+    localStorage.setItem(Tokens.ACCESS, token);
   } else {
     delete api.defaults.headers.common.Authorization;
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem(Tokens.ACCESS);
   }
 };
 
 export const setRefreshToken = (token) => {
   if (token) {
-    localStorage.setItem("refreshToken", token);
+    localStorage.setItem(Tokens.REFRESH, token);
   } else {
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem(Tokens.REFRESH);
   }
 };

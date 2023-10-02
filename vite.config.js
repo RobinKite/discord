@@ -1,6 +1,7 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import "dotenv/config";
 
 export default defineConfig({
   plugins: [react()],
@@ -11,11 +12,11 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: import.meta.env.API_URL,
+        target: process.env.API_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
-    }
+    },
   },
   resolve: {
     alias: {

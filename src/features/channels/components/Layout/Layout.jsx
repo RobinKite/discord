@@ -8,9 +8,9 @@ export function Layout() {
     <div className="flex">
       <ClientSidebar />
       <div className="flex min-h-screen flex-col">
-        <Header serverName="Server" channelName="general" />
+        <Header />
         <main className="flex grow">
-          <UserSidebar fullname="User" username="username" />
+          <UserSidebar />
           <Chat />
           <UserList />
         </main>

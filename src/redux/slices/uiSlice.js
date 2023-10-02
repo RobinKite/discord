@@ -5,6 +5,7 @@ const uiSlice = createSlice({
   initialState: {
     modalStack: [],
     isLoading: false,
+    //TODO: show/hide userList
   },
   reducers: {
     openModal: (state, action) => {

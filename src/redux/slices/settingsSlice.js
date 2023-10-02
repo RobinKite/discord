@@ -1,9 +1,10 @@
+import { Themes } from "@/constants";
 import { createSlice } from "@reduxjs/toolkit";
 
 const settingsSlice = createSlice({
   name: "settings",
   initialState: {
-    theme: "light",
+    theme: Themes.LIGHT,
     notificationsEnabled: true,
   },
   reducers: {

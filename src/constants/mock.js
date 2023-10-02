@@ -1,21 +1,13 @@
 import { Status } from ".";
 
-export const SAMPLE_MESSAGES = [
-  {
-    avatarUrl: "/",
-    authorName: "User1",
-    timestamp: 1694970000000,
-    text: "Text",
-  },
-  {
-    avatarUrl: "/",
-    authorName: "User2",
-    timestamp: 1694970600000,
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime.",
-  },
+export const SAMPLE_CHANNELS = [
+  { id: "1", name: "general", type: "text" },
+  { id: "2", name: "voice", type: "voice" },
+  { id: "3", name: "random", type: "text" },
+  { id: "4", name: "music", type: "voice" },
 ];
 
-export const users = [
+export const SAMPLE_USERS = [
   {
     userName: "Eric",
     userId: "1",
@@ -53,3 +45,25 @@ export const users = [
     status: Status.ONLINE,
   },
 ];
+
+export const SAMPLE_MESSAGES = [
+  {
+    avatarUrl: "/",
+    authorName: SAMPLE_USERS[0].userName,
+    timestamp: 1694970000000,
+    text: "Text",
+  },
+  {
+    avatarUrl: "/",
+    authorName: SAMPLE_USERS[1].userName,
+    timestamp: 1694970600000,
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime.",
+  },
+];
+
+export const SAMPLE_SERVER = {
+  id: "1",
+  title: "default",
+  channels: SAMPLE_CHANNELS,
+  users: SAMPLE_USERS,
+};
