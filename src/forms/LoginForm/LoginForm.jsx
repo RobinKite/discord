@@ -16,8 +16,8 @@ function LoginForm() {
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "test@test.com",
+    password: "testpassword",
   };
 
   const handleSubmit = (values, actions) => {

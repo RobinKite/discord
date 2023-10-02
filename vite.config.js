@@ -8,6 +8,15 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: import.meta.env.API_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    }
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
