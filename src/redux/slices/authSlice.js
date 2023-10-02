@@ -50,11 +50,14 @@ const authSlice = createSlice({
 });
 
 export const setUser = createAsyncThunk("auth/me", async (_, thunkAPI) => {
-  const tokens = getTokens();
-  const headers = {
-    Authorization: `Bearer ${tokens.accessToken}`,
-  };
-  const result = await api.get("auth/me", { headers });
+  // TODO: remove next code
+  // const tokens = getTokens();
+  // const headers = {
+  //   Authorization: `Bearer ${tokens.accessToken}`,
+  // };
+  // const result = await api.get("/auth/me", { headers });
+  // TODO: "/auth/me" create api constants
+  const result = await api.get("/auth/me");
   const { id, email, avatar, name, userName } = result.data;
   thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
   return result;

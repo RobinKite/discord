@@ -2,8 +2,22 @@ import { getTokens, setAuthToken, setRefreshToken } from "@/utils/auth";
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://64.226.102.49:8080/api/v1",
+  baseURL: "/api",
 });
+
+api.interceptors.request.use(
+  (config) => {
+    const token = getTokens().accessToken;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 
 api.interceptors.response.use(
   (r) => r.data,
