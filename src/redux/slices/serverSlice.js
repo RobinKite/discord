@@ -1,9 +1,17 @@
+import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
 import { createSlice } from "@reduxjs/toolkit";
 
 const serverSlice = createSlice({
   name: "server",
   initialState: {
-    servers: [],
+    currentChannel: SAMPLE_CHANNELS[0],
+    currentServer: SAMPLE_SERVER,
+    servers: [SAMPLE_SERVER],
+    // currentServer: {...SAMPLE_SERVER, users: [...SAMPLE_SERVER.users, { userName: "test", userId: "0", role: null, status: Status.ONLINE, }, ], },
+    //TODO: add reducers for currentServer & currentChannel
+    // currentChannel: {},
+    // currentServer: {},
+    // servers: [],
   },
   reducers: {
     addServer: (state, action) => {

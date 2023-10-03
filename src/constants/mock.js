@@ -1,7 +1,15 @@
 import { getRandomColor } from "@/utils";
 import icon from "@/assets/amongus.png";
+import { Status } from ".";
 
-export const users = [
+export const SAMPLE_CHANNELS = [
+  { id: "1", name: "general", type: "text" },
+  { id: "2", name: "voice", type: "voice" },
+  { id: "3", name: "random", type: "text" },
+  { id: "4", name: "music", type: "voice" },
+];
+
+export const SAMPLE_USERS = [
   {
     userId: "1",
     name: "Eric",
@@ -10,7 +18,7 @@ export const users = [
     avatar: icon,
     role: "role-1",
     note: "",
-    status: "idle",
+    status: Status.ONLINE,
     serverRegistrationDate: "09.09.2023",
     serverName: "Bounderies",
     backgroundBanner: getRandomColor(),
@@ -22,7 +30,7 @@ export const users = [
     userRegistrationDate: "07.07.2017",
     avatar: null,
     role: "role-1",
-    status: "offline",
+    status: Status.IDLE,
     serverRegistrationDate: "09.09.2023",
     serverName: "Bounderies",
     note: "",
@@ -35,7 +43,7 @@ export const users = [
     userRegistrationDate: "07.10.2020",
     avatar: null,
     role: "role-2",
-    status: "idle",
+    status: Status.INVISIBLE,
     serverRegistrationDate: "09.09.2023",
     serverName: "Bond",
     note: "",
@@ -48,7 +56,7 @@ export const users = [
     userRegistrationDate: "07.27.2021",
     avatar: null,
     role: "role-2",
-    status: "invisible",
+    status: Status.INVISIBLE,
     serverRegistrationDate: "09.09.2023",
     serverName: "Ks",
     note: "",
@@ -62,7 +70,7 @@ export const users = [
     serverName: "Mono",
     avatar: null,
     role: null,
-    status: "offline",
+    status: Status.OFFLINE,
     serverRegistrationDate: "09.09.2023",
     note: "",
     backgroundBanner: getRandomColor(),
@@ -75,9 +83,30 @@ export const users = [
     serverName: "Bond",
     avatar: null,
     role: null,
-    status: "online",
+    status: Status.ONLINE,
     serverRegistrationDate: "09.09.2023",
     note: "",
     backgroundBanner: getRandomColor(),
   },
 ];
+export const SAMPLE_MESSAGES = [
+  {
+    avatarUrl: "/",
+    authorName: SAMPLE_USERS[0].userName,
+    timestamp: 1694970000000,
+    text: "Text",
+  },
+  {
+    avatarUrl: "/",
+    authorName: SAMPLE_USERS[1].userName,
+    timestamp: 1694970600000,
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime.",
+  },
+];
+
+export const SAMPLE_SERVER = {
+  id: "1",
+  title: "default",
+  channels: SAMPLE_CHANNELS,
+  users: SAMPLE_USERS,
+};

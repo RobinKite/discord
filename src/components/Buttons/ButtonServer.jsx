@@ -19,7 +19,7 @@ const indicatorHeightMap = {
 
 const ButtonServer = ({ children, title, bgcolor, color }) => {
   const [indicatorState, setIndicatorState] = useState(null);
-  const [notification, setNotification] = useState(false); //mock redux notification
+  const [notification, setNotification] = useState(false);
   const [adjusted, setAdjusted] = useState({});
 
   const handleEnter = () => {

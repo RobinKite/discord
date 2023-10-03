@@ -1,10 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import CustomInput from "@/components/CustomInput/CustomInput";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { register, setIsLoading } from "@/redux/slices/authSlice";
+import { Oval } from "react-loader-spinner";
 
 function RegistrationForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
   const initialValues = {
     email: "",
     username: "",
@@ -17,7 +27,11 @@ function RegistrationForm() {
 
   const onSubmit = (values, actions) => {
     console.log(values);
-    actions.resetForm();
+    dispatch(register(values)).then(() => {
+      navigate(from, { replace: true });
+      actions.resetForm();
+      dispatch(setIsLoading(false));
+    });
   };
 
   return (
@@ -53,7 +67,15 @@ function RegistrationForm() {
               name="password"
               required
             />
-            <CustomDateSelector setFieldValue={setFieldValue} />
+            <CustomDateSelector
+              dayId="day"
+              monthId="month"
+              yearId="year"
+              dayLabel="Day"
+              monthLabel="Month"
+              yearLabel="Year"
+              required={true}
+            />
             <button
               disabled={!isValid}
               type="submit"
