@@ -2,7 +2,7 @@ import FormControl from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { monthsArray } from "@/constants";
+import { monthNames } from "@/constants";
 import { grey } from "@/constants/designTokens";
 import PropTypes from "prop-types";
 import { useField } from "formik";
@@ -47,7 +47,8 @@ const CustomDateSelector = ({
       <fieldset className="mb-6 grid grid-cols-3 justify-between gap-3">
         <legend
           required
-          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]">
+          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]"
+        >
           Date of birth
           {required && (
             <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
@@ -67,7 +68,7 @@ const CustomDateSelector = ({
         <DateSelect
           id={monthId}
           label={monthLabel}
-          array={monthsArray}
+          array={monthNames}
           field={monthField[0]}
           meta={monthField[1]}
           helpers={monthField[2]}
@@ -95,9 +96,7 @@ const DateSelect = ({ field, meta, label, id, array, required }) => {
   };
 
   return (
-    <FormControl
-      variant="standard"
-      required={required}>
+    <FormControl variant="standard" required={required}>
       <CustomSelect
         displayEmpty
         id={id}
@@ -106,16 +105,13 @@ const DateSelect = ({ field, meta, label, id, array, required }) => {
         label={label}
         renderValue={handleRenderValue}
         error={meta.touched && meta.error ? true : false}
-        {...field}>
-        <MenuItem
-          disabled
-          value="">
+        {...field}
+      >
+        <MenuItem disabled value="">
           <em>{label}</em>
         </MenuItem>
         {array.map((item, index) => (
-          <MenuItem
-            key={item}
-            value={id === "month" ? index + 1 : item}>
+          <MenuItem key={item} value={id === "month" ? index + 1 : item}>
             {item}
           </MenuItem>
         ))}

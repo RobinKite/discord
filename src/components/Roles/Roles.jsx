@@ -45,9 +45,6 @@ export default function Roles() {
     )
     .reverse();
 
-  return roles.map((role) => (
-  const users = useSelector((state) => state.server.currentServer.users);
-  const sortedUsers = mapUserData(users);
   // TODO: create correct list of users
 
   return sortedUsers.map((role) => (
