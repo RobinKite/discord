@@ -1,4 +1,3 @@
-export const SETTINGS_MODAL = "settings";
 export const daysArray = [...Array(31).keys()].map(day => day + 1);
 export const monthNames = [
   "January",
@@ -15,21 +14,23 @@ export const monthNames = [
   "December",
 ];
 
+export class Tokens {
+  static ACCESS = "accessToken";
+  static REFRESH = "refreshToken";
+}
+
 export class Modal {
   static SETTINGS = "settings";
 }
 
-export const SAMPLE_MESSAGES = [
-  {
-    avatarUrl: "/",
-    authorName: "User1",
-    timestamp: 1694970000000,
-    text: "Text",
-  },
-  {
-    avatarUrl: "/",
-    authorName: "User2",
-    timestamp: 1694970600000,
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime.",
-  },
-];
+export class Themes {
+  static LIGHT = "light";
+  static DARK = "dark";
+}
+
+export class Status {
+  static ONLINE = "online";
+  static OFFLINE = "offline";
+  static IDLE = "idle";
+  static INVISIBLE = "invisible";
+}

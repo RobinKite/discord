@@ -1,100 +1,54 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getTokens, setAuthToken, setRefreshToken } from "@/utils/auth";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://64.226.102.49:8080/api/v1/";
-
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
-};
-
-/*
- * POST @ /auth/register
- * body: {
-      "email": "string",
-      "username": "string",
-      "name": "string",
-      "password": "stringst"
-    }
- */
-export const register = createAsyncThunk(
-  "auth/setUser",
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await axios.post("auth/register", credentials);
-      console.log(res.data);
-      setAuthHeader(res.data.access_token);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-/*
- * POST @ /auth/login
- * body: {
-      "email": "string",
-      "password": "stringst"
-    }
- */
-export const logIn = createAsyncThunk(
-  "auth/login",
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await axios.post("/auth/login", credentials);
-      console.log(res);
-
-      setAuthHeader(res.data.access_token);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-/*
- * POST @ /auth/logout
- * headers: Authorization: Bearer token
- */
-export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
-  try {
-    await axios.get("/auth/logout");
-    // After a successful logout, remove the token from the HTTP header
-    clearAuthHeader();
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
+export const api = axios.create({
+  baseURL: "/api",
 });
 
-/*
- * GET @ /auth/refresh
- * headers: Authorization: Bearer token
- */
-export const refreshUser = createAsyncThunk(
-  "auth/refreshUser",
-  async (_, thunkAPI) => {
-    // Reading the token from the state via getState()
-    const state = thunkAPI.getState();
-    console.log(state);
-    const persistedToken = state.auth.token;
+api.interceptors.request.use(
+  config => {
+    const token = getTokens().accessToken;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
-    if (persistedToken === null) {
-      // If there is no token, exit without performing any request
-      return thunkAPI.rejectWithValue("Unable to fetch user");
+api.interceptors.response.use(
+  r => r.data,
+  async function (error) {
+    const { refreshToken } = getTokens();
+    const originalRequest = error.config;
+
+    if (originalRequest._retry) {
+      setAuthToken();
+      setRefreshToken();
+    } else if (error.response.status === 401) {
+      originalRequest._retry = true;
+
+      return await axios
+        .get("/api/v1/auth/refresh", {
+          headers: {
+            "Refresh-token": refreshToken,
+          },
+        })
+        .then(({ data }) => {
+          setAuthToken(data.token);
+          setRefreshToken(data.refreshToken);
+          originalRequest.headers.Authorization = data.token;
+          return api(originalRequest);
+        })
+        .catch(err => {
+          console.error(err);
+          setAuthToken();
+          setRefreshToken();
+        });
     }
 
-    try {
-      // If there is a token, add it to the HTTP header and perform the request
-      setAuthHeader(persistedToken);
-      const res = await axios.get("/auth/refresh");
-      console.log(res);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return Promise.reject(error);
   }
 );

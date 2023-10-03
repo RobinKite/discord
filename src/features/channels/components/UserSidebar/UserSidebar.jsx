@@ -1,14 +1,21 @@
 import { BiSolidMicrophone } from "react-icons/bi";
 import { BsHeadphones, BsGearFill } from "react-icons/bs";
 import Avatar from "@mui/material/Avatar";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PanelButton, ChannelGroup } from "@/features/channels/components";
 import { openModal } from "@/redux/slices/uiSlice";
 import { Modal } from "@/constants";
+import { filterChannelsByType } from "@/utils";
 
-export function UserSidebar({ fullname, username }) {
+export function UserSidebar() {
   const dispatch = useDispatch();
+  const username = useSelector((state) => state.auth.userName);
+  const fullname = useSelector((state) => state.auth.name);
+  const avatar = useSelector((state) => state.auth.avatar);
+
+  const channels = useSelector((state) => state.server.currentServer.channels);
+  const textChannels = filterChannelsByType(channels, "text");
+  const voiceChannels = filterChannelsByType(channels, "voice");
 
   const handleToggleMicrophone = () => {};
   const handleToggleDeafen = () => {};
@@ -22,18 +29,27 @@ export function UserSidebar({ fullname, username }) {
         <ChannelGroup
           type="text"
           name="Text channels"
-          channels={[{ name: "general" }, { name: "backend" }]}
+          channels={textChannels}
         />
         <ChannelGroup
           type="voice"
           name="Voice channels"
-          channels={[{ name: "general" }, { name: "frontend" }]}
+          channels={voiceChannels}
         />
       </div>
 
       <div className="flex justify-between bg-[#232428] py-[0.35rem] pl-2 pr-3">
         <div className="flex cursor-pointer gap-x-2 rounded py-1 pl-[0.2rem] pr-2 text-[0.85rem] transition-colors hover:bg-[#3D3E44]">
-          <Avatar sx={{ bgcolor: "#7076f1", width: "32px", height: "32px" }} />
+          {avatar ? (
+            <img
+              src={avatar}
+              alt="user avatar"
+            />
+          ) : (
+            <Avatar
+              sx={{ bgcolor: "#7076f1", width: "32px", height: "32px" }}
+            />
+          )}
           <div className="mt-[0.1rem]">
             <p className="text-[0.8rem] font-semibold leading-4 text-[#f2f3f5]">
               {fullname}
@@ -45,21 +61,25 @@ export function UserSidebar({ fullname, username }) {
         </div>
         <div className="flex items-center gap-[0.1rem]">
           <PanelButton onClick={handleToggleMicrophone}>
-            <BiSolidMicrophone color="#b6bac0" size={20} />
+            <BiSolidMicrophone
+              color="#b6bac0"
+              size={20}
+            />
           </PanelButton>
           <PanelButton onClick={handleToggleDeafen}>
-            <BsHeadphones color="#b6bac0" size={22} />
+            <BsHeadphones
+              color="#b6bac0"
+              size={22}
+            />
           </PanelButton>
           <PanelButton onClick={handleOpenSettings}>
-            <BsGearFill color="#b6bac0" size={18} />
+            <BsGearFill
+              color="#b6bac0"
+              size={18}
+            />
           </PanelButton>
         </div>
       </div>
     </aside>
   );
 }
-
-UserSidebar.propTypes = {
-  fullname: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-};

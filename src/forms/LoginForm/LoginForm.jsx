@@ -2,9 +2,10 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Input, Button } from "@/components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Typography, Stack } from "@mui/material";
-import { logIn } from "@/services/client";
+import { Oval } from "react-loader-spinner";
+import { login, setIsLoading } from "@/redux/slices/authSlice";
 
 const StyledStackSX = {
   direction: "column",
@@ -41,22 +42,22 @@ function LoginForm() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
   const initialValues = {
-    email: "",
-    password: "",
+    email: "test@test.com",
+    password: "testpassword",
   };
 
   const handleSubmit = (values, actions) => {
     console.log(values);
-    const { email, password } = values;
+    dispatch(setIsLoading(true));
     try {
-      dispatch(
-        logIn({
-          email,
-          password,
-        })
-      );
-      navigate(from, { replace: true });
+      dispatch(login(values)).then(() => {
+        navigate(from, { replace: true });
+        actions.resetForm();
+        dispatch(setIsLoading(false));
+      });
     } catch (e) {
       console.error(e);
     }
@@ -117,8 +118,18 @@ function LoginForm() {
               </Link>
             </Stack>
 
-            <Button disabled={!form.isValid} sx={{ mb: 3 }} type="submit">
-              Log In
+            <Button
+              disabled={!form.isValid || isLoading}
+              sx={{ mb: 3 }}
+              type="submit"
+            >
+              {isLoading ? (
+                <span className="flex justify-center">
+                  <Oval width={20} height={20} />
+                </span>
+              ) : (
+                "Log In"
+              )}
             </Button>
 
             <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>

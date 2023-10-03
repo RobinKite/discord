@@ -1,31 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { logIn, register } from "@/services/client";
+import { Endpoint } from "@/constants/api";
+import { api } from "@/services/client";
+import { setAuthToken, setRefreshToken } from "@/utils/auth";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     userName: null,
     email: null,
-    password: null,
     name: null,
-    token: null,
     isLoggedIn: false,
     roles: [],
     permissions: [],
+    isLoading: false,
   },
 
   reducers: {
-    // setUser: (state, action) => {
-    //   state.email = action.payload.user.email;
-    //   state.password = action.payload.user.password;
-    //   state.token = action.payload.access_token;
-
-    //   state.isLoggedIn = true;
-    // },
-    refreshUser: state => {
-      state.email = action.payload.email;
-      state.password = action.payload.password;
+    loginUser: (state, action) => {
+      const { id, email, avatar, name, userName } = action.payload;
       state.isLoggedIn = true;
+      state.email = email;
+      state.userName = userName;
+      state.name = name;
+      state.id = id;
+      state.isLoading = false;
+      state.avatar = avatar;
     },
     logoutUser: state => {
       state.isLoggedIn = false;
@@ -35,6 +34,16 @@ const authSlice = createSlice({
     },
     clearToken: state => {
       state.token = null;
+      state.email = null;
+      state.userName = null;
+      state.password = null;
+      state.name = null;
+      state.isLoading = false;
+      setAuthToken();
+      setRefreshToken();
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
     updateUserProfile: (state, action) => {
       state.userName = { ...state.userName, ...action.payload };
@@ -46,40 +55,51 @@ const authSlice = createSlice({
       state.permissions = action.payload;
     },
   },
-  extraReducers: builder => {
-    builder
-      .addCase(register.fulfilled, (state, action) => {
-        const { user, access_token } = action.payload.data;
-        state.email = user.email;
-        state.name = user.name;
-        state.userName = user.username;
-        state.token = access_token;
-        state.isLoggedIn = true;
-      })
-      .addCase(register.rejected, (state, action) => {
-        alert("ERROR: ", action.payload);
-      })
-      .addCase(logIn.fulfilled, (state, action) => {
-        const { user, access_token } = action.payload.data;
-        state.email = user.email;
-        state.name = user.name;
-        state.userName = user.username;
-        state.token = access_token;
-        state.isLoggedIn = true;
-      })
-      .addCase(logIn.rejected, (state, action) => {
-        alert("ERROR: ", action.payload);
-      });
-  },
 });
 
+export const setUser = createAsyncThunk(Endpoint.ME, async (_, thunkAPI) => {
+  const result = await api.get(Endpoint.ME);
+  const { id, email, avatar, name, userName } = result.data;
+  thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+  return result;
+});
+
+export const login = createAsyncThunk(
+  Endpoint.LOGIN,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.LOGIN, data);
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
+    return result;
+  }
+);
+
+export const register = createAsyncThunk(
+  Endpoint.REGISTER,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.REGISTER, data);
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
+    console.log(data, result);
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    return result;
+  }
+);
+
 export const {
-  setUser,
+  loginUser,
   logoutUser,
   setToken,
   clearToken,
   updateUserProfile,
   setUserRoles,
   setUserPermissions,
+  setIsLoading,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -3,9 +3,11 @@ import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { register, setIsLoading } from "@/redux/slices/authSlice";
+import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { register } from "@/services/client";
+
 
 const StyledStackSX = {
   direction: "column",
@@ -32,6 +34,8 @@ function RegistrationForm() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
   const initialValues = {
     email: "",
     username: "",
@@ -43,26 +47,20 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    const { email, username, name, password } = values;
-    dispatch(
-      register({
-        email,
-        username,
-        name,
-        password,
-      })
-    );
-    navigate(from, { replace: true });
-    actions.resetForm();
+    console.log(values);
+    dispatch(register(values)).then(() => {
+      navigate(from, { replace: true });
+      actions.resetForm();
+      dispatch(setIsLoading(false));
+    });
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ isValid, setFieldValue }) => (
+      onSubmit={onSubmit}>
+      {({ isValid }) => (
         <Form>
           <Stack sx={StyledStackSX}>
             <Typography
@@ -93,6 +91,31 @@ function RegistrationForm() {
               name="password"
               required
             />
+            <CustomDateSelector
+              dayId="day"
+              monthId="month"
+              yearId="year"
+              dayLabel="Day"
+              monthLabel="Month"
+              yearLabel="Year"
+              required={true}
+            />
+            <button
+              disabled={!isValid}
+              type="submit"
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
+              {isLoading ? (
+                <span className="flex justify-center">
+                  <Oval
+                    width={20}
+                    height={20}
+                  />
+                </span>
+              ) : (
+                "Continue"
+              )}
+            </button>
+            <p className="mb-5 text-xs text-[#ffffffbb]">
             <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
             <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               Continue

@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import User from "../User/User";
 import { BiMinus } from "react-icons/bi";
+import { Status } from "@/constants";
+import { mapUserData } from "@/utils/user";
 
 export default function Roles() {
   const users = useSelector((state) => state.userStatus.users);
@@ -44,6 +46,11 @@ export default function Roles() {
     .reverse();
 
   return roles.map((role) => (
+  const users = useSelector((state) => state.server.currentServer.users);
+  const sortedUsers = mapUserData(users);
+  // TODO: create correct list of users
+
+  return sortedUsers.map((role) => (
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>
@@ -57,7 +64,7 @@ export default function Roles() {
               <li
                 key={user.userId}
                 className={
-                  role.name === "offline"
+                  role.name === Status.OFFLINE
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }

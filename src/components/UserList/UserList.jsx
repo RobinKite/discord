@@ -1,6 +1,4 @@
-import { setUserStatus } from "@/redux/slices/userStatusSlice";
 import Roles from "../Roles/Roles";
-import { useDispatch } from "react-redux";
 
 export default function UserList() {
   const users = [

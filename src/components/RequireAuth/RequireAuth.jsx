@@ -7,8 +7,6 @@ const RequireAuth = () => {
   const { isLoggedIn } = useAuth();
   const location = useLocation();
 
-  console.log(isLoggedIn);
-
   return isLoggedIn ? (
     <ProtectedLayout />
   ) : (
