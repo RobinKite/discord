@@ -8,7 +8,6 @@ import { register, setIsLoading } from "@/redux/slices/authSlice";
 import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
 
-
 const StyledStackSX = {
   direction: "column",
   justifyContent: "flex-start",
@@ -59,7 +58,8 @@ function RegistrationForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       {({ isValid }) => (
         <Form>
           <Stack sx={StyledStackSX}>
@@ -100,25 +100,15 @@ function RegistrationForm() {
               yearLabel="Year"
               required={true}
             />
-            <button
-              disabled={!isValid}
-              type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
+
+            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval
-                    width={20}
-                    height={20}
-                  />
+                  <Oval width={20} height={20} />
                 </span>
               ) : (
                 "Continue"
               )}
-            </button>
-            <p className="mb-5 text-xs text-[#ffffffbb]">
-            <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
-            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
-              Continue
             </Button>
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
