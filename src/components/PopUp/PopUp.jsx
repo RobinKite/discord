@@ -74,8 +74,15 @@ const PopUp = () => {
             src={user.avatar}
             alt="user avatar"
             width="86"
-            className={`p-3 rounded-[50%] border-[6px] border-[#232328] absolute top-3 left-3`}
-            style={{ backgroundColor: user.backgroundBanner }}
+            style={{
+              backgroundColor: user.backgroundBanner,
+              padding: "12px",
+              borderRadius: "50%",
+              border: "6px solid #232328",
+              position: "absolute",
+              top: "12px",
+              left: "12px",
+            }}
           />
         ) : (
           <SiDiscord
@@ -187,7 +194,10 @@ const PopUp = () => {
           >
             <Tooltip title="Discord">
               <Stack>
-                <SiDiscord className="w-7 h-5 rounded-[50%]" color="#b5bac1" />
+                <SiDiscord
+                  style={{ width: "28px", height: "20px", borderRadius: "50%" }}
+                  color="#b5bac1"
+                />
               </Stack>
             </Tooltip>
             <Typography variant="span" sx={{ color: "#dbdee1" }}>
@@ -244,10 +254,13 @@ const PopUp = () => {
                 padding: "4px 8px 4px 4px",
                 backgroundColor: "#1e1f22",
                 borderRadius: "6px",
-                width: "86px",
+                width: "66px",
               }}
             >
-              <BsFillCircleFill className="text-[#5d64f4] m-1" size={12} />
+              <BsFillCircleFill
+                style={{ color: "#5d64f4", margin: "4px" }}
+                size={12}
+              />
               <Typography sx={{ fontSize: "12px" }}>{user.role}</Typography>
             </Stack>
           </>
