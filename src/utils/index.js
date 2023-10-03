@@ -20,3 +20,7 @@ export const adjustText = (text) => {
     return { serverName, fontSize };
   }
 };
+
+export function filterChannelsByType(channels, type) {
+  return channels.filter((channel) => channel.type === type);
+}
