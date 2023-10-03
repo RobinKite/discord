@@ -57,7 +57,6 @@ function LoginForm() {
         })
       );
       navigate(from, { replace: true });
-      actions.resetForm();
     } catch (e) {
       console.error(e);
     }
@@ -69,8 +68,6 @@ function LoginForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
       onSubmit={handleSubmit}
     >
       {(form) => (
@@ -86,28 +83,9 @@ function LoginForm() {
                 fontSize: "1.5rem",
               }}
             >
-          <Stack sx={StyledStackSX}>
-            <Typography
-              component="h2"
-              variant="h2"
-              sx={{
-                color: "#fff",
-                textAlign: "center",
-                mb: "4px",
-                fontSize: "1.5rem",
-              }}
-            >
               Welcome back!
             </Typography>
-            <Typography
-              sx={{
-                color: "#ffffffa9",
-                textAlign: "center",
-                mb: 3,
-                fontSize: "1.025rem",
-              }}
-            >
-            </Typography>
+
             <Typography
               sx={{
                 color: "#ffffffa9",
@@ -118,8 +96,7 @@ function LoginForm() {
             >
               We&apos;re so exited to see you again!
             </Typography>
-            <Input
-            </Typography>
+
             <Input
               id="email"
               label="E-mail"
@@ -139,36 +116,19 @@ function LoginForm() {
                 Forgot your password?
               </Link>
             </Stack>
-            <Button disabled={!form.isValid} sx={{ mb: 3 }} type="submit">
-            <Stack sx={{ position: "relative", mb: 5 }}>
-              <Input
-                id="password"
-                label="Password"
-                type="password"
-                name="password"
-                required
-              />
-              <Link href="#" sx={StyledLink}>
-                Forgot your password?
-              </Link>
-            </Stack>
+
             <Button disabled={!form.isValid} sx={{ mb: 3 }} type="submit">
               Log In
             </Button>
-            <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
-            </Button>
+
             <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
               Need an account? &#32;
               <NavLink
                 to="/register"
                 className="text-sm font-medium text-[#00a8fc]"
               >
-                className="text-sm font-medium text-[#00a8fc]"
-              >
                 Register
               </NavLink>
-            </Typography>
-          </Stack>
             </Typography>
           </Stack>
         </Form>

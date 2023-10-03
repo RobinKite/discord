@@ -56,6 +56,9 @@ const authSlice = createSlice({
         state.token = access_token;
         state.isLoggedIn = true;
       })
+      .addCase(register.rejected, (state, action) => {
+        alert("ERROR: ", action.payload);
+      })
       .addCase(logIn.fulfilled, (state, action) => {
         const { user, access_token } = action.payload.data;
         state.email = user.email;
@@ -63,6 +66,9 @@ const authSlice = createSlice({
         state.userName = user.username;
         state.token = access_token;
         state.isLoggedIn = true;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        alert("ERROR: ", action.payload);
       });
   },
 });

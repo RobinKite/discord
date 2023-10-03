@@ -52,7 +52,7 @@ function RegistrationForm() {
         password,
       })
     );
-    navigate("channel/@me", { replace: true });
+    navigate(from, { replace: true });
     actions.resetForm();
   };
 
