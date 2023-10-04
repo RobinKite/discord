@@ -1,8 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { register, setIsLoading } from "@/redux/slices/authSlice";
+import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
 
 const StyledStackSX = {
@@ -25,6 +28,13 @@ const StyledStackSX = {
 };
 
 function RegistrationForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
   const initialValues = {
     email: "",
     username: "",
@@ -37,16 +47,19 @@ function RegistrationForm() {
 
   const onSubmit = (values, actions) => {
     console.log(values);
-    actions.resetForm();
+    dispatch(register(values)).then(() => {
+      navigate(from, { replace: true });
+      actions.resetForm();
+      dispatch(setIsLoading(false));
+    });
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ isValid, setFieldValue }) => (
+      onSubmit={onSubmit}>
+      {({ isValid }) => (
         <Form>
           <Stack sx={StyledStackSX}>
             <Typography
@@ -70,16 +83,33 @@ function RegistrationForm() {
             />
             <Input id="name" label="Display name" name="name" />
             <Input id="username" label="Username" name="username" required />
-            <Input
+            <Input       
               id="password"
               label="Password"
               type="password"
               name="password"
               required
             />
-            <CustomDateSelector setFieldValue={setFieldValue} sx={{ mb: 1 }} />
-            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
-              Continue
+            <CustomDateSelector
+              dayId="day"
+              monthId="month"
+              yearId="year"
+              dayLabel="Day"
+              monthLabel="Month"
+              yearLabel="Year"
+              required={true}
+            />
+            <Button disabled={!isValid || isLoading} type="submit" sx={{ mb: 3 }}>
+               {isLoading ? (
+                  <span className="flex justify-center">
+                    <Oval
+                      width={20}
+                      height={20}
+                    />
+                  </span>
+                ) : (
+                  "Continue"
+                )}
             </Button>
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
@@ -91,7 +121,7 @@ function RegistrationForm() {
                 Privacy Policy.
               </Link>
             </Typography>
-            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
+            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]"> 
               Already have an account?
             </NavLink>
           </Stack>

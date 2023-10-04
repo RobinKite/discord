@@ -18,6 +18,7 @@ module.exports = {
     quotes: ["error", "double"],
     semi: ["error", "always"],
     "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "warn",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

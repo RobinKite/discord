@@ -132,9 +132,9 @@ const SettingsTabContainer = ({ header, isActive, children }) => (
 
 SettingsNavSection.propTypes = {
   header: PropTypes.string,
-  items: PropTypes.array.isRequired, // Updated prop type
-  activeTab: PropTypes.string.isRequired, // Added activeTab prop
-  setActiveTab: PropTypes.func.isRequired, // Added setActiveTab prop
+  items: PropTypes.array.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
 };
 
 SettingsNavSection.defaultProps = {
@@ -144,7 +144,7 @@ SettingsNavSection.defaultProps = {
 SettingsNavItem.propTypes = {
   name: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
-  onClick: PropTypes.func, // Corrected prop name
+  onClick: PropTypes.func,
 };
 
 SettingsNavItem.defaultProps = {
@@ -154,13 +154,13 @@ SettingsNavItem.defaultProps = {
 
 SettingsTabContainer.propTypes = {
   header: PropTypes.string,
-  isActive: PropTypes.bool, // Added isActive prop
+  isActive: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 SettingsTabContainer.defaultProps = {
   header: "",
-  isActive: false, // Added default isActive value
+  isActive: false,
 };
 
 export default Settings;

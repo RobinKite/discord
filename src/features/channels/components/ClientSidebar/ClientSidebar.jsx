@@ -3,6 +3,7 @@ import { SiDiscord } from "react-icons/si";
 import { darkSidebar, darkText, green } from "@/constants/designTokens";
 import { darkServerIconBg } from "@/constants/designTokens";
 import ButtonServer from "@/components/Buttons/ButtonServer";
+import { useSelector } from "react-redux";
 import { Stack } from "@mui/material";
 
 const StyledStackSX = {
@@ -18,18 +19,27 @@ const StyledStackSX = {
 };
 
 export function ClientSidebar() {
+  const servers = useSelector((state) => state.server.servers);
+  //TODO: Add server functionallity
+
   return (
+
     <Stack sx={StyledStackSX}>
       <ButtonServer title={"Private messages"} color={darkText}>
+
         <SiDiscord size={26} />
       </ButtonServer>
       <div
         className={`bg-[${darkServerIconBg}] mx-auto h-0.5  w-8 rounded-md`}
       />
-      <ButtonServer>server 1</ButtonServer>
-      <ButtonServer>server 2</ButtonServer>
-      <ButtonServer>server 3</ButtonServer>
-      <ButtonServer title="Add a Server" bgcolor={green} color={green}>
+      {servers.map((server) => (
+        <ButtonServer key={server.id}>{server.title}</ButtonServer>
+      ))}
+
+      <ButtonServer
+        title="Add a Server"
+        bgcolor={green}
+        color={green}>
         <LiaPlusSolid size={28} />
       </ButtonServer>
     </Stack>

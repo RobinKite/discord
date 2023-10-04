@@ -3,7 +3,9 @@ import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
 import { Input, Button } from "@/components";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Oval } from "react-loader-spinner";
+import { login, setIsLoading } from "@/redux/slices/authSlice";
 import { setUser } from "@/redux/slices/authSlice";
 import { Link, Typography, Stack } from "@mui/material";
 
@@ -36,24 +38,30 @@ const StyledLink = {
   fontSize: "14px",
 };
 
+
+
 function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
   const initialValues = {
-    email: "",
-    password: "",
+    email: "test@test.com",
+    password: "testpassword",
   };
 
   const handleSubmit = (values, actions) => {
     console.log(values);
-
+    dispatch(setIsLoading(true));
     try {
-      dispatch(setUser());
-      navigate(from, { replace: true });
-      actions.resetForm();
+      dispatch(login(values)).then(() => {
+        navigate(from, { replace: true });
+        actions.resetForm();
+        dispatch(setIsLoading(false));
+      });
     } catch (e) {
       console.error(e);
     }
@@ -97,6 +105,7 @@ function LoginForm() {
               name="email"
               required
             />
+
             <Stack sx={{ position: "relative", mb: 5 }}>
               <Input
                 id="password"
@@ -113,6 +122,7 @@ function LoginForm() {
               Log In
             </Button>
             <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
+
               Need an account? &#32;
               <NavLink
                 to="/register"
