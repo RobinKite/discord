@@ -1,13 +1,12 @@
 import { styled } from "@mui/system";
 import { Link, Stack, Tooltip, Typography } from "@mui/material";
-import { statusMap } from "@/constants/statusMap";
+import { statusMap } from "../User/User";
 import { SiDiscord } from "react-icons/si";
 import { BsFillCircleFill } from "react-icons/bs";
 import { FaHashtag } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fillPopupContent } from "@/redux/slices/uiSlice";
-import { adjustText } from "@/utils";
-import { formatRegistrationDate } from "@/utils/date";
+import { adjustText, formatRegistrationDate } from "@/utils";
 
 const CustomNoteTextField = styled("input")({
   fontSize: "12px",
@@ -37,7 +36,7 @@ const CustomMessageTextField = styled("input")({
 const PopUp = () => {
   const user = useSelector((state) => state.ui.popupContent);
   const dispatch = useDispatch();
-
+  console.log(user);
   const handleNoteChange = (ev) => {
     dispatch(fillPopupContent({ ...user, note: ev.target.value }));
     console.log(ev.target.value);
@@ -229,7 +228,10 @@ const PopUp = () => {
               {adjustText(user.serverName, 2, false).serverName}
             </Stack>
           </Tooltip>
-          <Typography variant="span" sx={{ color: "#dbdee1" }}>
+          <Typography
+            variant="span"
+            sx={{ color: "#dbdee1", fontSize: "14px" }}
+          >
             {serverRegistrationDate}
           </Typography>
         </Stack>

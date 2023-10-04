@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { IoMdMoon } from "react-icons/io";
 import { BsRecordCircleFill } from "react-icons/bs";
 import { Status } from "@/constants";
+import { useState, useRef } from "react";
+import PopUp from "../PopUp/PopUp";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { fillPopupContent } from "@/redux/slices/uiSlice";
+import { useDispatch } from "react-redux";
 
 export const statusMap = {
   [Status.ONLINE]: <BsCircleFill className="text-[green]" />,
@@ -12,18 +17,13 @@ export const statusMap = {
 };
 export const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
 
-import { useState, useRef } from "react";
-import PopUp from "../PopUp/PopUp";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { fillPopupContent } from "@/redux/slices/uiSlice";
-import { useDispatch } from "react-redux";
-
 export default function User({ user }) {
   const isOffline = offlineRoles.includes(user.status);
   const [isPopUpOpen, setIsPopupOpen] = useState(false);
   const containerRef = useRef(null);
   const dispatch = useDispatch();
 
+  console.log(user);
   const handleModalOpen = (user) => {
     if (isPopUpOpen) return;
     setIsPopupOpen(true);
@@ -38,7 +38,7 @@ export default function User({ user }) {
   useOnClickOutside(containerRef, handleModalClose);
 
   const bannerColor = user.backgroundBanner;
-
+  // console.log(user);
   return (
     <div
       ref={containerRef}

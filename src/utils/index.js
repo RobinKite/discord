@@ -4,7 +4,11 @@ export function convertTimestampToDateString(timestamp) {
   const readableDate = date.toLocaleDateString("en-GB", options);
   return readableDate.replace(",", "");
 }
-
+export const formatRegistrationDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { month: "short", day: "numeric", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+};
 export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
   if (typeof text !== "string") return { serverName: text };
   const maxFontSize = 22.25;

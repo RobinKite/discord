@@ -7,6 +7,7 @@ import { mapUserData } from "@/utils/user";
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
+  console.log(users);
   // TODO: create correct list of users
 
   const roles = users
