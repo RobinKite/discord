@@ -6,6 +6,11 @@ export default {
       fontFamily: {
         star: ["Roboto", "Helvetica", "Arial", "sans-serif"],
       },
+      screens: {
+        lg: { max: "1280px" },
+        md: { max: "767px" },
+        sm: { min: "240px", max: "639px" },
+      },
     },
   },
   plugins: [],

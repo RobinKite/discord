@@ -6,20 +6,20 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (config) => {
+  config => {
     const token = getTokens().accessToken;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
 
 api.interceptors.response.use(
-  (r) => r.data,
+  r => r.data,
   async function (error) {
     const { refreshToken } = getTokens();
     const originalRequest = error.config;
@@ -42,7 +42,7 @@ api.interceptors.response.use(
           originalRequest.headers.Authorization = data.token;
           return api(originalRequest);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
           setAuthToken();
           setRefreshToken();
