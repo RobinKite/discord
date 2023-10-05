@@ -3,12 +3,19 @@ import { Header, UserSidebar } from "@/features/channels/components";
 import { Chat } from "@/features/messaging/components";
 import UserList from "@/components/UserList/UserList";
 import { useSelector } from "react-redux";
+import { Stack } from "@mui/material";
+
+const StyledStackSX = {
+  display: "flex",
+  flexDirection: "row",
+  overflow: "hidden",
+};
 
 export function Layout() {
   const { isUserListShown } = useSelector((state) => state.ui);
 
   return (
-    <div className="flex">
+    <Stack sx={StyledStackSX}>
       <ClientSidebar />
       <div className="flex min-h-screen flex-col">
         <Header />
@@ -18,6 +25,6 @@ export function Layout() {
           {isUserListShown && <UserList />}
         </main>
       </div>
-    </div>
+    </Stack>
   );
 }

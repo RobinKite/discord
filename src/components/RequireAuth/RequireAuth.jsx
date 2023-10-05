@@ -1,19 +1,16 @@
 import { Navigate, useLocation } from "react-router-dom";
 import ProtectedLayout from "../Layout/ProtectedLayout";
 import { useSelector } from "react-redux";
+import useAuth from "@/hooks/useAuth";
 
 const RequireAuth = () => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { isLoggedIn } = useAuth();
   const location = useLocation();
 
   return isLoggedIn ? (
     <ProtectedLayout />
   ) : (
-    <Navigate
-      to="/login"
-      state={{ from: location }}
-      replace
-    />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 
