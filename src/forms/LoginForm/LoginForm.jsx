@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Typography, Stack } from "@mui/material";
 import { Oval } from "react-loader-spinner";
 import { login, setIsLoading } from "@/redux/slices/authSlice";
-
 const StyledStackSX = {
   direction: "column",
   justifyContent: "flex-start",
@@ -62,9 +61,8 @@ function LoginForm() {
       console.error(e);
     }
 
-    actions.resetForm();
+    // actions.resetForm();
   };
-
   return (
     <Formik
       initialValues={initialValues}

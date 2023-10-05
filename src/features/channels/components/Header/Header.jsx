@@ -1,3 +1,5 @@
+import { useTheme } from "@mui/material/styles";
+import { Stack, Typography } from "@mui/material";
 import { BiHash, BiSolidHelpCircle, BiSolidBell } from "react-icons/bi";
 import { BsPinAngleFill } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
@@ -5,21 +7,59 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@/components";
 import { toggleUserList } from "@/redux/slices/uiSlice";
 
+const StyledStackSX = (theme) => ({
+  display: "flex",
+  flexDirection: "row",
+  flexGrow: 1,
+  justifyContent: "space-between",
+  alignItems: "center",
+  bgcolor: theme.palette.darkUsersList,
+  py: "0.75rem",
+  px: "1rem",
+});
+
 export function Header() {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const title = useSelector((state) => state.server.currentServer.title);
   const channelName = useSelector((state) => state.server.currentChannel.name);
 
   return (
-    <header className="relative z-10 flex text-[#f2f3f5] shadow-[0_2px_4px_0_rgba(0,0,0,0.35)]">
-      <div className="max-w-[240px] grow bg-[#2b2d31] px-4 py-3">
-        <h2 className="font-medium">{title}</h2>
-      </div>
-      <div className="flex grow justify-between bg-[#313338] px-4 py-3">
-        <div className="flex items-center gap-x-1">
+    <Stack
+      component="header"
+      sx={{
+        position: "relative",
+        flexDirection: "row",
+        color: theme.palette.lightUsersList,
+        zIndex: "10",
+      }}
+      boxShadow={theme.shadows[1]}
+    >
+      <Stack sx={[StyledStackSX, { maxWidth: "240px" }]}>
+        <Typography component="h2" sx={{ fontWeight: "500" }}>
+          {title}
+        </Typography>
+      </Stack>
+      <Stack sx={[StyledStackSX, { bgcolor: "#313338" }]}>
+        <Stack
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            columnGap: "0.25rem",
+          }}
+        >
+          {/* <DehazeIcon
+            sx={{ color: "#80848e", cursor: "pointer" }}
+            onClick={() => {
+              console.log("click");
+            }}
+          /> */}
           <BiHash color="#80848e" size={24} />
-          <h2 className="font-medium">{channelName}</h2>
-        </div>
+          <Typography component="h2" sx={{ fontWeight: "500" }}>
+            {channelName}
+          </Typography>
+        </Stack>
         <div className="flex items-center gap-x-4 text-[#b5bac1]">
           <IconButton icon={<BiSolidBell size={22} />} />
           <IconButton icon={<BsPinAngleFill size={22} />} />
@@ -29,7 +69,7 @@ export function Header() {
           />
           <IconButton icon={<BiSolidHelpCircle size={24} />} />
         </div>
-      </div>
-    </header>
+      </Stack>
+    </Stack>
   );
 }

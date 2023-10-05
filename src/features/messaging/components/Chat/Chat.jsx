@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { SAMPLE_MESSAGES } from "@/constants/mock";
 import { Message, Input } from "@/features/messaging/components";
 import { useSelector } from "react-redux";
+import { Stack, useTheme } from "@mui/material";
 
 export function Chat() {
   const [messages, setMessages] = useState(SAMPLE_MESSAGES);
@@ -18,6 +19,15 @@ export function Chat() {
       text: messageText,
     };
     setMessages((prev) => [...prev, message]);
+  };
+
+  const theme = useTheme();
+
+  const StyledStackSx = {
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "column",
+    justifyContent: "space-beetween",
   };
 
   useEffect(() => {
@@ -40,18 +50,25 @@ export function Chat() {
   }, []);
 
   return (
-    <div className="flex grow flex-col justify-between bg-[#313338]">
-      <div
+    <Stack sx={{ ...StyledStackSx, bgcolor: theme.palette.lightText }}>
+      <Stack
         ref={chatRef}
-        className="relative grow overflow-y-auto">
+        sx={{ ...StyledStackSx, position: "relative", overflowY: "auto" }}
+      >
         {messages.map((message) => (
-          <Message
-            key={message.timestamp}
-            {...message}
-          />
+          <Message key={message.timestamp} {...message} />
         ))}
-      </div>
+      </Stack>
       <Input submitCallback={createMessage} />
-    </div>
+    </Stack>
   );
 }
+
+// <div className="flex grow flex-col justify-between bg-[#313338]">
+//   <div ref={chatRef} className="relative grow overflow-y-auto">
+//     {messages.map((message) => (
+//       <Message key={message.timestamp} {...message} />
+//     ))}
+//   </div>
+//   <Input submitCallback={createMessage} />
+// </div>;

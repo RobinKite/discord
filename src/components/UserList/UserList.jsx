@@ -1,9 +1,21 @@
+import { Stack } from "@mui/material";
 import Roles from "../Roles/Roles";
+
+const StyledStackSX = (theme) => ({
+  display: "flex",
+  flexDirection: "column",
+  minWidth: "240px",
+  gap: 5,
+  bgcolor: theme.palette.darkUsersList,
+  pl: "16px",
+  pr: "8px",
+  pt: "24px",
+});
 
 export default function UserList() {
   return (
-    <div className="flex min-w-[240px] flex-col gap-5 bg-[#2b2d31] px-[8px] pt-6">
+    <Stack sx={StyledStackSX}>
       <Roles />
-    </div>
+    </Stack>
   );
 }

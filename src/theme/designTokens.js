@@ -37,6 +37,7 @@ export const lightChannelName = "#5c5e66";
 export const font = "PT Sans";
 
 export const grey = {
+  10: "#b5bac1",
   50: "#f6f8fa",
   100: "#eaeef2",
   200: "#d0d7de",
@@ -54,10 +55,14 @@ export default {
   grey900: grey[900],
   darkTextLighter,
   darkSidebar,
+  darkUsersList,
   white,
   blurple,
   buttonBgHover,
   buttonBgDisabled,
   red,
   buttonBgDefault,
+  lightText,
+  lightUsersList,
+  grey,
 };

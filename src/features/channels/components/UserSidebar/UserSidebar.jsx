@@ -25,7 +25,7 @@ export function UserSidebar() {
 
   return (
     <aside className="flex min-w-[240px] max-w-[240px] grow flex-col justify-between bg-[#2b2d31]">
-      <div className="pt-8 text-xs text-[#949BA4]">
+      <div className="pt-6 text-xs text-[#949BA4]">
         <ChannelGroup
           type="text"
           name="Text channels"
@@ -41,10 +41,7 @@ export function UserSidebar() {
       <div className="flex justify-between bg-[#232428] py-[0.35rem] pl-2 pr-3">
         <div className="flex cursor-pointer gap-x-2 rounded py-1 pl-[0.2rem] pr-2 text-[0.85rem] transition-colors hover:bg-[#3D3E44]">
           {avatar ? (
-            <img
-              src={avatar}
-              alt="user avatar"
-            />
+            <img src={avatar} alt="user avatar" />
           ) : (
             <Avatar
               sx={{ bgcolor: "#7076f1", width: "32px", height: "32px" }}
@@ -61,22 +58,13 @@ export function UserSidebar() {
         </div>
         <div className="flex items-center gap-[0.1rem]">
           <PanelButton onClick={handleToggleMicrophone}>
-            <BiSolidMicrophone
-              color="#b6bac0"
-              size={20}
-            />
+            <BiSolidMicrophone color="#b6bac0" size={20} />
           </PanelButton>
           <PanelButton onClick={handleToggleDeafen}>
-            <BsHeadphones
-              color="#b6bac0"
-              size={22}
-            />
+            <BsHeadphones color="#b6bac0" size={22} />
           </PanelButton>
           <PanelButton onClick={handleOpenSettings}>
-            <BsGearFill
-              color="#b6bac0"
-              size={18}
-            />
+            <BsGearFill color="#b6bac0" size={18} />
           </PanelButton>
         </div>
       </div>
