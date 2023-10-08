@@ -47,8 +47,7 @@ const CustomDateSelector = ({
       <fieldset className="mb-6 grid grid-cols-3 justify-between gap-3">
         <legend
           required
-          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]"
-        >
+          className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]">
           Date of birth
           {required && (
             <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
@@ -88,107 +87,40 @@ const CustomDateSelector = ({
   );
 };
 
-const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
-  const [yearOptions, setYearOptions] = useState([]);
-  const [field] = useField({ name: "year" });
-
-  useEffect(() => {
-    const currentYear = new Date().getFullYear();
-    const startYear = currentYear - 100;
-
-    const options = [
-      <MenuItem key="" value="" disabled>
-        Year
-      </MenuItem>,
-    ];
-
-    for (let year = currentYear; year >= startYear; year--) {
-      options.push(
-        <MenuItem key={year} value={year}>
-          {year}
-        </MenuItem>
-      );
-    }
-
-    setYearOptions(options);
-  }, []);
-
-  const handleYearRenderValue = (selected) => {
-    if (!selected) return "Year";
+const DateSelect = ({ field, meta, label, id, array, required }) => {
+  const handleRenderValue = (selected) => {
+    if (!selected) return label;
+    if (id === "month") return array[selected - 1];
     return selected;
   };
 
   return (
-    <CustomSelect
-      displayEmpty
-      id="year"
-      value={selectedYear}
-      onChange={handleYearChange}
-      label="Year"
-      renderValue={handleYearRenderValue}
-      {...field}
-    >
-      {yearOptions}
-    </CustomSelect>
-  );
-};
-
-const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
-  const [field] = useField({ name: "month" });
-
-  const handleMonthRenderValue = (selected) => {
-    if (!selected) return "Month";
-    const index = Number(selected) - 1;
-    return monthNames[index];
-  };
-  return (
-    <CustomSelect
-      displayEmpty
-      id="month"
-      value={selectedMonth}
-      onChange={handleMonthChange}
-      label="Month"
-      renderValue={handleMonthRenderValue}
-      {...field}
-    >
-      <MenuItem disabled value="">
-        <em>Month</em>
-      </MenuItem>
-      {monthNames.map((month, index) => (
-        <MenuItem key={index + 1} value={index + 1}>
-          {month}
+    <FormControl
+      variant="standard"
+      required={required}>
+      <CustomSelect
+        displayEmpty
+        id={id}
+        name={id}
+        onChange={(value) => field.onChange(field.name, value)}
+        label={label}
+        renderValue={handleRenderValue}
+        error={meta.touched && meta.error ? true : false}
+        {...field}>
+        <MenuItem
+          disabled
+          value="">
+          <em>{label}</em>
         </MenuItem>
-      ))}
-    </CustomSelect>
-  );
-};
-
-const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
-  const [field] = useField({ name: "day" });
-
-  const handleDayRenderValue = (selected) => {
-    if (!selected) return "Day";
-    return selected;
-  };
-  return (
-    <CustomSelect
-      displayEmpty
-      id="day"
-      value={selectedDay}
-      onChange={handleDayChange}
-      label="Day"
-      renderValue={handleDayRenderValue}
-      {...field}
-    >
-      <MenuItem disabled value="">
-        <em>Day</em>
-      </MenuItem>
-      {daysArray.map((day) => (
-        <MenuItem key={day} value={day}>
-          {day}
-        </MenuItem>
-      ))}
-    </CustomSelect>
+        {array.map((item, index) => (
+          <MenuItem
+            key={item}
+            value={id === "month" ? index + 1 : item}>
+            {item}
+          </MenuItem>
+        ))}
+      </CustomSelect>
+    </FormControl>
   );
 };
 

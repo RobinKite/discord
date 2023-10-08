@@ -1,77 +1,63 @@
 import { SiDiscord } from "react-icons/si";
 import PropTypes from "prop-types";
-import { IoMdMoon } from "react-icons/io";
-import { BsRecordCircleFill } from "react-icons/bs";
-import { Status } from "@/constants";
-import { useState, useRef } from "react";
-import PopUp from "../PopUp/PopUp";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { fillPopupContent } from "@/redux/slices/uiSlice";
+import {
+  fillPopupContent,
+  openModal,
+  setPopUpPosition,
+} from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
-
-export const statusMap = {
-  [Status.ONLINE]: <BsCircleFill className="text-[green]" />,
-  [Status.OFFLINE]: <BsCircleFill className="text-stone-500" />,
-  [Status.INVISIBLE]: <BsRecordCircleFill className="text-stone-500" />,
-  [Status.IDLE]: <IoMdMoon className="rotate-[270deg] text-yellow-500" />,
-};
-export const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
+import { offlineRoles, statusMap } from "@/constants/userStatus";
+import { Modal, PopUpPositions } from "@/constants";
+import { useBbox } from "@/hooks/useBbox";
 
 export default function User({ user }) {
-  const isOffline = offlineRoles.includes(user.status);
-  const [isPopUpOpen, setIsPopupOpen] = useState(false);
-  const containerRef = useRef(null);
   const dispatch = useDispatch();
+  const isOffline = offlineRoles.includes(user.status);
+  const [bbox, ref] = useBbox();
 
-  console.log(user);
   const handleModalOpen = (user) => {
-    if (isPopUpOpen) return;
-    setIsPopupOpen(true);
+    dispatch(openModal(Modal.POPUP));
+    dispatch(setPopUpPosition([PopUpPositions.USER_LIST, bbox]));
     dispatch(fillPopupContent(user));
   };
 
-  const handleModalClose = () => {
-    if (!isPopUpOpen) return;
-    setIsPopupOpen(false);
-  };
-
-  useOnClickOutside(containerRef, handleModalClose);
-
-  const bannerColor = user.backgroundBanner;
-  // console.log(user);
+  const bannerColor = user.bannerColor;
   return (
     <div
-      ref={containerRef}
+      ref={ref}
       onClick={() => handleModalOpen(user)}
-      className="flex px-1.5 py-1 rounded items-center bg-[#2b2d31] cursor-pointer hover:bg-[#35373d] relative"
-    >
+      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
       <div
         className={
           isOffline
-            ? "flex rounded-[50%] w-[32px] h-[32px] mr-2 justify-center items-center opacity-30 transition-opacity hover:opacity-100"
-            : "flex rounded-[50%] w-[32px] h-[32px] mr-2 justify-center items-center"
+            ? "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] opacity-30 transition-opacity hover:opacity-100"
+            : "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%]"
         }
-        style={{ backgroundColor: bannerColor }}
-      >
+        style={{ backgroundColor: bannerColor }}>
         {user.avatar ? (
-          <img src={user.avatar} alt="user avatar" />
+          <img
+            src={user.avatar}
+            alt="user avatar"
+          />
         ) : (
-          <SiDiscord size={20} color="white" />
+          <SiDiscord
+            size={20}
+            color="white"
+          />
         )}
       </div>
       {!isOffline && (
-        <span className="absolute flex justify-center items-center p-[3px] w-[14px] h-[14px] rounded-[50%] bg-inherit bottom-1 left-7">
+        <span className="absolute bottom-1 left-7 flex h-[14px] w-[14px] items-center justify-center rounded-[50%] bg-inherit p-[3px]">
           {statusMap[user.status]}
         </span>
       )}
-      {isPopUpOpen && <PopUp user={user} onClose={handleModalClose} />}
+
       <p
         className={
           isOffline
             ? "text-[#9b59b6] opacity-30 transition-opacity hover:opacity-100"
             : "text-[#9b59b6]"
-        }
-      >
+        }>
         {user.name}
       </p>
     </div>

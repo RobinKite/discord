@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Settings from "../Settings/Settings";
+import PopUp from "../PopUp/PopUp";
 
 const ProtectedLayout = () => {
   const modalStack = useSelector((state) => state.ui.modalStack);
   const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
+  const isPopUpOpen = modalStack.includes(Modal.POPUP);
 
   useEffect(() => {
     if (isSettingsModalOpen)
@@ -19,6 +21,7 @@ const ProtectedLayout = () => {
     <>
       <Outlet />
       {isSettingsModalOpen && <Settings />}
+      {isPopUpOpen && <PopUp />}
     </>
   );
 };

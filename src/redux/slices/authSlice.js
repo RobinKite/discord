@@ -1,5 +1,7 @@
+import { Status } from "@/constants";
 import { Endpoint } from "@/constants/api";
 import { api } from "@/services/client";
+import { blurple } from "@/theme/designTokens";
 import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -13,6 +15,10 @@ const authSlice = createSlice({
     roles: [],
     permissions: [],
     isLoading: false,
+    status: Status.ONLINE, //mock
+    userRegistrationDate: "09.19.2023", //mock
+    serverRegistrationDate: "09.10.2023", //mock
+    bannerColor: blurple, //mock
   },
   reducers: {
     loginUser: (state, action) => {

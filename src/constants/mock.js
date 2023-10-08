@@ -1,8 +1,6 @@
 import { getRandomColor } from "@/utils";
 import icon from "@/assets/amongus.png";
 import { Status } from ".";
-import { getRandomColor } from "@/utils";
-import icon from "@/assets/amongus.png";
 
 export const SAMPLE_CHANNELS = [
   { id: "1", name: "general", type: "text" },
@@ -10,6 +8,8 @@ export const SAMPLE_CHANNELS = [
   { id: "3", name: "random", type: "text" },
   { id: "4", name: "music", type: "voice" },
 ];
+
+const SAMPLE_SERVER_TITLE = "default";
 
 export const SAMPLE_USERS = [
   {
@@ -22,8 +22,8 @@ export const SAMPLE_USERS = [
     note: "",
     status: Status.ONLINE,
     serverRegistrationDate: "09.09.2023",
-    serverName: "Bounderies",
-    backgroundBanner: getRandomColor(),
+    serverName: SAMPLE_SERVER_TITLE,
+    bannerColor: getRandomColor(),
   },
   {
     userId: "2",
@@ -34,9 +34,9 @@ export const SAMPLE_USERS = [
     role: "role-1",
     status: Status.IDLE,
     serverRegistrationDate: "09.09.2023",
-    serverName: "Bounderies",
+    serverName: SAMPLE_SERVER_TITLE,
     note: "",
-    backgroundBanner: getRandomColor(),
+    bannerColor: getRandomColor(),
   },
   {
     userId: "3",
@@ -47,9 +47,9 @@ export const SAMPLE_USERS = [
     role: "role-2",
     status: Status.INVISIBLE,
     serverRegistrationDate: "09.09.2023",
-    serverName: "Bond",
+    serverName: SAMPLE_SERVER_TITLE,
     note: "",
-    backgroundBanner: getRandomColor(),
+    bannerColor: getRandomColor(),
   },
   {
     userId: "4",
@@ -60,55 +60,79 @@ export const SAMPLE_USERS = [
     role: "role-2",
     status: Status.INVISIBLE,
     serverRegistrationDate: "09.09.2023",
-    serverName: "Ks",
+    serverName: SAMPLE_SERVER_TITLE,
     note: "",
-    backgroundBanner: getRandomColor(),
+    bannerColor: getRandomColor(),
   },
   {
     userId: "5",
     name: "Kyle",
     userName: "ekyle54",
     userRegistrationDate: "07.03.2022",
-    serverName: "Mono",
+    serverName: SAMPLE_SERVER_TITLE,
     avatar: null,
     role: null,
     status: Status.OFFLINE,
     serverRegistrationDate: "09.09.2023",
     note: "",
-    backgroundBanner: getRandomColor(),
+    bannerColor: getRandomColor(),
   },
   {
     userId: "6",
     name: "Chef",
     userName: "chef80",
     userRegistrationDate: "12.17.2019",
-    serverName: "Bond",
+    serverName: SAMPLE_SERVER_TITLE,
     avatar: null,
     role: null,
     status: Status.ONLINE,
     serverRegistrationDate: "09.09.2023",
     note: "",
-    backgroundBanner: getRandomColor(),
+    bannerColor: getRandomColor(),
   },
 ];
 export const SAMPLE_MESSAGES = [
   {
-    avatarUrl: "/",
-    authorName: SAMPLE_USERS[0].userName,
+    ...SAMPLE_USERS[0],
+    messageID: 1,
     timestamp: 1694970000000,
-    text: "Text",
+    text: "Hey :)",
   },
   {
-    avatarUrl: "/",
-    authorName: SAMPLE_USERS[1].userName,
+    ...SAMPLE_USERS[1],
+    messageID: 2,
     timestamp: 1694970600000,
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium itaque eligendi est, doloremque inventore repellat optio dignissimos, veritatis cum voluptates impedit! Tempora veniam facere enim eveniet atque vitae maxime.",
+    text: "Hello.",
+  },
+  {
+    ...SAMPLE_USERS[2],
+    messageID: 3,
+    timestamp: 1694970700000,
+    text: "hi",
+  },
+  {
+    ...SAMPLE_USERS[3],
+    messageID: 4,
+    timestamp: 1694970800000,
+    text: "Howdy",
+  },
+  {
+    ...SAMPLE_USERS[4],
+    messageID: 5,
+    timestamp: 1694970900000,
+    text: "What's up?",
+  },
+  {
+    ...SAMPLE_USERS[5],
+    messageID: 6,
+    timestamp: 1694971000000,
+    text: "Salutations!",
   },
 ];
 
 export const SAMPLE_SERVER = {
   id: "1",
-  title: "default",
+  title: SAMPLE_SERVER_TITLE,
   channels: SAMPLE_CHANNELS,
   users: SAMPLE_USERS,
 };

@@ -1,50 +1,14 @@
 import { useSelector } from "react-redux";
 import User from "../User/User";
 import { BiMinus } from "react-icons/bi";
-import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
-  console.log(users);
   // TODO: create correct list of users
 
-  const roles = users
-    .reduce(
-      (result, user) => {
-        if (user.status === "offline" || user.status === "invisible") {
-          const statusGroup = result.find((group) => group.name === "offline");
-          statusGroup.users.push({ ...user });
-          return result;
-        }
-        if (!user.role) {
-          const statusGroup = result.find((group) => group.name === "online");
-          statusGroup.users.push({ ...user });
-          return result;
-        }
-
-        let roleGroup = result.find((group) => group.name === user.role);
-
-        if (!roleGroup) {
-          result.push({ name: user.role, users: [] });
-          roleGroup = result.find((group) => group.name === user.role);
-        }
-
-        if (roleGroup) {
-          roleGroup.users.push({ ...user });
-        }
-
-        return result;
-      },
-      [
-        { name: "offline", users: [] },
-        { name: "online", users: [] },
-      ]
-    )
-    .reverse();
-
-  return roles.map((role) => (
+  return sortedUsers.map((role) => (
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>
