@@ -1,36 +1,111 @@
+import { useState } from "react";
 import SettingsLine from "../SettingsLine";
+import {
+  Input,
+  Stack,
+  TextField,
+  Typography,
+  FormControl,
+  MenuItem,
+} from "@mui/material";
+import {
+  CustomSelect,
+  MainButton,
+  Title,
+  UserTextField,
+} from "../StyledElements";
+import ProfileReview from "../ProfileReview/ProfileReview";
 
 export const ProfileTabContent = () => {
+  const [language, setLanguage] = useState("");
+
+  const handleChange = (event) => {
+    setLanguage(event.target.value);
+  };
   return (
-    <>
-      <div>*preview*</div>
-      <SettingsLine />
-      <h3>Avatar</h3>
-      <button>Change Avatar</button>
-      <button>Remove Avatar</button>
-      <SettingsLine />
-      <label htmlFor="bannerColor">Banner Color</label>
-      <input
-        type="color"
-        id="bannerColor"
-      />
-      <SettingsLine />
-      <label htmlFor="aboutMe">About me</label>
-      <p>You can use markdown and links if you&apos;d like.</p>
-      <textarea
-        name="aboutMe"
-        id="aboutMe"
-        cols="30"
-        rows="10"
-      />
-      <SettingsLine />
-      <label htmlFor="language">Language</label>
-      <select
-        name="language"
-        id="language">
-        <option value="en">English, US</option>
-        <option value="ua">Ukrainian, UA</option>
-      </select>
-    </>
+    <Stack
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "35px",
+        alignItems: "start",
+      }}
+    >
+      <Stack>
+        <Stack direction="column">
+          <Title>Display Name</Title>
+          <UserTextField id="display-name" size="small" placeholder="tadimm" />
+          <SettingsLine />
+        </Stack>
+        <Stack>
+          <Title>Pronouns</Title>
+          <UserTextField
+            id="display-pronouns"
+            size="small"
+            placeholder="Add your pronouns"
+          />
+          <SettingsLine />
+        </Stack>
+        <Stack>
+          <Title>Avatar</Title>
+          <Stack direction="row" spacing={2}>
+            <MainButton>Change Avatar</MainButton>
+            <MainButton>Remove Avatar</MainButton>
+          </Stack>
+          <SettingsLine />
+        </Stack>
+        <Stack>
+          <Title>Banner Color</Title>
+          <Input
+            type="color"
+            autoFocus="false"
+            disableUnderline
+            sx={{
+              width: "70px",
+              height: "50px",
+              // bgcolor: "#f45cb0",
+              borderRadius: "4px",
+            }}
+          />
+          <SettingsLine />
+        </Stack>
+        <Stack>
+          <Title>About me</Title>
+          <Typography sx={{ color: "#b5bac1", fontSize: "14px", mb: "16px" }}>
+            You can use markdown and links if you&apos;d like.
+          </Typography>
+          <TextField
+            id="standard-textarea"
+            multiline
+            variant="filled"
+            rows={5}
+            sx={{
+              width: "270px",
+              bgcolor: "#1e1f22",
+              color: "#b5bac1",
+            }}
+          />
+          <SettingsLine />
+        </Stack>
+        <Stack>
+          <Title>Language</Title>
+          <FormControl sx={{ minWidth: 120 }} size="small">
+            <CustomSelect
+              id="demo-select-small"
+              value={language}
+              onChange={handleChange}
+            >
+              <MenuItem value={"ua"}>Ukrainian</MenuItem>
+              <MenuItem value={"en"}>English</MenuItem>
+              <MenuItem value={"fr"}>French</MenuItem>
+              <MenuItem value={"de"}>German</MenuItem>
+              <MenuItem value={"es"}>Spanish</MenuItem>
+              <MenuItem value={"it"}>Italian</MenuItem>
+            </CustomSelect>
+          </FormControl>
+        </Stack>
+      </Stack>
+      <ProfileReview />
+    </Stack>
   );
 };

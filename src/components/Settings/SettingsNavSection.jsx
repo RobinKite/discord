@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import SettingsNavItem from "./SettingsNavItem";
 import SettingsLine from "./SettingsLine";
+import { List, Typography } from "@mui/material";
 const SettingsNavSection = ({
   header,
   items,
@@ -10,11 +11,21 @@ const SettingsNavSection = ({
 }) => (
   <>
     {header && (
-      <h2 className="px-[10px] py-[6px] text-xs uppercase text-[#949ba4]">
+      <Typography
+        variant="h2"
+        sx={{
+          paddingX: "10px",
+          paddingY: "6px",
+          fontSize: "12px",
+          textTransform: "uppercase",
+          color: "#949ba4",
+          fontWeight: 700,
+        }}
+      >
         {header}
-      </h2>
+      </Typography>
     )}
-    <ul>
+    <List>
       {items.map(({ name, content }) => (
         <SettingsNavItem
           key={name}
@@ -26,7 +37,7 @@ const SettingsNavSection = ({
           }}
         />
       ))}
-    </ul>
+    </List>
     <SettingsLine />
   </>
 );

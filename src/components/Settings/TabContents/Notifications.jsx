@@ -1,34 +1,63 @@
 import SettingsLine from "../SettingsLine";
+import Typography from "@mui/material/Typography";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { AntSwitch } from "../StyledElements";
 
 export const NotificationsTabContent = () => {
   return (
-    <>
-      <label htmlFor="desktopNotificatons">Enable Desktop Notifications</label>
-      <input
-        type="checkbox"
-        name="desktopNotificatons"
-        id="desktopNotificatons"
+    <FormGroup>
+      <FormControlLabel
+        control={<AntSwitch />}
+        label="Enable Desktop Notifications"
+        labelPlacement="start"
+        sx={{
+          color: "#f2f3f5",
+          fontWeight: 600,
+          display: "flex",
+          justifyContent: "space-between",
+          mx: 0,
+          mb: "10px",
+        }}
       />
-      <p>
+      <Typography sx={{ color: "#b5bac1", fontSize: "14px" }}>
         If you&apos;re looking for per-channel or per-server notifications,
         right-click the desired server icon and select Notification Settings.
-      </p>
+      </Typography>
       <SettingsLine />
-      <label htmlFor="unreadBadge">Enable Unread Messages Badge</label>
-      <input
-        type="checkbox"
-        name="unreadBadge"
-        id="unreadBadge"
+      <FormControlLabel
+        control={<AntSwitch defaultChecked />}
+        label="Enable Unread Messages Badge"
+        labelPlacement="start"
+        sx={{
+          color: "#f2f3f5",
+          fontWeight: 600,
+          display: "flex",
+          justifyContent: "space-between",
+          mx: 0,
+          mb: "10px",
+        }}
       />
-      <p>Shows a red badge on the app icon when you have unread messages.</p>
+      <Typography sx={{ color: "#b5bac1", fontSize: "14px" }}>
+        Shows a red badge on the app icon when you have unread messages.
+      </Typography>
       <SettingsLine />
-      <label htmlFor="allNotifications">All notifications</label>
-      <input
-        type="checkbox"
-        name="allNotifications"
-        id="allNotifications"
+      <FormControlLabel
+        control={<AntSwitch />}
+        label="All notifications"
+        labelPlacement="start"
+        sx={{
+          color: "#f2f3f5",
+          fontWeight: 600,
+          display: "flex",
+          justifyContent: "space-between",
+          mx: 0,
+          mb: "10px",
+        }}
       />
-      <p>Turn on/off notifications globally.</p>
-    </>
+      <Typography sx={{ color: "#b5bac1", fontSize: "14px" }}>
+        Turn on/off notifications globally.
+      </Typography>
+    </FormGroup>
   );
 };

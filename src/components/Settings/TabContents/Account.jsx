@@ -1,5 +1,12 @@
 import { useSelector } from "react-redux";
 import SettingsLine from "../SettingsLine";
+import Review from "@/components/Settings/Review/Review";
+import {
+  MainButton,
+  RemovalButton,
+  SettingsTitle,
+  Title,
+} from "../StyledElements";
 
 export const AccountTabContent = () => {
   const name = useSelector((state) => state.auth.name);
@@ -7,34 +14,13 @@ export const AccountTabContent = () => {
   const email = useSelector((state) => state.auth.email);
   return (
     <>
-      <div>*preview*</div>
+      <Review />
       <SettingsLine />
-      <label htmlFor="displayName">Display Name</label>
-      <input
-        id="displayName"
-        type="text"
-        placeholder={name}
-      />
+      <SettingsTitle>Password</SettingsTitle>
+      <MainButton>Change Password</MainButton>
       <SettingsLine />
-      <label htmlFor="username">Username</label>
-      <input
-        id="username"
-        type="text"
-        placeholder={username}
-      />
-      <SettingsLine />
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="text"
-        placeholder={email}
-      />
-      <SettingsLine />
-      <h3>Password</h3>
-      <button>Change Password</button>
-      <SettingsLine />
-      <h3>Account Removal</h3>
-      <button>Delete Account</button>
+      <Title>Account Removal</Title>
+      <RemovalButton>Delete Account</RemovalButton>
     </>
   );
 };

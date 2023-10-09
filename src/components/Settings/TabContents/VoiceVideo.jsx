@@ -1,53 +1,62 @@
+import { MenuItem, Stack, Typography } from "@mui/material";
 import SettingsLine from "../SettingsLine";
+import {
+  Title,
+  CustomSelect,
+  PrettoSlider,
+  SettingsTitle,
+  MainButton,
+} from "../StyledElements";
+import MicTest from "../MicTest/MicTest";
 
 export const VoiceVideoTabContent = () => {
   return (
     <>
-      <h2>Voice Settings</h2>
-      <label htmlFor="inputDevice">Input Device</label>
-      <select
-        name="inputDevice"
-        id="inputDevice">
-        <option value="">Default</option>
-      </select>
-      <label htmlFor="inputVolume">Input Volume</label>
-      <input
-        type="range"
-        name="inputVolume"
-        id="inputVolume"
-        min={0}
-        max={100}
-      />
-      <label htmlFor="outputDevice">Output Device</label>
-      <select
-        name="outputDevice"
-        id="outputDevice">
-        <option value="">Default</option>
-      </select>
-      <label htmlFor="outputVolume">Output Volume</label>
-      <input
-        type="range"
-        name="outputVolume"
-        id="outputVolume"
-        min={0}
-        max={100}
-      />
-      <h3>Mic Test</h3>
-      <p>
+      <SettingsTitle>Voice Settings</SettingsTitle>
+      <Stack direction="row" spacing={3}>
+        <Stack sx={{ width: "320px" }}>
+          <Title>Input device</Title>
+          <CustomSelect>
+            <MenuItem value="">AirPods</MenuItem>
+            <MenuItem value="">MacBook Air</MenuItem>
+          </CustomSelect>
+          <Title>Input Volume</Title>
+          <PrettoSlider
+            valueLabelDisplay="auto"
+            aria-label="pretto slider"
+            defaultValue={50}
+          />
+        </Stack>
+        <Stack sx={{ width: "320px" }}>
+          <Title>Output device</Title>
+          <CustomSelect>
+            <MenuItem value="">AirPods</MenuItem>
+            <MenuItem value="">MacBook Air</MenuItem>
+          </CustomSelect>
+          <Title>Output Volume</Title>
+          <PrettoSlider
+            valueLabelDisplay="auto"
+            aria-label="pretto slider"
+            defaultValue={50}
+          />
+        </Stack>
+      </Stack>
+      <Title>Mic Test</Title>
+      <Typography sx={{ color: "#b5bac1", fontSize: "14px", mb: "4px" }}>
         Having mic issues? Start a test and say something fun—we&apos;ll play
         your voice back to you.
-      </p>
-      <button>Let&apos;s Check</button>
-      <div>*progress bar*</div>
+      </Typography>
+      <Stack direction="row" spacing={1}>
+        <MainButton>Let&apos;s Check</MainButton>
+        <MicTest />
+      </Stack>
       <SettingsLine />
-      <h2>Video Settings</h2>
+      <SettingsTitle>Video Settings</SettingsTitle>
       <div>*video preview*</div>
-      <label htmlFor="camera">Camera</label>
-      <select
-        name="camera"
-        id="camera">
-        <option value="">Default</option>
-      </select>
+      <Title>Camera</Title>
+      <CustomSelect>
+        <MenuItem value="">Default</MenuItem>
+      </CustomSelect>
     </>
   );
 };

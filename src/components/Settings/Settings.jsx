@@ -9,6 +9,9 @@ import { logoutUser } from "@/redux/slices/authSlice";
 import SettingsLine from "./SettingsLine";
 import { tabsMap } from "./layout";
 import SettingsTabContainer from "./SettingsTabContainer";
+import { Button, List, Stack, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { CloseButton, LogOutButton } from "./StyledElements";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -54,9 +57,37 @@ const Settings = () => {
   };
 
   return (
-    <div className="absolute inset-0 z-50 box-border flex">
-      <div className="flex shrink-0 grow basis-[218px] justify-end bg-[#2b2d31]">
-        <nav className="py-[60px] pl-5 pr-[6px]">
+    <Stack
+      direction="row"
+      sx={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        boxSizing: "border-box",
+        zIndex: 50,
+      }}
+    >
+      <Stack
+        sx={{
+          bgcolor: "#2b2d31",
+          display: "flex",
+          flexShrink: 0,
+          flexGrow: 1,
+          flexBasis: "218px",
+          justifyContent: "flex-start",
+          alignItems: "end",
+        }}
+      >
+        <NavLink
+          style={{
+            paddingTop: "60px",
+            paddingBottom: "60px",
+            paddingLeft: "20px",
+            paddingRight: "6px",
+          }}
+        >
           {Object.keys(groupedTabs).map((group) => (
             <SettingsNavSection
               key={group}
@@ -67,35 +98,51 @@ const Settings = () => {
               setActiveTabContent={setActiveTabContent}
             />
           ))}
-          <button
+          {/* <button
             className="w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white"
-            onClick={handleLogout}>
+            onClick={handleLogout}
+          >
             Log out
-          </button>
+          </button> */}
+          <LogOutButton onClick={handleLogout}>log out</LogOutButton>
           <SettingsLine />
-          <p>{appVersion}</p>
-          <p>{OCVersion}</p>
-        </nav>
-      </div>
-      <div className="flex shrink grow basis-[800px] justify-start bg-[#313338]">
-        <div className="relative min-w-[460px] max-w-[740px] px-10 pb-20 pt-[60px]">
-          <ul>
+          <Typography>{appVersion}</Typography>
+          <Typography>{OCVersion}</Typography>
+        </NavLink>
+      </Stack>
+      <Stack
+        sx={{
+          bgcolor: "#313338",
+          display: "flex",
+          flexShrink: 1,
+          flexGrow: 1,
+          flexBasis: "800px",
+          justifyContent: "flex-start",
+        }}
+      >
+        <Stack
+          sx={{
+            minWidth: "460px",
+            maxWidth: "740px",
+            position: "relative",
+            pb: "80px",
+            pt: "60px",
+            paddingX: "40px",
+          }}
+        >
+          <List>
             <SettingsTabContainer
               header={activeTab}
               content={activeTabContent}
             />
-          </ul>
-          <button
-            className="absolute right-0 top-[60px] rounded-full hover:bg-[#4e50584c]"
-            onClick={handleCloseModal}>
-            <IoCloseCircleOutline
-              color="#fff"
-              size={44}
-            />
-          </button>
-        </div>
-      </div>
-    </div>
+          </List>
+          <CloseButton onClick={handleCloseModal}>
+            <IoCloseCircleOutline color="#b5bac1" size={44} />
+            Esc
+          </CloseButton>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 };
 

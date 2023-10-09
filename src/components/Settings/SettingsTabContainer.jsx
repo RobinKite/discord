@@ -1,11 +1,17 @@
+import { List, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
 const SettingsTabContainer = ({ header, content }) => {
   return (
-    <li>
-      <h2 className="mb-5 font-[600] text-[#f2f3f5]">{header}</h2>
+    <List>
+      <Typography
+        variant="h2"
+        sx={{ mb: "20px", fontWeight: 600, color: "#f2f3f5", fontSize: "16px" }}
+      >
+        {header}
+      </Typography>
       {content}
-    </li>
+    </List>
   );
 };
 
