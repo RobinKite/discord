@@ -1,45 +1,65 @@
 import { SiDiscord } from "react-icons/si";
-import { BsCircleFill } from "react-icons/bs";
 import PropTypes from "prop-types";
-import { IoMdMoon } from "react-icons/io";
-import { BsRecordCircleFill } from "react-icons/bs";
-import { Status } from "@/constants";
-
-const statusMap = {
-  [Status.ONLINE]: <BsCircleFill className="text-[green]" />,
-  [Status.OFFLINE]: <BsCircleFill className="text-stone-500" />,
-  [Status.INVISIBLE]: <BsRecordCircleFill className="text-stone-500" />,
-  [Status.IDLE]: <IoMdMoon className="rotate-[270deg] text-yellow-500" />,
-};
-const offlineRoles = [Status.OFFLINE, Status.INVISIBLE];
+import {
+  fillPopupContent,
+  openModal,
+  setPopUpPosition,
+} from "@/redux/slices/uiSlice";
+import { useDispatch } from "react-redux";
+import { offlineRoles, statusMap } from "@/constants/userStatus";
+import { Modal, PopUpPositions } from "@/constants";
+import { useBbox } from "@/hooks/useBbox";
 
 export default function User({ user }) {
-  // const username = useSelector(state => state?.user?.userName) || "No name";
-  const { userName = "No name", userAvatar = null, status } = user;
-  const isOffline = !offlineRoles.includes(status);
+  const dispatch = useDispatch();
+  const isOffline = offlineRoles.includes(user.status);
+  const [bbox, ref] = useBbox();
 
+  const handleModalOpen = (user) => {
+    dispatch(openModal(Modal.POPUP));
+    dispatch(setPopUpPosition([PopUpPositions.USER_LIST, bbox]));
+    dispatch(fillPopupContent(user));
+  };
+
+  const bannerColor = user.bannerColor;
   return (
-    <div className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
-      <div className="mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] bg-[#5d64f4]">
-        {userAvatar ? (
+    <div
+      ref={ref}
+      onClick={() => handleModalOpen(user)}
+      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
+      <div
+        className={
+          isOffline
+            ? "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] opacity-30 transition-opacity hover:opacity-100"
+            : "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%]"
+        }
+        style={{ backgroundColor: bannerColor }}>
+        {user.avatar ? (
           <img
-            src={userAvatar}
+            src={user.avatar}
             alt="user avatar"
           />
         ) : (
           <SiDiscord
             size={20}
-            className="text-white"
+            color="white"
           />
         )}
       </div>
-      {isOffline && (
+      {!isOffline && (
         <span className="absolute bottom-1 left-7 flex h-[14px] w-[14px] items-center justify-center rounded-[50%] bg-inherit p-[3px]">
-          {statusMap[status]}
+          {statusMap[user.status]}
         </span>
       )}
 
-      <p className="text-[#9b59b6]">{userName}</p>
+      <p
+        className={
+          isOffline
+            ? "text-[#9b59b6] opacity-30 transition-opacity hover:opacity-100"
+            : "text-[#9b59b6]"
+        }>
+        {user.name}
+      </p>
     </div>
   );
 }

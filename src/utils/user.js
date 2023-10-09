@@ -4,32 +4,35 @@ export const mapUserData = (users) =>
   users
     .reduce(
       (result, user) => {
-        const { userName, userId, role, status } = user;
+        // const { userName, userId, role, status } = user;
 
-        if (status === Status.OFFLINE || status === Status.INVISIBLE) {
+        if (
+          user.status === Status.OFFLINE ||
+          user.status === Status.INVISIBLE
+        ) {
           const statusGroup = result.find(
             (group) => group.name === Status.OFFLINE
           );
-          statusGroup.users.push({ userName, userId, role, status });
+          statusGroup.users.push(user);
           return result;
         }
-        if (!role) {
+        if (!user.role) {
           const statusGroup = result.find(
             (group) => group.name === Status.ONLINE
           );
-          statusGroup.users.push({ userName, userId, role, status });
+          statusGroup.users.push(user);
           return result;
         }
 
-        let roleGroup = result.find((group) => group.name === role);
+        let roleGroup = result.find((group) => group.name === user.role);
 
         if (!roleGroup) {
-          result.push({ name: role, users: [] });
-          roleGroup = result.find((group) => group.name === role);
+          result.push({ name: user.role, users: [] });
+          roleGroup = result.find((group) => group.name === user.role);
         }
 
         if (roleGroup) {
-          roleGroup.users.push({ userName, userId, role, status });
+          roleGroup.users.push(user);
         }
 
         return result;

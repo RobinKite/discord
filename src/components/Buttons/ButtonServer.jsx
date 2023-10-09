@@ -1,4 +1,4 @@
-import { Tooltip } from "@mui/material";
+import { Stack, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
@@ -54,18 +54,33 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
   }, []);
 
   return (
-    <div
-      className="relative flex w-full items-center justify-center"
+    <Stack
+      justifyContent="center"
+      alignItems="center"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      onClick={handleActive}>
+      onClick={handleActive}
+      sx={{ position: "relative", width: "100%" }}>
+      {/* <Typography
+        variant="span"
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: 0,
+          width: "4px",
+          bgcolor: "#fff",
+          borderTopRightRadius: "8px",
+          borderBottomRightRadius: "8px",
+          transition: "all 300",
+        }}
+      ></Typography> */}
       <span
         className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />
       <Tooltip
         title={title || children}
-        arrow
         placement="right"
+        arrow
         componentsProps={{
           tooltip: {
             sx: {
@@ -112,7 +127,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
           {adjusted?.serverName}
         </Button>
       </Tooltip>
-    </div>
+    </Stack>
   );
 };
 

@@ -5,15 +5,40 @@ import { useSelector } from "react-redux";
 
 export function Chat() {
   const [messages, setMessages] = useState(SAMPLE_MESSAGES);
-  const authorName = useSelector((state) => state.auth.name);
-  const avatarUrl = useSelector((state) => state.auth.avatar);
-
   const chatRef = useRef(null);
+
+  const userName = useSelector((state) => state.auth.userName);
+  const name = useSelector((state) => state.auth.name);
+  const avatar = useSelector((state) => state.auth.avatar);
+  const roles = useSelector((state) => state.auth.roles);
+  const status = useSelector((state) => state.auth.status);
+  const serverName = useSelector((state) => state.server.currentServer.title);
+  const userRegistrationDate = useSelector(
+    (state) => state.auth.userRegistrationDate
+  );
+  const serverRegistrationDate = useSelector(
+    (state) => state.auth.serverRegistrationDate
+  );
+  const bannerColor = useSelector((state) => state.auth.bannerColor);
+  const userId = useSelector((state) => state.auth.id);
+
+  const user = {
+    userName,
+    name,
+    avatar,
+    roles,
+    status,
+    serverName,
+    userRegistrationDate,
+    serverRegistrationDate,
+    bannerColor,
+    userId,
+  };
 
   const createMessage = (messageText) => {
     const message = {
-      avatarUrl,
-      authorName,
+      ...user,
+      messageID: Math.random(),
       timestamp: Date.now(),
       text: messageText,
     };
@@ -43,10 +68,10 @@ export function Chat() {
     <div className="flex grow flex-col justify-between bg-[#313338]">
       <div
         ref={chatRef}
-        className="relative grow overflow-y-auto">
+        className="grow overflow-y-auto">
         {messages.map((message) => (
           <Message
-            key={message.timestamp}
+            key={message.messageID}
             {...message}
           />
         ))}

@@ -5,20 +5,31 @@ export function convertTimestampToDateString(timestamp) {
   return readableDate.replace(",", "");
 }
 
-export const adjustText = (text) => {
+export const formatRegistrationDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { month: "short", day: "numeric", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+};
+
+export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
   if (typeof text !== "string") return { serverName: text };
   const maxFontSize = 22.25;
-  const maxLength = 7;
   const step = 1.75;
+  const ellipsis = addEllipsis ? "..." : "";
 
   if (text.length <= maxLength) {
     const fontSize = maxFontSize - step * (text.length - 1);
     return { serverName: text, fontSize };
   } else {
-    const serverName = text.slice(0, maxLength).trim() + "...";
+    const serverName = text.slice(0, maxLength).trim() + ellipsis;
     const fontSize = maxFontSize - step * maxLength;
     return { serverName, fontSize };
   }
+};
+
+export const getRandomColor = () => {
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${randomColor}`;
 };
 
 export function filterChannelsByType(channels, type) {
