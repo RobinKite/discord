@@ -10,7 +10,7 @@ export function Layout() {
   return (
     <div className="flex">
       <ClientSidebar />
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen grow flex-col">
         <Header />
         <main className="flex grow">
           <UserSidebar />
