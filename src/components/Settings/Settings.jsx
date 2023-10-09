@@ -48,6 +48,7 @@ const Settings = () => {
   };
 
   const handleLogout = () => {
+    //TODO: Add auth/logout
     try {
       dispatch(logoutUser());
       handleCloseModal();
