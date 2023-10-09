@@ -18,7 +18,6 @@ api.interceptors.request.use(
   }
 );
 
-
 api.interceptors.response.use(
   (r) => r.data,
   async function (error) {

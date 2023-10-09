@@ -20,6 +20,7 @@ export class Tokens {
 
 export class Modal {
   static SETTINGS = "settings";
+  static POPUP = "popup";
 }
 
 export class Themes {
@@ -32,4 +33,10 @@ export class Status {
   static OFFLINE = "offline";
   static IDLE = "idle";
   static INVISIBLE = "invisible";
+}
+
+export class PopUpPositions {
+  static USER_LIST = "user-list";
+  static CHAT = "chat";
+  static SIDEBAR = "sidebar";
 }
