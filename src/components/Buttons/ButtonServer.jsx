@@ -60,8 +60,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       onClick={handleActive}
-      sx={{ position: "relative", width: "100%" }}
-    >
+      sx={{ position: "relative", width: "100%" }}>
       {/* <Typography
         variant="span"
         sx={{
@@ -86,11 +85,18 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
           tooltip: {
             sx: {
               maxWidth: "300px",
+              padding: "10px",
               left: "6px",
+              fontSize: "18px",
+              fontWeight: "700",
+              color: darkText,
+              bgcolor: darkTooltip,
+              "& .MuiTooltip-arrow": {
+                color: "#111214",
+              },
             },
           },
-        }}
-      >
+        }}>
         <Button
           variant="text"
           sx={{
@@ -117,8 +123,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
             "&:active": {
               transform: "translateY(2px)",
             },
-          }}
-        >
+          }}>
           {adjusted?.serverName}
         </Button>
       </Tooltip>

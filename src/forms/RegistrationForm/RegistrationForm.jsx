@@ -38,9 +38,8 @@ function RegistrationForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ isValid, setFieldValue }) => (
+      onSubmit={onSubmit}>
+      {({ isValid }) => (
         <Form>
           <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
             <h1 className="mb-5 text-center text-2xl font-medium text-white">
@@ -53,7 +52,11 @@ function RegistrationForm() {
               name="email"
               required
             />
-            <CustomInput id="name" label="Display name" name="name" />
+            <CustomInput
+              id="name"
+              label="Display name"
+              name="name"
+            />
             <CustomInput
               id="username"
               label="Username"
@@ -79,11 +82,13 @@ function RegistrationForm() {
             <button
               disabled={!isValid}
               type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]"
-            >
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval width={20} height={20} />
+                  <Oval
+                    width={20}
+                    height={20}
+                  />
                 </span>
               ) : (
                 "Continue"
@@ -91,15 +96,21 @@ function RegistrationForm() {
             </button>
             <p className="mb-5 text-xs text-[#ffffffbb]">
               By registering, you agree to Discord&apos;s&#32;
-              <a href="#" className="text-[#00a8fc]">
+              <a
+                href="#"
+                className="text-[#00a8fc]">
                 Term&apos;s of Service&#32;
               </a>
               and &#32;
-              <a href="#" className="text-[#00a8fc]">
+              <a
+                href="#"
+                className="text-[#00a8fc]">
                 Privacy Policy.
               </a>
             </p>
-            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
+            <NavLink
+              to="/login"
+              className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
           </div>

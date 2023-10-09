@@ -38,8 +38,7 @@ function LoginForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       {(form) => (
         <Form>
           <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
@@ -65,18 +64,19 @@ function LoginForm() {
             />
             <a
               href="#"
-              className="mb-[18px] text-sm font-medium text-[#00a8fc]"
-            >
+              className="mb-[18px] text-sm font-medium text-[#00a8fc]">
               Forgot your password?
             </a>
             <button
               disabled={!form.isValid || isLoading}
               type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]"
-            >
+              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval width={20} height={20} />
+                  <Oval
+                    width={20}
+                    height={20}
+                  />
                 </span>
               ) : (
                 "Log In"
@@ -86,8 +86,7 @@ function LoginForm() {
               Need an account? &#32;
               <NavLink
                 to="/register"
-                className="text-sm font-medium text-[#00a8fc]"
-              >
+                className="text-sm font-medium text-[#00a8fc]">
                 Register
               </NavLink>
             </p>
