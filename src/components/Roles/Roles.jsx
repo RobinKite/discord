@@ -59,15 +59,14 @@ export default function Roles() {
     toggled: false,
   });
 
-  const handleOnContextMenu = (e, rightClickedUser) => {
+  const handleOnContextMenu = (e, user) => {
     e.preventDefault();
-
     const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
     let x = e.clientX - contextMenuAttr.width - 4;
     let y = e.clientY - 5;
 
     setContextMenu({
-      user: rightClickedUser,
+      user,
       position: { x, y },
       toggled: true,
     });
@@ -116,39 +115,10 @@ export default function Roles() {
             positionX={contextMenu.position.x}
             positionY={contextMenu.position.y}
             buttons={buttons}
-            rightClickedUser={contextMenu.user}
+            user={contextMenu.user}
           />
         </div>
       )}
     </div>
   ));
 }
-
-// return sortedUsers.map((role) => (
-//   <div key={role.name}>
-//     {role.users.length > 0 && (
-//       <div>
-//         <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
-//           {role.name}&nbsp;
-//           <BiMinus />
-//           &nbsp;{role.users.length}
-//         </h2>
-//         <ul className="flex flex-col">
-//           {role.users.map((user) => (
-//             <li
-//               key={user.userId}
-//               className={
-//                 role.name === Status.OFFLINE
-//                   ? "opacity-30 transition-opacity hover:opacity-100"
-//                   : ""
-//               }
-//               onContextMenu={(e) => handleOnContextMenu(e, user)}
-//             >
-//               <User user={user} />
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     )}
-//   </div>
-// ));

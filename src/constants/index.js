@@ -20,6 +20,7 @@ export class Tokens {
 
 export class Modal {
   static SETTINGS = "settings";
+  static PROFILE = "profile";
 }
 
 export class Themes {

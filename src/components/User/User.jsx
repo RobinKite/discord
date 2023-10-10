@@ -5,7 +5,7 @@ import { IoMdMoon } from "react-icons/io";
 import { BsRecordCircleFill } from "react-icons/bs";
 import { Status } from "@/constants";
 
-const statusMap = {
+export const statusMap = {
   [Status.ONLINE]: <BsCircleFill className="text-[green]" />,
   [Status.OFFLINE]: <BsCircleFill className="text-stone-500" />,
   [Status.INVISIBLE]: <BsRecordCircleFill className="text-stone-500" />,
@@ -22,15 +22,9 @@ export default function User({ user }) {
     <div className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
       <div className="mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] bg-[#5d64f4]">
         {userAvatar ? (
-          <img
-            src={userAvatar}
-            alt="user avatar"
-          />
+          <img src={userAvatar} alt="user avatar" />
         ) : (
-          <SiDiscord
-            size={20}
-            className="text-white"
-          />
+          <SiDiscord size={20} className="text-white" />
         )}
       </div>
       {isOffline && (

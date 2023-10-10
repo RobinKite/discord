@@ -9,10 +9,26 @@ export const SAMPLE_CHANNELS = [
 
 export const SAMPLE_USERS = [
   {
-    userName: "Eric",
     userId: "1",
+    name: "Eric",
+    userName: "eric54",
+    userRegistrationDate: "07.07.2018",
+    avatar: "icon",
     role: "role-1",
+    note: "",
     status: Status.ONLINE,
+    serverRegistrationDate: "09.09.2023",
+    serverName: "Bounderies",
+    backgroundBanner: "yellowgreen",
+    mutualFriends: [
+      {
+        userName: "Stan",
+        userId: "2",
+        role: "role-1",
+        status: Status.OFFLINE,
+      },
+    ],
+    mutualServers: [],
   },
   {
     userName: "Stan",

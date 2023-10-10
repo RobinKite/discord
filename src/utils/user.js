@@ -1,6 +1,6 @@
 import { Status } from "@/constants";
 
-export const mapUserData = (users) =>
+export const mapUserData = users =>
   users
     .reduce(
       (result, user) => {
@@ -8,24 +8,24 @@ export const mapUserData = (users) =>
 
         if (status === Status.OFFLINE || status === Status.INVISIBLE) {
           const statusGroup = result.find(
-            (group) => group.name === Status.OFFLINE
+            group => group.name === Status.OFFLINE
           );
           statusGroup.users.push({ userName, userId, role, status });
           return result;
         }
         if (!role) {
           const statusGroup = result.find(
-            (group) => group.name === Status.ONLINE
+            group => group.name === Status.ONLINE
           );
           statusGroup.users.push({ userName, userId, role, status });
           return result;
         }
 
-        let roleGroup = result.find((group) => group.name === role);
+        let roleGroup = result.find(group => group.name === role);
 
         if (!roleGroup) {
           result.push({ name: role, users: [] });
-          roleGroup = result.find((group) => group.name === role);
+          roleGroup = result.find(group => group.name === role);
         }
 
         if (roleGroup) {
