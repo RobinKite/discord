@@ -26,24 +26,20 @@ export default function User({ user }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
+      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]"
+    >
       <div
         className={
           isOffline
             ? "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] opacity-30 transition-opacity hover:opacity-100"
             : "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%]"
         }
-        style={{ backgroundColor: bannerColor }}>
+        style={{ backgroundColor: bannerColor }}
+      >
         {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt="user avatar"
-          />
+          <img src={user.avatar} alt="user avatar" />
         ) : (
-          <SiDiscord
-            size={20}
-            color="white"
-          />
+          <SiDiscord size={20} color="white" />
         )}
       </div>
       {!isOffline && (
@@ -57,7 +53,8 @@ export default function User({ user }) {
           isOffline
             ? "text-[#9b59b6] opacity-30 transition-opacity hover:opacity-100"
             : "text-[#9b59b6]"
-        }>
+        }
+      >
         {user.name}
       </p>
     </div>

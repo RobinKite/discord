@@ -5,6 +5,7 @@ export const yellow = "#fee75c";
 export const fuchsia = "#eb459e";
 export const red = "#ed4245";
 const white = "#ffffff";
+const darkgreen = { 10: "#08853c", 20: "#026123" };
 
 // common
 const buttonBgDefault = blurple;
@@ -66,4 +67,9 @@ export default {
   lightText,
   lightUsersList,
   grey,
+  green,
+  darkgreen,
+  darkTooltip,
+  darkBg,
+  darkUserSection,
 };
