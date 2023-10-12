@@ -6,12 +6,17 @@ const Home = () => {
   const channelId = useSelector((state) => state.server.channelId);
 
   if (!serverId || !channelId) {
-    return <div>Loading...</div>;
+    return (
+      <Navigate
+        to="channels/@me"
+        replace
+      />
+    );
   }
 
   return (
     <Navigate
-      to={`/channels/${serverId}/${channelId}`}
+      to={`channels/${serverId}/${channelId}`}
       replace
     />
   );

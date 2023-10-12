@@ -9,22 +9,40 @@ const serverSlice = createSlice({
     // currentChannel: SAMPLE_CHANNELS[0],
     // currentServer: SAMPLE_SERVER,
     // servers: [SAMPLE_SERVER],
-    //TODO: add reducers for currentServer & currentChannel
     currentChannel: {},
     currentServer: {},
     serverId: "",
     channelId: "",
     servers: [],
+    messages: [],
   },
   reducers: {
+    setMessages: (state, action) => {
+      state.messages = action.payload;
+    },
+    addMessage: (state, action) => {
+      state.messages.push(action.payload);
+    },
+    removeMessage: (state, action) => {
+      state.messages = state.messages.filter(
+        (message) => message.id !== action.payload
+      );
+    },
+    clearCurrentServer: (state) => {
+      state.currentChannel = {};
+      state.currentServer = {};
+      state.serverId = "";
+      state.channelId = "";
+      state.messages = [];
+    },
     addServer: (state, action) => {
       state.servers.push(action.payload);
       if (!Object.keys(state.currentServer).length)
         state.currentServer = action.payload;
       if (!Object.keys(state.currentChannel).length)
         state.currentChannel = action.payload.channels[0];
-      if (!state.serverId) state.serverId = action.payload.id;
-      if (!state.channelId) state.channelId = action.payload.channels[0].id;
+      // if (!state.serverId) state.serverId = action.payload.id;
+      // if (!state.channelId) state.channelId = action.payload.channels[0].id;
     },
     removeServer: (state, action) => {
       state.servers = state.servers.filter(
@@ -200,7 +218,24 @@ export const createServer = createAsyncThunk(
   }
 );
 
+export const getMessages = createAsyncThunk(
+  Endpoint.TEXT_CHANNEL,
+  async (_, thunkAPI) => {
+    const result = await api.get(Endpoint.TEXT_CHANNEL);
+    // const { title, server, link, connect, messages } = result.data;
+    const { messages } = result.data;
+
+    thunkAPI.dispatch(setMessages(messages));
+
+    return result;
+  }
+);
+
 export const {
+  clearCurrentServer,
+  setMessages,
+  addMessage,
+  removeMessage,
   addServer,
   removeServer,
   updateNotificationCount,

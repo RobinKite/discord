@@ -9,9 +9,7 @@ import {
   darkTooltip,
 } from "@/constants/designTokens";
 import { adjustText } from "@/utils";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setCurrentServer } from "@/redux/slices/serverSlice";
+import { useSelector } from "react-redux";
 
 const indicatorHeightMap = {
   active: "h-10",
@@ -20,20 +18,14 @@ const indicatorHeightMap = {
   hidden: "h-0",
 };
 
-const ButtonServer = ({
-  children,
-  title,
-  bgcolor,
-  color,
-  onClick,
-  id,
-  activeServerId,
-}) => {
-  const [indicatorState, setIndicatorState] = useState(null);
+const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
+  const serverId = useSelector((state) => state.server.serverId);
+
+  const isActive = serverId === id;
+
+  const [indicatorState, setIndicatorState] = useState("hidden");
   const [notification, setNotification] = useState(false);
   const [adjusted, setAdjusted] = useState({});
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setAdjusted(adjustText(children));
@@ -41,19 +33,14 @@ const ButtonServer = ({
   }, []);
 
   useEffect(() => {
-    if (activeServerId === id) {
+    if (isActive) {
       setIndicatorState("active");
     } else if (notification) {
       setIndicatorState("notification");
     } else {
       setIndicatorState("hidden");
     }
-  }, [activeServerId, id, notification]);
-
-  const handleClick = () => {
-    dispatch(setCurrentServer(id));
-    navigate(`/channels/${id}`);
-  };
+  }, [isActive]);
 
   const handleMouseEnter = () => {
     if (indicatorState === "active") return;
@@ -74,21 +61,7 @@ const ButtonServer = ({
       alignItems="center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
       sx={{ position: "relative", width: "100%" }}>
-      {/* <Typography
-        variant="span"
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: 0,
-          width: "4px",
-          bgcolor: "#fff",
-          borderTopRightRadius: "8px",
-          borderBottomRightRadius: "8px",
-          transition: "all 300",
-        }}
-      ></Typography> */}
       <span
         className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />

@@ -3,9 +3,9 @@ import PublicLayout from "./components/Layout/PublicLayout";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
-// import { Layout as ServerLayout } from "@/features/channels/components";
 import Redirect from "./pages/Redirect/Redirect";
 import Home from "./pages/Home/Home";
+import { Layout } from "./features/channels/components";
 
 const AppRoutes = () => {
   return (
@@ -25,10 +25,10 @@ const AppRoutes = () => {
 
         <Route element={<RequireAuth />}>
           <Route path="channels/">
-            {/* <Route
+            <Route
               path="@me"
-              element={<></>}
-            /> */}
+              element={<Layout />}
+            />
             <Route
               path=":serverId/:channelId"
               element={<Redirect />}

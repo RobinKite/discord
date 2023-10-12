@@ -5,18 +5,33 @@ import ButtonServer from "@/components/Buttons/ButtonServer";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "@/constants";
 import { openModal } from "@/redux/slices/uiSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  clearCurrentServer,
+  setCurrentServer,
+} from "@/redux/slices/serverSlice";
 
 export function ClientSidebar() {
   const servers = useSelector((state) => state.server.servers);
-  //TODO: Add server functionallity
-  //TODO: Stop page from reloading upon manual adress input ?
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const serverId = useSelector((state) => state.server.serverId);
 
   const handleCreateServer = () => {
     dispatch(openModal(Modal.CREATE_SERVER));
   };
+
+  const handleOpenPersonalMessages = () => {
+    dispatch(clearCurrentServer());
+    navigate("/channels/@me", { replace: true });
+  };
+
+  const handleOpenServer = (id) => {
+    dispatch(setCurrentServer(id));
+    navigate(`/channels/${id}`);
+  };
+
+  console.log("rerender sidebar");
 
   return (
     <div
@@ -24,6 +39,7 @@ export function ClientSidebar() {
         "flex h-screen min-w-[4.5rem] flex-col items-center gap-y-2 bg-[#1e1f22] py-3"
       }>
       <ButtonServer
+        onClick={handleOpenPersonalMessages}
         title={"Private messages"}
         color={darkText}
         id="privateMessages">
@@ -36,8 +52,8 @@ export function ClientSidebar() {
       {servers.map((server) => (
         <ButtonServer
           key={server.id}
-          id={server.id}
-          activeServerId={serverId}>
+          onClick={() => handleOpenServer(server.id)}
+          id={server.id}>
           {server.title}
         </ButtonServer>
       ))}

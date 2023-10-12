@@ -1,15 +1,16 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const RedirectToChannel = () => {
   const { serverId } = useParams();
   const channelId = useSelector((state) => state.server.channelId);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate(`/channels/${serverId}/${channelId}`, { replace: true });
-  }, [navigate, serverId, channelId]);
+  return (
+    <Navigate
+      to={`/channels/${serverId}/${channelId}`}
+      replace
+    />
+  );
 };
 
 export default RedirectToChannel;
