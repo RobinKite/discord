@@ -44,8 +44,8 @@ export function UserSidebar() {
   };
 
   const channels = useSelector((state) => state.server.currentServer.channels);
-  const textChannels = filterChannelsByType(channels, "text");
-  const voiceChannels = filterChannelsByType(channels, "voice");
+  const textChannels = channels ? filterChannelsByType(channels, "text") : [];
+  const voiceChannels = channels ? filterChannelsByType(channels, "voice") : [];
 
   const handleToggleMicrophone = () => {};
   const handleToggleDeafen = () => {};

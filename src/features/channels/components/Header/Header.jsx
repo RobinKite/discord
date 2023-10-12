@@ -8,7 +8,7 @@ import { toggleUserList } from "@/redux/slices/uiSlice";
 export function Header() {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.server.currentServer.title);
-  const channelName = useSelector((state) => state.server.currentChannel.name);
+  const channelName = useSelector((state) => state.server.currentChannel.title);
 
   return (
     <header className="relative z-10 flex text-[#f2f3f5] shadow-[0_2px_4px_0_rgba(0,0,0,0.35)]">

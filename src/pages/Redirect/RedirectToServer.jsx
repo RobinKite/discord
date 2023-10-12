@@ -1,20 +1,19 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-const Home = () => {
+const RedirectToServer = () => {
   const serverId = useSelector((state) => state.server.serverId);
-  const channelId = useSelector((state) => state.server.channelId);
 
-  if (!serverId || !channelId) {
+  if (!serverId) {
     return <div>Loading...</div>;
   }
 
   return (
     <Navigate
-      to={`/channels/${serverId}/${channelId}`}
+      to={`/channels/${serverId}`}
       replace
     />
   );
 };
 
-export default Home;
+export default RedirectToServer;
