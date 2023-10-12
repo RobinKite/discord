@@ -6,43 +6,7 @@ import { mapUserData } from "@/utils/user";
 import { useRef, useState } from "react";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { buttons } from "@/constants/contextMenuButtons";
-
-//make an import and delete from:
-
-import { useEffect, useCallback } from "react";
-
-export const useOnClickOutside = (ref, handler) => {
-  const handleClick = useCallback(
-    (event) => {
-      const el = ref?.current;
-      if (!el || el.contains(event.target)) return;
-
-      event && event.preventDefault();
-      event && event.stopPropagation();
-
-      handler && handler(event);
-    },
-    [ref, handler]
-  );
-
-  const onAdd = useCallback(() => {
-    document.addEventListener("click", handleClick);
-  }, [handleClick]);
-
-  const onRemove = useCallback(() => {
-    document.removeEventListener("click", handleClick);
-  }, [handleClick]);
-
-  useEffect(() => {
-    onAdd();
-
-    return () => {
-      onRemove();
-    };
-  }, [onAdd, onRemove]);
-};
-
-// ... delete to.
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);

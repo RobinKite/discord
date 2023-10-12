@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Stack, Typography } from "@mui/material";
 import { setProfile } from "@/redux/slices/profileSlice";
@@ -7,26 +6,13 @@ import { Modal } from "@/constants";
 import { ProfileTabBar } from "./ProfileTabbar";
 import { ProfileBanner } from "./ProfileBanner";
 import { ProfileTabsContent } from "./ProfileTabsContent";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ProfileActions } from "./ProfileActions";
 
 export const Profile = () => {
   const backdropRef = useRef(null);
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.profile.userProfile);
-  const user = {
-    userId: "1",
-    name: "Eric",
-    userName: "eric54",
-    userRegistrationDate: "07.07.2018",
-    avatar: null,
-    role: "role-1",
-    note: "",
-    status: "online",
-    serverRegistrationDate: "09.09.2023",
-    serverName: "Bounderies",
-    backgroundBanner: "yellowgreen",
-  };
+  const user = useSelector((state) => state.profile.userProfile);
 
   const tabs = [
     { text: "About the user", id: "aboutUser" },
@@ -76,7 +62,7 @@ export const Profile = () => {
           overflow: "hidden",
         })}
       >
-        <ProfileBanner user={user} />
+        <ProfileBanner />
         <ProfileActions />
         <Stack
           sx={{ padding: "78px 16px 16px", width: "100%", height: "auto" }}
@@ -88,25 +74,22 @@ export const Profile = () => {
               borderRadius: "8px",
             })}
           >
-            <Stack sx={{ mb: "16px" }}>
-              <Typography
-                component="h3"
-                sx={{ fontSize: "20px", lineHeight: "1.2" }}
-              >
-                {user.name}
-              </Typography>
-              <Typography sx={{ fontSize: "14px", lineHeight: "1.7" }}>
-                {user.userName}
-              </Typography>
-            </Stack>
-            <Stack sx={{ gap: "16px" }}>
-              <ProfileTabBar
-                activeTabId={activeTabId}
-                handleTabClick={handleTabClick}
-                tabs={tabs}
-              />
-              <ProfileTabsContent user={user} activeTabId={activeTabId} />
-            </Stack>
+            <Typography
+              component="h3"
+              sx={{ fontSize: "20px", lineHeight: "1.2" }}
+            >
+              {user.name}
+            </Typography>
+            <Typography sx={{ fontSize: "14px", lineHeight: "1.7" }}>
+              {user.userName}
+            </Typography>
+
+            <ProfileTabBar
+              activeTabId={activeTabId}
+              handleTabClick={handleTabClick}
+              tabs={tabs}
+            />
+            <ProfileTabsContent user={user} activeTabId={activeTabId} />
           </Stack>
         </Stack>
       </Stack>

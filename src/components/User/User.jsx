@@ -10,7 +10,7 @@ import { offlineRoles, statusMap } from "@/constants/userStatus";
 import { Modal, PopUpPositions } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export default function User({ user }) {
+export default function User({ user, styles }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();
@@ -26,7 +26,7 @@ export default function User({ user }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]"
+      className={`relative flex  cursor-pointer items-center  rounded px-1.5 py-1 transition duration-300 hover:bg-[#35373d] ${styles} `}
     >
       <div
         className={
@@ -63,4 +63,9 @@ export default function User({ user }) {
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  styles: PropTypes.string,
+};
+
+User.defaultProps = {
+  styles: "bg-[#2b2d31]",
 };

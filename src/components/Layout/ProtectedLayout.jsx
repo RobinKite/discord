@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Settings from "../Settings/Settings";
 import PopUp from "../PopUp/PopUp";
-import { Profile } from "../Profile/Profile";
+import { Profile } from "../../features/Profile/Profile";
 
 const ProtectedLayout = () => {
   const modalStack = useSelector((state) => state.ui.modalStack);
@@ -30,8 +30,8 @@ const ProtectedLayout = () => {
     <>
       <Outlet />
       {isSettingsModalOpen && <Settings />}
-      {isPopUpOpen && <PopUp />}
       {isProfileModalOpen && <Profile />}
+      {isPopUpOpen && <PopUp />}
     </>
   );
 };

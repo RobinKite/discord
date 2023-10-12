@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const ProfileTabBar = ({ activeTabId, handleTabClick, tabs }) => {
   return (
-    <Stack sx={{ borderBottom: "1px solid #ffffff90" }}>
+    <Stack sx={{ mt: "16px", borderBottom: "1px solid #ffffff90" }}>
       <List
         sx={{
           mr: "auto",
@@ -21,13 +21,13 @@ export const ProfileTabBar = ({ activeTabId, handleTabClick, tabs }) => {
               p: 0,
               height: "46px",
               alignItems: "start",
-
+              fontSize: "14px",
               cursor: activeTabId !== tab.id ? "pointer" : "default",
               borderBottom:
                 activeTabId === tab.id
                   ? "2px solid white"
                   : "2px solid transparent",
-              transition: "borderBottomColor 250ms linear",
+
               "&:hover": {
                 borderBottom: "2px solid white",
               },

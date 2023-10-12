@@ -19,6 +19,7 @@ const authSlice = createSlice({
     userRegistrationDate: "09.19.2023", //mock
     serverRegistrationDate: "09.10.2023", //mock
     bannerColor: blurple, //mock
+    friends: [{ userId: 1, name: "Eric" }], //mock
   },
   reducers: {
     loginUser: (state, action) => {
@@ -52,6 +53,9 @@ const authSlice = createSlice({
     },
     setUserPermissions: (state, action) => {
       state.permissions = action.payload;
+    },
+    setUserFriends: (state, action) => {
+      state.friends = action.payload;
     },
   },
 });

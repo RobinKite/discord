@@ -1,14 +1,15 @@
-import React from "react";
 import { SiDiscord } from "react-icons/si";
-import PropTypes from "prop-types";
 import { Stack } from "@mui/material";
-import { statusMap } from "../User/User";
+import { statusMap } from "@/constants/userStatus";
+import { useSelector } from "react-redux";
 
-export const ProfileBanner = ({ user }) => {
+export const ProfileBanner = () => {
+  const user = useSelector((state) => state.profile.userProfile);
+
   return (
     <Stack>
       <Stack
-        backgroundColor={user.backgroundBanner}
+        backgroundColor={user.bannerColor}
         sx={{ width: "600px", height: "106px" }}
       />
       {user.avatar ? (
@@ -18,7 +19,7 @@ export const ProfileBanner = ({ user }) => {
           width="134"
           height="134"
           style={{
-            backgroundColor: user.backgroundBanner,
+            backgroundColor: user.bannerColor,
             padding: "12px",
             borderRadius: "50%",
             border: "6px solid #232328",
@@ -31,7 +32,7 @@ export const ProfileBanner = ({ user }) => {
         <SiDiscord
           color="white"
           style={{
-            backgroundColor: user.backgroundBanner,
+            backgroundColor: user.bannerColor,
             borderRadius: "50%",
             padding: "28px",
             border: "7px solid #232428",
@@ -57,8 +58,4 @@ export const ProfileBanner = ({ user }) => {
       </Stack>
     </Stack>
   );
-};
-
-ProfileBanner.propeTypes = {
-  user: PropTypes.object.isRequired,
 };

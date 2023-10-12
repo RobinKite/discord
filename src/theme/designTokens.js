@@ -71,5 +71,4 @@ export default {
   darkgreen,
   darkTooltip,
   darkBg,
-  darkUserSection,
 };

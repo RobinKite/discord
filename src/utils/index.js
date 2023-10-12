@@ -5,7 +5,7 @@ export function convertTimestampToDateString(timestamp) {
   return readableDate.replace(",", "");
 }
 
-export const formatRegistrationDate = (dateString) => {
+export const formatRegistrationDate = dateString => {
   const date = new Date(dateString);
   const options = { month: "short", day: "numeric", year: "numeric" };
   return date.toLocaleDateString("en-US", options);
@@ -28,10 +28,13 @@ export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
 };
 
 export const getRandomColor = () => {
-  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  if (randomColor.length < 6) {
+    randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  }
   return `#${randomColor}`;
 };
 
 export function filterChannelsByType(channels, type) {
-  return channels.filter((channel) => channel.type === type);
+  return channels.filter(channel => channel.type === type);
 }
