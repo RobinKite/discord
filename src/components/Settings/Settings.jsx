@@ -79,6 +79,7 @@ const Settings = () => {
           flexBasis: "218px",
           justifyContent: "flex-start",
           alignItems: "end",
+          overflow: "scroll",
         }}
       >
         <NavLink
@@ -107,7 +108,11 @@ const Settings = () => {
           </button> */}
           <LogOutButton onClick={handleLogout}>log out</LogOutButton>
           <SettingsLine />
-          <Typography>{appVersion}</Typography>
+          <Typography
+            sx={{ fontSize: "12px", color: "#949ba4", padding: "8px 10px" }} //wrap these two typographies together
+          >
+            {appVersion}
+          </Typography>
           <Typography>{OCVersion}</Typography>
         </NavLink>
       </Stack>
@@ -115,16 +120,18 @@ const Settings = () => {
         sx={{
           bgcolor: "#313338",
           display: "flex",
-          flexShrink: 1,
+          // flexShrink: 1,
           flexGrow: 1,
           flexBasis: "800px",
           justifyContent: "flex-start",
+          height: "100%",
         }}
       >
         <Stack
           sx={{
             minWidth: "460px",
             maxWidth: "740px",
+            minHeight: "100%",
             position: "relative",
             pb: "80px",
             pt: "60px",

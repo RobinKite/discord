@@ -39,6 +39,7 @@ export const CustomSelect = styled(Select)(({ theme }) => ({
 export const PrettoSlider = styled(Slider)({
   color: "#5865f2",
   height: 8,
+  width: "100%",
   "& .MuiSlider-track": {
     border: "none",
   },
@@ -48,6 +49,7 @@ export const PrettoSlider = styled(Slider)({
     backgroundColor: "#e3e5e8",
     border: "2px solid #e3e5e8",
     borderRadius: "3px",
+
     "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
       boxShadow: "inherit",
     },
@@ -57,6 +59,11 @@ export const PrettoSlider = styled(Slider)({
   },
   "& .MuiSlider-markLabel": {
     color: "#fff",
+  },
+  "& .MuiSlider-mark": {
+    width: 2,
+    height: 24,
+    backgroundColor: "#4e5058",
   },
   "& .MuiSlider-valueLabel": {
     lineHeight: 1.2,

@@ -3,6 +3,8 @@ import SettingsLine from "../SettingsLine";
 import { useState } from "react";
 import { PrettoSlider, Title } from "../StyledElements";
 import { BsCheckLg } from "react-icons/bs";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { AntSwitch } from "../StyledElements";
 
 export const AppearanceTabContainer = () => {
   const [selectedValue, setSelectedValue] = useState("dark");
@@ -142,8 +144,22 @@ export const AppearanceTabContainer = () => {
         />
       </Stack>
       <SettingsLine />
-      <label htmlFor="imagesPreview">Images preview</label>
-      <input type="checkbox" id="imagesPreview" />
+      {/* <label htmlFor="imagesPreview">Images preview</label>
+      <input type="checkbox" id="imagesPreview" /> */}
+      <FormControlLabel
+        control={<AntSwitch />}
+        label="Images preview"
+        labelPlacement="start"
+        sx={{
+          color: "#f2f3f5",
+          fontWeight: 600,
+          fontSize: "16px",
+          display: "flex",
+          justifyContent: "space-between",
+          mx: 0,
+          mb: "10px",
+        }}
+      />
     </>
   );
 };

@@ -57,8 +57,8 @@ const MicTest = () => {
 
   return (
     <Stack direction="row" spacing={1}>
-      <MainButton onClick={startMicTest}>Let check</MainButton>
-      <canvas ref={canvasRef} width={550} height={32} />
+      <MainButton onClick={startMicTest}>Let&apos;s check</MainButton>
+      <canvas ref={canvasRef} width={542} height={32} />
     </Stack>
   );
 };

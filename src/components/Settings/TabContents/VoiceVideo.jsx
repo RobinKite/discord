@@ -8,10 +8,11 @@ import {
   MainButton,
 } from "../StyledElements";
 import MicTest from "../MicTest/MicTest";
+import camera from "../../../assets/camera.svg";
 
 export const VoiceVideoTabContent = () => {
   return (
-    <>
+    <Stack spacing={3}>
       <SettingsTitle>Voice Settings</SettingsTitle>
       <Stack direction="row" spacing={3}>
         <Stack sx={{ width: "320px" }}>
@@ -47,16 +48,32 @@ export const VoiceVideoTabContent = () => {
         your voice back to you.
       </Typography>
       <Stack direction="row" spacing={1}>
-        <MainButton>Let&apos;s Check</MainButton>
+        {/* <MainButton>Let&apos;s Check</MainButton> */}
         <MicTest />
       </Stack>
       <SettingsLine />
       <SettingsTitle>Video Settings</SettingsTitle>
-      <div>*video preview*</div>
+      <Stack
+        alignItems="center"
+        justifyContent="center"
+        spacing={3}
+        sx={{
+          width: "660px",
+          height: "220px",
+          bgcolor: "#2b2d31",
+          border: "1px solid #1e1f22",
+          borderRadius: "4px",
+        }}
+      >
+        <Stack sx={{ width: "166px", height: "101px" }}>
+          <img src={camera} />
+        </Stack>
+        <MainButton>Test Video</MainButton>
+      </Stack>
       <Title>Camera</Title>
       <CustomSelect>
         <MenuItem value="">Default</MenuItem>
       </CustomSelect>
-    </>
+    </Stack>
   );
 };

@@ -63,7 +63,7 @@ export const ProfileTabContent = () => {
             sx={{
               width: "70px",
               height: "50px",
-              // bgcolor: "#f45cb0",
+              bgcolor: "#f45cb0",
               borderRadius: "4px",
             }}
           />
