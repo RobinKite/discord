@@ -8,7 +8,7 @@ import { PageContentMap } from "@/utils/collections";
 import { Page } from "@/constants";
 
 function ServerContent() {
-  const { isUserListShown } = useSelector((state) => state.ui);
+  const isUserListShown = useSelector((state) => state.ui.isUserListShown);
 
   return (
     <main className="flex grow">
@@ -22,7 +22,7 @@ function ServerContent() {
 const contentMap = new PageContentMap([Page.SERVER], [ServerContent]);
 
 export function Layout() {
-  const { currentPage } = useSelector((state) => state.ui);
+  const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
     <div className="flex">

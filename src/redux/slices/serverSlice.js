@@ -19,13 +19,13 @@ const serverSlice = createSlice({
     },
     removeServer: (state, action) => {
       state.servers = state.servers.filter(
-        (room) => room.id !== action.payload
+        (room) => room.id !== action.payload,
       );
     },
     updateNotificationCount: (state, action) => {
       const serverIdToUpdate = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverIdToUpdate
+        (server) => server.id === serverIdToUpdate,
       );
 
       if (serverToUpdate) {
@@ -35,7 +35,7 @@ const serverSlice = createSlice({
     addChannelToServer: (state, action) => {
       const { serverId, channel } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.channels.push(channel);
@@ -44,18 +44,18 @@ const serverSlice = createSlice({
     removeChannelFromServer: (state, action) => {
       const { serverId, channelId } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.channels = serverToUpdate.channels.filter(
-          (channel) => channel.id !== channelId
+          (channel) => channel.id !== channelId,
         );
       }
     },
     addServerRole: (state, action) => {
       const { serverId, role } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.roles.push(role);
@@ -64,22 +64,22 @@ const serverSlice = createSlice({
     removeServerRole: (state, action) => {
       const { serverId, roleId } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.roles = serverToUpdate.roles.filter(
-          (role) => role.id !== roleId
+          (role) => role.id !== roleId,
         );
       }
     },
     addUserToServerRole: (state, action) => {
       const { serverId, roleId, userId } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         const roleToUpdate = serverToUpdate.roles.find(
-          (role) => role.id === roleId
+          (role) => role.id === roleId,
         );
         if (roleToUpdate) {
           roleToUpdate.users.push(userId);
@@ -89,15 +89,15 @@ const serverSlice = createSlice({
     removeUserFromServerRole: (state, action) => {
       const { serverId, roleId, userId } = action.payload;
       const serverToUpdate = state.servers.find(
-        (server) => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         const roleToUpdate = serverToUpdate.roles.find(
-          (role) => role.id === roleId
+          (role) => role.id === roleId,
         );
         if (roleToUpdate) {
           roleToUpdate.users = roleToUpdate.users.filter(
-            (user) => user !== userId
+            (user) => user !== userId,
           );
         }
       }

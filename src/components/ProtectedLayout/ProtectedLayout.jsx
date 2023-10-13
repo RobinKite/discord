@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import Settings from "../Settings/Settings";
 import PopUp from "../PopUp/PopUp";
 
-const ProtectedLayout = () => {
+export function ProtectedLayout() {
   const modalStack = useSelector((state) => state.ui.modalStack);
   const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
   const isPopUpOpen = modalStack.includes(Modal.POPUP);
@@ -24,6 +24,4 @@ const ProtectedLayout = () => {
       {isPopUpOpen && <PopUp />}
     </>
   );
-};
-
-export default ProtectedLayout;
+}

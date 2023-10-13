@@ -6,7 +6,7 @@ import { PageContentMap } from "@/utils/collections";
 import { Page } from "@/constants";
 
 function ServerContent() {
-  const { channels } = useSelector((state) => state.server.currentServer);
+  const channels = useSelector((state) => state.server.currentServer.channels);
 
   return (
     <div className="pt-8 text-xs text-[#949BA4]">
@@ -27,7 +27,7 @@ function ServerContent() {
 const contentMap = new PageContentMap([Page.SERVER], [ServerContent]);
 
 export function UserSidebar() {
-  const { currentPage } = useSelector((state) => state.ui);
+  const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
     <aside className="flex min-w-[240px] max-w-[240px] grow flex-col justify-between bg-[#2b2d31]">

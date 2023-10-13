@@ -63,10 +63,7 @@ const Settings = () => {
           <button
             className="absolute right-0 top-[60px] rounded-full hover:bg-[#4e50584c]"
             onClick={handleCloseModal}>
-            <IoCloseCircleOutline
-              color="#fff"
-              size={44}
-            />
+            <IoCloseCircleOutline color="#fff" size={44} />
           </button>
         </div>
       </div>

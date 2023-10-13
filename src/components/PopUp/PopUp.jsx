@@ -20,10 +20,10 @@ const PopUp = () => {
   };
 
   const userRegistrationDate = formatRegistrationDate(
-    user.userRegistrationDate
+    user.userRegistrationDate,
   );
   const serverRegistrationDate = formatRegistrationDate(
-    user.serverRegistrationDate
+    user.serverRegistrationDate,
   );
 
   const handleModalClose = () => {

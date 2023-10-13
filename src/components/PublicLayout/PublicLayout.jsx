@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const PublicLayout = () => {
+export function PublicLayout() {
   const hasToken = Boolean(getTokens().accessToken);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +17,4 @@ const PublicLayout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <Outlet />;
-};
-
-export default PublicLayout;
+}

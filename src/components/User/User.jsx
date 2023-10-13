@@ -35,15 +35,9 @@ export default function User({ user }) {
         }
         style={{ backgroundColor: bannerColor }}>
         {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt="user avatar"
-          />
+          <img src={user.avatar} alt="user avatar" />
         ) : (
-          <SiDiscord
-            size={20}
-            color="white"
-          />
+          <SiDiscord size={20} color="white" />
         )}
       </div>
       {!isOffline && (

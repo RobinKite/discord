@@ -3,7 +3,7 @@ import RegistrationForm from "@/forms/RegistrationForm/RegistrationForm";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
-const Login = () => {
+export function Login() {
   const { pathname } = useLocation();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -17,6 +17,4 @@ const Login = () => {
       </div>
     </>
   );
-};
-
-export default Login;
+}

@@ -1,14 +1,10 @@
-import { Route, Routes, useLocation } from "react-router-dom";
-import PublicLayout from "./components/Layout/PublicLayout";
-import RequireAuth from "./components/RequireAuth/RequireAuth";
-import Default from "./pages/Default/Default";
-import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
-import { Layout as ServerLayout } from "@/features/channels/components";
 import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { Default, Home, Login } from "@/pages";
+import { Layout, PublicLayout, RequireAuth } from "@/components";
 import { useDispatch } from "react-redux";
-import { updateCurrentPage } from "./redux/slices/uiSlice";
-import { findPageByPathname } from "./utils";
+import { updateCurrentPage } from "@/redux/slices/uiSlice";
+import { findPageByPathname } from "@/utils";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -28,7 +24,7 @@ const AppRoutes = () => {
 
         <Route element={<RequireAuth />}>
           <Route path="channels/">
-            <Route path="@me" element={<ServerLayout />} />
+            <Route path="@me" element={<Layout />} />
             <Route
               path=":serverId/:channelId"
               element={<p>Server channel</p>}

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+export function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -9,6 +9,4 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <p>Home</p>;
-};
-
-export default Home;
+}

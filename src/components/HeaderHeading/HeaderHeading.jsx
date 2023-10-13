@@ -4,7 +4,7 @@ import { Page } from "@/constants";
 import { PageContentMap } from "@/utils/collections";
 
 function ServerContent() {
-  const { name } = useSelector((state) => state.server.currentChannel);
+  const name = useSelector((state) => state.server.currentChannel.name);
 
   return (
     <>
@@ -17,7 +17,7 @@ function ServerContent() {
 const contentMap = new PageContentMap([Page.SERVER], [ServerContent]);
 
 export function HeaderHeading() {
-  const { currentPage } = useSelector((state) => state.ui);
+  const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
     <div className="flex items-center gap-x-1">

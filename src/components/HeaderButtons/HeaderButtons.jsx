@@ -27,7 +27,7 @@ function ServerContent() {
 const pageContent = new PageContentMap([Page.SERVER], [ServerContent]);
 
 export function HeaderButtons() {
-  const { currentPage } = useSelector((state) => state.ui);
+  const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
     <div className="flex items-center gap-x-4 text-[#b5bac1]">
