@@ -21,6 +21,7 @@ export class Tokens {
 export class Modal {
   static SETTINGS = "settings";
   static POPUP = "popup";
+  static CREATE_SERVER = "create-server";
 }
 
 export class Themes {

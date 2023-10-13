@@ -24,7 +24,7 @@ function ServerContent() {
   );
 }
 
-const pageContent = new PageContentMap([Page.SERVER], [ServerContent]);
+const pageContent = new PageContentMap([Page.SERVER, ServerContent]);
 
 export function HeaderButtons() {
   const currentPage = useSelector((state) => state.ui.currentPage);

@@ -1,4 +1,5 @@
 import { setUser } from "@/redux/slices/authSlice";
+import { setServers } from "@/redux/slices/serverSlice";
 import { getTokens } from "@/utils/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -12,9 +13,11 @@ export function PublicLayout() {
   useEffect(() => {
     hasToken &&
       dispatch(setUser()).then(() => {
+        dispatch(setServers());
         navigate("/", { replace: true });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return <Outlet />;
 }

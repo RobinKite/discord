@@ -7,7 +7,7 @@ function ServerContent() {
   return <h2 className="font-medium">{title}</h2>;
 }
 
-const pageContent = new PageContentMap([Page.SERVER], [ServerContent]);
+const pageContent = new PageContentMap([Page.SERVER, ServerContent]);
 
 export function HeaderSidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);

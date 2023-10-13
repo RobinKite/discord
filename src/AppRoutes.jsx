@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Default, Home, Login } from "@/pages";
+import { Default, Home, Login, Redirect } from "@/pages";
 import { Layout, PublicLayout, RequireAuth } from "@/components";
 import { useDispatch } from "react-redux";
 import { updateCurrentPage } from "@/redux/slices/uiSlice";
@@ -25,12 +25,10 @@ const AppRoutes = () => {
         <Route element={<RequireAuth />}>
           <Route path="channels/">
             <Route path="@me" element={<Layout />} />
-            <Route
-              path=":serverId/:channelId"
-              element={<p>Server channel</p>}
-            />
+            <Route path=":serverId/:channelId" element={<Redirect />} />
+            <Route path=":serverId/" element={<Redirect />} />
           </Route>
-          <Route path="/" element={<Home />} />
+          <Route path="" element={<Home />} />
         </Route>
         <Route path="*" element={<Default />} />
       </Route>

@@ -10,10 +10,10 @@ export function ChannelGroup({ type, name, channels }) {
       <ul className="text-[0.9rem] font-medium">
         {channels.map((channel) => (
           <li
-            key={channel.name}
+            key={channel.id}
             className="group flex items-center gap-x-1 rounded px-2 py-1 transition-colors hover:bg-[#404249]">
             <Icon size={22} />
-            <span className="group-hover:text-white">{channel.name}</span>
+            <span className="group-hover:text-white">{channel.title}</span>
           </li>
         ))}
       </ul>

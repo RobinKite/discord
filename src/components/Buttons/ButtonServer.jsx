@@ -9,6 +9,7 @@ import {
   darkTooltip,
 } from "@/constants/designTokens";
 import { adjustText } from "@/utils";
+import { useSelector } from "react-redux";
 
 const indicatorHeightMap = {
   active: "h-10",
@@ -17,17 +18,36 @@ const indicatorHeightMap = {
   hidden: "h-0",
 };
 
-const ButtonServer = ({ children, title, bgcolor, color }) => {
-  const [indicatorState, setIndicatorState] = useState(null);
+const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
+  const serverId = useSelector((state) => state.server.serverId);
+
+  const isActive = serverId === id;
+
+  const [indicatorState, setIndicatorState] = useState("hidden");
   const [notification, setNotification] = useState(false);
   const [adjusted, setAdjusted] = useState({});
 
-  const handleEnter = () => {
+  useEffect(() => {
+    setAdjusted(adjustText(children));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isActive) {
+      setIndicatorState("active");
+    } else if (notification) {
+      setIndicatorState("notification");
+    } else {
+      setIndicatorState("hidden");
+    }
+  }, [isActive]);
+
+  const handleMouseEnter = () => {
     if (indicatorState === "active") return;
     setIndicatorState("hover");
   };
 
-  const handleLeave = () => {
+  const handleMouseLeave = () => {
     if (indicatorState === "active") return;
 
     if (notification) {
@@ -35,45 +55,13 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
     } else if (indicatorState === "hover") setIndicatorState("hidden");
   };
 
-  const handleActive = () => {
-    setNotification(true);
-    setIndicatorState("active");
-  };
-
-  // useEffect(() => {
-  //   if (indicatorState === "active")
-  //     setTimeout(() => {
-  //       setIndicatorState(notification ? "notification" : null);
-  //       if (!notification) setIndicator(false);
-  //     }, 3000);
-  // }, [indicatorState]);
-
-  useEffect(() => {
-    setAdjusted(adjustText(children));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Stack
       justifyContent="center"
       alignItems="center"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onClick={handleActive}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       sx={{ position: "relative", width: "100%" }}>
-      {/* <Typography
-        variant="span"
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: 0,
-          width: "4px",
-          bgcolor: "#fff",
-          borderTopRightRadius: "8px",
-          borderBottomRightRadius: "8px",
-          transition: "all 300",
-        }}
-      ></Typography> */}
       <span
         className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />
@@ -98,6 +86,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
           },
         }}>
         <Button
+          onClick={onClick}
           variant="text"
           sx={{
             color,
@@ -138,10 +127,14 @@ ButtonServer.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
   bgcolor: PropTypes.string,
+  onClick: PropTypes.func,
+  id: PropTypes.string,
+  activeServerId: PropTypes.string,
 };
 
 ButtonServer.defaultProps = {
   title: "",
   color: "#fff",
   bgcolor: blurple,
+  onClick: () => {},
 };

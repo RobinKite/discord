@@ -19,7 +19,7 @@ function ServerContent() {
   );
 }
 
-const contentMap = new PageContentMap([Page.SERVER], [ServerContent]);
+const contentMap = new PageContentMap([Page.SERVER, ServerContent]);
 
 export function Layout() {
   const currentPage = useSelector((state) => state.ui.currentPage);

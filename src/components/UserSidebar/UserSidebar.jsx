@@ -24,7 +24,7 @@ function ServerContent() {
   );
 }
 
-const contentMap = new PageContentMap([Page.SERVER], [ServerContent]);
+const contentMap = new PageContentMap([Page.SERVER, ServerContent]);
 
 export function UserSidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);

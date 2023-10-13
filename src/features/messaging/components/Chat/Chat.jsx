@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from "react";
-import { SAMPLE_MESSAGES } from "@/constants/mock";
+import { useRef, useEffect } from "react";
 import { Message, Input } from "@/features/messaging/components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "@/redux/slices/serverSlice";
 
 export function Chat() {
-  const [messages, setMessages] = useState(SAMPLE_MESSAGES);
+  const dispatch = useDispatch();
   const chatRef = useRef(null);
-
+  const messages = useSelector((state) => state.server.messages);
   const userName = useSelector((state) => state.auth.userName);
   const name = useSelector((state) => state.auth.name);
   const avatar = useSelector((state) => state.auth.avatar);
@@ -42,7 +42,7 @@ export function Chat() {
       timestamp: Date.now(),
       text: messageText,
     };
-    setMessages((prev) => [...prev, message]);
+    dispatch(addMessage(message));
   };
 
   useEffect(() => {

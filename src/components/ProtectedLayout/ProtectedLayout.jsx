@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Settings from "../Settings/Settings";
 import PopUp from "../PopUp/PopUp";
+import CreateServerModal from "../Modals/CreateServerModal";
 
 export function ProtectedLayout() {
   const modalStack = useSelector((state) => state.ui.modalStack);
   const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
   const isPopUpOpen = modalStack.includes(Modal.POPUP);
+  const isCreateServerModalOpen = modalStack.includes(Modal.CREATE_SERVER);
 
   useEffect(() => {
     if (isSettingsModalOpen)
@@ -22,6 +24,7 @@ export function ProtectedLayout() {
       <Outlet />
       {isSettingsModalOpen && <Settings />}
       {isPopUpOpen && <PopUp />}
+      {isCreateServerModalOpen && <CreateServerModal />}
     </>
   );
 }

@@ -1,26 +1,74 @@
-import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
-import { createSlice } from "@reduxjs/toolkit";
+import { Endpoint } from "@/constants/api";
+// import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
+import { api } from "@/services/client";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const serverSlice = createSlice({
   name: "server",
   initialState: {
-    currentChannel: SAMPLE_CHANNELS[0],
-    currentServer: SAMPLE_SERVER,
-    servers: [SAMPLE_SERVER],
-    // currentServer: {...SAMPLE_SERVER, users: [...SAMPLE_SERVER.users, { userName: "test", userId: "0", role: null, status: Status.ONLINE, }, ], },
-    //TODO: add reducers for currentServer & currentChannel
-    // currentChannel: {},
-    // currentServer: {},
-    // servers: [],
+    // currentChannel: SAMPLE_CHANNELS[0],
+    // currentServer: SAMPLE_SERVER,
+    // servers: [SAMPLE_SERVER],
+    currentChannel: {},
+    currentServer: {},
+    serverId: "",
+    channelId: "",
+    servers: [],
+    messages: [],
   },
   reducers: {
+    setMessages: (state, action) => {
+      state.messages = action.payload;
+    },
+    addMessage: (state, action) => {
+      state.messages.push(action.payload);
+    },
+    removeMessage: (state, action) => {
+      state.messages = state.messages.filter(
+        (message) => message.id !== action.payload,
+      );
+    },
+    clearCurrentServer: (state) => {
+      state.currentChannel = {};
+      state.currentServer = {};
+      state.serverId = "";
+      state.channelId = "";
+      state.messages = [];
+    },
     addServer: (state, action) => {
       state.servers.push(action.payload);
+      if (!Object.keys(state.currentServer).length)
+        state.currentServer = action.payload;
+      if (!Object.keys(state.currentChannel).length)
+        state.currentChannel = action.payload.channels[0];
+      // if (!state.serverId) state.serverId = action.payload.id;
+      // if (!state.channelId) state.channelId = action.payload.channels[0].id;
     },
     removeServer: (state, action) => {
       state.servers = state.servers.filter(
         (room) => room.id !== action.payload,
       );
+    },
+    setCurrentServer: (state, action) => {
+      //action.payload = serverId
+      if (action.payload) {
+        const serverToFind = state.servers.find(
+          (server) => server.id === action.payload,
+        );
+        state.currentServer = serverToFind;
+        state.currentChannel = serverToFind.channels[0];
+        state.channelId = serverToFind.channels[0].id;
+      }
+      state.serverId = action.payload;
+    },
+    setCurrentChannel: (state, action) => {
+      //action.payload = channelId
+      if (action.payload) {
+        state.currentChannel = state.currentServer.find(
+          (channel) => channel.id === action.payload,
+        );
+      }
+      state.channelId = action.payload;
     },
     updateNotificationCount: (state, action) => {
       const serverIdToUpdate = action.payload;
@@ -105,7 +153,89 @@ const serverSlice = createSlice({
   },
 });
 
+export const setServers = createAsyncThunk(
+  Endpoint.SERVERS,
+  async (_, thunkAPI) => {
+    const result = await api.get(Endpoint.SERVERS);
+    const servers = result.data;
+
+    const currentServers = thunkAPI.getState().server.servers;
+
+    if (servers.length) {
+      servers.forEach((server) => {
+        const existingServer = currentServers.find((s) => s.id === server.link);
+
+        if (!existingServer) {
+          const { title, owner, link, textChannels } = server;
+          // eslint-disable-next-line no-unused-vars
+          const { isLoggedIn, isLoading, ...currentUser } =
+            thunkAPI.getState().auth;
+          thunkAPI.dispatch(
+            addServer({
+              id: link,
+              title,
+              owner,
+              users: [currentUser],
+              channels: [
+                ...textChannels.map((channel) => ({
+                  ...channel,
+                  id: channel.link,
+                  type: "text",
+                })),
+              ],
+            }),
+          );
+        }
+      });
+    }
+    return result;
+  },
+);
+
+export const createServer = createAsyncThunk(
+  Endpoint.SERVERS,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.SERVERS, data);
+    const { title, owner, link, textChannels } = result.data;
+    // eslint-disable-next-line no-unused-vars
+    const { isLoggedIn, isLoading, ...currentUser } = thunkAPI.getState().auth;
+    thunkAPI.dispatch(
+      addServer({
+        id: link,
+        title,
+        owner,
+        users: [currentUser],
+        channels: [
+          ...textChannels.map((channel) => ({
+            ...channel,
+            id: channel.link,
+            type: "text",
+          })),
+        ],
+      }),
+    );
+    return result;
+  },
+);
+
+export const getMessages = createAsyncThunk(
+  Endpoint.TEXT_CHANNEL,
+  async (_, thunkAPI) => {
+    const result = await api.get(Endpoint.TEXT_CHANNEL);
+    // const { title, server, link, connect, messages } = result.data;
+    const { messages } = result.data;
+
+    thunkAPI.dispatch(setMessages(messages));
+
+    return result;
+  },
+);
+
 export const {
+  clearCurrentServer,
+  setMessages,
+  addMessage,
+  removeMessage,
   addServer,
   removeServer,
   updateNotificationCount,
@@ -113,5 +243,7 @@ export const {
   removeChannelFromServer,
   addUserToServerRole,
   removeUserFromServerRole,
+  setCurrentServer,
+  setCurrentChannel,
 } = serverSlice.actions;
 export default serverSlice.reducer;

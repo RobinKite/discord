@@ -1,6 +1,6 @@
 export class PageContentMap {
-  constructor(pages, components) {
-    this.map = new Map([pages, components]);
+  constructor(...pairs) {
+    this.map = new Map([...pairs]);
   }
 
   getComponent(pageName) {
