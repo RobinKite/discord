@@ -40,3 +40,10 @@ export class PopUpPositions {
   static CHAT = "chat";
   static SIDEBAR = "sidebar";
 }
+
+export class Page {
+  static LOGIN = "login";
+  static HOME = "home";
+  static DIRECT = "direct";
+  static SERVER = "server";
+}

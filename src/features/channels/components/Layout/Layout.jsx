@@ -1,6 +1,7 @@
 import { ClientSidebar } from "@/features/channels/components";
-import { Header, UserSidebar } from "@/features/channels/components";
+import { UserSidebar } from "@/features/channels/components";
 import { Chat } from "@/features/messaging/components";
+import { Header } from "@/components";
 import UserList from "@/components/UserList/UserList";
 import { useSelector } from "react-redux";
 

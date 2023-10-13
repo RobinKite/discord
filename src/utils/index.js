@@ -1,8 +1,21 @@
+import { Page } from "@/constants";
+
 export function convertTimestampToDateString(timestamp) {
   const date = new Date(timestamp);
   const options = { hour: "2-digit", minute: "2-digit" };
   const readableDate = date.toLocaleDateString("en-GB", options);
   return readableDate.replace(",", "");
+}
+
+export function findPageByPathname(pathname) {
+  if (pathname == "/channels/@me") {
+    return Page.HOME;
+  } else if (pathname.includes("/channels/@me")) {
+    return Page.DIRECT;
+  } else if (pathname.includes("/channels/")) {
+    return Page.SERVER;
+  }
+  return Page.LOGIN;
 }
 
 export const formatRegistrationDate = (dateString) => {
