@@ -167,7 +167,7 @@ const PopUpInner = ({
                 fontSize: "8px",
                 p: 0.5,
               }}>
-              {adjustText(user.serverName, 2, false).serverName}
+              {adjustText(user.serverName, 1.75, 2, false).serverName}
             </Stack>
           </Tooltip>
           <Typography

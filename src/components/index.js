@@ -9,3 +9,4 @@ export { PublicLayout } from "./PublicLayout/PublicLayout";
 export { ProtectedLayout } from "./ProtectedLayout/ProtectedLayout";
 export { RequireAuth } from "./RequireAuth/RequireAuth";
 export { Layout } from "./Layout/Layout";
+export { ServerButton } from "./ServerButton/ServerButton";

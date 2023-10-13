@@ -24,6 +24,7 @@ export function UserSidebarPanel() {
     dispatch(openModal(Modal.SETTINGS));
   };
   const handleModalOpen = () => {
+    // FIXME: Prevent from opening if closed by clicking the second time
     dispatch(openModal(Modal.POPUP));
     dispatch(setPopUpPosition([PopUpPositions.SIDEBAR, bbox]));
     dispatch(fillPopupContent(user));

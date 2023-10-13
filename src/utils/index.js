@@ -24,10 +24,9 @@ export const formatRegistrationDate = (dateString) => {
   return date.toLocaleDateString("en-US", options);
 };
 
-export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
+export const adjustText = (text, step, maxLength = 7, addEllipsis = true) => {
   if (typeof text !== "string") return { serverName: text };
-  const maxFontSize = 22.25;
-  const step = 1.75;
+  const maxFontSize = 22.5;
   const ellipsis = addEllipsis ? "..." : "";
 
   if (text.length <= maxLength) {

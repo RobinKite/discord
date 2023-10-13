@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 function ServerContent() {
   const title = useSelector((state) => state.server.currentServer.title);
-  return <h2 className="font-medium">{title}</h2>;
+  return <h2 className="truncate font-medium">{title}</h2>;
 }
 
 const pageContent = new PageContentMap([Page.SERVER, ServerContent]);

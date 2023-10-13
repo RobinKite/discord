@@ -2,12 +2,8 @@ import { Stack, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  blurple,
-  darkServerIconBg,
-  darkText,
-  darkTooltip,
-} from "@/constants/designTokens";
+import { blurple, darkText, darkTooltip } from "@/constants/designTokens";
+import { darkServerIconBg } from "@/constants/designTokens";
 import { adjustText } from "@/utils";
 import { useSelector } from "react-redux";
 
@@ -18,7 +14,7 @@ const indicatorHeightMap = {
   hidden: "h-0",
 };
 
-const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
+export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
   const serverId = useSelector((state) => state.server.serverId);
 
   const isActive = serverId === id;
@@ -28,7 +24,7 @@ const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
   const [adjusted, setAdjusted] = useState({});
 
   useEffect(() => {
-    setAdjusted(adjustText(children));
+    setAdjusted(adjustText(children || title, 2, 6));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -73,10 +69,10 @@ const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
           tooltip: {
             sx: {
               maxWidth: "300px",
-              padding: "10px",
+              padding: "0.45rem 0.65rem",
               left: "6px",
-              fontSize: "18px",
-              fontWeight: "700",
+              fontSize: "0.95rem",
+              fontWeight: "500",
               color: darkText,
               bgcolor: darkTooltip,
               "& .MuiTooltip-arrow": {
@@ -97,7 +93,8 @@ const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
             whiteSpace: "nowrap",
             width: 48,
             height: 48,
-            transition: "all 300ms",
+            transition:
+              "color 300ms, background-color 300ms, border-radius 300ms",
             minWidth: "auto",
             "&:hover": {
               bgcolor,
@@ -118,12 +115,10 @@ const ButtonServer = ({ children, title, bgcolor, color, onClick, id }) => {
       </Tooltip>
     </Stack>
   );
-};
+}
 
-export default ButtonServer;
-
-ButtonServer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+ServerButton.propTypes = {
+  children: PropTypes.node,
   title: PropTypes.string,
   color: PropTypes.string,
   bgcolor: PropTypes.string,
@@ -132,7 +127,7 @@ ButtonServer.propTypes = {
   activeServerId: PropTypes.string,
 };
 
-ButtonServer.defaultProps = {
+ServerButton.defaultProps = {
   title: "",
   color: "#fff",
   bgcolor: blurple,
