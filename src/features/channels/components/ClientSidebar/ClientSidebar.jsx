@@ -13,23 +13,15 @@ export function ClientSidebar() {
       className={
         "flex h-screen min-w-[4.5rem] flex-col items-center gap-y-2 bg-[#1e1f22] py-3"
       }>
-      <ButtonServer
-        title={"Private messages"}
-        color={darkText}>
-        <SiDiscord
-          size={26}
-          color="white"
-        />
+      <ButtonServer title={"Private messages"} color={darkText}>
+        <SiDiscord size={26} color="white" />
       </ButtonServer>
       <div className={"mx-auto h-0.5 w-8  rounded-md bg-[#dbded1]"} />
       {servers.map((server) => (
         <ButtonServer key={server.id}>{server.title}</ButtonServer>
       ))}
 
-      <ButtonServer
-        title="Add a Server"
-        bgcolor={green}
-        color={green}>
+      <ButtonServer title="Add a Server" bgcolor={green} color={green}>
         <LiaPlusSolid size={28} />
       </ButtonServer>
     </div>

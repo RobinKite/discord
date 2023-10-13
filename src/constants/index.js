@@ -46,4 +46,5 @@ export class Page {
   static HOME = "home";
   static DIRECT = "direct";
   static SERVER = "server";
+  static CALL = "call";
 }
