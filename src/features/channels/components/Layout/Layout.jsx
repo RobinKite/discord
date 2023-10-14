@@ -3,6 +3,7 @@ import { Header, UserSidebar } from "@/features/channels/components";
 import { Chat } from "@/features/messaging/components";
 import UserList from "@/components/UserList/UserList";
 import { useSelector } from "react-redux";
+import Streaming from "@/components/Streaming/Streaming";
 
 export function Layout() {
   const { isUserListShown } = useSelector((state) => state.ui);
@@ -14,7 +15,8 @@ export function Layout() {
         <Header />
         <main className="flex grow">
           <UserSidebar />
-          <Chat />
+          {/* <Chat /> */}
+          <Streaming />
           {isUserListShown && <UserList />}
         </main>
       </div>
