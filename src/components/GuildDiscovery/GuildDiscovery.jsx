@@ -1,7 +1,7 @@
 import { Grid, Input, Stack, Typography, styled } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
-// import ServerCard from "../ServerCard/ServerCard";
+import ServerCard from "../ServerCard/ServerCard";
 import { NavLink } from "react-router-dom";
 import footerImage from "../../assets/footer_image.svg";
 import headerImage from "../../assets/discover_header.svg";
