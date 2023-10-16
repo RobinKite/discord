@@ -63,7 +63,7 @@ export const SAMPLE_CARDS = [
     banner: starrail,
     icon: honkaiIcon,
     title: "Honkai: Rail Official",
-    description: "honkai: Star Rail is a new HoYoverse space fantasy RPG.",
+    description: "Honkai: Star Rail is a new HoYoverse space fantasy RPG.",
     isPublic: true,
     onlineUsers: 277,
     members: 568,

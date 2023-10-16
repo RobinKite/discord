@@ -1,8 +1,6 @@
 import {
   Stack,
-  InputAdornment,
   IconButton,
-  Input,
   styled,
   TextField,
   Typography,
@@ -16,6 +14,7 @@ import { SAMPLE_CARDS } from "@/constants/mock";
 import FilteredCard from "@/components/FilteredCard/FilteredCard";
 import Categories from "@/components/Servers/Categories";
 import PageControl from "@/components/PageControl/PageControl";
+import { Link, useLocation } from "react-router-dom";
 
 const DiscoverTextField = styled(TextField)`
   .MuiInputBase-root {
@@ -27,11 +26,6 @@ const DiscoverTextField = styled(TextField)`
     border: 1px solid transparent;
     background-color: #4e5058;
     outline: 0;
-    /* padding: 10px 6px 6px; */
-
-    /* &:hover {
-
-    } */
     &:focus {
       outline: none;
       border: 1px solid #5865f2;
@@ -42,7 +36,8 @@ const DiscoverTextField = styled(TextField)`
 const FilteredServers = () => {
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 9;
+  const location = useLocation();
+  const totalPages = 3;
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -59,14 +54,21 @@ const FilteredServers = () => {
     <>
       <Stack spacing={3} sx={{ p: "32px" }}>
         <Stack direction="row" alignItems="center" spacing={3}>
-          <IconButton>
-            <ArrowBackRoundedIcon sx={{ color: "#b5bac1" }} />
+          <IconButton
+            component={Link}
+            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}
+          >
+            <ArrowBackRoundedIcon
+              sx={{ color: "#b5bac1", "&:hover": { color: "#dbdee1" } }}
+            />
           </IconButton>
           <Typography
             variant="h2"
             sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}
           >
-            0 Communities for "aa"
+            {`${SAMPLE_CARDS.length} Communities for "${decodeURIComponent(
+              new URLSearchParams(location.search).get("query")
+            )}"`}
           </Typography>
         </Stack>
         <DiscoverTextField

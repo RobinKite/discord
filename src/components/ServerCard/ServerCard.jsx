@@ -67,8 +67,22 @@ const ServerCard = ({ card }) => {
             }}
           />
         </Stack>
-        <Stack direction="row" spacing={1}>
-          <MdVerified fill="#23a559" style={{ color: "#fff" }} />
+        <Stack direction="row" sx={{ position: "relative" }}>
+          <Stack
+            sx={{
+              bgcolor: "#fff",
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              top: "4px",
+              left: "4px",
+              position: "relative",
+              mr: "12px",
+            }}
+          />
+          <Stack sx={{ position: "absolute" }}>
+            <MdVerified fill="#23a559" />
+          </Stack>
           <Typography
             variant="h3"
             sx={{

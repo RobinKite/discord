@@ -16,9 +16,7 @@ export function Layout() {
         <Header />
         <main className="flex grow relative">
           <UserSidebar />
-          <FilteredServers />
-          {/* <GuildDiscovery /> */}
-          {/* <Chat /> */}
+          <Chat />
           {isUserListShown && <UserList />}
         </main>
       </div>

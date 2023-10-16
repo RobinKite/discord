@@ -1,8 +1,8 @@
-import { Grid, Input, Stack, Typography, styled } from "@mui/material";
+import { Grid, IconButton, Stack, Typography, styled } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import ServerCard from "../ServerCard/ServerCard";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import footerImage from "../../assets/footer_image.svg";
 import headerImage from "../../assets/discover_header.svg";
 import { SAMPLE_CARDS } from "@/constants/mock";
@@ -15,7 +15,7 @@ const DiscoverTextField = styled("input")({
   borderRadius: "3px",
   border: "2px solid transparent",
   backgroundColor: "#fff",
-  padding: "10px 6px 6px",
+  padding: "6px",
   "&:focus": {
     outline: "none",
     boxShadow: "0 0 0 1px #5b43f0, 0 0 0 2px #bdb3f9, 0 0 0 3px #bdb3f9",
@@ -23,11 +23,22 @@ const DiscoverTextField = styled("input")({
 });
 
 const GuildDiscovery = () => {
-  // const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
 
-  // const handleSearch = () => {
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
-  // }
+  const handleInputClear = () => {
+    setInputValue("");
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && inputValue.trim() !== "") {
+      navigate(`/filtered-servers?query=${encodeURIComponent(inputValue)}`);
+    }
+  };
   return (
     <Stack spacing={6} sx={{ padding: "32px 16px 32px 32px", width: "100%" }}>
       <Stack
@@ -63,15 +74,51 @@ const GuildDiscovery = () => {
             From gaming, to music, to learning, theres a place for you.
           </Typography>
           <Stack sx={{ position: "relative" }}>
-            <DiscoverTextField
-              placeholder="Explore communities"
-              disableUnderline
-            />
-            <BiSearch
-              fill="#4e505899"
-              size={25}
-              style={{ position: "absolute", top: "12px", right: "8px" }}
-            />
+            <NavLink
+              to={
+                inputValue
+                  ? `/filtered-servers?query=${encodeURIComponent(inputValue)}`
+                  : null
+              }
+            >
+              <DiscoverTextField
+                placeholder="Explore communities"
+                disableUnderline
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+              />
+            </NavLink>
+            {inputValue ? (
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+                sx={{ position: "absolute", top: "8px", right: "8px" }}
+              >
+                <Typography sx={{ color: "#a9a7a7", fontSize: "12px" }}>
+                  "Enter" to Search
+                </Typography>
+                <IconButton
+                  onClick={handleInputClear}
+                  sx={{
+                    bgcolor: "#4e5058",
+                    width: "25px",
+                    p: "0 4px",
+                    "&:hover": { bgcolor: "#313338" },
+                  }}
+                >
+                  <RxCross2 color="#fff" />
+                </IconButton>
+              </Stack>
+            ) : (
+              <BiSearch
+                fill="#4e505899"
+                size={25}
+                style={{ position: "absolute", top: "8px", right: "8px" }}
+              />
+            )}
           </Stack>
         </Stack>
       </Stack>

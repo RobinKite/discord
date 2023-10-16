@@ -5,6 +5,8 @@ import Default from "./pages/Default/Default";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import { Layout as ServerLayout } from "@/features/channels/components";
+import GuildDiscovery from "./components/GuildDiscovery/GuildDiscovery";
+import FilteredServers from "./features/channels/components/FilteredServers/FilteredServers";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,8 @@ const AppRoutes = () => {
           </Route>
           <Route path="/" element={<Home />} />
         </Route>
+        <Route path="guild-discovery" element={<GuildDiscovery />} />
+        <Route path="filtered-servers" element={<FilteredServers />} />
         <Route path="*" element={<Default />} />
       </Route>
     </Routes>
