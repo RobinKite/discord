@@ -1,14 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import User from "../User/User";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 import { useRef, useState } from "react";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
-import { buttons } from "@/constants/contextMenuButtons";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { setProfile } from "@/redux/slices/profileSlice";
 
 export default function Roles() {
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
   // TODO: create correct list of users
@@ -25,6 +26,9 @@ export default function Roles() {
 
   const handleOnContextMenu = (e, user) => {
     e.preventDefault();
+    e.stopPropagation();
+    dispatch(setProfile(user));
+
     const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
     let x = e.clientX - contextMenuAttr.width - 4;
     let y = e.clientY - 5;
@@ -78,8 +82,6 @@ export default function Roles() {
             isToggled={contextMenu.toggled}
             positionX={contextMenu.position.x}
             positionY={contextMenu.position.y}
-            buttons={buttons}
-            user={contextMenu.user}
           />
         </div>
       )}
