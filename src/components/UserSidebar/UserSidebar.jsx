@@ -1,24 +1,25 @@
-import { UserSidebarPanel } from "@/components";
 import { useSelector } from "react-redux";
-import { filterChannelsByType } from "@/utils";
+import { UserSidebarPanel } from "@/components";
 import { ChannelGroup } from "@/features/channels/components";
-import { PageContentMap } from "@/utils/collections";
 import { Page } from "@/constants";
+import { PageContentMap } from "@/utils/collections";
+import { filterChannelsByType } from "@/utils/filters";
 
 function ServerContent() {
-  const channels = useSelector((state) => state.server.currentServer.channels);
+  const channels =
+    useSelector((state) => state.server.currentServer.channels) || [];
 
   return (
     <div className="pt-8 text-xs text-[#949BA4]">
       <ChannelGroup
         type="text"
         name="Text channels"
-        channels={filterChannelsByType(channels || [], "text")}
+        channels={filterChannelsByType(channels, "text")}
       />
       <ChannelGroup
         type="voice"
         name="Voice channels"
-        channels={filterChannelsByType(channels || [], "voice")}
+        channels={filterChannelsByType(channels, "voice")}
       />
     </div>
   );

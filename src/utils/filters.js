@@ -23,3 +23,7 @@ export function filterFriendsByText(friends, text) {
       name.toLowerCase().includes(normalizedText),
   );
 }
+
+export function filterChannelsByType(channels, type) {
+  return channels.filter((channel) => channel.type === type);
+}

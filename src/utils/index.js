@@ -50,7 +50,3 @@ export const getRandomColor = () => {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
   return `#${randomColor}`;
 };
-
-export function filterChannelsByType(channels, type) {
-  return channels.filter((channel) => channel.type === type);
-}

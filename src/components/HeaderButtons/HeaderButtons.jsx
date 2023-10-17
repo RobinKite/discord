@@ -24,7 +24,14 @@ function ServerContent() {
   );
 }
 
-const pageContent = new PageContentMap([Page.SERVER, ServerContent]);
+function FriendsContent() {
+  return <IconButton icon={<BiSolidHelpCircle size={24} />} />;
+}
+
+const pageContent = new PageContentMap(
+  [Page.SERVER, ServerContent],
+  [Page.FRIENDS, FriendsContent],
+);
 
 export function HeaderButtons() {
   const currentPage = useSelector((state) => state.ui.currentPage);
