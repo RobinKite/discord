@@ -48,4 +48,20 @@ export class Page {
   static DIRECT = "direct";
   static SERVER = "server";
   static CALL = "call";
+  static FRIENDS = "friends";
+}
+
+export class FriendStatus {
+  static ONLINE = "online";
+  static OFFLINE = "offline";
+  static BLOCKED = "blocked";
+  static PENDING = "pending";
+}
+
+export class Tab {
+  static ALL = "all";
+  static ONLINE = "online";
+  static PENDING = "pending";
+  static BLOCKED = "blocked";
+  static ADD_FRIEND = "add friend";
 }

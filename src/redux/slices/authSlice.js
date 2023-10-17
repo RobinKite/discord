@@ -12,7 +12,7 @@ const authSlice = createSlice({
     userName: null,
     email: null,
     name: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     roles: [],
     permissions: [],
     isLoading: false,

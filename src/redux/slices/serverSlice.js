@@ -1,19 +1,19 @@
 import { Endpoint } from "@/constants/api";
-// import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
+import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
 import { api } from "@/services/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const serverSlice = createSlice({
   name: "server",
   initialState: {
-    // currentChannel: SAMPLE_CHANNELS[0],
-    // currentServer: SAMPLE_SERVER,
-    // servers: [SAMPLE_SERVER],
-    currentChannel: {},
-    currentServer: {},
+    currentChannel: SAMPLE_CHANNELS[0],
+    currentServer: SAMPLE_SERVER,
+    servers: [SAMPLE_SERVER],
+    // currentChannel: {},
+    // currentServer: {},
     serverId: "",
     channelId: "",
-    servers: [],
+    // servers: [],
     messages: [],
   },
   reducers: {

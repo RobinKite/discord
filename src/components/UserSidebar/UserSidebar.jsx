@@ -13,18 +13,25 @@ function ServerContent() {
       <ChannelGroup
         type="text"
         name="Text channels"
-        channels={filterChannelsByType(channels, "text")}
+        channels={filterChannelsByType(channels || [], "text")}
       />
       <ChannelGroup
         type="voice"
         name="Voice channels"
-        channels={filterChannelsByType(channels, "voice")}
+        channels={filterChannelsByType(channels || [], "voice")}
       />
     </div>
   );
 }
 
-const contentMap = new PageContentMap([Page.SERVER, ServerContent]);
+function FriendsContent() {
+  return <div></div>;
+}
+
+const contentMap = new PageContentMap(
+  [Page.SERVER, ServerContent],
+  [Page.FRIENDS, FriendsContent],
+);
 
 export function UserSidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);

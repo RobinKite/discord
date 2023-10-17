@@ -20,7 +20,7 @@ export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
   const isActive = serverId === id;
 
   const [indicatorState, setIndicatorState] = useState("hidden");
-  const [notification, setNotification] = useState(false);
+  const [notification] = useState(false);
   const [adjusted, setAdjusted] = useState({});
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
     } else {
       setIndicatorState("hidden");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
   const handleMouseEnter = () => {

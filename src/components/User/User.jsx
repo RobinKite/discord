@@ -10,7 +10,7 @@ import { offlineRoles, statusMap } from "@/constants/userStatus";
 import { Modal, PopUpPositions } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export default function User({ user }) {
+export function User({ user }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();

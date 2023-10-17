@@ -10,3 +10,6 @@ export { ProtectedLayout } from "./ProtectedLayout/ProtectedLayout";
 export { RequireAuth } from "./RequireAuth/RequireAuth";
 export { Layout } from "./Layout/Layout";
 export { ServerButton } from "./ServerButton/ServerButton";
+export { Friends } from "./Friends/Friends";
+export { UserList } from "./UserList/UserList";
+export { User } from "./User/User";

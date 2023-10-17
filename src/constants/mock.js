@@ -1,6 +1,7 @@
 import { getRandomColor } from "@/utils";
 import icon from "@/assets/amongus.png";
 import { Status } from ".";
+import { FriendStatus } from "@/constants";
 
 export const SAMPLE_CHANNELS = [
   { id: "1", name: "general", type: "text" },
@@ -24,6 +25,7 @@ export const SAMPLE_USERS = [
     serverRegistrationDate: "09.09.2023",
     serverName: SAMPLE_SERVER_TITLE,
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.ONLINE,
   },
   {
     userId: "2",
@@ -37,6 +39,7 @@ export const SAMPLE_USERS = [
     serverName: SAMPLE_SERVER_TITLE,
     note: "",
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.ONLINE,
   },
   {
     userId: "3",
@@ -50,6 +53,7 @@ export const SAMPLE_USERS = [
     serverName: SAMPLE_SERVER_TITLE,
     note: "",
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.OFFLINE,
   },
   {
     userId: "4",
@@ -63,6 +67,7 @@ export const SAMPLE_USERS = [
     serverName: SAMPLE_SERVER_TITLE,
     note: "",
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.BLOCKED,
   },
   {
     userId: "5",
@@ -76,6 +81,7 @@ export const SAMPLE_USERS = [
     serverRegistrationDate: "09.09.2023",
     note: "",
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.PENDING,
   },
   {
     userId: "6",
@@ -89,6 +95,7 @@ export const SAMPLE_USERS = [
     serverRegistrationDate: "09.09.2023",
     note: "",
     bannerColor: getRandomColor(),
+    friendStatus: FriendStatus.BLOCKED,
   },
 ];
 export const SAMPLE_MESSAGES = [
