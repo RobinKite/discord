@@ -48,7 +48,6 @@ export const VoiceVideoTabContent = () => {
         your voice back to you.
       </Typography>
       <Stack direction="row" spacing={1}>
-        {/* <MainButton>Let&apos;s Check</MainButton> */}
         <MicTest />
       </Stack>
       <SettingsLine />

@@ -38,7 +38,7 @@ const SettingsNavSection = ({
         />
       ))}
     </List>
-    <SettingsLine />
+    <SettingsLine styles={{ marginLeft: "10px" }} />
   </>
 );
 

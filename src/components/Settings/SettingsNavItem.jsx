@@ -4,14 +4,6 @@ import PropTypes from "prop-types";
 const SettingsNavItem = ({ name, isActive, onClick }) => {
   return (
     <ListItem sx={{ p: 0, mb: "2px" }}>
-      {/* <button
-        className={`w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white ${
-          isActive ? "bg-[#4e505899] text-white" : ""
-        }`}
-        onClick={onClick}
-      >
-        {name}
-      </button> */}
       <Button
         className={`${
           isActive

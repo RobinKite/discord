@@ -40,8 +40,12 @@ export const PrettoSlider = styled(Slider)({
   color: "#5865f2",
   height: 8,
   width: "100%",
+  marginTop: "18px",
   "& .MuiSlider-track": {
     border: "none",
+  },
+  "& .MuiSlider-rail": {
+    backgroundColor: "#4e5058",
   },
   "& .MuiSlider-thumb": {
     height: 24,
@@ -58,31 +62,23 @@ export const PrettoSlider = styled(Slider)({
     },
   },
   "& .MuiSlider-markLabel": {
-    color: "#fff",
+    color: "#949ba4",
+    fontSize: 10,
+    fontWeight: 700,
+    top: "-10px",
   },
+  "&.MuiSlider-markActive": { color: "#2dc770" },
   "& .MuiSlider-mark": {
     width: 2,
     height: 24,
     backgroundColor: "#4e5058",
   },
   "& .MuiSlider-valueLabel": {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: "unset",
-    padding: 18,
-    width: 26,
-    height: 32,
-    // borderRadius: "50% 50% 50% 0",
+    padding: "4px 12px",
+    borderRadius: "4px",
     backgroundColor: "#1e1f22",
-    // transformOrigin: "bottom left",
-    // transfo2m: "translate(50%, -100%) rotate(-45deg) scale(0)",
-    "&:before": { display: "none" },
-    "&.MuiSlider-valueLabelOpen": {
-      // transform: "translate(50%, -100%) rotate(-45deg) scale(1)",
-    },
-    "& > *": {
-      // transform: "rotate(45deg)",
-    },
+    boxShadow:
+      "0 4px 1px 0 rgba(0, 0, 0, 0.05),0 2px 2px 0 rgba(0, 0, 0, 0.1),0 3px 3px 0 rgba(0, 0, 0, 0.05)",
   },
 });
 
@@ -148,7 +144,7 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
   display: "flex",
   "&:active": {
     "& .MuiSwitch-thumb": {
-      width: 15,
+      width: 22,
     },
     "& .MuiSwitch-switchBase.Mui-checked": {
       transform: "translateX(16px)",
@@ -229,23 +225,18 @@ export const CloseButton = styled(Button)(() => ({
     position: "absolute",
     right: "-50px",
     top: "60px",
-    // borderRadius: "50%",
     display: "flex",
     flexDirection: "column",
     color: "#b5bac1",
     justifyContent: "center",
     alignItems: "center",
-    // width: "34px",
-    // height: "34px",
-    // "& svg": {
-    //   marginRight: "1px",
-    // },
     "&:hover": {
-      color: "#fff",
       boxShadow: "none",
+      backgroundColor: "transparent",
     },
     "&:hover svg": {
       fill: "#fff",
+      color: "#fff",
     },
   },
 }));

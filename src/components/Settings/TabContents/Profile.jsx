@@ -15,6 +15,7 @@ import {
   UserTextField,
 } from "../StyledElements";
 import ProfileReview from "../ProfileReview/ProfileReview";
+import { BsPencilFill } from "react-icons/bs";
 
 export const ProfileTabContent = () => {
   const [language, setLanguage] = useState("");
@@ -54,7 +55,7 @@ export const ProfileTabContent = () => {
           </Stack>
           <SettingsLine />
         </Stack>
-        <Stack>
+        <Stack sx={{ position: "relative" }}>
           <Title>Banner Color</Title>
           <Input
             type="color"
@@ -65,6 +66,23 @@ export const ProfileTabContent = () => {
               height: "50px",
               bgcolor: "#f45cb0",
               borderRadius: "4px",
+              border: "none",
+              p: 0,
+              "& input": {
+                opacity: 0,
+                cursor: "pointer",
+                height: "100%",
+                width: "100%",
+              },
+            }}
+          />
+          <BsPencilFill
+            size={10.5}
+            style={{
+              color: "#fff",
+              position: "absolute",
+              top: "32px",
+              left: "54px",
             }}
           />
           <SettingsLine />

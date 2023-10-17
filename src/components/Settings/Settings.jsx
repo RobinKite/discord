@@ -9,7 +9,7 @@ import { logoutUser } from "@/redux/slices/authSlice";
 import SettingsLine from "./SettingsLine";
 import { tabsMap } from "./layout";
 import SettingsTabContainer from "./SettingsTabContainer";
-import { Button, List, Stack, Typography } from "@mui/material";
+import { List, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { CloseButton, LogOutButton } from "./StyledElements";
 
@@ -79,15 +79,11 @@ const Settings = () => {
           flexBasis: "218px",
           justifyContent: "flex-start",
           alignItems: "end",
-          overflow: "scroll",
         }}
       >
         <NavLink
           style={{
-            paddingTop: "60px",
-            paddingBottom: "60px",
-            paddingLeft: "20px",
-            paddingRight: "6px",
+            padding: "60px 6px 60px 20px",
           }}
         >
           {Object.keys(groupedTabs).map((group) => (
@@ -100,38 +96,33 @@ const Settings = () => {
               setActiveTabContent={setActiveTabContent}
             />
           ))}
-          {/* <button
-            className="w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white"
-            onClick={handleLogout}
-          >
-            Log out
-          </button> */}
           <LogOutButton onClick={handleLogout}>log out</LogOutButton>
-          <SettingsLine />
-          <Typography
-            sx={{ fontSize: "12px", color: "#949ba4", padding: "8px 10px" }} //wrap these two typographies together
-          >
-            {appVersion}
-          </Typography>
-          <Typography>{OCVersion}</Typography>
+          <SettingsLine styles={{ marginLeft: "10px" }} />
+          <Stack sx={{ p: "8px 10px" }}>
+            <Typography sx={{ fontSize: "12px", color: "#949ba4" }}>
+              {appVersion}
+            </Typography>
+            <Typography sx={{ fontSize: "12px", color: "#949ba4" }}>
+              {OCVersion}
+            </Typography>
+          </Stack>
         </NavLink>
       </Stack>
       <Stack
         sx={{
           bgcolor: "#313338",
           display: "flex",
-          // flexShrink: 1,
           flexGrow: 1,
           flexBasis: "800px",
           justifyContent: "flex-start",
-          height: "100%",
+          minHeight: "100%",
+          overflowY: "scroll",
         }}
       >
         <Stack
           sx={{
             minWidth: "460px",
             maxWidth: "740px",
-            minHeight: "100%",
             position: "relative",
             pb: "80px",
             pt: "60px",
@@ -145,8 +136,7 @@ const Settings = () => {
             />
           </List>
           <CloseButton onClick={handleCloseModal}>
-            <IoCloseCircleOutline color="#b5bac1" size={44} />
-            Esc
+            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} /> Esc
           </CloseButton>
         </Stack>
       </Stack>

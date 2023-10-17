@@ -1,6 +1,6 @@
 import { Stack } from "@mui/system";
 
-const SettingsLine = () => (
+const SettingsLine = ({ styles }) => (
   <Stack
     variant="span"
     sx={{
@@ -10,6 +10,7 @@ const SettingsLine = () => (
       height: "1px",
       bgcolor: "#949ba448",
       content: "''",
+      ...styles,
     }}
   />
 );

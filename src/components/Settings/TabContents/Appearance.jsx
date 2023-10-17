@@ -24,7 +24,6 @@ export const AppearanceTabContainer = () => {
   };
   return (
     <>
-      {/* <div>*preview*</div> */}
       <Title>Theme</Title>
       <Tooltip>
         <Stack direction="row" spacing={2}>
@@ -111,7 +110,7 @@ export const AppearanceTabContainer = () => {
           min={12}
           max={24}
           step={1}
-          valueLabelDisplay="auto"
+          valueLabelDisplay="off"
           aria-labelledby="font-slider-label"
           marks={[
             { value: 12, label: "12px" },
@@ -132,7 +131,7 @@ export const AppearanceTabContainer = () => {
           min={0}
           max={24}
           step={4}
-          valueLabelDisplay="auto"
+          valueLabelDisplay="off"
           aria-labelledby="slider-label"
           marks={[
             { value: 0, label: "0px" },
@@ -144,8 +143,6 @@ export const AppearanceTabContainer = () => {
         />
       </Stack>
       <SettingsLine />
-      {/* <label htmlFor="imagesPreview">Images preview</label>
-      <input type="checkbox" id="imagesPreview" /> */}
       <FormControlLabel
         control={<AntSwitch />}
         label="Images preview"
