@@ -14,7 +14,6 @@ const AppRoutes = () => {
     const currentPage = findPageByPathname(location.pathname);
     console.log(location.pathname);
     dispatch(updateCurrentPage(currentPage));
-    console.log("CURRENT PAGE:", currentPage);
   }, [dispatch, location]);
 
   return (

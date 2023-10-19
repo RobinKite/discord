@@ -4,7 +4,7 @@ import { darkText, green } from "@/constants/designTokens";
 import { ServerButton } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "@/constants";
-import { openModal } from "@/redux/slices/uiSlice";
+import { openModal, toggleUserList } from "@/redux/slices/uiSlice";
 import { useNavigate } from "react-router-dom";
 import {
   clearCurrentServer,
@@ -14,6 +14,7 @@ import { IoCompass } from "react-icons/io5";
 
 export function ClientSidebar() {
   const servers = useSelector((state) => state.server.servers);
+  const isUserListShown = useSelector((state) => state.ui.isUserListShown);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ export function ClientSidebar() {
   };
 
   const handleOpenPersonalMessages = () => {
+    if (isUserListShown) dispatch(toggleUserList());
+
     dispatch(clearCurrentServer());
     navigate("/channels/@me", { replace: true });
   };
@@ -31,8 +34,6 @@ export function ClientSidebar() {
     dispatch(setCurrentServer(id));
     navigate(`/channels/${id}`);
   };
-
-  console.log("rerender sidebar");
 
   return (
     <div

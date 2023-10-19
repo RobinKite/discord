@@ -87,7 +87,6 @@ export const register = createAsyncThunk(
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     setAuthToken(access_token);
     setRefreshToken(refresh_token);
-    console.log(data, result);
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     return result;
   },

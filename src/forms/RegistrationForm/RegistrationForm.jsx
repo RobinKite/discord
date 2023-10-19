@@ -26,7 +26,6 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    console.log(values);
     dispatch(register(values)).then(() => {
       navigate(from, { replace: true });
       actions.resetForm();
