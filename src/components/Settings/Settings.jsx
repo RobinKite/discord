@@ -1,163 +1,145 @@
 import { Modal } from "@/constants";
 import { closeModal } from "@/redux/slices/uiSlice";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useState } from "react";
+
+import SettingsNavSection from "./SettingsNavSection";
 import { logoutUser } from "@/redux/slices/authSlice";
-
-const tabsMap = {
-  user: {
-    name: "User Settings",
-    children: [
-      "My Account",
-      "Profile & Activity",
-      "Devices",
-      "Friends & Messages",
-    ],
-  },
-  app: {
-    name: "App Settings",
-    children: ["Appearance", "Voice & Video", "Notifications"],
-  },
-  noname: {
-    children: ["Log out"],
-  },
-};
-
-const allTabs = [...tabsMap.user.children, ...tabsMap.app.children];
+import SettingsLine from "./SettingsLine";
+import { tabsMap } from "./layout";
+import SettingsTabContainer from "./SettingsTabContainer";
+import { List, Stack, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { CloseButton, LogOutButton } from "./StyledElements";
 
 const Settings = () => {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState("My Account");
+
+  const appVersion = "Alpha 0.0.1"; //mocking
+  const OCVersion = "*oc version*"; //mocking
+
+  const initialActiveTabState = {
+    header: Object.keys(tabsMap)[0],
+    content: Object.values(tabsMap)[0].content,
+  };
+
+  const [activeTab, setActiveTab] = useState(initialActiveTabState.header);
+  const [activeTabContent, setActiveTabContent] = useState(
+    initialActiveTabState.content
+  );
+
+  const tabArray = Object.entries(tabsMap).map(([name, tab]) => ({
+    name,
+    ...tab,
+  }));
+
+  const groupedTabs = tabArray.reduce((groups, tab) => {
+    const { group } = tab;
+    if (!groups[group]) {
+      groups[group] = [];
+    }
+    groups[group].push(tab);
+    return groups;
+  }, {});
 
   const handleCloseModal = () => {
     dispatch(closeModal(Modal.SETTINGS));
   };
 
-  return (
-    <div className="absolute inset-0 z-50 box-border flex">
-      <div className="flex shrink-0 grow basis-[218px] justify-end bg-[#2b2d31]">
-        <nav className="py-[60px] pl-5 pr-[6px]">
-          {Object.entries(tabsMap).map(([key, value]) => (
-            <SettingsNavSection
-              key={key}
-              header={value.name}
-              items={value.children}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
-          ))}
-        </nav>
-      </div>
-      <div className="flex shrink grow basis-[800px] justify-start bg-[#313338]">
-        <div className="relative min-w-[460px] max-w-[740px] px-10 pb-20 pt-[60px]">
-          <ul>
-            {allTabs.map((childName) => (
-              <SettingsTabContainer
-                key={childName}
-                header={childName}
-                isActive={activeTab === childName}></SettingsTabContainer>
-            ))}
-          </ul>
-          <button
-            className="absolute right-0 top-[60px] rounded-full hover:bg-[#4e50584c]"
-            onClick={handleCloseModal}>
-            <IoCloseCircleOutline color="#fff" size={44} />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const SettingsNavSection = ({ header, items, activeTab, setActiveTab }) => (
-  <>
-    {header && (
-      <h2 className="px-[10px] py-[6px] text-xs uppercase text-[#949ba4]">
-        {header}
-      </h2>
-    )}
-    <ul>
-      {items.map((childName) => (
-        <SettingsNavItem
-          key={childName}
-          name={childName}
-          isActive={activeTab === childName}
-          onClick={() => setActiveTab(childName)}
-        />
-      ))}
-    </ul>
-    <div className="mx-2 my-2.5 box-border block h-px bg-[#949ba448] content-['']"></div>
-  </>
-);
-
-const SettingsNavItem = ({ name, isActive, onClick }) => {
-  const dispatch = useDispatch();
   const handleLogout = () => {
+    //TODO: Add auth/logout
     try {
       dispatch(logoutUser());
-      onClick();
+      handleCloseModal();
     } catch (e) {
       console.error(e);
     }
   };
-  const handleClick = name === "Log out" ? handleLogout : onClick;
+
   return (
-    <li>
-      <button
-        className={`w-full rounded-[4px] px-[10px] py-[6px] text-left text-[#B5BAC1] hover:bg-[#4e50584c] hover:text-white ${
-          isActive ? "bg-[#4e505899] text-white" : ""
-        }`}
-        onClick={handleClick}>
-        {name}
-      </button>
-    </li>
+    <Stack
+      direction="row"
+      sx={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 50,
+      }}>
+      <Stack
+        sx={{
+          bgcolor: "#2b2d31",
+          display: "flex",
+          flexShrink: 0,
+          flexGrow: 1,
+          flexBasis: "218px",
+          justifyContent: "flex-start",
+          alignItems: "end",
+        }}>
+        <NavLink
+          style={{
+            padding: "60px 6px 60px 20px",
+          }}>
+          {Object.keys(groupedTabs).map((group) => (
+            <SettingsNavSection
+              key={group}
+              header={group}
+              items={groupedTabs[group]}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              setActiveTabContent={setActiveTabContent}
+            />
+          ))}
+          <LogOutButton onClick={handleLogout}>log out</LogOutButton>
+          <SettingsLine styles={{ margin: "8px 10px" }} />
+          <Stack sx={{ p: "8px 10px" }}>
+            <Typography sx={{ fontSize: "12px", color: "#949ba4" }}>
+              {appVersion}
+            </Typography>
+            <Typography sx={{ fontSize: "12px", color: "#949ba4" }}>
+              {OCVersion}
+            </Typography>
+          </Stack>
+        </NavLink>
+      </Stack>
+      <Stack
+        sx={{
+          bgcolor: "#313338",
+          display: "flex",
+          flexGrow: 1,
+          flexBasis: "800px",
+          justifyContent: "flex-start",
+          minHeight: "100%",
+          overflowY: "scroll",
+        }}>
+        <Stack
+          sx={{
+            minWidth: "460px",
+            maxWidth: "740px",
+            position: "relative",
+            pb: "80px",
+            pt: "60px",
+            paddingX: "40px",
+          }}>
+          <List>
+            <SettingsTabContainer
+              header={activeTab}
+              content={activeTabContent}
+            />
+          </List>
+          <CloseButton onClick={handleCloseModal}>
+            <IoCloseCircleOutline
+              size={44}
+              style={{ fill: "#b5bac1" }}
+            />{" "}
+            Esc
+          </CloseButton>
+        </Stack>
+      </Stack>
+    </Stack>
   );
-};
-
-const SettingsTabContainer = ({ header, isActive, children }) => (
-  <div>
-    {isActive && (
-      <>
-        <h2 className="mb-5 font-[600] text-[#f2f3f5]">{header}</h2>
-        {children}
-      </>
-    )}
-  </div>
-);
-
-SettingsNavSection.propTypes = {
-  header: PropTypes.string,
-  items: PropTypes.array.isRequired,
-  activeTab: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
-};
-
-SettingsNavSection.defaultProps = {
-  header: "",
-};
-
-SettingsNavItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  isActive: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-SettingsNavItem.defaultProps = {
-  isActive: false,
-  onClick: null,
-};
-
-SettingsTabContainer.propTypes = {
-  header: PropTypes.string,
-  isActive: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
-
-SettingsTabContainer.defaultProps = {
-  header: "",
-  isActive: false,
 };
 
 export default Settings;
