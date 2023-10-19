@@ -30,8 +30,7 @@ export const ProfileTabContent = () => {
         gridTemplateColumns: "1fr 1fr",
         gap: "35px",
         alignItems: "start",
-      }}
-    >
+      }}>
       <Stack>
         <Stack direction="column">
           <Title>Display Name</Title>
@@ -59,7 +58,7 @@ export const ProfileTabContent = () => {
           <Title>Banner Color</Title>
           <Input
             type="color"
-            autoFocus="false"
+            autoFocus={false}
             disableUnderline
             sx={{
               width: "70px",
@@ -111,8 +110,7 @@ export const ProfileTabContent = () => {
             <CustomSelect
               id="demo-select-small"
               value={language}
-              onChange={handleChange}
-            >
+              onChange={handleChange}>
               <MenuItem value={"ua"}>Ukrainian</MenuItem>
               <MenuItem value={"en"}>English</MenuItem>
               <MenuItem value={"fr"}>French</MenuItem>
