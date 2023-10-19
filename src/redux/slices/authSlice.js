@@ -12,7 +12,7 @@ const authSlice = createSlice({
     userName: null,
     email: null,
     name: null,
-    isLoggedIn: true,
+    isLoggedIn: false,
     roles: [],
     permissions: [],
     isLoading: false,
@@ -87,7 +87,6 @@ export const register = createAsyncThunk(
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     setAuthToken(access_token);
     setRefreshToken(refresh_token);
-    console.log(data, result);
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     return result;
   },
