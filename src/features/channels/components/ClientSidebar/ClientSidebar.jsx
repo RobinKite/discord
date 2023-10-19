@@ -10,6 +10,7 @@ import {
   clearCurrentServer,
   setCurrentServer,
 } from "@/redux/slices/serverSlice";
+import { IoCompass } from "react-icons/io5";
 
 export function ClientSidebar() {
   const servers = useSelector((state) => state.server.servers);
@@ -62,6 +63,12 @@ export function ClientSidebar() {
         color={green}
         id="addServer">
         <LiaPlusSolid size={28} />
+      </ServerButton>
+      <ServerButton
+        title="Explore Discoverable Servers"
+        bgcolor={green}
+        color={green}>
+        <IoCompass size={24} />
       </ServerButton>
     </div>
   );

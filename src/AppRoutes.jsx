@@ -1,5 +1,7 @@
-import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import FilteredServers from "./features/channels/components/FilteredServers/FilteredServers";
+import GuildDiscovery from "./components/GuildDiscovery/GuildDiscovery";
+import { useEffect } from "react";
 import { Default, Home, Login, Redirect } from "@/pages";
 import { Layout, PublicLayout, RequireAuth } from "@/components";
 import { useDispatch } from "react-redux";
@@ -30,6 +32,8 @@ const AppRoutes = () => {
           </Route>
           <Route path="" element={<Home />} />
         </Route>
+        <Route path="guild-discovery" element={<GuildDiscovery />} />
+        <Route path="filtered-servers" element={<FilteredServers />} />
         <Route path="*" element={<Default />} />
       </Route>
     </Routes>
