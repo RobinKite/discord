@@ -10,12 +10,12 @@ import { removeFromArray } from "@/utils";
 import { PageContentMap } from "@/utils/collections";
 
 function ServerContent() {
-  const name = useSelector((state) => state.server.currentChannel.name);
+  const title = useSelector((state) => state.server.currentChannel.title);
 
   return (
     <>
       <BiHash color="#80848e" size={24} />
-      <h2 className="font-medium">{name}</h2>
+      <h2 className="font-medium">{title}</h2>
     </>
   );
 }
