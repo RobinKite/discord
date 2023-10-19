@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from "react";
-import { SAMPLE_MESSAGES } from "@/constants/mock";
+import { useRef, useEffect } from "react";
 import { Message, Input } from "@/features/messaging/components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "@/redux/slices/serverSlice";
 
 export function Chat() {
-  const [messages, setMessages] = useState(SAMPLE_MESSAGES);
+  const dispatch = useDispatch();
   const chatRef = useRef(null);
-
+  const messages = useSelector((state) => state.server.messages);
   const userName = useSelector((state) => state.auth.userName);
   const name = useSelector((state) => state.auth.name);
   const avatar = useSelector((state) => state.auth.avatar);
@@ -14,10 +14,10 @@ export function Chat() {
   const status = useSelector((state) => state.auth.status);
   const serverName = useSelector((state) => state.server.currentServer.title);
   const userRegistrationDate = useSelector(
-    (state) => state.auth.userRegistrationDate
+    (state) => state.auth.userRegistrationDate,
   );
   const serverRegistrationDate = useSelector(
-    (state) => state.auth.serverRegistrationDate
+    (state) => state.auth.serverRegistrationDate,
   );
   const bannerColor = useSelector((state) => state.auth.bannerColor);
   const userId = useSelector((state) => state.auth.id);
@@ -42,20 +42,20 @@ export function Chat() {
       timestamp: Date.now(),
       text: messageText,
     };
-    setMessages((prev) => [...prev, message]);
+    dispatch(addMessage(message));
   };
 
   useEffect(() => {
     const handleResize = () => {
       chatRef.current.style.maxHeight = null;
       [...chatRef.current.children].forEach(
-        (element) => (element.style.display = "none")
+        (element) => (element.style.display = "none"),
       );
 
       const maxHeight = chatRef.current.offsetHeight;
       chatRef.current.style.maxHeight = `${maxHeight}px`;
       [...chatRef.current.children].forEach(
-        (element) => (element.style.display = null)
+        (element) => (element.style.display = null),
       );
     };
     handleResize();
@@ -66,14 +66,9 @@ export function Chat() {
 
   return (
     <div className="flex grow flex-col justify-between bg-[#313338]">
-      <div
-        ref={chatRef}
-        className="grow overflow-y-auto">
+      <div ref={chatRef} className="grow overflow-y-auto">
         {messages.map((message) => (
-          <Message
-            key={message.messageID}
-            {...message}
-          />
+          <Message key={message.messageID} {...message} />
         ))}
       </div>
       <Input submitCallback={createMessage} />

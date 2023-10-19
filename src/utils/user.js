@@ -11,14 +11,14 @@ export const mapUserData = (users) =>
           user.status === Status.INVISIBLE
         ) {
           const statusGroup = result.find(
-            (group) => group.name === Status.OFFLINE
+            (group) => group.name === Status.OFFLINE,
           );
           statusGroup.users.push(user);
           return result;
         }
         if (!user.role) {
           const statusGroup = result.find(
-            (group) => group.name === Status.ONLINE
+            (group) => group.name === Status.ONLINE,
           );
           statusGroup.users.push(user);
           return result;
@@ -40,6 +40,6 @@ export const mapUserData = (users) =>
       [
         { name: Status.OFFLINE, users: [] },
         { name: Status.ONLINE, users: [] },
-      ]
+      ],
     )
     .reverse();
