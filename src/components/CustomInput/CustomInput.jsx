@@ -25,10 +25,14 @@ export default function CustomizedInputsStyled(props) {
 
   return (
     <>
-      <CustomLabel htmlFor={id} required={required}>
+      <CustomLabel
+        htmlFor={id}
+        required={required}>
         {label}
       </CustomLabel>
-      <FormControl variant="standard" sx={{ marginBottom: "20px" }}>
+      <FormControl
+        variant="standard"
+        sx={{ marginBottom: "20px" }}>
         <CustomInput
           id={id}
           type={type ? type : "text"}

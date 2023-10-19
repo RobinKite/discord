@@ -5,8 +5,18 @@ const uiSlice = createSlice({
   initialState: {
     modalStack: [],
     isLoading: false,
+    isUserListShown: false,
+    popupContent: {},
+    popupPosition: [],
+    currentPage: null,
   },
   reducers: {
+    setPopUpPosition: (state, action) => {
+      state.popupPosition = action.payload;
+    },
+    updateCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
     openModal: (state, action) => {
       state.modalStack.push(action.payload);
     },
@@ -19,9 +29,24 @@ const uiSlice = createSlice({
     stopLoading: (state) => {
       state.isLoading = false;
     },
+    toggleUserList: (state) => {
+      state.isUserListShown = !state.isUserListShown;
+    },
+    fillPopupContent: (state, action) => {
+      state.popupContent = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal, startLoading, stopLoading } =
-  uiSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  startLoading,
+  stopLoading,
+  fillPopupContent,
+  setPopUpPosition,
+  toggleUserList,
+  updateCurrentPage,
+} = uiSlice.actions;
+
 export default uiSlice.reducer;

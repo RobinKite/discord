@@ -1,19 +1,48 @@
-import { useState, useRef, useEffect } from "react";
-import { SAMPLE_MESSAGES } from "@/constants";
+import { useRef, useEffect } from "react";
 import { Message, Input } from "@/features/messaging/components";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "@/redux/slices/serverSlice";
 
 export function Chat() {
-  const [messages, setMessages] = useState(SAMPLE_MESSAGES);
+  const dispatch = useDispatch();
   const chatRef = useRef(null);
+  const messages = useSelector((state) => state.server.messages);
+  const userName = useSelector((state) => state.auth.userName);
+  const name = useSelector((state) => state.auth.name);
+  const avatar = useSelector((state) => state.auth.avatar);
+  const roles = useSelector((state) => state.auth.roles);
+  const status = useSelector((state) => state.auth.status);
+  const serverName = useSelector((state) => state.server.currentServer.title);
+  const userRegistrationDate = useSelector(
+    (state) => state.auth.userRegistrationDate,
+  );
+  const serverRegistrationDate = useSelector(
+    (state) => state.auth.serverRegistrationDate,
+  );
+  const bannerColor = useSelector((state) => state.auth.bannerColor);
+  const userId = useSelector((state) => state.auth.id);
+
+  const user = {
+    userName,
+    name,
+    avatar,
+    roles,
+    status,
+    serverName,
+    userRegistrationDate,
+    serverRegistrationDate,
+    bannerColor,
+    userId,
+  };
 
   const createMessage = (messageText) => {
     const message = {
-      avatarUrl: "/",
-      authorName: "User",
+      ...user,
+      messageID: Math.random(),
       timestamp: Date.now(),
       text: messageText,
     };
-    setMessages((prev) => [...prev, message]);
+    dispatch(addMessage(message));
   };
 
   useEffect(() => {
@@ -37,9 +66,9 @@ export function Chat() {
 
   return (
     <div className="flex grow flex-col justify-between bg-[#313338]">
-      <div ref={chatRef} className="relative grow overflow-y-auto">
+      <div ref={chatRef} className="grow overflow-y-auto">
         {messages.map((message) => (
-          <Message key={message.timestamp} {...message} />
+          <Message key={message.messageID} {...message} />
         ))}
       </div>
       <Input submitCallback={createMessage} />

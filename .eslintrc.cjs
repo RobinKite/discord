@@ -6,7 +6,6 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:storybook/recommended",
     "plugin:tailwindcss/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
@@ -14,10 +13,11 @@ module.exports = {
   settings: { react: { version: "18.2" } },
   plugins: ["react-refresh"],
   rules: {
-    indent: ["error", 2],
+    indent: ["error", 2, { SwitchCase: 1 }],
     quotes: ["error", "double"],
     semi: ["error", "always"],
     "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "warn",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

@@ -143,4 +143,48 @@ const Settings = () => {
   );
 };
 
+const SettingsTabContainer = ({ header, isActive, children }) => (
+  <div>
+    {isActive && (
+      <>
+        <h2 className="mb-5 font-[600] text-[#f2f3f5]">{header}</h2>
+        {children}
+      </>
+    )}
+  </div>
+);
+
+SettingsNavSection.propTypes = {
+  header: PropTypes.string,
+  items: PropTypes.array.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
+};
+
+SettingsNavSection.defaultProps = {
+  header: "",
+};
+
+SettingsNavItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  isActive: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+SettingsNavItem.defaultProps = {
+  isActive: false,
+  onClick: null,
+};
+
+SettingsTabContainer.propTypes = {
+  header: PropTypes.string,
+  isActive: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+
+SettingsTabContainer.defaultProps = {
+  header: "",
+  isActive: false,
+};
+
 export default Settings;

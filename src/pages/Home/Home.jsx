@@ -1,14 +1,13 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const Home = () => {
-  const navigate = useNavigate();
+export function Home() {
+  const serverId = useSelector((state) => state.server.serverId);
+  const channelId = useSelector((state) => state.server.channelId);
 
-  useEffect(() => {
-    navigate("/channels/@me", { replace: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return <p>Home</p>;
-};
+  if (!serverId || !channelId) {
+    return <Navigate to="channels/@me" replace />;
+  }
 
-export default Home;
+  return <Navigate to={`channels/${serverId}/${channelId}`} replace />;
+}

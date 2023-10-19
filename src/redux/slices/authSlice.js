@@ -1,29 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Status } from "@/constants";
+import { Endpoint } from "@/constants/api";
+import { api } from "@/services/client";
+import { blurple } from "@/theme/designTokens";
+import { setAuthToken, setRefreshToken } from "@/utils/auth";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { setServers } from "./serverSlice";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     userName: null,
     email: null,
-    password: null,
     name: null,
-    token: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     roles: [],
     permissions: [],
+    isLoading: false,
+    status: Status.ONLINE, //mock
+    userRegistrationDate: "09.19.2023", //mock
+    serverRegistrationDate: "09.10.2023", //mock
+    bannerColor: blurple, //mock
   },
   reducers: {
-    setUser: (state, action) => {
+    loginUser: (state, action) => {
+      const { id, email, avatar, name, userName } = action.payload;
       state.isLoggedIn = true;
+      state.email = email;
+      state.userName = userName;
+      state.name = name;
+      state.id = id;
+      state.isLoading = false;
+      state.avatar = avatar;
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
+      state.email = null;
+      state.userName = null;
+      state.password = null;
+      state.name = null;
+      state.isLoading = false;
+      setAuthToken();
+      setRefreshToken();
     },
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-    clearToken: (state) => {
-      state.token = null;
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
     },
     updateUserProfile: (state, action) => {
       state.userName = { ...state.userName, ...action.payload };
@@ -37,13 +57,50 @@ const authSlice = createSlice({
   },
 });
 
+export const setUser = createAsyncThunk(Endpoint.ME, async (_, thunkAPI) => {
+  const result = await api.get(Endpoint.ME);
+  const { id, email, avatar, name, userName } = result.data;
+  thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+  return result;
+});
+
+export const login = createAsyncThunk(
+  Endpoint.LOGIN,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.LOGIN, data);
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    thunkAPI.dispatch(setServers());
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
+    return result;
+  },
+);
+
+export const register = createAsyncThunk(
+  Endpoint.REGISTER,
+  async (data, thunkAPI) => {
+    const result = await api.post(Endpoint.REGISTER, data);
+    const { access_token, refresh_token } = result.data;
+    const { id, email, avatar, name, userName } = result.data.user;
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    setAuthToken(access_token);
+    setRefreshToken(refresh_token);
+    console.log(data, result);
+    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    return result;
+  },
+);
+
 export const {
-  setUser,
+  loginUser,
   logoutUser,
   setToken,
   clearToken,
   updateUserProfile,
   setUserRoles,
   setUserPermissions,
+  setIsLoading,
 } = authSlice.actions;
 export default authSlice.reducer;

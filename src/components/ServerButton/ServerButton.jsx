@@ -1,14 +1,11 @@
-import { Tooltip } from "@mui/material";
+import { Stack, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  blurple,
-  darkServerIconBg,
-  darkText,
-  darkTooltip,
-} from "@/constants/designTokens";
+import { blurple, darkText, darkTooltip } from "@/constants/designTokens";
+import { darkServerIconBg } from "@/constants/designTokens";
 import { adjustText } from "@/utils";
+import { useSelector } from "react-redux";
 
 const indicatorHeightMap = {
   active: "h-10",
@@ -17,17 +14,37 @@ const indicatorHeightMap = {
   hidden: "h-0",
 };
 
-const ButtonServer = ({ children, title, bgcolor, color }) => {
-  const [indicatorState, setIndicatorState] = useState(null);
-  const [notification, setNotification] = useState(false); //mock redux notification
+export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
+  const serverId = useSelector((state) => state.server.serverId);
+
+  const isActive = serverId === id;
+
+  const [indicatorState, setIndicatorState] = useState("hidden");
+  const [notification] = useState(false);
   const [adjusted, setAdjusted] = useState({});
 
-  const handleEnter = () => {
+  useEffect(() => {
+    setAdjusted(adjustText(children || title, 2, 6));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isActive) {
+      setIndicatorState("active");
+    } else if (notification) {
+      setIndicatorState("notification");
+    } else {
+      setIndicatorState("hidden");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActive]);
+
+  const handleMouseEnter = () => {
     if (indicatorState === "active") return;
     setIndicatorState("hover");
   };
 
-  const handleLeave = () => {
+  const handleMouseLeave = () => {
     if (indicatorState === "active") return;
 
     if (notification) {
@@ -35,45 +52,28 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
     } else if (indicatorState === "hover") setIndicatorState("hidden");
   };
 
-  const handleActive = () => {
-    setNotification(true);
-    setIndicatorState("active");
-  };
-
-  // useEffect(() => {
-  //   if (indicatorState === "active")
-  //     setTimeout(() => {
-  //       setIndicatorState(notification ? "notification" : null);
-  //       if (!notification) setIndicator(false);
-  //     }, 3000);
-  // }, [indicatorState]);
-
-  useEffect(() => {
-    setAdjusted(adjustText(children));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <div
-      className="relative flex w-full items-center justify-center"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onClick={handleActive}>
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      sx={{ position: "relative", width: "100%" }}>
       <span
         className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
       />
       <Tooltip
         title={title || children}
-        arrow
         placement="right"
+        arrow
         componentsProps={{
           tooltip: {
             sx: {
               maxWidth: "300px",
-              padding: "10px",
+              padding: "0.45rem 0.65rem",
               left: "6px",
-              fontSize: "18px",
-              fontWeight: "700",
+              fontSize: "0.95rem",
+              fontWeight: "500",
               color: darkText,
               bgcolor: darkTooltip,
               "& .MuiTooltip-arrow": {
@@ -83,6 +83,7 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
           },
         }}>
         <Button
+          onClick={onClick}
           variant="text"
           sx={{
             color,
@@ -93,7 +94,8 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
             whiteSpace: "nowrap",
             width: 48,
             height: 48,
-            transition: "all 300ms",
+            transition:
+              "color 300ms, background-color 300ms, border-radius 300ms",
             minWidth: "auto",
             "&:hover": {
               bgcolor,
@@ -112,21 +114,23 @@ const ButtonServer = ({ children, title, bgcolor, color }) => {
           {adjusted?.serverName}
         </Button>
       </Tooltip>
-    </div>
+    </Stack>
   );
-};
+}
 
-export default ButtonServer;
-
-ButtonServer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+ServerButton.propTypes = {
+  children: PropTypes.node,
   title: PropTypes.string,
   color: PropTypes.string,
   bgcolor: PropTypes.string,
+  onClick: PropTypes.func,
+  id: PropTypes.string,
+  activeServerId: PropTypes.string,
 };
 
-ButtonServer.defaultProps = {
+ServerButton.defaultProps = {
   title: "",
   color: "#fff",
   bgcolor: blurple,
+  onClick: () => {},
 };

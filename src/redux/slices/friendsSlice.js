@@ -12,7 +12,7 @@ const friendsSlice = createSlice({
     },
     removeFriend: (state, action) => {
       state.friendsList = state.friendsList.filter(
-        (friend) => friend.id !== action.payload
+        (friend) => friend.id !== action.payload,
       );
     },
     sendFriendRequest: (state, action) => {
@@ -21,7 +21,7 @@ const friendsSlice = createSlice({
     acceptFriendRequest: (state, action) => {
       const requestId = action.payload;
       const requestIndex = state.friendRequests.findIndex(
-        (request) => request.id === requestId
+        (request) => request.id === requestId,
       );
       if (requestIndex !== -1) {
         const acceptedRequest = state.friendRequests[requestIndex];
@@ -32,7 +32,7 @@ const friendsSlice = createSlice({
     rejectFriendRequest: (state, action) => {
       const requestId = action.payload;
       state.friendRequests = state.friendRequests.filter(
-        (request) => request.id !== requestId
+        (request) => request.id !== requestId,
       );
     },
   },

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { daysArray, monthNames } from "@/constants";
+import { monthsArray } from "@/constants";
 import { grey } from "@/constants/designTokens";
 import PropTypes from "prop-types";
 import { useField } from "formik";
+import { getDaysArray, getYearsArray } from "@/utils/date";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   "&": {
@@ -23,20 +23,25 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-const CustomDateSelector = () => {
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
+const CustomDateSelector = ({
+  required,
+  dayId,
+  monthId,
+  yearId,
+  dayLabel,
+  monthLabel,
+  yearLabel,
+}) => {
+  const dayField = useField(dayId);
+  const monthField = useField(monthId);
+  const yearField = useField(yearId);
 
-  const handleDayChange = (event) => {
-    setSelectedDay(event.target.value);
-  };
-  const handleMonthChange = (event) => {
-    setSelectedMonth(event.target.value);
-  };
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
+  const chosenYear = yearField[0].value;
+  const chosenMonth = monthField[0].value;
+
+  const yearsArray = getYearsArray();
+  const daysArray = getDaysArray(chosenYear, chosenMonth);
+
   return (
     <>
       <fieldset className="mb-6 grid grid-cols-3 justify-between gap-3">
@@ -44,147 +49,104 @@ const CustomDateSelector = () => {
           required
           className="mb-2 text-xs font-bold uppercase text-[#ffffffaa]">
           Date of birth
-          <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
-            *
-          </span>
+          {required && (
+            <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
+              *
+            </span>
+          )}
         </legend>
-        <FormControl variant="standard">
-          <CustomMonthSelect
-            selectedMonth={selectedMonth}
-            handleMonthChange={handleMonthChange}
-          />
-        </FormControl>
-
-        <FormControl variant="standard">
-          <CustomDaySelect
-            selectedDay={selectedDay}
-            handleDayChange={handleDayChange}
-          />
-        </FormControl>
-
-        <FormControl variant="standard">
-          <CustomYearSelect
-            selectedYear={selectedYear}
-            handleYearChange={handleYearChange}
-          />
-        </FormControl>
+        <DateSelect
+          id={yearId}
+          label={yearLabel}
+          array={yearsArray}
+          field={yearField[0]}
+          meta={yearField[1]}
+          helpers={yearField[2]}
+          required={required}
+        />
+        <DateSelect
+          id={monthId}
+          label={monthLabel}
+          array={monthsArray}
+          field={monthField[0]}
+          meta={monthField[1]}
+          helpers={monthField[2]}
+          required={required}
+        />
+        <DateSelect
+          id={dayId}
+          label={dayLabel}
+          array={daysArray}
+          field={dayField[0]}
+          meta={dayField[1]}
+          helpers={dayField[2]}
+          required={required}
+        />
       </fieldset>
     </>
   );
 };
 
-const CustomYearSelect = ({ selectedYear, handleYearChange }) => {
-  const [yearOptions, setYearOptions] = useState([]);
-  const [field] = useField({ name: "year" });
-
-  useEffect(() => {
-    const currentYear = new Date().getFullYear();
-    const startYear = currentYear - 100;
-
-    const options = [
-      <MenuItem key="" value="" disabled>
-        Year
-      </MenuItem>,
-    ];
-
-    for (let year = currentYear; year >= startYear; year--) {
-      options.push(
-        <MenuItem key={year} value={year}>
-          {year}
-        </MenuItem>,
-      );
-    }
-
-    setYearOptions(options);
-  }, []);
-
-  const handleYearRenderValue = (selected) => {
-    if (!selected) return "Year";
+const DateSelect = ({ field, meta, label, id, array, required }) => {
+  const handleRenderValue = (selected) => {
+    if (!selected) return label;
+    if (id === "month") return array[selected - 1];
     return selected;
   };
 
   return (
-    <CustomSelect
-      displayEmpty
-      id="year"
-      value={selectedYear}
-      onChange={handleYearChange}
-      label="Year"
-      renderValue={handleYearRenderValue}
-      {...field}>
-      {yearOptions}
-    </CustomSelect>
-  );
-};
-
-const CustomMonthSelect = ({ selectedMonth, handleMonthChange }) => {
-  const [field] = useField({ name: "month" });
-
-  const handleMonthRenderValue = (selected) => {
-    if (!selected) return "Month";
-    const index = Number(selected) - 1;
-    return monthNames[index];
-  };
-  return (
-    <CustomSelect
-      displayEmpty
-      id="month"
-      value={selectedMonth}
-      onChange={handleMonthChange}
-      label="Month"
-      renderValue={handleMonthRenderValue}
-      {...field}>
-      <MenuItem disabled value="">
-        <em>Month</em>
-      </MenuItem>
-      {monthNames.map((month, index) => (
-        <MenuItem key={index + 1} value={index + 1}>
-          {month}
+    <FormControl variant="standard" required={required}>
+      <CustomSelect
+        displayEmpty
+        id={id}
+        name={id}
+        onChange={(value) => field.onChange(field.name, value)}
+        label={label}
+        renderValue={handleRenderValue}
+        error={meta.touched && meta.error ? true : false}
+        {...field}>
+        <MenuItem disabled value="">
+          <em>{label}</em>
         </MenuItem>
-      ))}
-    </CustomSelect>
+        {array.map((item, index) => (
+          <MenuItem key={item} value={id === "month" ? index + 1 : item}>
+            {item}
+          </MenuItem>
+        ))}
+      </CustomSelect>
+    </FormControl>
   );
-};
-
-const CustomDaySelect = ({ selectedDay, handleDayChange }) => {
-  const [field] = useField({ name: "day" });
-
-  const handleDayRenderValue = (selected) => {
-    if (!selected) return "Day";
-    return selected;
-  };
-  return (
-    <CustomSelect
-      displayEmpty
-      id="day"
-      value={selectedDay}
-      onChange={handleDayChange}
-      label="Day"
-      renderValue={handleDayRenderValue}
-      {...field}>
-      <MenuItem disabled value="">
-        <em>Day</em>
-      </MenuItem>
-      {daysArray.map((day) => (
-        <MenuItem key={day} value={day}>
-          {day}
-        </MenuItem>
-      ))}
-    </CustomSelect>
-  );
-};
-
-CustomMonthSelect.propTypes = {
-  selectedMonth: PropTypes.string.isRequired,
-  handleMonthChange: PropTypes.func.isRequired,
-};
-CustomDaySelect.propTypes = {
-  selectedDay: PropTypes.string.isRequired,
-  handleDayChange: PropTypes.func.isRequired,
-};
-CustomYearSelect.propTypes = {
-  selectedYear: PropTypes.string.isRequired,
-  handleYearChange: PropTypes.func.isRequired,
 };
 
 export default CustomDateSelector;
+
+CustomDateSelector.propTypes = {
+  dayId: PropTypes.string,
+  monthId: PropTypes.string,
+  yearId: PropTypes.string,
+  dayLabel: PropTypes.string,
+  monthLabel: PropTypes.string,
+  yearLabel: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+DateSelect.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  array: PropTypes.array,
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+  }),
+  meta: PropTypes.shape({
+    touched: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+  }),
+  helpers: PropTypes.shape({
+    setValue: PropTypes.func.isRequired,
+    setTouched: PropTypes.func.isRequired,
+  }),
+  required: PropTypes.bool,
+};
