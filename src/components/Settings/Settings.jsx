@@ -66,7 +66,6 @@ const Settings = () => {
         right: 0,
         bottom: 0,
         left: 0,
-        boxSizing: "border-box",
         zIndex: 50,
       }}
     >
@@ -97,7 +96,7 @@ const Settings = () => {
             />
           ))}
           <LogOutButton onClick={handleLogout}>log out</LogOutButton>
-          <SettingsLine styles={{ marginLeft: "10px" }} />
+          <SettingsLine styles={{ margin: "8px 10px" }} />
           <Stack sx={{ p: "8px 10px" }}>
             <Typography sx={{ fontSize: "12px", color: "#949ba4" }}>
               {appVersion}

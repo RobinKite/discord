@@ -36,7 +36,7 @@ export const ProfileTabContent = () => {
         <Stack direction="column">
           <Title>Display Name</Title>
           <UserTextField id="display-name" size="small" placeholder="tadimm" />
-          <SettingsLine />
+          <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
           <Title>Pronouns</Title>
@@ -45,7 +45,7 @@ export const ProfileTabContent = () => {
             size="small"
             placeholder="Add your pronouns"
           />
-          <SettingsLine />
+          <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
           <Title>Avatar</Title>
@@ -53,7 +53,7 @@ export const ProfileTabContent = () => {
             <MainButton>Change Avatar</MainButton>
             <MainButton>Remove Avatar</MainButton>
           </Stack>
-          <SettingsLine />
+          <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack sx={{ position: "relative" }}>
           <Title>Banner Color</Title>
@@ -85,7 +85,7 @@ export const ProfileTabContent = () => {
               left: "54px",
             }}
           />
-          <SettingsLine />
+          <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
           <Title>About me</Title>
@@ -103,7 +103,7 @@ export const ProfileTabContent = () => {
               color: "#b5bac1",
             }}
           />
-          <SettingsLine />
+          <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
           <Title>Language</Title>

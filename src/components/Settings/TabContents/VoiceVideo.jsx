@@ -9,17 +9,53 @@ import {
 } from "../StyledElements";
 import MicTest from "../MicTest/MicTest";
 import camera from "../../../assets/camera.svg";
+import { useEffect, useState } from "react";
 
 export const VoiceVideoTabContent = () => {
+  const [inputDevice, setInputDevice] = useState("");
+  const [inputDevices, setInputDevices] = useState([]);
+  const [outputDevice, setOutputDevice] = useState("");
+  const [outputDevices, setOutputDevices] = useState([]);
+
+  const updateAudioDevices = async () => {
+    let localInputDevices = [];
+    let localOutputDevices = [];
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      localInputDevices = devices.filter(
+        (device) => device.kind === "audioinput"
+      );
+      localOutputDevices = devices.filter(
+        (device) => device.kind === "audiooutput"
+      );
+      setInputDevices(localInputDevices);
+      setOutputDevices(localOutputDevices);
+      setInputDevice(inputDevices[0]?.deviceId || "");
+      setOutputDevice(outputDevices[0]?.deviceId || "");
+    } catch (err) {
+      console.error("Error receiving audio devices: ", err);
+    }
+  };
+
+  useEffect(() => {
+    updateAudioDevices();
+  }, []);
+
   return (
     <Stack spacing={3}>
       <SettingsTitle>Voice Settings</SettingsTitle>
       <Stack direction="row" spacing={3}>
         <Stack sx={{ width: "320px" }}>
           <Title>Input device</Title>
-          <CustomSelect>
-            <MenuItem value="">AirPods</MenuItem>
-            <MenuItem value="">MacBook Air</MenuItem>
+          <CustomSelect
+            value={inputDevice}
+            onChange={(e) => setInputDevice(e.target.value)}
+          >
+            {inputDevices.map((device) => (
+              <MenuItem key={device.deviceId} value={device.deviceId}>
+                {device.label}
+              </MenuItem>
+            ))}
           </CustomSelect>
           <Title>Input Volume</Title>
           <PrettoSlider
@@ -30,9 +66,15 @@ export const VoiceVideoTabContent = () => {
         </Stack>
         <Stack sx={{ width: "320px" }}>
           <Title>Output device</Title>
-          <CustomSelect>
-            <MenuItem value="">AirPods</MenuItem>
-            <MenuItem value="">MacBook Air</MenuItem>
+          <CustomSelect
+            value={outputDevice}
+            onChange={(e) => setOutputDevice(e.target.value)}
+          >
+            {outputDevices.map((device) => (
+              <MenuItem key={device.deviceId} value={device.deviceId}>
+                {device.label}
+              </MenuItem>
+            ))}
           </CustomSelect>
           <Title>Output Volume</Title>
           <PrettoSlider

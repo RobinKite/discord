@@ -25,7 +25,7 @@ const SettingsNavSection = ({
         {header}
       </Typography>
     )}
-    <List>
+    <List sx={{ p: 0 }}>
       {items.map(({ name, content }) => (
         <SettingsNavItem
           key={name}
@@ -38,7 +38,7 @@ const SettingsNavSection = ({
         />
       ))}
     </List>
-    <SettingsLine styles={{ marginLeft: "10px" }} />
+    <SettingsLine styles={{ margin: "8px 10px" }} />
   </>
 );
 

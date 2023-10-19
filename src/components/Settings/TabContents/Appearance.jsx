@@ -26,7 +26,7 @@ export const AppearanceTabContainer = () => {
     <>
       <Title>Theme</Title>
       <Tooltip>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} sx={{ mb: "16px" }}>
           <Stack
             sx={{
               width: "60px",
@@ -101,7 +101,7 @@ export const AppearanceTabContainer = () => {
           </Stack>
         </Stack>
       </Tooltip>
-      <SettingsLine />
+      <SettingsLine styles={{ marginBottom: "20px" }} />
       <Stack sx={{ mb: "20px" }}>
         <Title>Chat Font Scaling</Title>
         <PrettoSlider
@@ -123,7 +123,7 @@ export const AppearanceTabContainer = () => {
           ]}
         />
       </Stack>
-      <Stack sx={{ mb: "20px" }}>
+      <Stack>
         <Title>Space Between Message Groups</Title>
         <PrettoSlider
           value={space}
@@ -142,7 +142,7 @@ export const AppearanceTabContainer = () => {
           ]}
         />
       </Stack>
-      <SettingsLine />
+      <SettingsLine styles={{ marginBottom: "20px" }} />
       <FormControlLabel
         control={<AntSwitch />}
         label="Images preview"

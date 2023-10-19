@@ -24,7 +24,7 @@ export const NotificationsTabContent = () => {
         If you&apos;re looking for per-channel or per-server notifications,
         right-click the desired server icon and select Notification Settings.
       </Typography>
-      <SettingsLine />
+      <SettingsLine styles={{ marginY: "20px" }} />
       <FormControlLabel
         control={<AntSwitch defaultChecked />}
         label="Enable Unread Messages Badge"
@@ -41,7 +41,7 @@ export const NotificationsTabContent = () => {
       <Typography sx={{ color: "#b5bac1", fontSize: "14px" }}>
         Shows a red badge on the app icon when you have unread messages.
       </Typography>
-      <SettingsLine />
+      <SettingsLine styles={{ marginY: "20px" }} />
       <FormControlLabel
         control={<AntSwitch />}
         label="All notifications"

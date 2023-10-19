@@ -4,7 +4,7 @@ const SettingsLine = ({ styles }) => (
   <Stack
     variant="span"
     sx={{
-      marginY: "20px",
+      // marginY: "20px",
       boxSizing: "border-box",
       display: "block",
       height: "1px",

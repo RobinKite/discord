@@ -1,5 +1,4 @@
 import SettingsLine from "../SettingsLine";
-import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AntSwitch, Title } from "../StyledElements";
@@ -17,10 +16,10 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          m: 0,
+          m: "8px 0 20px",
         }}
       />
-      <SettingsLine />
+      <SettingsLine styles={{ marginBottom: "20px" }} />
       <FormControlLabel
         control={<AntSwitch defaultChecked />}
         label="Friends of Friends"
@@ -30,10 +29,10 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          m: 0,
+          m: "0 0 20px",
         }}
       />
-      <SettingsLine />
+      <SettingsLine styles={{ marginBottom: "20px" }} />
       <FormControlLabel
         control={<AntSwitch defaultChecked />}
         label="Server Members"
@@ -43,10 +42,10 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          m: 0,
+          mb: "20px",
         }}
       />
-      <SettingsLine />
+      <SettingsLine styles={{ marginBottom: "20px" }} />
       <FormControlLabel
         control={<AntSwitch defaultChecked />}
         label="Allow messages from server members?"
@@ -56,7 +55,7 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          m: 0,
+          mb: "20px",
         }}
       />
     </FormGroup>
