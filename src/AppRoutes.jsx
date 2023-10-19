@@ -13,7 +13,6 @@ const AppRoutes = () => {
   useEffect(() => {
     const currentPage = findPageByPathname(location.pathname);
     dispatch(updateCurrentPage(currentPage));
-    console.log("CURRENT PAGE:", currentPage);
   }, [dispatch, location]);
 
   return (

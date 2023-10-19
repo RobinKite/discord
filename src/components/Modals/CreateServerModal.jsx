@@ -42,14 +42,12 @@ const CreateServerModal = () => {
   };
 
   const handleConfirmCreate = (values, actions) => {
-    console.log(values);
     actions.resetForm();
     handleModalClose();
     dispatch(createServer(values));
   };
 
   const handleConfirmJoin = (values, actions) => {
-    console.log(values);
     actions.resetForm();
   };
 
@@ -64,9 +62,7 @@ const CreateServerModal = () => {
   };
 
   return (
-    <Dialog
-      onClose={handleModalClose}
-      open={open}>
+    <Dialog onClose={handleModalClose} open={open}>
       <IconButton
         edge="end"
         color="#4e5058"
