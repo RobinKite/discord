@@ -73,10 +73,7 @@ function LoginForm() {
               className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval
-                    width={20}
-                    height={20}
-                  />
+                  <Oval width={20} height={20} />
                 </span>
               ) : (
                 "Log In"

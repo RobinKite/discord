@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import User from "../User/User";
+import { User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";

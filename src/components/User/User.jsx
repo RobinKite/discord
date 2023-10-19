@@ -10,7 +10,7 @@ import { offlineRoles, statusMap } from "@/constants/userStatus";
 import { Modal, PopUpPositions } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export default function User({ user }) {
+export function User({ user }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();
@@ -35,15 +35,9 @@ export default function User({ user }) {
         }
         style={{ backgroundColor: bannerColor }}>
         {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt="user avatar"
-          />
+          <img src={user.avatar} alt="user avatar" />
         ) : (
-          <SiDiscord
-            size={20}
-            color="white"
-          />
+          <SiDiscord size={20} color="white" />
         )}
       </div>
       {!isOffline && (

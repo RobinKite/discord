@@ -48,9 +48,7 @@ export function Message({
 
   return (
     <div className="mb-2 mt-5 flex gap-x-4 py-1 pl-4 pr-12 text-sm text-[#dcdee1]">
-      <div
-        ref={ref}
-        onClick={handleModalOpen}>
+      <div ref={ref} onClick={handleModalOpen}>
         <Avatar
           sx={{ bgcolor: "#7076f1", cursor: "pointer", position: "unset" }}
           src={avatar}

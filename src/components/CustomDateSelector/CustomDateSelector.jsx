@@ -95,9 +95,7 @@ const DateSelect = ({ field, meta, label, id, array, required }) => {
   };
 
   return (
-    <FormControl
-      variant="standard"
-      required={required}>
+    <FormControl variant="standard" required={required}>
       <CustomSelect
         displayEmpty
         id={id}
@@ -107,15 +105,11 @@ const DateSelect = ({ field, meta, label, id, array, required }) => {
         renderValue={handleRenderValue}
         error={meta.touched && meta.error ? true : false}
         {...field}>
-        <MenuItem
-          disabled
-          value="">
+        <MenuItem disabled value="">
           <em>{label}</em>
         </MenuItem>
         {array.map((item, index) => (
-          <MenuItem
-            key={item}
-            value={id === "month" ? index + 1 : item}>
+          <MenuItem key={item} value={id === "month" ? index + 1 : item}>
             {item}
           </MenuItem>
         ))}
