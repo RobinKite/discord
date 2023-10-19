@@ -4,10 +4,10 @@ import { Status } from ".";
 import { FriendStatus } from "@/constants";
 
 export const SAMPLE_CHANNELS = [
-  { id: "1", name: "general", type: "text", isActive: true },
-  { id: "2", name: "voice", type: "voice", isActive: false },
-  { id: "3", name: "random", type: "text", isActive: false },
-  { id: "4", name: "music", type: "voice", isActive: false },
+  { id: "1", title: "general", type: "text", isActive: true },
+  { id: "2", title: "voice", type: "voice", isActive: false },
+  { id: "3", title: "random", type: "text", isActive: false },
+  { id: "4", title: "music", type: "voice", isActive: false },
 ];
 
 const SAMPLE_SERVER_TITLE = "default";

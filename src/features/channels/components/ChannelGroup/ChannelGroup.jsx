@@ -31,10 +31,10 @@ export function ChannelGroup({ type, name, channels }) {
       </div>
       {!collapsed && (
         <ul className="text-[0.9rem] font-medium">
-          {channels.map(({ name, isActive }) => (
+          {channels.map(({ title, isActive }) => (
             <li
-              key={name}
-              onMouseEnter={() => setHoveredChannelName(name)}
+              key={title}
+              onMouseEnter={() => setHoveredChannelName(title)}
               onMouseLeave={() => setHoveredChannelName(null)}
               className={clsx(
                 "mb-1 flex min-h-[32px] items-center gap-x-1 rounded px-2 py-1 transition-colors ",
@@ -45,9 +45,9 @@ export function ChannelGroup({ type, name, channels }) {
                 className={clsx(
                   isActive ? "brightness-200" : "group-hover:brightness-150",
                 )}>
-                {name}
+                {title}
               </span>
-              {(isActive || hoveredChannelName === name) && (
+              {(isActive || hoveredChannelName === title) && (
                 <div className="ml-auto flex items-center gap-x-2">
                   <IconButton icon={<BsFillPersonPlusFill size={14} />} />
                   <IconButton icon={<BsFillGearFill size={12} />} />
