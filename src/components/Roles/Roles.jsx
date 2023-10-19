@@ -3,6 +3,7 @@ import { User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
+import { PopUpPositions } from "@/constants";
 
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);
@@ -27,7 +28,7 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }>
-                <User user={user} />
+                <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}
           </ul>

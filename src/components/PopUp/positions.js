@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { PopUpPositions } from "@/constants";
 
 export const getPosition = (calledAt, parentBBox) => {

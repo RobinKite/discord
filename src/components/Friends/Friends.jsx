@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { User } from "@/components";
 import { SAMPLE_USERS } from "@/constants/mock";
 import { filterFriendsByStatus, filterFriendsByText } from "@/utils/filters";
+import { PopUpPositions } from "@/constants";
 
 export function Friends({ status }) {
   const [inputValue, setInputValue] = useState("");
@@ -28,7 +29,7 @@ export function Friends({ status }) {
       {friends.map((friend) => (
         // TODO: Restyle or use another component
         <div key={friend.userName} className="mb-3 rounded bg-[#2b2d31] p-2">
-          <User user={friend} />
+          <User user={friend} position={PopUpPositions.USER_LIST} />
         </div>
       ))}
     </div>
