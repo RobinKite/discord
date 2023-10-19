@@ -34,8 +34,6 @@ export function ClientSidebar() {
     navigate(`/channels/${id}`);
   };
 
-  console.log("rerender sidebar");
-
   return (
     <div
       className={
