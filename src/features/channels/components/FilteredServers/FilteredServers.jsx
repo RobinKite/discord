@@ -52,22 +52,22 @@ const FilteredServers = () => {
   };
   return (
     <>
-      <Stack spacing={3} sx={{ p: "32px" }}>
+      <Stack
+        spacing={3}
+        sx={{ p: "32px", maxHeight: "100vh", width: "100%", overflow: "auto" }}>
         <Stack direction="row" alignItems="center" spacing={3}>
           <IconButton
             component={Link}
-            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}
-          >
+            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}>
             <ArrowBackRoundedIcon
               sx={{ color: "#b5bac1", "&:hover": { color: "#dbdee1" } }}
             />
           </IconButton>
           <Typography
             variant="h2"
-            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}
-          >
+            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}>
             {`${SAMPLE_CARDS.length} Communities for "${decodeURIComponent(
-              new URLSearchParams(location.search).get("query")
+              new URLSearchParams(location.search).get("query"),
             )}"`}
           </Typography>
         </Stack>
@@ -103,8 +103,7 @@ const FilteredServers = () => {
           sx={{
             gridTemplateColumns: "1fr",
             width: "720px",
-          }}
-        >
+          }}>
           {SAMPLE_CARDS.map((card) => (
             <FilteredCard key={card.serverId} card={card} />
           ))}

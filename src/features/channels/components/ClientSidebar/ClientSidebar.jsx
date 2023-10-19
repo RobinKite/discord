@@ -65,6 +65,7 @@ export function ClientSidebar() {
         <LiaPlusSolid size={28} />
       </ServerButton>
       <ServerButton
+        onClick={() => navigate("/guild-discovery")}
         title="Explore Discoverable Servers"
         bgcolor={green}
         color={green}>

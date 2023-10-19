@@ -49,6 +49,8 @@ export class Page {
   static SERVER = "server";
   static CALL = "call";
   static FRIENDS = "friends";
+  static EXPLORE = "explore";
+  static SEARCH = "search";
 }
 
 export class FriendStatus {
