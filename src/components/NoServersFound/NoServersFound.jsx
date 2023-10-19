@@ -6,7 +6,8 @@ const NoServersFound = () => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        width: "720px",
+        maxWidth: "720px",
+        width: "100%",
         height: "395px",
         bgcolor: "#2b2d31",
         paddingY: "80px",

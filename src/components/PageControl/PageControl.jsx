@@ -20,7 +20,6 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
       <IconButton
         onClick={handlePrevPage}
         disabled={currentPage === 1}
-        color="secondary"
         size="small"
         sx={{
           fontSize: "14px",
@@ -32,13 +31,15 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:hover": {
             bgcolor: "#232428",
           },
+          "&:disabled": {
+            color: "#c0c1c2",
+          },
         }}
       >
         <IoIosArrowBack
-          size={14}
-          fill={"#f2f3f5"}
-          style={{ marginRight: "4px" }}
-        />{" "}
+          size={16}
+          style={{ marginRight: "4px", fill: "current" }}
+        />
         Back
       </IconButton>
       {[...Array(totalPages)].map((_, index) => (
@@ -77,15 +78,16 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:hover": {
             bgcolor: "#232428",
           },
+          "&:disabled": {
+            color: "#a4a5a7",
+          },
         }}
       >
         Next
         <IoIosArrowForward
-          size={14}
-          fill={"#f2f3f5"}
-          style={{ marginLeft: "4px" }}
+          size={16}
+          style={{ marginLeft: "4px", fill: "current" }}
         />
-        {/* <ArrowForwardIosIcon /> */}
       </IconButton>
     </Stack>
   );
