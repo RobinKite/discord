@@ -1,4 +1,11 @@
-import { Grid, IconButton, Stack, Typography, styled } from "@mui/material";
+import {
+  Grid,
+  IconButton,
+  Input,
+  Stack,
+  Typography,
+  styled,
+} from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import ServerCard from "../ServerCard/ServerCard";
@@ -6,12 +13,29 @@ import { NavLink, useNavigate } from "react-router-dom";
 import footerImage from "../../assets/footer_image.svg";
 import headerImage from "../../assets/discover_header.svg";
 import { SAMPLE_CARDS } from "@/constants/mock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { textAlign } from "@mui/system";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
-const DiscoverTextField = styled("input")({
+// const DiscoverTextField = styled("input")({
+//   fontSize: "16px",
+//   color: "#313338",
+//   width: { xs: "500px", md: "560px" },
+//   borderRadius: "3px",
+//   border: "2px solid transparent",
+//   backgroundColor: "#fff",
+//   padding: "6px",
+//   "&:focus": {
+//     outline: "none",
+//     boxShadow: "0 0 0 1px #5b43f0, 0 0 0 2px #bdb3f9, 0 0 0 3px #bdb3f9",
+//   },
+// });
+
+const DiscoverTextField = {
   fontSize: "16px",
   color: "#313338",
-  width: "560px",
+  width: { xs: "80vw", md: "560px" },
   borderRadius: "3px",
   border: "2px solid transparent",
   backgroundColor: "#fff",
@@ -20,7 +44,7 @@ const DiscoverTextField = styled("input")({
     outline: "none",
     boxShadow: "0 0 0 1px #5b43f0, 0 0 0 2px #bdb3f9, 0 0 0 3px #bdb3f9",
   },
-});
+};
 
 const GuildDiscovery = () => {
   const [inputValue, setInputValue] = useState("");
@@ -39,6 +63,7 @@ const GuildDiscovery = () => {
       navigate(`/filtered-servers?query=${encodeURIComponent(inputValue)}`);
     }
   };
+
   return (
     <Stack spacing={6} sx={{ padding: "32px 16px 32px 32px", width: "100%" }}>
       <Stack
@@ -70,7 +95,9 @@ const GuildDiscovery = () => {
           >
             Find your community on Discord
           </Typography>
-          <Typography sx={{ color: "#fff", fontSize: "14px" }}>
+          <Typography
+            sx={{ color: "#fff", fontSize: "14px", textAlign: "center" }}
+          >
             From gaming, to music, to learning, theres a place for you.
           </Typography>
           <Stack sx={{ position: "relative" }}>
@@ -81,7 +108,8 @@ const GuildDiscovery = () => {
                   : null
               }
             >
-              <DiscoverTextField
+              <Input
+                sx={DiscoverTextField}
                 placeholder="Explore communities"
                 disableUnderline
                 value={inputValue}
