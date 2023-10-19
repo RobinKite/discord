@@ -67,8 +67,7 @@ const Settings = () => {
         bottom: 0,
         left: 0,
         zIndex: 50,
-      }}
-    >
+      }}>
       <Stack
         sx={{
           bgcolor: "#2b2d31",
@@ -78,13 +77,11 @@ const Settings = () => {
           flexBasis: "218px",
           justifyContent: "flex-start",
           alignItems: "end",
-        }}
-      >
+        }}>
         <NavLink
           style={{
             padding: "60px 6px 60px 20px",
-          }}
-        >
+          }}>
           {Object.keys(groupedTabs).map((group) => (
             <SettingsNavSection
               key={group}
@@ -116,8 +113,7 @@ const Settings = () => {
           justifyContent: "flex-start",
           minHeight: "100%",
           overflowY: "scroll",
-        }}
-      >
+        }}>
         <Stack
           sx={{
             minWidth: "460px",
@@ -126,8 +122,7 @@ const Settings = () => {
             pb: "80px",
             pt: "60px",
             paddingX: "40px",
-          }}
-        >
+          }}>
           <List>
             <SettingsTabContainer
               header={activeTab}
@@ -135,56 +130,16 @@ const Settings = () => {
             />
           </List>
           <CloseButton onClick={handleCloseModal}>
-            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} /> Esc
+            <IoCloseCircleOutline
+              size={44}
+              style={{ fill: "#b5bac1" }}
+            />{" "}
+            Esc
           </CloseButton>
         </Stack>
       </Stack>
     </Stack>
   );
-};
-
-const SettingsTabContainer = ({ header, isActive, children }) => (
-  <div>
-    {isActive && (
-      <>
-        <h2 className="mb-5 font-[600] text-[#f2f3f5]">{header}</h2>
-        {children}
-      </>
-    )}
-  </div>
-);
-
-SettingsNavSection.propTypes = {
-  header: PropTypes.string,
-  items: PropTypes.array.isRequired,
-  activeTab: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired,
-};
-
-SettingsNavSection.defaultProps = {
-  header: "",
-};
-
-SettingsNavItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  isActive: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-SettingsNavItem.defaultProps = {
-  isActive: false,
-  onClick: null,
-};
-
-SettingsTabContainer.propTypes = {
-  header: PropTypes.string,
-  isActive: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-};
-
-SettingsTabContainer.defaultProps = {
-  header: "",
-  isActive: false,
 };
 
 export default Settings;
