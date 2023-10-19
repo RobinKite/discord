@@ -24,7 +24,7 @@ export function HeaderSidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
-    <div className="max-w-[240px] grow bg-[#2b2d31] px-[0.65rem] py-3">
+    <div className="min-w-[240px] max-w-[240px] grow bg-[#2b2d31] px-[0.65rem] py-3">
       {pageContent.getComponent(currentPage)}
     </div>
   );
