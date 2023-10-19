@@ -1,12 +1,16 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { BiSolidMicrophoneOff } from "react-icons/bi";
 import { SiDiscord } from "react-icons/si";
+import PropTypes from "prop-types";
 
-const UserStream = () => {
+const UserStream = ({ user }) => {
+  const idCheck = user.userId == 1 ? "local-video" : "remote-video"; //mock
+
   return (
     <Stack
       justifyContent="center"
       alignItems="center"
+      id={idCheck}
       sx={{
         cursor: "pointer",
         bgcolor: "#5c64f4",
@@ -14,10 +18,12 @@ const UserStream = () => {
         height: "200px",
         borderRadius: "8px",
         position: "relative",
-      }}
-    >
+      }}>
       <Stack>
-        <SiDiscord color="#fff" size={50} />
+        <SiDiscord
+          color="#fff"
+          size={50}
+        />
       </Stack>
       {/* <Stack direction="row" justifyContent="space-between"> */}
       <Typography
@@ -30,9 +36,8 @@ const UserStream = () => {
           position: "absolute",
           bottom: "8px",
           left: "8px",
-        }}
-      >
-        Kiteye
+        }}>
+        {user.name}
       </Typography>
       <Stack
         justifyContent="center"
@@ -45,13 +50,19 @@ const UserStream = () => {
           position: "absolute",
           bottom: "8px",
           right: "8px",
-        }}
-      >
-        <BiSolidMicrophoneOff color="#fff" size={24} />
+        }}>
+        <BiSolidMicrophoneOff
+          color="#fff"
+          size={24}
+        />
       </Stack>
     </Stack>
     // </Stack>
   );
+};
+
+UserStream.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 export default UserStream;

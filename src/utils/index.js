@@ -35,3 +35,11 @@ export const getRandomColor = () => {
 export function filterChannelsByType(channels, type) {
   return channels.filter((channel) => channel.type === type);
 }
+
+export function shortenArray(arr, length) {
+  if (arr.length <= length) {
+    return arr;
+  } else {
+    return arr.slice(0, length);
+  }
+}

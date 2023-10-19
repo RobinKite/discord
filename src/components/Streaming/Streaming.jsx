@@ -1,4 +1,3 @@
-import React from "react";
 import UserStream from "./UserStream";
 import { Grid, IconButton, Stack, styled } from "@mui/material";
 import { BiSolidMicrophone, BiSolidMicrophoneOff } from "react-icons/bi";
@@ -8,6 +7,8 @@ import {
 } from "react-icons/bs";
 import { MdScreenShare, MdStopScreenShare } from "react-icons/md";
 import { HiPhoneXMark } from "react-icons/hi2";
+import { SAMPLE_USERS } from "@/constants/mock";
+import { shortenArray } from "@/utils";
 
 const StreamButton = styled(IconButton)({
   backgroundColor: "#2b2d31",
@@ -18,12 +19,29 @@ const StreamButton = styled(IconButton)({
 });
 
 const Streaming = () => {
+  const users = shortenArray(SAMPLE_USERS, 8);
+
   return (
-    <Stack sx={{ width: "1128px", padding: "8px" }}>
-      <Grid container spacing={3} alignItems="center" justifyContent="center">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-          <Grid item xs={4} key={item}>
-            <UserStream />
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        padding: "16px",
+        position: "relative",
+        width: "100%",
+        bgcolor: "black",
+      }}>
+      <Grid
+        container
+        spacing={4}
+        alignItems="center"
+        justifyContent="center">
+        {users.map((user) => (
+          <Grid
+            key={user.userId} //mock
+            item
+            xs={4}>
+            <UserStream user={user} />
           </Grid>
         ))}
       </Grid>
@@ -31,8 +49,7 @@ const Streaming = () => {
         direction="row"
         justifyContent="center"
         spacing={4}
-        sx={{ mt: "40px" }}
-      >
+        sx={{ position: "absolute", bottom: "10px" }}>
         <StreamButton>
           <BiSolidMicrophone color="#fff" />
         </StreamButton>
@@ -56,8 +73,7 @@ const Streaming = () => {
             bgcolor: "#f23f42",
             padding: "16px",
             "&:hover": { backgroundColor: "#f23f42" },
-          }}
-        >
+          }}>
           <HiPhoneXMark color="#fff" />
         </IconButton>
       </Stack>
