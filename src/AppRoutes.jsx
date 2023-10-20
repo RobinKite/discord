@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Default, Home, Login, Redirect } from "@/pages";
 import { Layout, PublicLayout, RequireAuth } from "@/components";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     const currentPage = findPageByPathname(location.pathname);
+    console.log(location.pathname);
     dispatch(updateCurrentPage(currentPage));
   }, [dispatch, location]);
 
@@ -22,12 +23,14 @@ const AppRoutes = () => {
         <Route path="register" element={<Login />} />
 
         <Route element={<RequireAuth />}>
+          <Route path="" element={<Home />} />
           <Route path="channels/">
             <Route path="@me" element={<Layout />} />
             <Route path=":serverId/:channelId" element={<Redirect />} />
             <Route path=":serverId/" element={<Redirect />} />
           </Route>
-          <Route path="" element={<Home />} />
+          <Route path="guild-discovery" element={<Layout />} />
+          <Route path="filtered-servers" element={<Layout />} />
         </Route>
         <Route path="*" element={<Default />} />
       </Route>
