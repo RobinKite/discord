@@ -22,6 +22,7 @@ export class Modal {
   static SETTINGS = "settings";
   static POPUP = "popup";
   static CREATE_SERVER = "create-server";
+  static PROFILE = "profile";
 }
 
 export class Themes {

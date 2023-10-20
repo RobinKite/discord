@@ -10,6 +10,7 @@ const theme = createTheme({
     ...extendPalette,
   },
   spacing: 4,
+  shadows: ["none", "0 1px 2px 0 rgba(0,0,0,0.35)"],
   breakpoints: {
     values: { xs: 0, sm: 450, md: 700, lg: 1200, xl: 1536 },
   },
@@ -41,8 +42,6 @@ const theme = createTheme({
           color: "#ffffffaa",
           textTransform: "uppercase",
           fontWeight: "700",
-          marginBottom: "8px",
-
           "& .MuiFormLabel-asterisk": {
             color: "#dd3f41",
           },

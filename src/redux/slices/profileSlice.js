@@ -13,8 +13,11 @@ const profileSlice = createSlice({
       const { field, value } = action.payload;
       state.userProfile[field] = value;
     },
+    setProfileNote: (state, action) => {
+      state.userProfile.note = action.payload;
+    },
   },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, setProfileNote } = profileSlice.actions;
 export default profileSlice.reducer;

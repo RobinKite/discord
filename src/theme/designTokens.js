@@ -5,6 +5,7 @@ export const yellow = "#fee75c";
 export const fuchsia = "#eb459e";
 export const red = "#ed4245";
 const white = "#ffffff";
+const darkgreen = { 10: "#08853c", 20: "#026123" };
 
 // common
 const buttonBgDefault = blurple;
@@ -37,6 +38,7 @@ export const lightChannelName = "#5c5e66";
 export const font = "PT Sans";
 
 export const grey = {
+  10: "#b5bac1",
   50: "#f6f8fa",
   100: "#eaeef2",
   200: "#d0d7de",
@@ -54,6 +56,7 @@ export default {
   grey900: grey[900],
   darkTextLighter,
   darkSidebar,
+  darkUsersList,
   white,
   blurple,
   buttonBgHover,
@@ -61,4 +64,11 @@ export default {
   red,
   buttonBgDefault,
   darkUserSection,
+  lightText,
+  lightUsersList,
+  grey,
+  green,
+  darkgreen,
+  darkTooltip,
+  darkBg,
 };

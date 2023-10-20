@@ -10,7 +10,7 @@ import { offlineRoles, statusMap } from "@/constants/userStatus";
 import { Modal } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export function User({ user, position }) {
+export function User({ user, position, styles }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();
@@ -26,14 +26,16 @@ export function User({ user, position }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
+      className={`relative flex  cursor-pointer items-center  rounded px-1.5 py-1 transition duration-300 hover:bg-[#35373d] ${styles} `}
+    >
       <div
         className={
           isOffline
             ? "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] opacity-30 transition-opacity hover:opacity-100"
             : "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%]"
         }
-        style={{ backgroundColor: bannerColor }}>
+        style={{ backgroundColor: bannerColor }}
+      >
         {user.avatar ? (
           <img src={user.avatar} alt="user avatar" />
         ) : (
@@ -51,7 +53,8 @@ export function User({ user, position }) {
           isOffline
             ? "text-[#9b59b6] opacity-30 transition-opacity hover:opacity-100"
             : "text-[#9b59b6]"
-        }>
+        }
+      >
         {user.name}
       </p>
     </div>
@@ -60,5 +63,10 @@ export function User({ user, position }) {
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
-  position: PropTypes.string.isRequired,
+  position: PropTypes.string,
+  styles: PropTypes.string,
+};
+
+User.defaultProps = {
+  styles: "bg-[#2b2d31]",
 };
