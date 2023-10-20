@@ -75,3 +75,32 @@ export const styledCheckboxSX = {
     color: "#5865f2",
   },
 };
+
+export const styleSelectSX = {
+  position: "relative",
+  transition: "opacity 250ms linear",
+  "&:hover div": {
+    opacity: 1,
+    pointerEvents: "auto",
+  },
+  "&:focus div": {
+    opacity: 1,
+    pointerEvents: "auto",
+  },
+  "&:active div": {
+    opacity: 1,
+    pointerEvents: "auto",
+  },
+
+  "& div": {
+    position: "absolute",
+    top: "-4px",
+    right: "105%",
+    borderRadius: "6px",
+    p: "6px",
+    width: "100%",
+    backgroundColor: "#111214",
+    opacity: 0,
+    pointerEvents: "none",
+  },
+};
