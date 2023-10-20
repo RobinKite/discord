@@ -50,8 +50,10 @@ const PopUp = () => {
         borderRadius: "8px",
         overflow: "hidden",
         position: "fixed",
+        zIndex: 12,
         ...styled,
-      }}>
+      }}
+    >
       <PopUpInner
         user={user}
         userRegistrationDate={userRegistrationDate}
