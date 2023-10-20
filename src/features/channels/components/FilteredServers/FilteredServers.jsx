@@ -1,7 +1,6 @@
 import {
   Stack,
   IconButton,
-  Input,
   styled,
   TextField,
   Typography,
@@ -9,11 +8,10 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NoServersFound from "@/components/NoServersFound/NoServersFound";
 import { SAMPLE_CARDS } from "@/constants/mock";
 import FilteredCard from "@/components/FilteredCard/FilteredCard";
-import Categories from "@/components/Servers/Categories";
 import PageControl from "@/components/PageControl/PageControl";
 import { Link, useLocation } from "react-router-dom";
 import ServerCard from "@/components/ServerCard/ServerCard";
@@ -39,7 +37,7 @@ const DiscoverTextField = styled(TextField)`
 const FilteredServers = () => {
   const location = useLocation();
   const queryFromGuildDiscovery = new URLSearchParams(location.search).get(
-    "query",
+    "query"
   );
   const containerRef = useRef(null);
   // const refWidth = containerRef?.current.getBoundingClientRect().width || 0;
@@ -95,20 +93,23 @@ const FilteredServers = () => {
             overflow: "auto",
             width: "100%",
           },
-        }}>
+        }}
+      >
         <Stack direction="row" alignItems="center" spacing={3}>
           <IconButton
             component={Link}
-            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}>
+            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}
+          >
             <ArrowBackRoundedIcon
               sx={{ color: "#b5bac1", "&:hover": { color: "#dbdee1" } }}
             />
           </IconButton>
           <Typography
             variant="h2"
-            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}>
+            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}
+          >
             {`${SAMPLE_CARDS.length} Communities for "${decodeURIComponent(
-              query,
+              query
             )}"`}
           </Typography>
         </Stack>
@@ -145,14 +146,15 @@ const FilteredServers = () => {
             gridTemplateColumns: "1fr",
             width: "100%",
             maxWidth: "720px",
-          }}>
+          }}
+        >
           {SAMPLE_CARDS.map(
             (card) =>
               containerWidth > 500 ? (
                 <FilteredCard key={card.serverId} card={card} />
               ) : (
                 <ServerCard key={card.serverId} card={card} />
-              ),
+              )
             // <FilteredCard key={card.serverId} card={card} />
           )}
           <PageControl
