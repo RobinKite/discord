@@ -33,6 +33,8 @@ export const Input = memo((props) => {
   );
 });
 
+Input.displayName = "Input";
+
 Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

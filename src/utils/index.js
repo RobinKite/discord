@@ -1,8 +1,32 @@
+import { Page } from "@/constants";
+
 export function convertTimestampToDateString(timestamp) {
   const date = new Date(timestamp);
   const options = { hour: "2-digit", minute: "2-digit" };
   const readableDate = date.toLocaleDateString("en-GB", options);
   return readableDate.replace(",", "");
+}
+
+export function findPageByPathname(pathname) {
+  if (pathname == "/channels/@me") {
+    return Page.FRIENDS;
+  } else if (pathname.includes("/channels/@me")) {
+    return Page.DIRECT;
+  } else if (pathname.includes("/channels/")) {
+    return Page.SERVER;
+  } else if (pathname === "/guild-discovery") {
+    return Page.EXPLORE;
+  } else if (pathname === "/filtered-servers") {
+    return Page.SEARCH;
+  }
+  return Page.LOGIN;
+}
+
+export function removeFromArray(array, item) {
+  const shallowCopy = [...array];
+  const itemIndex = array.indexOf(item);
+  if (itemIndex !== -1) shallowCopy.splice(itemIndex, 1);
+  return shallowCopy;
 }
 
 export const formatRegistrationDate = dateString => {
@@ -11,10 +35,9 @@ export const formatRegistrationDate = dateString => {
   return date.toLocaleDateString("en-US", options);
 };
 
-export const adjustText = (text, maxLength = 7, addEllipsis = true) => {
+export const adjustText = (text, step, maxLength = 7, addEllipsis = true) => {
   if (typeof text !== "string") return { serverName: text };
-  const maxFontSize = 22.25;
-  const step = 1.75;
+  const maxFontSize = 22.5;
   const ellipsis = addEllipsis ? "..." : "";
 
   if (text.length <= maxLength) {

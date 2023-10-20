@@ -8,10 +8,14 @@ const uiSlice = createSlice({
     isUserListShown: false,
     popupContent: {},
     popupPosition: [],
+    currentPage: null,
   },
   reducers: {
     setPopUpPosition: (state, action) => {
       state.popupPosition = action.payload;
+    },
+    updateCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
     },
     openModal: (state, action) => {
       state.modalStack.push(action.payload);
@@ -42,6 +46,7 @@ export const {
   fillPopupContent,
   setPopUpPosition,
   toggleUserList,
+  updateCurrentPage,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

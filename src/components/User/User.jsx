@@ -7,17 +7,17 @@ import {
 } from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
 import { offlineRoles, statusMap } from "@/constants/userStatus";
-import { Modal, PopUpPositions } from "@/constants";
+import { Modal } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export default function User({ user, styles }) {
+export function User({ user, position, styles }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();
 
   const handleModalOpen = (user) => {
     dispatch(openModal(Modal.POPUP));
-    dispatch(setPopUpPosition([PopUpPositions.USER_LIST, bbox]));
+    dispatch(setPopUpPosition([position, bbox]));
     dispatch(fillPopupContent(user));
   };
 
@@ -63,6 +63,7 @@ export default function User({ user, styles }) {
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  position: PropTypes.string,
   styles: PropTypes.string,
 };
 

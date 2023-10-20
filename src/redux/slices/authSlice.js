@@ -4,6 +4,7 @@ import { api } from "@/services/client";
 import { blurple } from "@/theme/designTokens";
 import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { setServers } from "./serverSlice";
 
 const authSlice = createSlice({
   name: "auth",
@@ -74,10 +75,11 @@ export const login = createAsyncThunk(
     const { access_token, refresh_token } = result.data;
     const { id, email, avatar, name, userName } = result.data.user;
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+    thunkAPI.dispatch(setServers());
     setAuthToken(access_token);
     setRefreshToken(refresh_token);
     return result;
-  }
+  },
 );
 
 export const register = createAsyncThunk(
@@ -91,7 +93,7 @@ export const register = createAsyncThunk(
     setRefreshToken(refresh_token);
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     return result;
-  }
+  },
 );
 
 export const {

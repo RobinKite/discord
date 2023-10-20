@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
-import { Button } from "../../components/Buttons";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ActionMenu } from "./ActionMenu";
 import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { useSelector } from "react-redux";
+import { Button } from "@/components";
 
 export const ProfileActions = () => {
   const actionMenuRef = useRef(null);

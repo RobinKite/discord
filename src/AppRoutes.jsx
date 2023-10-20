@@ -1,12 +1,21 @@
-import { Route, Routes } from "react-router-dom";
-import PublicLayout from "./components/Layout/PublicLayout";
-import RequireAuth from "./components/RequireAuth/RequireAuth";
-import Default from "./pages/Default/Default";
-import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
-import { Layout as ServerLayout } from "@/features/channels/components";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Default, Home, Login, Redirect } from "@/pages";
+import { Layout, PublicLayout, RequireAuth } from "@/components";
+import { useDispatch } from "react-redux";
+import { updateCurrentPage } from "@/redux/slices/uiSlice";
+import { findPageByPathname } from "@/utils";
 
 const AppRoutes = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentPage = findPageByPathname(location.pathname);
+    console.log(location.pathname);
+    dispatch(updateCurrentPage(currentPage));
+  }, [dispatch, location]);
+
   return (
     <Routes>
       <Route exact path="/" element={<PublicLayout />}>
@@ -14,14 +23,14 @@ const AppRoutes = () => {
         <Route path="register" element={<Login />} />
 
         <Route element={<RequireAuth />}>
+          <Route path="" element={<Home />} />
           <Route path="channels/">
-            <Route path="@me" element={<ServerLayout />} />
-            <Route
-              path=":serverId/:channelId"
-              element={<p>Server channel</p>}
-            />
+            <Route path="@me" element={<Layout />} />
+            <Route path=":serverId/:channelId" element={<Redirect />} />
+            <Route path=":serverId/" element={<Redirect />} />
           </Route>
-          <Route path="/" element={<Home />} />
+          <Route path="guild-discovery" element={<Layout />} />
+          <Route path="filtered-servers" element={<Layout />} />
         </Route>
         <Route path="*" element={<Default />} />
       </Route>

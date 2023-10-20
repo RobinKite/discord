@@ -12,7 +12,7 @@ const StyledStackSX = (theme) => ({
   pt: "24px",
 });
 
-export default function UserList() {
+export function UserList() {
   return (
     <Stack sx={StyledStackSX}>
       <Roles />

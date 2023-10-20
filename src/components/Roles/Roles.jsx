@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import User from "../User/User";
+import { User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
+import { PopUpPositions } from "@/constants";
 import { useRef, useState } from "react";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
@@ -73,7 +74,7 @@ export default function Roles() {
                 }
                 onContextMenu={(e) => handleOnContextMenu(e, user)}
               >
-                <User user={user} />
+                <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}
           </ul>

@@ -23,7 +23,7 @@ const store = configureStore({
     error: errorReducer,
     userStatus: userStatusReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

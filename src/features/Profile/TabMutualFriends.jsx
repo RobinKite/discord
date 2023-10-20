@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import User from "@/components/User/User";
+import { User } from "@/components/User/User";
 
 export const TabMutualFriends = () => {
   const userMutualFriends = useSelector(

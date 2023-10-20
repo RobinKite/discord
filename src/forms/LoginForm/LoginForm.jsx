@@ -49,7 +49,6 @@ function LoginForm() {
   };
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
     dispatch(setIsLoading(true));
     try {
       dispatch(login(values)).then(() => {

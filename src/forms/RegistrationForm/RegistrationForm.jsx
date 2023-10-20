@@ -36,17 +36,16 @@ function RegistrationForm() {
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const initialValues = {
-    email: "",
-    username: "",
-    password: "",
-    name: "",
-    day: "",
-    month: "",
-    year: "",
+    email: "test@test.com",
+    username: "test.test",
+    password: "testpassword",
+    name: "Test",
+    day: "30",
+    month: "11",
+    year: "2022",
   };
 
   const onSubmit = (values, actions) => {
-    console.log(values);
     dispatch(register(values)).then(() => {
       navigate(from, { replace: true });
       actions.resetForm();
@@ -104,6 +103,7 @@ function RegistrationForm() {
             <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               {isLoading ? (
                 <span className="flex justify-center">
+                  <Oval width={20} height={20} />
                   <Oval width={20} height={20} />
                 </span>
               ) : (
