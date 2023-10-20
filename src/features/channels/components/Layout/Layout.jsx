@@ -12,7 +12,7 @@ export function Layout() {
     <div className="flex">
       <ClientSidebar />
       <div className="flex min-h-screen grow flex-col">
-        <Header />
+        {/* <Header /> */}
         <main className="flex grow">
           <UserSidebar />
           {/* <Chat /> */}

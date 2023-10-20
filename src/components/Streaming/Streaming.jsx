@@ -1,82 +1,46 @@
+import { useState } from "react";
 import UserStream from "./UserStream";
-import { Grid, IconButton, Stack, styled } from "@mui/material";
-import { BiSolidMicrophone, BiSolidMicrophoneOff } from "react-icons/bi";
-import {
-  BsFillCameraVideoFill,
-  BsFillCameraVideoOffFill,
-} from "react-icons/bs";
-import { MdScreenShare, MdStopScreenShare } from "react-icons/md";
-import { HiPhoneXMark } from "react-icons/hi2";
+import { Grid, Stack } from "@mui/material";
+import { Chat } from "@/features/messaging/components";
+import StreamHeader from "./StreamHeader";
+import StreamFooter from "./StreamFooter";
 import { SAMPLE_USERS } from "@/constants/mock";
 import { shortenArray } from "@/utils";
 
-const StreamButton = styled(IconButton)({
-  backgroundColor: "#2b2d31",
-  padding: "16px",
-  "&:hover": {
-    backgroundColor: "#1e1f22",
-  },
-});
-
 const Streaming = () => {
-  const users = shortenArray(SAMPLE_USERS, 8);
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const users = shortenArray(SAMPLE_USERS, 2);
 
   return (
     <Stack
-      justifyContent="center"
       alignItems="center"
+      justifyContent="center"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       sx={{
-        padding: "16px",
+        bgcolor: "#000",
         position: "relative",
         width: "100%",
-        bgcolor: "black",
-      }}>
-      <Grid
-        container
-        spacing={4}
-        alignItems="center"
-        justifyContent="center">
-        {users.map((user) => (
-          <Grid
-            key={user.userId} //mock
-            item
-            xs={4}>
-            <UserStream user={user} />
-          </Grid>
-        ))}
-      </Grid>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        spacing={4}
-        sx={{ position: "absolute", bottom: "10px" }}>
-        <StreamButton>
-          <BiSolidMicrophone color="#fff" />
-        </StreamButton>
-        {/* <IconButton sx={{ bgcolor: "#fff", p: "16px" }}>
-          <BiSolidMicrophoneOff color="#000" />
-        </IconButton> */}
-        <StreamButton>
-          <BsFillCameraVideoFill color="#fff" />
-        </StreamButton>
-        {/* <IconButton sx={{ bgcolor: "#fff", p: "16px" }}>
-          <BsFillCameraVideoOffFill color="#000" />
-        </IconButton> */}
-        <StreamButton>
-          <MdScreenShare color="#fff" />
-        </StreamButton>
-        {/* <IconButton sx={{ bgcolor: "#fff", p: "16px" }}>
-          <MdStopScreenShare color="#000" />
-        </IconButton> */}
-        <IconButton
-          sx={{
-            bgcolor: "#f23f42",
-            padding: "16px",
-            "&:hover": { backgroundColor: "#f23f42" },
-          }}>
-          <HiPhoneXMark color="#fff" />
-        </IconButton>
+        overflow: "hidden",
+      }}
+    >
+      {isHovered && <StreamHeader isHovered={isHovered} />}
+      <Stack sx={{ width: "100%", padding: "16px" }}>
+        <Grid container spacing={4} alignItems="center" justifyContent="center">
+          {users.map((user) => (
+            <Grid item xs={4} key={user.userId}>
+              <UserStream user={user} isHovered={isHovered} />
+            </Grid>
+          ))}
+        </Grid>
       </Stack>
+      {isHovered && <StreamFooter isHovered={isHovered} />}
     </Stack>
   );
 };
