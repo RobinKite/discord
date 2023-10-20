@@ -14,6 +14,10 @@ export function findPageByPathname(pathname) {
     return Page.DIRECT;
   } else if (pathname.includes("/channels/")) {
     return Page.SERVER;
+  } else if (pathname === "/guild-discovery") {
+    return Page.EXPLORE;
+  } else if (pathname === "/filtered-servers") {
+    return Page.SEARCH;
   }
   return Page.LOGIN;
 }

@@ -1,7 +1,16 @@
 import { useSelector } from "react-redux";
-import { UserSidebarPanel } from "@/components";
+import { CategoryButton, UserSidebarPanel } from "@/components";
 import { ChannelGroup } from "@/features/channels/components";
 import { Page } from "@/constants";
+
+import { IoMdCompass } from "react-icons/io";
+import { BiSolidJoystick } from "react-icons/bi";
+import { PiMusicNotesFill } from "react-icons/pi";
+import { RiGraduationCapFill } from "react-icons/ri";
+import { BiAtom } from "react-icons/bi";
+import { MdTv } from "react-icons/md";
+import { LuNetwork } from "react-icons/lu";
+
 import { PageContentMap } from "@/utils/collections";
 import { filterChannelsByType } from "@/utils/filters";
 
@@ -29,9 +38,26 @@ function FriendsContent() {
   return <div></div>;
 }
 
+function ExploreContent() {
+  return (
+    <div className="px-2">
+      <h2 className="mx-2 my-4 text-2xl font-bold text-white">Discover</h2>
+      <CategoryButton isActive={true} icon={<IoMdCompass />} text="Home" />
+      <CategoryButton icon={<BiSolidJoystick />} text="Gaming" />
+      <CategoryButton icon={<PiMusicNotesFill />} text="Music" />
+      <CategoryButton icon={<RiGraduationCapFill />} text="Education" />
+      <CategoryButton icon={<BiAtom />} text="Science & Tech" />
+      <CategoryButton icon={<MdTv />} text="Entertainment" />
+      <CategoryButton icon={<LuNetwork />} text="Student Hubs" />
+    </div>
+  );
+}
+
 const contentMap = new PageContentMap(
   [Page.SERVER, ServerContent],
   [Page.FRIENDS, FriendsContent],
+  [Page.EXPLORE, ExploreContent],
+  [Page.SEARCH, ExploreContent],
 );
 
 export function UserSidebar() {

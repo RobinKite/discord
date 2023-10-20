@@ -7,6 +7,8 @@ import { Page, Tab } from "@/constants";
 import { TabContext } from "@/contexts";
 import { TabContextProvider } from "@/contexts/TabContextProvider";
 import { PageContentMap } from "@/utils/collections";
+import GuildDiscovery from "../GuildDiscovery/GuildDiscovery";
+import FilteredServers from "@/features/channels/components/FilteredServers/FilteredServers";
 
 function ServerContent() {
   const isUserListShown = useSelector((state) => state.ui.isUserListShown);
@@ -31,9 +33,29 @@ function FriendsContent() {
   );
 }
 
+function ExploreContent() {
+  return (
+    <main className="flex grow">
+      <UserSidebar />
+      <GuildDiscovery />
+    </main>
+  );
+}
+
+function SearchContent() {
+  return (
+    <main className="flex grow">
+      <UserSidebar />
+      <FilteredServers />
+    </main>
+  );
+}
+
 const contentMap = new PageContentMap(
   [Page.SERVER, ServerContent],
   [Page.FRIENDS, FriendsContent],
+  [Page.EXPLORE, ExploreContent],
+  [Page.SEARCH, SearchContent],
 );
 
 export function Layout() {
@@ -43,8 +65,10 @@ export function Layout() {
     <TabContextProvider>
       <div className="flex">
         <ClientSidebar />
-        <div className="flex min-h-screen grow flex-col">
-          <Header />
+        <div className="flex max-h-screen min-h-screen grow flex-col">
+          {currentPage !== Page.EXPLORE && currentPage !== Page.SEARCH && (
+            <Header />
+          )}
           {contentMap.getComponent(currentPage)}
         </div>
       </div>

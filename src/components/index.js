@@ -13,3 +13,4 @@ export { ServerButton } from "./ServerButton/ServerButton";
 export { Friends } from "./Friends/Friends";
 export { UserList } from "./UserList/UserList";
 export { User } from "./User/User";
+export { CategoryButton } from "./CategoryButton/CategoryButton";
