@@ -6,6 +6,7 @@ import { Checkbox, Stack } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import {
+  styleSelectSX,
   styledCheckboxSX,
   styledFormControlLabelSX,
   styledMenuSX,
@@ -36,21 +37,21 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Згадати",
+      text: "Mention",
       onClick: (e, user) => {
         console.log(user);
       },
       isSpacer: false,
     },
     {
-      text: "Повідомлення",
+      text: "Message",
       onClick: (e, user) => {
         console.log(user);
       },
       isSpacer: false,
     },
     {
-      text: "Зателефонувати",
+      text: "Call",
       onClick: (e, user) => {
         console.log(user);
       },
@@ -65,7 +66,7 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Додати нік друга",
+      text: "Add Friend Nickname",
       onClick: (e, user) => {
         console.log(user);
       },
@@ -75,7 +76,7 @@ export const ContextMenu = ({
       isSpacer: true,
     },
     {
-      text: "Вимкнути міркрофон",
+      text: "Mute",
       onClick: (e, user) => {
         e.stopPropagation();
         console.log(user);
@@ -85,7 +86,7 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Вимкнути звукову панель",
+      text: "Mute Soundboard",
       onClick: (e, user) => {
         console.log(user);
         alert(`click by ${user.userName}`);
@@ -94,7 +95,7 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Запросити на сервер",
+      text: "Invite to server",
       onClick: (e, user) => {
         console.log(user);
         alert(`click by ${user.userName}`);
@@ -103,7 +104,7 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Видалити друга",
+      text: "Remote Friend",
       onClick: (e, user) => {
         console.log(user);
         alert(`click by ${user.userName}`);
@@ -111,7 +112,7 @@ export const ContextMenu = ({
       isSpacer: false,
     },
     {
-      text: "Заблокувати",
+      text: "Block",
       onClick: (e, user) => {
         console.log(user);
         alert(`click by ${user.userName}`);
@@ -122,7 +123,7 @@ export const ContextMenu = ({
       isSpacer: true,
     },
     {
-      text: "role",
+      text: "Role",
       onClick: (e, user) => {
         console.log(user);
       },
@@ -148,24 +149,27 @@ export const ContextMenu = ({
           if (button.isSpacer) return <hr key={index} />;
           if (button.isSelector)
             return (
-              <Stack key={index} sx={{ position: "relative" }}>
+              <Stack key={index} sx={styleSelectSX}>
                 <button>
                   <span>{button.text}</span>
                   <KeyboardArrowRightIcon />
                 </button>
-                {/* {button.text.toLowerCase() === "role" && (
-                  <button
-                    style={{ position: "absolute", top: "0", right: "100%" }}
-                  >
-                    {user.role}
+                <Stack>
+                  <button>
+                    {button.text.toLowerCase() === "role" && (
+                      <span>{user?.role}</span>
+                    )}
+                    {button.text.toLowerCase() === "invite to server" && (
+                      <span>server 1</span>
+                      // TODO: map a real user's servers
+                    )}
                   </button>
-                )} */}
+                </Stack>
               </Stack>
             );
           if (button.isCheckbox)
             return (
               <FormControlLabel
-                // onClick={(e) => button.onClick(e, user)}
                 labelPlacement="start"
                 control={<Checkbox sx={styledCheckboxSX} />}
                 key={index}
