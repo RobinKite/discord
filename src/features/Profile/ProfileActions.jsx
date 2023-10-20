@@ -24,10 +24,10 @@ export const ProfileActions = () => {
   };
 
   const handleSendMessageButton = () => {
-    console.log("hi");
+    console.log("handleSendMessageButton");
   };
   const handleSendRequestButton = () => {
-    console.log("hello");
+    console.log("handleSendRequestButton");
   };
 
   useOnClickOutside(actionMenuRef, handleAdditionalActionsButton);

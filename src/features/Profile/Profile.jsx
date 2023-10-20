@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 import { setProfile } from "@/redux/slices/profileSlice";
 import { closeModal } from "@/redux/slices/uiSlice";
 import { Modal } from "@/constants";
-import { ProfileTabBar } from "./ProfileTabbar";
+import { ProfileTabBar } from "./ProfileTabBar";
 import { ProfileBanner } from "./ProfileBanner";
 import { ProfileTabsContent } from "./ProfileTabsContent";
 import { useRef, useState } from "react";
