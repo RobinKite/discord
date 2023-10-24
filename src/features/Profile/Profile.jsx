@@ -8,19 +8,14 @@ import { ProfileBanner } from "./ProfileBanner";
 import { ProfileTabsContent } from "./ProfileTabsContent";
 import { useRef, useState } from "react";
 import { ProfileActions } from "./ProfileActions";
+import { profileTabs } from "@/constants/profileTabs";
 
 export const Profile = () => {
   const backdropRef = useRef(null);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.userProfile);
 
-  const tabs = [
-    { text: "About the user", id: "aboutUser" },
-    { text: "Shared servers", id: "SharedServers" },
-    { text: "Mutual friends", id: "MutualFriends" },
-  ];
-
-  const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+  const [activeTabId, setActiveTabId] = useState(profileTabs[0].id);
 
   const handleTabClick = (id) => {
     setActiveTabId(id);
@@ -62,7 +57,17 @@ export const Profile = () => {
           overflow: "hidden",
         })}
       >
-        <ProfileBanner />
+        <ProfileBanner
+          wrapperSX={{ width: "600px", height: "106px" }}
+          imageSX={{
+            border: "6px solid #232328",
+            width: "134px",
+            height: "134px",
+            top: "32px",
+            left: "16px",
+          }}
+          statusSX={{ top: "126px", left: "115px" }}
+        />
         <ProfileActions />
         <Stack
           sx={{ padding: "78px 16px 16px", width: "100%", height: "auto" }}
@@ -87,7 +92,7 @@ export const Profile = () => {
             <ProfileTabBar
               activeTabId={activeTabId}
               handleTabClick={handleTabClick}
-              tabs={tabs}
+              tabs={profileTabs}
             />
             <ProfileTabsContent user={user} activeTabId={activeTabId} />
           </Stack>
