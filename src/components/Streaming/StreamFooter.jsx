@@ -10,6 +10,7 @@ import {
 } from "react-icons/bs";
 import { HiPhoneXMark } from "react-icons/hi2";
 import { MdScreenShare, MdStopScreenShare } from "react-icons/md";
+import PropTypes from "prop-types";
 
 const StreamButton = styled(IconButton)({
   backgroundColor: "#2b2d31",
@@ -19,9 +20,13 @@ const StreamButton = styled(IconButton)({
   },
 });
 
-const StreamFooter = ({ isHovered }) => {
+const StreamFooter = ({ isHovered, handleStopStreaming }) => {
   return (
-    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
+    <Slide
+      direction="up"
+      in={isHovered}
+      mountOnEnter
+      unmountOnExit>
       <Stack
         direction="row"
         justifyContent="center"
@@ -33,8 +38,7 @@ const StreamFooter = ({ isHovered }) => {
           bottom: "10px",
           left: 0,
           right: 0,
-        }}
-      >
+        }}>
         <StreamButton>
           <BiSolidMicrophone color="#fff" />
         </StreamButton>
@@ -54,12 +58,12 @@ const StreamFooter = ({ isHovered }) => {
         <MdStopScreenShare color="#000" />
       </IconButton> */}
         <IconButton
+          onClick={handleStopStreaming}
           sx={{
             bgcolor: "#f23f42",
             padding: "16px",
             "&:hover": { backgroundColor: "#f23f42" },
-          }}
-        >
+          }}>
           <HiPhoneXMark color="#fff" />
         </IconButton>
         <IconButton sx={{ position: "absolute", top: "8px", right: "8px" }}>
@@ -68,6 +72,11 @@ const StreamFooter = ({ isHovered }) => {
       </Stack>
     </Slide>
   );
+};
+
+StreamFooter.propTypes = {
+  isHovered: PropTypes.bool,
+  handleStopStreaming: PropTypes.func,
 };
 
 export default StreamFooter;
