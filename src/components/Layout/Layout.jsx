@@ -9,6 +9,7 @@ import { TabContextProvider } from "@/contexts/TabContextProvider";
 import { PageContentMap } from "@/utils/collections";
 import GuildDiscovery from "../GuildDiscovery/GuildDiscovery";
 import FilteredServers from "@/features/channels/components/FilteredServers/FilteredServers";
+import { FriendProfilePanel } from "../../features/FriendProfilePanel/FriendProfilePanel";
 
 function ServerContent() {
   const isUserListShown = useSelector((state) => state.ui.isUserListShown);
@@ -29,6 +30,7 @@ function FriendsContent() {
     <main className="flex grow">
       <UserSidebar fullname="User" username="username" />
       {tab !== Tab.ADD_FRIEND ? <Friends status={tab} /> : null}
+      <FriendProfilePanel />
     </main>
   );
 }
@@ -55,7 +57,7 @@ const contentMap = new PageContentMap(
   [Page.SERVER, ServerContent],
   [Page.FRIENDS, FriendsContent],
   [Page.EXPLORE, ExploreContent],
-  [Page.SEARCH, SearchContent],
+  [Page.SEARCH, SearchContent]
 );
 
 export function Layout() {
