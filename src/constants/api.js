@@ -6,4 +6,5 @@ export class Endpoint {
   static SERVERS = "servers";
   static TEXT_CHANNEL = "channels/text/";
   static USERS = "users";
+  static ALL_SERVERS = "servers/test";
 }
