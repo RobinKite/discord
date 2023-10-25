@@ -12,7 +12,7 @@ const authSlice = createSlice({
     userName: null,
     email: null,
     name: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     roles: [],
     permissions: [],
     isLoading: false,
@@ -20,7 +20,32 @@ const authSlice = createSlice({
     userRegistrationDate: "09.19.2023", //mock
     serverRegistrationDate: "09.10.2023", //mock
     bannerColor: blurple, //mock
-    friends: [{ userId: 1, name: "Eric" }], //mock
+    friends: [
+      {
+        userId: "1",
+        name: "Eric",
+        userName: "eric54",
+        userRegistrationDate: "07.07.2018",
+        role: "role-1",
+        note: "",
+        status: Status.ONLINE,
+        serverRegistrationDate: "09.09.2023",
+        bannerColor: "gold",
+      },
+
+      {
+        userId: "3",
+        name: "Wendy",
+        userName: "wendy033",
+        userRegistrationDate: "07.10.2020",
+        avatar: null,
+        role: "role-2",
+        status: Status.ONLINE,
+        serverRegistrationDate: "09.09.2023",
+        note: "",
+        bannerColor: "blue",
+      },
+    ], //mock
   },
   reducers: {
     loginUser: (state, action) => {
@@ -79,7 +104,7 @@ export const login = createAsyncThunk(
     setAuthToken(access_token);
     setRefreshToken(refresh_token);
     return result;
-  },
+  }
 );
 
 export const register = createAsyncThunk(
@@ -93,7 +118,7 @@ export const register = createAsyncThunk(
     setRefreshToken(refresh_token);
     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
     return result;
-  },
+  }
 );
 
 export const {
