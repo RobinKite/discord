@@ -7,19 +7,18 @@ export const wrapperSX = {
 };
 
 export const titleSX = {
-  // ml: "10px",
-  // mb: "10px",
   fontSize: "12px",
   textTransform: "uppercase",
   fontWeight: "700",
   color: "#949ba4",
+  transition: "color 300ms linear",
   "&:hover": {
     color: "#f2f3f5",
   },
 };
 
 export const itemSX = {
-  position: "reletive",
+  position: "relative",
   borderRadius: "4px",
   p: "8px",
   width: "100%",
@@ -74,4 +73,28 @@ export const addIconSX = {
     cursor: "pointer",
     color: "#f2f3f5",
   },
+};
+
+export const innerBoxSX = {
+  position: "relative",
+  p: "10px",
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+};
+
+export const menuWrapperSX = {
+  position: "absolute",
+  top: "40px",
+  left: "90%",
+  borderRAdius: "4px",
+  p: "8px",
+  width: "440px",
+  gap: "8px",
+  bgcolor: "#2b2d31",
+  boxShadow:
+    "rgba(30, 31, 34, 0.6) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 2px 10px 0px",
+  zIndex: 1,
 };
