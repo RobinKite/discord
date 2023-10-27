@@ -43,3 +43,26 @@ export function shortenArray(arr, length) {
     return arr.slice(0, length);
   }
 }
+
+export const calculateGridDimensions = (totalUsers) => {
+  let gridColumns = 1;
+  let gridRows = 1;
+
+  if (totalUsers <= 2) {
+    gridColumns = 1;
+    gridRows = totalUsers;
+  } else if (totalUsers <= 4) {
+    gridColumns = 2;
+    gridRows = Math.ceil(totalUsers / gridColumns);
+  } else if (totalUsers <= 9) {
+    gridColumns = 3;
+    gridRows = Math.ceil(totalUsers / gridColumns);
+  } else if (totalUsers <= 16) {
+    gridColumns = 4;
+    gridRows = Math.ceil(totalUsers / gridColumns);
+  } else if (totalUsers <= 25) {
+    gridColumns = 5;
+    gridRows = Math.ceil(totalUsers / gridColumns);
+  }
+  return { gridColumns, gridRows };
+};
