@@ -9,7 +9,7 @@ export const wrapperSX = {
 export const titleSX = {
   fontSize: "12px",
   textTransform: "uppercase",
-  fontWeight: 700,
+  fontWeight: 500,
   color: "#949ba4",
   transition: "color 300ms linear",
   "&:hover": {
@@ -77,7 +77,7 @@ export const addIconSX = {
 
 export const innerBoxSX = {
   position: "relative",
-  p: "10px",
+  p: "10px 10px 0px 8px",
   width: "100%",
   display: "flex",
   flexDirection: "row",

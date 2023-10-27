@@ -26,16 +26,14 @@ export function User({ user, position, styles }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className={`relative flex  cursor-pointer items-center  rounded px-1.5 py-1 text-[#949ba4] transition duration-300 hover:bg-[#35373d] hover:text-[#f2f3f5] ${styles} `}
-    >
+      className={`relative flex  cursor-pointer items-center  rounded p-1 text-[#949ba4] transition duration-300 hover:bg-[#35373d] hover:text-[#f2f3f5] ${styles} `}>
       <div
         className={
           isOffline
             ? "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%] opacity-30 transition-opacity hover:opacity-100"
             : "mr-2 flex h-[32px] w-[32px] items-center justify-center rounded-[50%]"
         }
-        style={{ backgroundColor: bannerColor }}
-      >
+        style={{ backgroundColor: bannerColor }}>
         {user.avatar ? (
           <img src={user.avatar} alt="user avatar" />
         ) : (
@@ -53,8 +51,7 @@ export function User({ user, position, styles }) {
           isOffline
             ? "text-inherit opacity-30 transition-opacity  hover:opacity-100"
             : "text-inherit "
-        }
-      >
+        }>
         {user.name}
       </p>
     </div>

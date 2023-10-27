@@ -83,8 +83,9 @@ export function FriendsSidebar() {
               </ListItem>
             ))
           ) : (
-            <Typography sx={{ fontSize: "14px", color: "#81848D" }}>
-              Have no friends
+            <Typography
+              sx={{ fontSize: "14px", color: "#81848D", ml: "0.5rem" }}>
+              You have no friends
             </Typography>
           )}
         </List>

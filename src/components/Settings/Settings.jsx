@@ -26,7 +26,7 @@ const Settings = () => {
 
   const [activeTab, setActiveTab] = useState(initialActiveTabState.header);
   const [activeTabContent, setActiveTabContent] = useState(
-    initialActiveTabState.content
+    initialActiveTabState.content,
   );
 
   const tabArray = Object.entries(tabsMap).map(([name, tab]) => ({
@@ -130,10 +130,7 @@ const Settings = () => {
             />
           </List>
           <CloseButton onClick={handleCloseModal}>
-            <IoCloseCircleOutline
-              size={44}
-              style={{ fill: "#b5bac1" }}
-            />{" "}
+            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} />
             Esc
           </CloseButton>
         </Stack>
