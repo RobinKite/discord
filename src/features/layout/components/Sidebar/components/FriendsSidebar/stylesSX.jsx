@@ -9,7 +9,7 @@ export const wrapperSX = {
 export const titleSX = {
   fontSize: "12px",
   textTransform: "uppercase",
-  fontWeight: "700",
+  fontWeight: 700,
   color: "#949ba4",
   transition: "color 300ms linear",
   "&:hover": {

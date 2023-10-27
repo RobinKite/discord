@@ -58,7 +58,7 @@ export default function Roles() {
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>
-          <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
+          <h2 className="flex items-center px-1.5 text-xs font-medium uppercase text-[#959ba3]">
             {role.name}&nbsp;
             <BiMinus />
             &nbsp;{role.users.length}
@@ -72,8 +72,7 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }
-                onContextMenu={(e) => handleOnContextMenu(e, user)}
-              >
+                onContextMenu={(e) => handleOnContextMenu(e, user)}>
                 <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}

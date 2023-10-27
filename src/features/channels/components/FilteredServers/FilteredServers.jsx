@@ -122,7 +122,7 @@ export const FilteredServers = () => {
                     bgcolor: "#b5bac1",
                     borderRadius: "50%",
                     p: "2px",
-                    fontWeight: 900,
+                    fontWeight: 700,
                   }}
                 />
               </IconButton>

@@ -14,8 +14,7 @@ const FilteredCard = ({ card }) => {
           "&:hover img": {
             transform: "scale(1.05)",
           },
-        }}
-      >
+        }}>
         <Stack
           sx={{
             width: "240px",
@@ -23,8 +22,7 @@ const FilteredCard = ({ card }) => {
             flexShrink: 0,
             overflow: "hidden",
             borderRadius: "8px",
-          }}
-        >
+          }}>
           <img
             src={card.banner}
             alt="banner"
@@ -45,8 +43,7 @@ const FilteredCard = ({ card }) => {
                 p: 0,
                 borderRadius: "8px",
                 mb: "6px",
-              }}
-            >
+              }}>
               <img src={card.icon} style={{ borderRadius: "8px" }} />
             </Stack>
             <Typography
@@ -54,11 +51,10 @@ const FilteredCard = ({ card }) => {
               sx={{
                 color: "#f2f3f5",
                 fontSize: "16px",
-                fontWeight: 600,
+                fontWeight: 500,
                 p: 0,
                 mb: "6px",
-              }}
-            >
+              }}>
               {card.title}
             </Typography>
             <Typography
@@ -67,8 +63,7 @@ const FilteredCard = ({ card }) => {
                 fontSize: "14px",
                 p: 0,
                 mb: "auto",
-              }}
-            >
+              }}>
               {card.description}
             </Typography>
             <Stack
@@ -79,8 +74,7 @@ const FilteredCard = ({ card }) => {
                 color: "#b5bac1",
                 fontSize: "12px",
                 p: 0,
-              }}
-            >
+              }}>
               <Typography sx={{ fontSize: "12px" }}>
                 {card.onlineUsers} Online
               </Typography>

@@ -26,7 +26,7 @@ export function ChannelGroup({ type, name, channels }) {
           onClick={() => setCollapsed((prev) => !prev)}
           icon={<ArrowIcon />}
         />
-        <h3 className="font-semibold uppercase">{name}</h3>
+        <h3 className="font-medium uppercase">{name}</h3>
         <IconButton className="ml-auto" icon={<BiPlus size={24} />} />
       </div>
       {!collapsed && (

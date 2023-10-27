@@ -38,8 +38,7 @@ export const AppearanceTabContainer = () => {
               alignItems: "center",
               border: selectedValue === "light" ? "2px solid #5865f2" : "none",
               position: "relative",
-            }}
-          >
+            }}>
             <Radio
               checked={selectedValue === "light"}
               onChange={handleChange}
@@ -74,8 +73,7 @@ export const AppearanceTabContainer = () => {
               justifyContent: "center",
               alignItems: "center",
               position: "relative",
-            }}
-          >
+            }}>
             <Radio
               checked={selectedValue === "dark"}
               onChange={handleChange}
@@ -149,7 +147,7 @@ export const AppearanceTabContainer = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           fontSize: "16px",
           display: "flex",
           justifyContent: "space-between",

@@ -51,7 +51,9 @@ export function FriendsSidebar() {
           variant="h2"
           sx={[itemSX, { "&:hover svg": { fill: "#f2f3f5" } }]}>
           <FaUserFriends color="#81848D" size={20} />
-          <Typography variant="span">Friends</Typography>
+          <Typography variant="span" fontWeight={500}>
+            Friends
+          </Typography>
         </Typography>
         <Stack sx={innerBoxSX}>
           <Typography variant="h2" sx={titleSX}>

@@ -13,7 +13,7 @@ export const NotificationsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           mx: 0,
@@ -31,7 +31,7 @@ export const NotificationsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           mx: 0,
@@ -48,7 +48,7 @@ export const NotificationsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           mx: 0,

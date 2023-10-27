@@ -46,7 +46,7 @@ const theme = createTheme({
           fontSize: "12px",
           color: "#ffffffaa",
           textTransform: "uppercase",
-          fontWeight: "700",
+          fontWeight: 700,
           "& .MuiFormLabel-asterisk": {
             color: "#dd3f41",
           },
@@ -80,7 +80,7 @@ const theme = createTheme({
         tooltip: {
           backgroundColor: darkTooltip,
           fontSize: "12px",
-          fontWeight: "500",
+          fontWeight: 500,
           padding: "8px 12px",
           color: darkText,
           "& .MuiTooltip-arrow": {

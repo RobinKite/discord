@@ -119,7 +119,7 @@ const PopUpInner = ({
             paddingTop: 3,
             marginBottom: "6px",
             fontSize: "12px",
-            fontWeight: "700",
+            fontWeight: 700,
             textTransform: "uppercase",
           }}>
           Member Since
@@ -183,7 +183,7 @@ const PopUpInner = ({
               sx={{
                 fontSize: "12px",
                 textTransform: "uppercase",
-                fontWeight: "700",
+                fontWeight: 700,
                 marginBottom: 1.5,
               }}>
               Role
@@ -211,7 +211,7 @@ const PopUpInner = ({
           sx={{
             fontSize: "12px",
             textTransform: "uppercase",
-            fontWeight: "700",
+            fontWeight: 700,
             marginBottom: 1.5,
           }}>
           Note

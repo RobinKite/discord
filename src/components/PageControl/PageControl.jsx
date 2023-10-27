@@ -15,15 +15,14 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
       direction="row"
       alignItems="center"
       justifyContent="center"
-      sx={{ mt: "20px", p: "4px" }}
-    >
+      sx={{ mt: "20px", p: "4px" }}>
       <IconButton
         onClick={handlePrevPage}
         disabled={currentPage === 1}
         size="small"
         sx={{
           fontSize: "14px",
-          fontWeight: 600,
+          fontWeight: 500,
           color: "#f2f3f5",
           borderRadius: "3px",
           padding: "8px",
@@ -34,8 +33,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:disabled": {
             color: "#c0c1c2",
           },
-        }}
-      >
+        }}>
         <IoIosArrowBack
           size={16}
           style={{ marginRight: "4px", fill: "current" }}
@@ -50,7 +48,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           underline="none"
           sx={{
             fontSize: "24px",
-            fontWeight: 600,
+            fontWeight: 500,
             backgroundColor:
               currentPage === index + 1 ? "#5865f2" : "transparent",
             color: currentPage === index + 1 ? "#ffffff" : "#f2f3f5",
@@ -59,8 +57,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
             margin: "4px",
             cursor: "pointer",
           }}
-          onClick={() => onPageChange(index + 1)}
-        >
+          onClick={() => onPageChange(index + 1)}>
           {index + 1}
         </Link>
       ))}
@@ -70,7 +67,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
         size="small"
         sx={{
           fontSize: "14px",
-          fontWeight: 600,
+          fontWeight: 500,
           color: "#f2f3f5",
           borderRadius: "3px",
           padding: "8px",
@@ -81,8 +78,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:disabled": {
             color: "#a4a5a7",
           },
-        }}
-      >
+        }}>
         Next
         <IoIosArrowForward
           size={16}

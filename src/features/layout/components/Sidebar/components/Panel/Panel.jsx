@@ -43,7 +43,7 @@ export function Panel() {
           <Avatar sx={{ bgcolor: "#7076f1", width: "32px", height: "32px" }} />
         )}
         <div className="mt-[0.1rem]">
-          <p className="text-[0.8rem] font-semibold leading-4 text-[#f2f3f5]">
+          <p className="text-[0.8rem] font-medium leading-4 text-[#f2f3f5]">
             {user.name}
           </p>
           <p className="text-[0.75rem] leading-3 text-[#b6bac0]">

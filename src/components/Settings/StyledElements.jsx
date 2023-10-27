@@ -85,7 +85,7 @@ export const PrettoSlider = styled(Slider)({
 export const SettingsTitle = styled(Typography)(() => ({
   "&": {
     fontSize: "20px",
-    fontWeight: 600,
+    fontWeight: 500,
     color: "#f2f3f5",
     marginBottom: "20px",
   },

@@ -31,8 +31,7 @@ export const TabAboutUserInner = () => {
           fontSize: "12px",
           textTransform: "uppercase",
           fontWeight: 700,
-        }}
-      >
+        }}>
         Discord member since
       </Typography>
       <Typography
@@ -40,8 +39,7 @@ export const TabAboutUserInner = () => {
           mb: "16px",
           fontSize: "12px",
           fontWeight: 500,
-        }}
-      >
+        }}>
         {user.userRegistrationDate}
       </Typography>
       <Typography
@@ -49,10 +47,9 @@ export const TabAboutUserInner = () => {
         sx={{
           fontSize: "12px",
           textTransform: "uppercase",
-          fontWeight: "700",
+          fontWeight: 700,
           marginBottom: 1.5,
-        }}
-      >
+        }}>
         Note
       </Typography>
       <CustomNoteTextField

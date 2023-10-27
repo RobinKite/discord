@@ -22,7 +22,7 @@ export function Friends({ status }) {
         className="mb-6 rounded bg-[#1E1F22] px-3 py-2 text-sm text-[#DCDEE1] placeholder:text-gray-400 focus:outline-none"
       />
       <div className="mb-4">
-        <h3 className="text-xs font-semibold uppercase text-[#B1B5BC]">
+        <h3 className="text-xs font-medium uppercase text-[#B1B5BC]">
           {status} friends — {friends.length}
         </h3>
       </div>
