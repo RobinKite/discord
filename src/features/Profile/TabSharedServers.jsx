@@ -1,6 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { darkServerIconBg } from "@/theme/designTokens";
+import { trimTheLine } from "@/utils";
 
 export const TabSharedServers = () => {
   const userServers = useSelector(
@@ -9,10 +10,7 @@ export const TabSharedServers = () => {
 
   return userServers.length ? (
     userServers.map((server) => {
-      const abbrTitle = server.title
-        .split(" ")
-        .map((s) => s[0])
-        .join("");
+      const abbrTitle = trimTheLine(server.title);
 
       return (
         <Stack

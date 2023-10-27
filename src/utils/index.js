@@ -61,3 +61,10 @@ export const getRandomColor = () => {
 export function filterChannelsByType(channels, type) {
   return channels.filter(channel => channel.type === type);
 }
+
+export function trimTheLine(line) {
+  return line
+    .split(" ")
+    .map(s => s[0])
+    .join("");
+}

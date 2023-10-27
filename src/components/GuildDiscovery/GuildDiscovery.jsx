@@ -6,7 +6,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import footerImage from "../../assets/footer_image.svg";
 import headerImage from "../../assets/discover_header.svg";
 import { SAMPLE_CARDS } from "@/constants/mock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setUnsubbedServers } from "@/redux/slices/serverSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const DiscoverTextField = {
   fontSize: "16px",
@@ -39,6 +41,15 @@ export const GuildDiscovery = () => {
       navigate(`/filtered-servers?query=${encodeURIComponent(inputValue)}`);
     }
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setUnsubbedServers());
+  }, [dispatch]);
+
+  const servers = useSelector((state) => state.server.allServers);
+  const allServers = [...SAMPLE_CARDS, ...servers]; //mock
 
   return (
     <Stack
@@ -138,7 +149,7 @@ export const GuildDiscovery = () => {
             gridTemplateColumns: "repeat(auto-fill,minmax(248px, 1fr))",
             gap: "16px",
           }}>
-          {SAMPLE_CARDS.map((card) => (
+          {allServers.map((card) => (
             <ServerCard key={card.serverId} card={card} />
           ))}
         </Grid>
