@@ -76,7 +76,7 @@ const theme = createTheme({
         tooltip: {
           backgroundColor: darkTooltip,
           fontSize: "12px",
-          fontWeight: "500",
+          fontWeight: "600",
           padding: "8px 12px",
           color: darkText,
           "& .MuiTooltip-arrow": {
