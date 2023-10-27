@@ -1,12 +1,11 @@
-import { UserSidebar } from "@/components";
-import { Layout } from "@/features/layout/components";
+import { Layout, Sidebar } from "@/features/layout/components";
 import { FilteredServers } from "@/features/channels/components";
 
 export function Search() {
   return (
     <Layout withHeader={false}>
       <main className="flex grow">
-        <UserSidebar />
+        <Sidebar />
         <FilteredServers />
       </main>
     </Layout>

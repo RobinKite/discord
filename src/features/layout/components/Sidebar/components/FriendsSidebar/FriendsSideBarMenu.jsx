@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { User } from "..";
+import { User } from "@/components";
 import { List, ListItem } from "@mui/material";
 import { itemSX, menuWrapperSX } from "./stylesSX";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
@@ -22,8 +22,7 @@ export function FriendsSideBarMenu({ setShowFriedsList, addFriendChat }) {
           key={friend.name}
           onClick={(e) => {
             addFriendChat(e, friend);
-          }}
-        >
+          }}>
           <User user={friend} />
         </ListItem>
       ))}

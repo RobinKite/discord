@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export function PanelButton({ onClick, children }) {
+export function Button({ onClick, children }) {
   return (
     <button
       type="button"
@@ -11,7 +11,7 @@ export function PanelButton({ onClick, children }) {
   );
 }
 
-PanelButton.propTypes = {
+Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
 };

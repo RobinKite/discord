@@ -1,5 +1,5 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { ProfileBanner } from "../Profile/ProfileBanner";
+import { ProfileBanner } from "../../features/Profile/ProfileBanner";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile, setProfileNote } from "@/redux/slices/profileSlice";
@@ -17,8 +17,8 @@ import Separator from "@/components/Separator/Separator";
 import { CustomNoteTextField } from "@/components/PopUp/styled";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { TabSharedServers } from "../Profile/TabSharedServers";
-import { TabMutualFriends } from "../Profile/TabMutualFriends";
+import { TabSharedServers } from "../../features/Profile/TabSharedServers";
+import { TabMutualFriends } from "../../features/Profile/TabMutualFriends";
 
 export function FriendProfilePanel() {
   const dispatch = useDispatch();
@@ -57,8 +57,7 @@ export function FriendProfilePanel() {
           <Stack sx={boxSX}>
             <Typography
               component="h3"
-              sx={{ fontSize: "16px", fontWeight: "700" }}
-            >
+              sx={{ fontSize: "16px", fontWeight: "700" }}>
               {user.name}
             </Typography>
             <Typography sx={{ fontSize: "14px" }}>{user.userName}</Typography>
@@ -80,8 +79,7 @@ export function FriendProfilePanel() {
           <Stack sx={boxSX}>
             <Button onClick={showMutualServers} variant="text" sx={buttonSX}>
               <Typography
-                sx={{ fontSize: "14px", textTransform: "capitalize" }}
-              >
+                sx={{ fontSize: "14px", textTransform: "capitalize" }}>
                 {user?.mutualServers.length && user?.mutualServers.length}{" "}
                 Mutual servers
               </Typography>
@@ -92,8 +90,7 @@ export function FriendProfilePanel() {
             <Separator />
             <Button onClick={showMutualFriends} variant="text" sx={buttonSX}>
               <Typography
-                sx={{ fontSize: "14px", textTransform: "capitalize" }}
-              >
+                sx={{ fontSize: "14px", textTransform: "capitalize" }}>
                 {user?.mutualFriends.length && user?.mutualFriends.length}{" "}
                 Mutual friends
               </Typography>

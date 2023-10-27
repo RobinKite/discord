@@ -1,7 +1,6 @@
 import { BiSolidMicrophone } from "react-icons/bi";
 import { BsHeadphones, BsGearFill } from "react-icons/bs";
 import Avatar from "@mui/material/Avatar";
-import { PanelButton } from "@/features/channels/components";
 import { useDispatch } from "react-redux";
 import {
   fillPopupContent,
@@ -11,8 +10,9 @@ import {
 import { Modal, PopUpPositions } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 import { useUser } from "@/hooks/useUser";
+import { Button } from "../../components";
 
-export function UserSidebarPanel() {
+export function Panel() {
   const dispatch = useDispatch();
   const user = useUser();
 
@@ -33,12 +33,10 @@ export function UserSidebarPanel() {
   return (
     <div
       ref={ref}
-      className="mt-[auto] flex justify-between bg-[#232428] py-[0.35rem] pl-2 pr-3"
-    >
+      className="mt-[auto] flex justify-between bg-[#232428] py-[0.35rem] pl-2 pr-3">
       <div
         onClick={handleModalOpen}
-        className="flex cursor-pointer gap-x-2 rounded py-1 pl-[0.2rem] pr-2 text-[0.85rem] transition-colors hover:bg-[#3D3E44]"
-      >
+        className="flex cursor-pointer gap-x-2 rounded py-1 pl-[0.2rem] pr-2 text-[0.85rem] transition-colors hover:bg-[#3D3E44]">
         {user.avatar ? (
           <img src={user.avatar} alt="user avatar" />
         ) : (
@@ -54,15 +52,15 @@ export function UserSidebarPanel() {
         </div>
       </div>
       <div className="flex items-center gap-[0.1rem]">
-        <PanelButton onClick={handleToggleMicrophone}>
+        <Button onClick={handleToggleMicrophone}>
           <BiSolidMicrophone color="#b6bac0" size={20} />
-        </PanelButton>
-        <PanelButton onClick={handleToggleDeafen}>
+        </Button>
+        <Button onClick={handleToggleDeafen}>
           <BsHeadphones color="#b6bac0" size={22} />
-        </PanelButton>
-        <PanelButton onClick={handleOpenSettings}>
+        </Button>
+        <Button onClick={handleOpenSettings}>
           <BsGearFill color="#b6bac0" size={18} />
-        </PanelButton>
+        </Button>
       </div>
     </div>
   );

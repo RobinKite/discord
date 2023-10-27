@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
 import { Page } from "@/constants";
-import { ServerHeader, FriendsHeader } from "./components";
+import { FriendsSidebar, ServerSidebar, ExploreSidebar } from "./components";
 
 const pageToComponent = new Map([
-  [Page.SERVER, ServerHeader],
-  [Page.FRIENDS, FriendsHeader],
+  [Page.SERVER, ServerSidebar],
+  [Page.FRIENDS, FriendsSidebar],
+  [Page.EXPLORE, ExploreSidebar],
+  [Page.SEARCH, ExploreSidebar],
 ]);
 
-export function Header() {
+export function Sidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);
 
   const Component = pageToComponent.get(currentPage);

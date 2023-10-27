@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { UserList, UserSidebar } from "@/components";
-import { Layout } from "@/features/layout/components";
+import { UserList } from "@/components";
+import { Layout, Sidebar } from "@/features/layout/components";
 import { Chat } from "@/features/messaging/components";
 
 export function Server() {
@@ -9,7 +9,7 @@ export function Server() {
   return (
     <Layout>
       <main className="flex grow">
-        <UserSidebar />
+        <Sidebar />
         <Chat />
         {isUserListShown && <UserList />}
       </main>

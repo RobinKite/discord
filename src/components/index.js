@@ -1,6 +1,4 @@
 export { IconButton } from "./IconButton/IconButton";
-export { UserSidebar } from "./UserSidebar/UserSidebar";
-export { UserSidebarPanel } from "./UserSidebarPanel/UserSidebarPanel";
 export { PublicLayout } from "./PublicLayout/PublicLayout";
 export { ProtectedLayout } from "./ProtectedLayout/ProtectedLayout";
 export { RequireAuth } from "./RequireAuth/RequireAuth";
@@ -12,3 +10,4 @@ export { CategoryButton } from "./CategoryButton/CategoryButton";
 export { Input } from "./Input/Input";
 export { Button } from "./Button/Button";
 export { GuildDiscovery } from "./GuildDiscovery/GuildDiscovery";
+export { FriendProfilePanel } from "./FriendProfilePanel/FriendProfilePanel";
