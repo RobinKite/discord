@@ -12,7 +12,7 @@ const authSlice = createSlice({
     userName: null,
     email: null,
     name: null,
-    isLoggedIn: true,
+    isLoggedIn: false,
     roles: [],
     permissions: [],
     isLoading: false,
@@ -58,7 +58,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.avatar = avatar;
     },
-    logoutUser: state => {
+    logoutUser: (state) => {
       state.isLoggedIn = false;
       state.email = null;
       state.userName = null;
