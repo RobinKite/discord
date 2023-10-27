@@ -5,7 +5,7 @@ import { SiDiscord } from "react-icons/si";
 
 const UserStream = ({ user, isHovered, cardHeight }) => {
   const idCheck = user.userId == 1 ? "local-video" : "remote-video"; //mock
-  console.log(user);
+
   return (
     <Stack
       justifyContent="center"
@@ -13,7 +13,7 @@ const UserStream = ({ user, isHovered, cardHeight }) => {
       id={idCheck}
       sx={{
         cursor: "pointer",
-        bgcolor: "#5c64f4",
+        bgcolor: user.bannerColor ? user.bannerColor : "#5c64f4",
         maxWidth: "592px",
         minHeight: `${cardHeight}px`,
         borderRadius: "8px",
