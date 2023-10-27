@@ -1,4 +1,4 @@
-import AppRoutes from "./AppRoutes";
+import { AppRoutes } from "./AppRoutes";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme/theme";
 

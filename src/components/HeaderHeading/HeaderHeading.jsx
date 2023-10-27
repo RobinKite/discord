@@ -1,10 +1,9 @@
 import { capitalize } from "@mui/material";
 import { clsx } from "clsx";
-import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaUserFriends } from "react-icons/fa";
 import { BiHash } from "react-icons/bi";
-import { TabContext } from "@/contexts";
+import { setFriendsTab } from "@/redux/slices/uiSlice";
 import { Tab, Page } from "@/constants";
 import { removeFromArray } from "@/utils";
 import { PageContentMap } from "@/utils/collections";
@@ -21,7 +20,8 @@ function ServerContent() {
 }
 
 function FriendsContent() {
-  const { tab, setTab } = useContext(TabContext);
+  const dispatch = useDispatch();
+  const tab = useSelector((state) => state.ui.friendsTab);
   const tabs = removeFromArray(Object.values(Tab), Tab.ADD_FRIEND);
 
   return (
@@ -34,7 +34,7 @@ function FriendsContent() {
         {tabs.map((value) => (
           <button
             key={value}
-            onClick={() => setTab(value)}
+            onClick={() => dispatch(setFriendsTab(value))}
             className={clsx(
               "rounded bg-[#313338] px-2 py-[0.1rem] font-medium transition-all hover:brightness-125",
               tab === value && "brightness-150",
@@ -43,7 +43,7 @@ function FriendsContent() {
           </button>
         ))}
         <button
-          onClick={() => setTab(Tab.ADD_FRIEND)}
+          onClick={() => dispatch(setFriendsTab(Tab.ADD_FRIEND))}
           className={clsx(
             "rounded bg-[#417E4C] px-2 py-[0.1rem] font-medium text-white transition-all",
             tab === Tab.ADD_FRIEND && "bg-transparent text-[#00C770]",

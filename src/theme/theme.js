@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import extendPalette, { darkText, darkTooltip } from "./designTokens";
 
+const defaultTheme = createTheme();
 const { buttonBgHover, buttonBgDefault, buttonBgDisabled, white } =
   extendPalette;
 
@@ -10,7 +11,11 @@ const theme = createTheme({
     ...extendPalette,
   },
   spacing: 4,
-  shadows: ["none", "0 1px 2px 0 rgba(0,0,0,0.35)"],
+  shadows: [
+    "none",
+    "0 1px 2px 0 rgba(0,0,0,0.35)",
+    ...defaultTheme.shadows.slice(2),
+  ],
   breakpoints: {
     values: { xs: 0, sm: 450, md: 700, lg: 1200, xl: 1536 },
   },
