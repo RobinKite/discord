@@ -13,6 +13,7 @@ import { LuNetwork } from "react-icons/lu";
 
 import { PageContentMap } from "@/utils/collections";
 import { filterChannelsByType } from "@/utils/filters";
+import { FriendsSideBar } from "../FriendsSideBar/FriendsSideBar";
 
 function ServerContent() {
   const channels =
@@ -35,7 +36,7 @@ function ServerContent() {
 }
 
 function FriendsContent() {
-  return <div></div>;
+  return <FriendsSideBar />;
 }
 
 function ExploreContent() {
@@ -57,14 +58,14 @@ const contentMap = new PageContentMap(
   [Page.SERVER, ServerContent],
   [Page.FRIENDS, FriendsContent],
   [Page.EXPLORE, ExploreContent],
-  [Page.SEARCH, ExploreContent],
+  [Page.SEARCH, ExploreContent]
 );
 
 export function UserSidebar() {
   const currentPage = useSelector((state) => state.ui.currentPage);
 
   return (
-    <aside className="flex min-w-[240px] max-w-[240px] grow flex-col justify-between bg-[#2b2d31]">
+    <aside className="flex min-w-[240px] max-w-[240px] grow flex-col bg-[#2b2d31]">
       {contentMap.getComponent(currentPage)}
       <UserSidebarPanel />
     </aside>
