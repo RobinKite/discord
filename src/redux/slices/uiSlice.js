@@ -6,6 +6,8 @@ const uiSlice = createSlice({
     modalStack: [],
     isLoading: false,
     isUserListShown: false,
+    isStreamingChatShown: false,
+    isFullScreen: false,
     popupContent: {},
     popupPosition: [],
   },
@@ -31,6 +33,12 @@ const uiSlice = createSlice({
     fillPopupContent: (state, action) => {
       state.popupContent = action.payload;
     },
+    toggleStreamingChatShown: (state) => {
+      state.isStreamingChatShown = !state.isStreamingChatShown;
+    },
+    toggleFullScreen: (state) => {
+      state.isFullScreen = !state.isFullScreen;
+    },
   },
 });
 
@@ -42,6 +50,8 @@ export const {
   fillPopupContent,
   setPopUpPosition,
   toggleUserList,
+  toggleStreamingChatShown,
+  toggleFullScreen,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
