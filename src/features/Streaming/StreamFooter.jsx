@@ -21,7 +21,7 @@ import {
 import { HiPhoneXMark } from "react-icons/hi2";
 import { MdScreenShare, MdStopScreenShare } from "react-icons/md";
 
-const StreamFooter = ({ isHovered }) => {
+const StreamFooter = ({ isHovered, handleStopStreaming }) => {
   const [isMicActive, setIsMicActive] = useState(false);
   const [isVideoActive, setIsVideoActive] = useState(false);
   const [isStreamActive, setIsStreamActive] = useState(true);
@@ -98,6 +98,7 @@ const StreamFooter = ({ isHovered }) => {
         )}
         <Tooltip arrow title="Disconnect">
           <IconButton
+            onClick={handleStopStreaming}
             sx={{
               bgcolor: "#f23f42",
               padding: "16px",
@@ -127,6 +128,7 @@ const StreamFooter = ({ isHovered }) => {
 
 StreamFooter.propTypes = {
   isHovered: PropTypes.bool.isRequired,
+  handleStopStreaming: PropTypes.func,
 };
 
 export default StreamFooter;
