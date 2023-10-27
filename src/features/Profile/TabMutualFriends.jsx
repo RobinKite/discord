@@ -12,6 +12,6 @@ export const TabMutualFriends = () => {
       return <User user={friend} key={friend.userName} styles="bg-[#111214]" />;
     })
   ) : (
-    <Typography sx={{ fontSize: "14px" }}>Have not shared servers</Typography>
+    <Typography sx={{ fontSize: "14px" }}>Have not mutual friends</Typography>
   );
 };
