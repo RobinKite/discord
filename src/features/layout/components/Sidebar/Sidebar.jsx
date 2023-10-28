@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import { Page } from "@/constants";
 import { FriendsSidebar, ServerSidebar, ExploreSidebar } from "./components";
 
@@ -9,10 +9,12 @@ const pageToComponent = new Map([
   [Page.SEARCH, ExploreSidebar],
 ]);
 
-export function Sidebar() {
-  const currentPage = useSelector((state) => state.ui.currentPage);
-
-  const Component = pageToComponent.get(currentPage);
+export function Sidebar({ page }) {
+  const Component = pageToComponent.get(page);
   if (Component === undefined) return null;
   return <Component />;
 }
+
+Sidebar.propTypes = {
+  page: PropTypes.string.isRequired,
+};

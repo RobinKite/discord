@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import { Page } from "@/constants";
-import { ServerHeader, FriendsHeader } from "./components";
+import { ServerHeader, FriendsHeader, DirectHeader } from "./components";
 
 const pageToComponent = new Map([
   [Page.SERVER, ServerHeader],
   [Page.FRIENDS, FriendsHeader],
+  [Page.DIRECT, DirectHeader],
 ]);
 
 export function Header() {

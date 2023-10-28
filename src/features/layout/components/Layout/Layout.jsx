@@ -8,7 +8,7 @@ export function Layout({ withHeader, children }) {
       <ClientSidebar />
       <div className="flex max-h-screen min-h-screen grow flex-col">
         {withHeader && <Header />}
-        {children}
+        <main className="flex grow">{children}</main>
       </div>
     </div>
   );
@@ -16,7 +16,10 @@ export function Layout({ withHeader, children }) {
 
 Layout.propTypes = {
   withHeader: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
 };
 
 Layout.defaultProps = {

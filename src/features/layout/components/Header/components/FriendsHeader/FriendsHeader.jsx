@@ -50,8 +50,7 @@ export function FriendsHeader() {
           </div>
         </div>
       }
-      buttonsContent={
-        <IconButton icon={<BiSolidHelpCircle size={24} />} />
-      }></BaseHeader>
+      buttonsContent={<IconButton icon={<BiSolidHelpCircle size={24} />} />}
+    />
   );
 }

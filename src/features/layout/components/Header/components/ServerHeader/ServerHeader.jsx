@@ -34,6 +34,7 @@ export function ServerHeader() {
           />
           <IconButton icon={<BiSolidHelpCircle size={24} />} />
         </>
-      }></BaseHeader>
+      }
+    />
   );
 }

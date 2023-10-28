@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Default, Home, Login, Redirect } from "@/pages";
+import { Default, Direct, Home, Login, Redirect } from "@/pages";
 import { Friends, Explore, Search } from "@/pages";
 import { PublicLayout, RequireAuth } from "@/components";
 import { useDispatch } from "react-redux";
@@ -27,6 +27,7 @@ export function AppRoutes() {
           <Route path="" element={<Home />} />
           <Route path="channels/">
             <Route path="@me" element={<Friends />} />
+            <Route path="@me/:chatId" element={<Direct />} />
             <Route path=":serverId/:channelId" element={<Redirect />} />
             <Route path=":serverId/" element={<Redirect />} />
           </Route>

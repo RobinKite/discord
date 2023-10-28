@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { List, ListItem, Stack, Typography } from "@mui/material";
 import { FaUserFriends } from "react-icons/fa";
 import {
@@ -15,8 +15,12 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { FriendsSideBarMenu } from "./FriendsSideBarMenu";
 import { BaseSidebar } from "../../components";
+import { useNavigate } from "react-router-dom";
+import { setProfile } from "@/redux/slices/profileSlice";
 
 export function FriendsSidebar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const friends = useSelector((state) => state.auth.friends);
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);
@@ -42,6 +46,8 @@ export function FriendsSidebar() {
 
   const openChat = (friend) => {
     console.log(friend); //TODO: implement the transition to personal chat
+    navigate("/channels/@me/" + friend.userId);
+    dispatch(setProfile(friend));
   };
 
   return (
@@ -49,7 +55,12 @@ export function FriendsSidebar() {
       <Stack sx={wrapperSX}>
         <Typography
           variant="h2"
-          sx={[itemSX, { "&:hover svg": { fill: "#f2f3f5" } }]}>
+          onClick={() => navigate("/channels/@me")}
+          sx={[
+            itemSX,
+            { "&:hover svg": { fill: "#f2f3f5" } },
+            { cursor: "pointer" },
+          ]}>
           <FaUserFriends color="#81848D" size={20} />
           <Typography variant="span" fontWeight={500}>
             Friends
