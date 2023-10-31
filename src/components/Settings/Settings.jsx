@@ -67,7 +67,8 @@ const Settings = () => {
         bottom: 0,
         left: 0,
         zIndex: 50,
-      }}>
+      }}
+    >
       <Stack
         sx={{
           bgcolor: "#2b2d31",
@@ -77,11 +78,13 @@ const Settings = () => {
           flexBasis: "218px",
           justifyContent: "flex-start",
           alignItems: "end",
-        }}>
+        }}
+      >
         <NavLink
           style={{
             padding: "60px 6px 60px 20px",
-          }}>
+          }}
+        >
           {Object.keys(groupedTabs).map((group) => (
             <SettingsNavSection
               key={group}
@@ -113,7 +116,8 @@ const Settings = () => {
           justifyContent: "flex-start",
           minHeight: "100%",
           overflowY: "scroll",
-        }}>
+        }}
+      >
         <Stack
           sx={{
             minWidth: "460px",
@@ -122,7 +126,8 @@ const Settings = () => {
             pb: "80px",
             pt: "60px",
             paddingX: "40px",
-          }}>
+          }}
+        >
           <List>
             <SettingsTabContainer
               header={activeTab}
@@ -130,11 +135,7 @@ const Settings = () => {
             />
           </List>
           <CloseButton onClick={handleCloseModal}>
-            <IoCloseCircleOutline
-              size={44}
-              style={{ fill: "#b5bac1" }}
-            />{" "}
-            Esc
+            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} /> Esc
           </CloseButton>
         </Stack>
       </Stack>

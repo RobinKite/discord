@@ -30,15 +30,16 @@ export const ProfileTabContent = () => {
         gridTemplateColumns: "1fr 1fr",
         gap: "35px",
         alignItems: "start",
-      }}>
+      }}
+    >
       <Stack>
         <Stack direction="column">
-          <Title>Display Name</Title>
+          <Title component="h3">Display Name</Title>
           <UserTextField id="display-name" size="small" placeholder="tadimm" />
           <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
-          <Title>Pronouns</Title>
+          <Title component="h3">Pronouns</Title>
           <UserTextField
             id="display-pronouns"
             size="small"
@@ -47,15 +48,15 @@ export const ProfileTabContent = () => {
           <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
-          <Title>Avatar</Title>
-          <Stack direction="row" spacing={2}>
+          <Title component="h3">Avatar</Title>
+          <Stack direction="row" spacing={4}>
             <MainButton>Change Avatar</MainButton>
             <MainButton>Remove Avatar</MainButton>
           </Stack>
           <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack sx={{ position: "relative" }}>
-          <Title>Banner Color</Title>
+          <Title component="h3">Banner Color</Title>
           <Input
             type="color"
             autoFocus={false}
@@ -87,7 +88,7 @@ export const ProfileTabContent = () => {
           <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
-          <Title>About me</Title>
+          <Title component="h3">About me</Title>
           <Typography sx={{ color: "#b5bac1", fontSize: "14px", mb: "16px" }}>
             You can use markdown and links if you&apos;d like.
           </Typography>
@@ -97,20 +98,34 @@ export const ProfileTabContent = () => {
             variant="filled"
             rows={5}
             sx={{
-              width: "270px",
-              bgcolor: "#1e1f22",
-              color: "#b5bac1",
+              "& .MuiInputBase-root": {
+                width: "100%",
+                bgcolor: "#1e1f22",
+                color: "#b5bac1",
+                height: "100%",
+                "&:before, &:after": {
+                  borderBottom: "none",
+                },
+                "&:hover:not(.Mui-disabled, .Mui-error):before": {
+                  borderBottom: "none",
+                },
+                "&.Mui-focused:after": {
+                  borderBottom: "none",
+                  bgcolor: "#1e1f22",
+                },
+              },
             }}
           />
           <SettingsLine styles={{ margin: "24px 0 " }} />
         </Stack>
         <Stack>
-          <Title>Language</Title>
+          <Title component="h3">Language</Title>
           <FormControl sx={{ minWidth: 120 }} size="small">
             <CustomSelect
               id="demo-select-small"
               value={language}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <MenuItem value={"ua"}>Ukrainian</MenuItem>
               <MenuItem value={"en"}>English</MenuItem>
               <MenuItem value={"fr"}>French</MenuItem>
@@ -121,7 +136,10 @@ export const ProfileTabContent = () => {
           </FormControl>
         </Stack>
       </Stack>
-      <ProfileReview />
+      <Stack>
+        <Title component="h3">Preview</Title>
+        <ProfileReview />
+      </Stack>
     </Stack>
   );
 };
