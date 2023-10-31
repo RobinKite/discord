@@ -99,7 +99,8 @@ export const RemovalButton = styled(Button)(() => ({
     textTransform: "capitalize",
     border: "1px solid #f23f42",
     borderRadius: "3px",
-    padding: "2px 16px",
+    padding: "5px 13px",
+    backgroundColor: "transparent",
     "&:hover": {
       backgroundColor: "#f23f42",
     },
@@ -189,6 +190,15 @@ export const UserTextField = styled(Input)({
   "&:focus": {
     outline: "none",
   },
+  "&:before, &:after": {
+    borderBottom: "none",
+  },
+  "&:hover:not(.Mui-disabled, .Mui-error):before": {
+    borderBottom: "none",
+  },
+  "&.Mui-focused:after": {
+    borderBottom: "none",
+  },
 });
 export const MainButton = styled(Button)(() => ({
   "&": {
@@ -196,7 +206,7 @@ export const MainButton = styled(Button)(() => ({
     fontSize: "14px",
     fontWeight: 500,
     backgroundColor: "#5865f2",
-    padding: "2px 16px",
+    padding: "6px 12px",
     borderRadius: "3px",
     marginBottom: "20px",
     color: "#fff",
@@ -230,9 +240,11 @@ export const CloseButton = styled(Button)(() => ({
     color: "#b5bac1",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "transparent",
     "&:hover": {
       boxShadow: "none",
       backgroundColor: "transparent",
+      color: "#fff",
     },
     "&:hover svg": {
       fill: "#fff",
@@ -250,6 +262,7 @@ export const LogOutButton = styled(Button)(() => ({
     color: "#b5bac1",
     fontSize: "16px",
     textTransform: "capitalize",
+    backgroundColor: "transparent",
     "&:hover": { backgroundColor: "#4e50584c", color: "#fff" },
   },
 }));

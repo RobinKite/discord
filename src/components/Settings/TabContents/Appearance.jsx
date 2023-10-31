@@ -24,7 +24,7 @@ export const AppearanceTabContainer = () => {
   };
   return (
     <>
-      <Title>Theme</Title>
+      <Title component="h3">Theme</Title>
       <Tooltip>
         <Stack direction="row" spacing={2} sx={{ mb: "16px" }}>
           <Stack
@@ -103,7 +103,7 @@ export const AppearanceTabContainer = () => {
       </Tooltip>
       <SettingsLine styles={{ marginBottom: "20px" }} />
       <Stack sx={{ mb: "20px" }}>
-        <Title>Chat Font Scaling</Title>
+        <Title component="h3">Chat Font Scaling</Title>
         <PrettoSlider
           value={fontSize}
           onChange={handleFontSize}
@@ -124,7 +124,7 @@ export const AppearanceTabContainer = () => {
         />
       </Stack>
       <Stack>
-        <Title>Space Between Message Groups</Title>
+        <Title component="h3">Space Between Message Groups</Title>
         <PrettoSlider
           value={space}
           onChange={handleSlider}

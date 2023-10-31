@@ -43,10 +43,10 @@ export const VoiceVideoTabContent = () => {
 
   return (
     <Stack spacing={3}>
-      <SettingsTitle>Voice Settings</SettingsTitle>
+      <SettingsTitle component="h2">Voice Settings</SettingsTitle>
       <Stack direction="row" spacing={3}>
         <Stack sx={{ width: "320px" }}>
-          <Title>Input device</Title>
+          <Title component="h3">Input device</Title>
           <CustomSelect
             value={inputDevice}
             onChange={(e) => setInputDevice(e.target.value)}
@@ -57,7 +57,7 @@ export const VoiceVideoTabContent = () => {
               </MenuItem>
             ))}
           </CustomSelect>
-          <Title>Input Volume</Title>
+          <Title component="h3">Input Volume</Title>
           <PrettoSlider
             valueLabelDisplay="auto"
             aria-label="pretto slider"
@@ -65,7 +65,7 @@ export const VoiceVideoTabContent = () => {
           />
         </Stack>
         <Stack sx={{ width: "320px" }}>
-          <Title>Output device</Title>
+          <Title component="h3">Output device</Title>
           <CustomSelect
             value={outputDevice}
             onChange={(e) => setOutputDevice(e.target.value)}
@@ -76,7 +76,7 @@ export const VoiceVideoTabContent = () => {
               </MenuItem>
             ))}
           </CustomSelect>
-          <Title>Output Volume</Title>
+          <Title component="h3">Output Volume</Title>
           <PrettoSlider
             valueLabelDisplay="auto"
             aria-label="pretto slider"
@@ -84,7 +84,7 @@ export const VoiceVideoTabContent = () => {
           />
         </Stack>
       </Stack>
-      <Title>Mic Test</Title>
+      <Title component="h3">Mic Test</Title>
       <Typography sx={{ color: "#b5bac1", fontSize: "14px", mb: "4px" }}>
         Having mic issues? Start a test and say something fun—we&apos;ll play
         your voice back to you.
@@ -93,7 +93,7 @@ export const VoiceVideoTabContent = () => {
         <MicTest />
       </Stack>
       <SettingsLine />
-      <SettingsTitle>Video Settings</SettingsTitle>
+      <SettingsTitle component="h3">Video Settings</SettingsTitle>
       <Stack
         alignItems="center"
         justifyContent="center"
@@ -111,7 +111,7 @@ export const VoiceVideoTabContent = () => {
         </Stack>
         <MainButton>Test Video</MainButton>
       </Stack>
-      <Title>Camera</Title>
+      <Title component="h3">Camera</Title>
       <CustomSelect>
         <MenuItem value="">Default</MenuItem>
       </CustomSelect>

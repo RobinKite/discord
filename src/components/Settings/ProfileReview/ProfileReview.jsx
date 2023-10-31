@@ -75,7 +75,7 @@ const ProfileReview = () => {
             content: "''",
           }}
         />
-        <Title>Customising My Profile</Title>
+        <Title component="h4">Customising My Profile</Title>
         <Stack sx={{ paddingBottom: "12px" }}>
           <Stack
             direction="row"

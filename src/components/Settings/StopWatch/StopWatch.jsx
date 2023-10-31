@@ -26,7 +26,7 @@ const Stopwatch = () => {
 
   return (
     <Stack sx={{ color: "#dbdee1", fontSize: "14px" }}>
-      {formattedTime()} elapsed{" "}
+      {formattedTime()} elapsed
     </Stack>
   );
 };

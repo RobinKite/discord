@@ -1,7 +1,8 @@
+import { List, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import SettingsNavItem from "./SettingsNavItem";
 import SettingsLine from "./SettingsLine";
-import { List, Typography } from "@mui/material";
+
 const SettingsNavSection = ({
   header,
   items,

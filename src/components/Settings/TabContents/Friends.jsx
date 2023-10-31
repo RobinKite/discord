@@ -42,7 +42,7 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          mb: "20px",
+          m: "0 0 20px",
         }}
       />
       <SettingsLine styles={{ marginBottom: "20px" }} />
@@ -55,7 +55,7 @@ export const FriendsTabContent = () => {
           fontWeight: 600,
           display: "flex",
           justifyContent: "space-between",
-          mb: "20px",
+          m: "0 0 20px",
         }}
       />
     </FormGroup>

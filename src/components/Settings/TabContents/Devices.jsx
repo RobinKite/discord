@@ -1,6 +1,6 @@
 import SettingsLine from "../SettingsLine";
 import Typography from "@mui/material/Typography";
-import { Button, Stack, styled } from "@mui/material";
+import { Stack } from "@mui/material";
 import { RiComputerLine } from "react-icons/ri";
 import { FaExclamation, FaMobileAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -20,11 +20,11 @@ export const DevicesTabContent = () => {
         account. You can log out of each one individually or all other devices.
       </DeviceText>
       <DeviceText>
-        If you see an entry you don't recognize, log out of that device and
+        If you see an entry you don&apos;t recognize, log out of that device and
         change your Discord account password immediately.
       </DeviceText>
       <Stack sx={{ margin: "32px 0" }}>
-        <Title>Current Device</Title>
+        <Title component="h3">Current Device</Title>
         <Stack
           direction="row"
           alignItems="center"
@@ -61,7 +61,7 @@ export const DevicesTabContent = () => {
             </Typography>
           </Stack>
         </Stack>
-        <Title>Other Devices</Title>
+        <Title component="h3">Other Devices</Title>
         <Stack
           direction="row"
           alignItems="center"
@@ -144,7 +144,7 @@ export const DevicesTabContent = () => {
             <Typography
               sx={{ color: "#949ba4", fontSize: "14px", fontWeight: 500 }}
             >
-              To log them out, please{" "}
+              To log them out, please
               <NavLink to="#" style={{ color: "#00a8fc" }}>
                 change your password
               </NavLink>
@@ -153,7 +153,9 @@ export const DevicesTabContent = () => {
         </Stack>
         <SettingsLine />
       </Stack>
-      <Title sx={{ mb: "8px" }}>Log out of all known devices</Title>
+      <Title component="h3" sx={{ mb: "8px" }}>
+        Log out of all known devices
+      </Title>
       <Typography
         sx={{ color: "#949ba4", fontSize: "14px", fontWeight: 500, mb: "16px" }}
       >
