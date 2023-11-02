@@ -31,7 +31,6 @@ export function FriendProfilePanel() {
 
   const user = useSelector((state) => state.profile.userProfile);
   const userNote = user?.note || "";
-  console.log(user);
 
   const handleNoteChange = (e) => {
     dispatch(setProfileNote(e.target.value));

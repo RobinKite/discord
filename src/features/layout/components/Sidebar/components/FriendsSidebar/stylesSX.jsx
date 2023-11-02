@@ -4,6 +4,7 @@ export const wrapperSX = {
   gap: "8px",
   alignItems: "start",
   flexGrow: 1,
+  color: "#949ba4",
 };
 
 export const titleSX = {

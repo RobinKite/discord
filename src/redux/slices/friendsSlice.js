@@ -54,25 +54,26 @@ export const createFriendRequest = createAsyncThunk(
   }
 );
 
-export const friendRequestAccepted = createAsyncThunk(
-  Endpoint.INVITE_ACCEPTED,
-  async (userId, thunkAPI) => {
-    const result = await api.post(Endpoint.INVITE_ACCEPTED, userId);
-    console.log(result);
-    thunkAPI.dispatch(acceptFriendRequest(result.data));
-    return result;
-  }
-);
+// export const friendRequestAccepted = createAsyncThunk(
+//   Endpoint.INVITE_ACCEPTED,
+//   async (userId, thunkAPI) => {
+//     const result = await api.post(Endpoint.INVITE_ACCEPTED, userId);
+//     console.log(result);
+//     thunkAPI.dispatch(acceptFriendRequest(result.data));
+//     return result;
+//   }
+// );
 
-export const friendRequestRejected = createAsyncThunk(
-  Endpoint.INVITE_REJECTED,
-  async (userId, thunkAPI) => {
-    const result = await api.post(Endpoint.INVITE_REJECTED, userId);
-    console.log(result);
-    thunkAPI.dispatch(rejectFriendRequest(result.data));
-    return result;
-  }
-);
+// export const friendRequestRejected = createAsyncThunk(
+//   Endpoint.INVITE_REJECTED,
+//   async (userId, thunkAPI) => {
+//     const result = await api.post(Endpoint.INVITE_REJECTED, userId);
+
+//     console.log(result);
+//     thunkAPI.dispatch(rejectFriendRequest(result.data));
+//     return result;
+//   }
+// );
 
 export const {
   addFriend,

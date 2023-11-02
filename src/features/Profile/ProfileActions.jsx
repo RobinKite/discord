@@ -10,7 +10,8 @@ import { createFriendRequest } from "@/redux/slices/friendsSlice";
 export const ProfileActions = () => {
   const actionMenuRef = useRef(null);
   const userProfile = useSelector((state) => state.profile.userProfile);
-  const authFriends = useSelector((state) => state.auth.friends);
+  // const authFriends = useSelector((state) => state.auth.friends);
+  const authFriends = useSelector((state) => state.friends.friendsList);
   const friendRequestStatus = useSelector((state) => state.friends.status);
   const [toggleActionMenu, setToggleActionMenu] = useState(false);
   const [isInAuthFriends, setIsInAuthFriends] = useState(false);
