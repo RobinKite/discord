@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { ChannelGroup } from "@/features/channels/components";
+import { ChannelType } from "@/constants";
 import { filterChannelsByType } from "@/utils/filters";
 import { BaseSidebar } from "../../components";
 
@@ -11,14 +12,14 @@ export function ServerSidebar() {
     <BaseSidebar>
       <div className="pt-8 text-xs text-[#949BA4]">
         <ChannelGroup
-          type="text"
+          type={ChannelType.TEXT}
           name="Text channels"
-          channels={filterChannelsByType(channels, "text")}
+          channels={filterChannelsByType(channels, ChannelType.TEXT)}
         />
         <ChannelGroup
-          type="voice"
+          type={ChannelType.VOICE}
           name="Voice channels"
-          channels={filterChannelsByType(channels, "voice")}
+          channels={filterChannelsByType(channels, ChannelType.VOICE)}
         />
       </div>
     </BaseSidebar>

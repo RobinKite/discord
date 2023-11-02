@@ -68,3 +68,8 @@ export class Tab {
   static BLOCKED = "blocked";
   static ADD_FRIEND = "add friend";
 }
+
+export class ChannelType {
+  static TEXT = "text";
+  static VOICE = "voice";
+}

@@ -13,6 +13,7 @@ const serverSlice = createSlice({
     // currentServer: {},
     serverId: "",
     channelId: "",
+    // currentChannel: {},
     // servers: [],
     allServers: [],
     messages: [],
@@ -69,13 +70,13 @@ const serverSlice = createSlice({
       state.serverId = action.payload;
     },
     setCurrentChannel: (state, action) => {
-      //action.payload = channelId
-      if (action.payload) {
-        state.currentChannel = state.currentServer.find(
-          (channel) => channel.id === action.payload,
-        );
-      }
-      state.channelId = action.payload;
+      // if (action.payload) {
+      //   state.currentChannel = state.currentServer.find(
+      //     (channel) => channel.id === action.payload,
+      //   );
+      // }
+      state.currentChannel = action.payload;
+      state.channelId = action.payload.id;
     },
     updateNotificationCount: (state, action) => {
       const serverIdToUpdate = action.payload;
