@@ -6,5 +6,6 @@ export class Endpoint {
   static SERVERS = "servers";
   static TEXT_CHANNEL = "channels/text/";
   static USERS = "users";
+  static TEXT_CHANNEL_INVITE = (link) => `channels/text/${link}/invite`;
   static ALL_SERVERS = "servers/test";
 }

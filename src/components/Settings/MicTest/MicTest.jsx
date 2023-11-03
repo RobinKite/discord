@@ -40,7 +40,7 @@ const MicTest = () => {
             x,
             canvas.height - barHeight / 2,
             barWidth,
-            barHeight / 2
+            barHeight / 2,
           );
 
           x += barWidth + 1;

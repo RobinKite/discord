@@ -13,6 +13,7 @@ const serverSlice = createSlice({
     // currentServer: {},
     serverId: "",
     channelId: "",
+    // currentChannel: {},
     // servers: [],
     allServers: [],
     messages: [],
@@ -26,13 +27,16 @@ const serverSlice = createSlice({
     },
     removeMessage: (state, action) => {
       state.messages = state.messages.filter(
-        message => message.id !== action.payload
+        (message) => message.id !== action.payload,
       );
     },
     setAllServers: (state, action) => {
       state.allServers = action.payload;
     },
-    clearCurrentServer: state => {
+    clearServers: (state) => {
+      state.servers = [];
+    },
+    clearCurrentServer: (state) => {
       state.currentChannel = {};
       state.currentServer = {};
       state.serverId = "";
@@ -49,13 +53,15 @@ const serverSlice = createSlice({
       // if (!state.channelId) state.channelId = action.payload.channels[0].id;
     },
     removeServer: (state, action) => {
-      state.servers = state.servers.filter(room => room.id !== action.payload);
+      state.servers = state.servers.filter(
+        (room) => room.id !== action.payload,
+      );
     },
     setCurrentServer: (state, action) => {
       //action.payload = serverId
       if (action.payload) {
         const serverToFind = state.servers.find(
-          server => server.id === action.payload
+          (server) => server.id === action.payload,
         );
         state.currentServer = serverToFind;
         state.currentChannel = serverToFind.channels[0];
@@ -64,18 +70,18 @@ const serverSlice = createSlice({
       state.serverId = action.payload;
     },
     setCurrentChannel: (state, action) => {
-      //action.payload = channelId
-      if (action.payload) {
-        state.currentChannel = state.currentServer.find(
-          channel => channel.id === action.payload
-        );
-      }
-      state.channelId = action.payload;
+      // if (action.payload) {
+      //   state.currentChannel = state.currentServer.find(
+      //     (channel) => channel.id === action.payload,
+      //   );
+      // }
+      state.currentChannel = action.payload;
+      state.channelId = action.payload.id;
     },
     updateNotificationCount: (state, action) => {
       const serverIdToUpdate = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverIdToUpdate
+        (server) => server.id === serverIdToUpdate,
       );
 
       if (serverToUpdate) {
@@ -85,7 +91,7 @@ const serverSlice = createSlice({
     addChannelToServer: (state, action) => {
       const { serverId, channel } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.channels.push(channel);
@@ -94,18 +100,18 @@ const serverSlice = createSlice({
     removeChannelFromServer: (state, action) => {
       const { serverId, channelId } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.channels = serverToUpdate.channels.filter(
-          channel => channel.id !== channelId
+          (channel) => channel.id !== channelId,
         );
       }
     },
     addServerRole: (state, action) => {
       const { serverId, role } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.roles.push(role);
@@ -114,22 +120,22 @@ const serverSlice = createSlice({
     removeServerRole: (state, action) => {
       const { serverId, roleId } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         serverToUpdate.roles = serverToUpdate.roles.filter(
-          role => role.id !== roleId
+          (role) => role.id !== roleId,
         );
       }
     },
     addUserToServerRole: (state, action) => {
       const { serverId, roleId, userId } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         const roleToUpdate = serverToUpdate.roles.find(
-          role => role.id === roleId
+          (role) => role.id === roleId,
         );
         if (roleToUpdate) {
           roleToUpdate.users.push(userId);
@@ -139,15 +145,15 @@ const serverSlice = createSlice({
     removeUserFromServerRole: (state, action) => {
       const { serverId, roleId, userId } = action.payload;
       const serverToUpdate = state.servers.find(
-        server => server.id === serverId
+        (server) => server.id === serverId,
       );
       if (serverToUpdate) {
         const roleToUpdate = serverToUpdate.roles.find(
-          role => role.id === roleId
+          (role) => role.id === roleId,
         );
         if (roleToUpdate) {
           roleToUpdate.users = roleToUpdate.users.filter(
-            user => user !== userId
+            (user) => user !== userId,
           );
         }
       }
@@ -164,8 +170,8 @@ export const setServers = createAsyncThunk(
     const currentServers = thunkAPI.getState().server.servers;
 
     if (servers.length) {
-      servers.forEach(server => {
-        const existingServer = currentServers.find(s => s.id === server.link);
+      servers.forEach((server) => {
+        const existingServer = currentServers.find((s) => s.id === server.link);
 
         if (!existingServer) {
           const { title, owner, link, textChannels } = server;
@@ -179,19 +185,19 @@ export const setServers = createAsyncThunk(
               owner,
               users: [currentUser],
               channels: [
-                ...textChannels.map(channel => ({
+                ...textChannels.map((channel) => ({
                   ...channel,
                   id: channel.link,
                   type: "text",
                 })),
               ],
-            })
+            }),
           );
         }
       });
     }
     return result;
-  }
+  },
 );
 
 export const createServer = createAsyncThunk(
@@ -208,16 +214,16 @@ export const createServer = createAsyncThunk(
         owner,
         users: [currentUser],
         channels: [
-          ...textChannels.map(channel => ({
+          ...textChannels.map((channel) => ({
             ...channel,
             id: channel.link,
             type: "text",
           })),
         ],
-      })
+      }),
     );
     return result;
-  }
+  },
 );
 
 export const getMessages = createAsyncThunk(
@@ -230,7 +236,7 @@ export const getMessages = createAsyncThunk(
     thunkAPI.dispatch(setMessages(messages));
 
     return result;
-  }
+  },
 );
 
 export const setUnsubbedServers = createAsyncThunk(
@@ -244,8 +250,14 @@ export const setUnsubbedServers = createAsyncThunk(
       thunkAPI.dispatch(setAllServers(data));
     }
     return result;
-  }
+  },
 );
+
+export const clearServerSlice = () => (dispatch) => {
+  dispatch(clearCurrentServer());
+  dispatch(setAllServers([]));
+  dispatch(clearServers());
+};
 
 export const {
   clearCurrentServer,
@@ -262,5 +274,6 @@ export const {
   setCurrentServer,
   setCurrentChannel,
   setAllServers,
+  clearServers,
 } = serverSlice.actions;
 export default serverSlice.reducer;

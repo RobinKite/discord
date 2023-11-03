@@ -28,10 +28,10 @@ import townhallIcon from "@/assets/cardIcons/townhall-icon.webp";
 import valorantIcon from "@/assets/cardIcons/valorant-icon.webp";
 
 export const SAMPLE_CHANNELS = [
-  { id: "1", title: "general", type: "text", isActive: true },
-  { id: "2", title: "voice", type: "voice", isActive: false },
-  { id: "3", title: "random", type: "text", isActive: false },
-  { id: "4", title: "music", type: "voice", isActive: false },
+  { id: "1", title: "general", type: "text" },
+  { id: "2", title: "voice", type: "voice" },
+  { id: "3", title: "random", type: "text" },
+  { id: "4", title: "music", type: "voice" },
 ];
 
 const SAMPLE_SERVER_TITLE = "default";

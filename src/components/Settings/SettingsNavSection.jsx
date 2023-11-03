@@ -21,8 +21,7 @@ const SettingsNavSection = ({
           textTransform: "uppercase",
           color: "#949ba4",
           fontWeight: 700,
-        }}
-      >
+        }}>
         {header}
       </Typography>
     )}

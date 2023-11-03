@@ -11,16 +11,14 @@ const Review = () => {
         bgcolor: "#1e1f22",
         borderRadius: "8px",
         position: "relative",
-      }}
-    >
+      }}>
       <Stack
         sx={{
           height: "100px",
           bgcolor: "#f45db0",
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
-        }}
-      ></Stack>
+        }}></Stack>
       <SiDiscord
         size={86}
         color="white"
@@ -48,12 +46,10 @@ const Review = () => {
       <Stack
         direction="row"
         justifyContent="space-between"
-        sx={{ p: "16px 16px 0 120px" }}
-      >
+        sx={{ p: "16px 16px 0 120px" }}>
         <Typography
           variant="span"
-          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 600 }}
-        >
+          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 500 }}>
           tadimm
         </Typography>
         <MainButton>Edit User Profile</MainButton>
@@ -64,13 +60,11 @@ const Review = () => {
           p: "16px",
           m: "8px 16px 16px",
           borderRadius: "8px",
-        }}
-      >
+        }}>
         <Stack
           direction="row"
           justifyContent="space-between"
-          sx={{ mb: "24px" }}
-        >
+          sx={{ mb: "24px" }}>
           <Stack>
             <Title component="h3">Display Name</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
@@ -91,8 +85,7 @@ const Review = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          sx={{ mt: "24px" }}
-        >
+          sx={{ mt: "24px" }}>
           <Stack>
             <Title component="h3">Email</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
@@ -104,8 +97,7 @@ const Review = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          sx={{ mt: "24px" }}
-        >
+          sx={{ mt: "24px" }}>
           <Stack>
             <Title component="h3">Phone Number</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>

@@ -34,10 +34,10 @@ const DiscoverTextField = styled(TextField)`
     }
   }
 `;
-const FilteredServers = () => {
+export const FilteredServers = () => {
   const location = useLocation();
   const queryFromGuildDiscovery = new URLSearchParams(location.search).get(
-    "query"
+    "query",
   );
   const containerRef = useRef(null);
   // const refWidth = containerRef?.current.getBoundingClientRect().width || 0;
@@ -93,23 +93,20 @@ const FilteredServers = () => {
             overflow: "auto",
             width: "100%",
           },
-        }}
-      >
+        }}>
         <Stack direction="row" alignItems="center" spacing={3}>
           <IconButton
             component={Link}
-            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}
-          >
+            to={`/guild-discovery?query=${encodeURIComponent(inputValue)}`}>
             <ArrowBackRoundedIcon
               sx={{ color: "#b5bac1", "&:hover": { color: "#dbdee1" } }}
             />
           </IconButton>
           <Typography
             variant="h2"
-            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}
-          >
+            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 700 }}>
             {`${SAMPLE_CARDS.length} Communities for "${decodeURIComponent(
-              query
+              query,
             )}"`}
           </Typography>
         </Stack>
@@ -125,7 +122,7 @@ const FilteredServers = () => {
                     bgcolor: "#b5bac1",
                     borderRadius: "50%",
                     p: "2px",
-                    fontWeight: 900,
+                    fontWeight: 700,
                   }}
                 />
               </IconButton>
@@ -146,15 +143,14 @@ const FilteredServers = () => {
             gridTemplateColumns: "1fr",
             width: "100%",
             maxWidth: "720px",
-          }}
-        >
+          }}>
           {SAMPLE_CARDS.map(
             (card) =>
               containerWidth > 500 ? (
                 <FilteredCard key={card.serverId} card={card} />
               ) : (
                 <ServerCard key={card.serverId} card={card} />
-              )
+              ),
             // <FilteredCard key={card.serverId} card={card} />
           )}
           <PageControl

@@ -73,7 +73,7 @@ export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
               padding: "0.45rem 0.65rem",
               left: "6px",
               fontSize: "0.95rem",
-              fontWeight: "500",
+              fontWeight: 500,
               color: darkText,
               bgcolor: darkTooltip,
               "& .MuiTooltip-arrow": {

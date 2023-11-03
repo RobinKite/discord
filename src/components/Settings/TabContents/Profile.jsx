@@ -30,8 +30,7 @@ export const ProfileTabContent = () => {
         gridTemplateColumns: "1fr 1fr",
         gap: "35px",
         alignItems: "start",
-      }}
-    >
+      }}>
       <Stack>
         <Stack direction="column">
           <Title component="h3">Display Name</Title>
@@ -124,8 +123,7 @@ export const ProfileTabContent = () => {
             <CustomSelect
               id="demo-select-small"
               value={language}
-              onChange={handleChange}
-            >
+              onChange={handleChange}>
               <MenuItem value={"ua"}>Ukrainian</MenuItem>
               <MenuItem value={"en"}>English</MenuItem>
               <MenuItem value={"fr"}>French</MenuItem>

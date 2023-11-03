@@ -72,8 +72,7 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }
-                onContextMenu={(e) => handleOnContextMenu(e, user)}
-              >
+                onContextMenu={(e) => handleOnContextMenu(e, user)}>
                 <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}

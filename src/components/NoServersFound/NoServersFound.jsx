@@ -12,8 +12,7 @@ const NoServersFound = () => {
         bgcolor: "#2b2d31",
         paddingY: "80px",
         borderRadius: "8px",
-      }}
-    >
+      }}>
       <Stack sx={{ width: "314px", height: "145px" }}>
         <img src={emptyImage} alt="empty page" />
       </Stack>
@@ -22,10 +21,9 @@ const NoServersFound = () => {
         sx={{
           color: "#f2f3f5",
           fontSize: "24px",
-          fontWeight: 600,
+          fontWeight: 700,
           margin: "32px 0 8px",
-        }}
-      >
+        }}>
         No results found
       </Typography>
       <Typography sx={{ color: "#b5bac1", fontSize: "16px" }}>

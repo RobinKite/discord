@@ -9,7 +9,7 @@ import { TabContextProvider } from "@/contexts/TabContextProvider";
 import { PageContentMap } from "@/utils/collections";
 import GuildDiscovery from "../GuildDiscovery/GuildDiscovery";
 import FilteredServers from "@/features/channels/components/FilteredServers/FilteredServers";
-import { FriendProfilePanel } from "../../features/FriendProfilePanel/FriendProfilePanel";
+import { FriendProfilePanel } from "../FriendProfilePanel/FriendProfilePanel";
 
 function ServerContent() {
   const isUserListShown = useSelector((state) => state.ui.isUserListShown);
@@ -57,7 +57,7 @@ const contentMap = new PageContentMap(
   [Page.SERVER, ServerContent],
   [Page.FRIENDS, FriendsContent],
   [Page.EXPLORE, ExploreContent],
-  [Page.SEARCH, SearchContent]
+  [Page.SEARCH, SearchContent],
 );
 
 export function Layout() {

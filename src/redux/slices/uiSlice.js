@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Tab } from "@/constants";
 
 const uiSlice = createSlice({
   name: "ui",
@@ -9,6 +10,7 @@ const uiSlice = createSlice({
     popupContent: {},
     popupPosition: [],
     currentPage: null,
+    friendsTab: Tab.ONLINE,
   },
   reducers: {
     setPopUpPosition: (state, action) => {
@@ -20,20 +22,23 @@ const uiSlice = createSlice({
     openModal: (state, action) => {
       state.modalStack.push(action.payload);
     },
-    closeModal: state => {
+    closeModal: (state) => {
       state.modalStack.pop();
     },
-    startLoading: state => {
+    startLoading: (state) => {
       state.isLoading = true;
     },
-    stopLoading: state => {
+    stopLoading: (state) => {
       state.isLoading = false;
     },
-    toggleUserList: state => {
+    toggleUserList: (state) => {
       state.isUserListShown = !state.isUserListShown;
     },
     fillPopupContent: (state, action) => {
       state.popupContent = action.payload;
+    },
+    setFriendsTab: (state, action) => {
+      state.friendsTab = action.payload;
     },
   },
 });
@@ -47,6 +52,7 @@ export const {
   setPopUpPosition,
   toggleUserList,
   updateCurrentPage,
+  setFriendsTab,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

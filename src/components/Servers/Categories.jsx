@@ -1,11 +1,10 @@
-import { Button, List, styled, Stack } from "@mui/material";
-import React from "react";
+import { Button, List, styled } from "@mui/material";
 
 const CategoryButton = styled(Button)(() => ({
   "&": {
     textTransform: "capitalize",
     fontSize: "14px",
-    fontWeight: 600,
+    fontWeight: 500,
     backgroundColor: "transparent",
     padding: "4px 8px",
     borderRadius: "8px",
@@ -21,12 +20,11 @@ const Categories = () => {
       sx={{
         color: "#949ba4",
         fontSize: "14px",
-        fontWeight: 600,
+        fontWeight: 500,
         display: "inline-flex",
         flexWrap: "wrap",
         width: "848px",
-      }}
-    >
+      }}>
       <CategoryButton>All (0)</CategoryButton>
       <CategoryButton>Gaming (0)</CategoryButton>
       <CategoryButton>Entertainment (0)</CategoryButton>

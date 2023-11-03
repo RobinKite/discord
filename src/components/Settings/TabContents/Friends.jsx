@@ -13,7 +13,7 @@ export const FriendsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           m: "8px 0 20px",
@@ -26,7 +26,7 @@ export const FriendsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           m: "0 0 20px",
@@ -39,7 +39,7 @@ export const FriendsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           m: "0 0 20px",
@@ -52,7 +52,7 @@ export const FriendsTabContent = () => {
         labelPlacement="start"
         sx={{
           color: "#f2f3f5",
-          fontWeight: 600,
+          fontWeight: 500,
           display: "flex",
           justifyContent: "space-between",
           m: "0 0 20px",

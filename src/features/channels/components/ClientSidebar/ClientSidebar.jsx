@@ -45,6 +45,7 @@ export function ClientSidebar() {
   };
 
   const handleOpenServer = (id) => {
+    dispatch(clearCurrentServer());
     dispatch(setCurrentServer(id));
     navigate(`/channels/${id}`);
   };
@@ -55,8 +56,7 @@ export function ClientSidebar() {
         onClick={handleOpenPersonalMessages}
         title={"Private messages"}
         color={darkText}
-        id="privateMessages"
-      >
+        id="privateMessages">
         <SiDiscord size={26} color="white" />
       </ServerButton>
       <div className={"mx-auto h-0.5 w-8  rounded-md bg-[#dbded1]"} />
@@ -74,16 +74,14 @@ export function ClientSidebar() {
         title="Add a Server"
         bgcolor={green}
         color={green}
-        id="addServer"
-      >
+        id="addServer">
         <LiaPlusSolid size={28} />
       </ServerButton>
       <ServerButton
         onClick={() => navigate("/guild-discovery")}
         title="Explore Discoverable Servers"
         bgcolor={green}
-        color={green}
-      >
+        color={green}>
         <IoCompass size={24} />
       </ServerButton>
     </Stack>
