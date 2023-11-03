@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {
   clearCurrentServer,
   setCurrentServer,
+  setExtraServerId,
 } from "@/redux/slices/serverSlice";
 import { IoCompass } from "react-icons/io5";
 import { Stack } from "@mui/material";
@@ -41,6 +42,7 @@ export function ClientSidebar() {
     if (isUserListShown) dispatch(toggleUserList());
 
     dispatch(clearCurrentServer());
+    dispatch(setExtraServerId("direct"));
     navigate("/channels/@me", { replace: true });
   };
 
@@ -50,13 +52,19 @@ export function ClientSidebar() {
     navigate(`/channels/${id}`);
   };
 
+  const handleOpenExplore = () => {
+    dispatch(clearCurrentServer());
+    dispatch(setExtraServerId("explore"));
+    navigate("/guild-discovery");
+  };
+
   return (
     <Stack sx={StyledStackSX}>
       <ServerButton
         onClick={handleOpenPersonalMessages}
         title={"Private messages"}
         color={darkText}
-        id="privateMessages">
+        id="direct">
         <SiDiscord size={26} color="white" />
       </ServerButton>
       <div className={"mx-auto h-0.5 w-8  rounded-md bg-[#dbded1]"} />
@@ -66,6 +74,7 @@ export function ClientSidebar() {
           title={server.title}
           onClick={() => handleOpenServer(server.id)}
           id={server.id}
+          notificationCount={server.notificationCount}
         />
       ))}
 
@@ -78,10 +87,11 @@ export function ClientSidebar() {
         <LiaPlusSolid size={28} />
       </ServerButton>
       <ServerButton
-        onClick={() => navigate("/guild-discovery")}
+        onClick={handleOpenExplore}
         title="Explore Discoverable Servers"
         bgcolor={green}
-        color={green}>
+        color={green}
+        id="explore">
         <IoCompass size={24} />
       </ServerButton>
     </Stack>

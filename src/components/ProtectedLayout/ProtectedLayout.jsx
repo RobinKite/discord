@@ -6,6 +6,9 @@ import Settings from "../Settings/Settings";
 import PopUp from "../PopUp/PopUp";
 import CreateServerModal from "../Modals/CreateServerModal";
 import { Profile } from "@/features/Profile/Profile";
+import { addNotification } from "@/redux/slices/notificationsSlice";
+import { updateNotificationCount } from "@/redux/slices/serverSlice";
+import { useDispatch } from "react-redux";
 
 export function ProtectedLayout() {
   const modalStack = useSelector((state) => state.ui.modalStack);
@@ -13,6 +16,15 @@ export function ProtectedLayout() {
   const isPopUpOpen = modalStack.includes(Modal.POPUP);
   const isCreateServerModalOpen = modalStack.includes(Modal.CREATE_SERVER);
   const isProfileModalOpen = modalStack.includes(Modal.PROFILE);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      addNotification({ id: "0", message: "test", type: "", serverId: "1" }),
+    );
+    dispatch(updateNotificationCount("1"));
+  }, [dispatch]);
 
   useEffect(() => {
     if ((isSettingsModalOpen, isCreateServerModalOpen, isProfileModalOpen))

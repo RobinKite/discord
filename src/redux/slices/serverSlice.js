@@ -17,10 +17,14 @@ const serverSlice = createSlice({
     // servers: [],
     allServers: [],
     messages: [],
+    extraServerId: "",
   },
   reducers: {
     setMessages: (state, action) => {
       state.messages = action.payload;
+    },
+    setExtraServerId: (state, action) => {
+      state.extraServerId = action.payload;
     },
     addMessage: (state, action) => {
       state.messages.push(action.payload);
@@ -42,6 +46,7 @@ const serverSlice = createSlice({
       state.serverId = "";
       state.channelId = "";
       state.messages = [];
+      state.extraServerId = "";
     },
     addServer: (state, action) => {
       state.servers.push(action.payload);
@@ -191,6 +196,7 @@ export const setServers = createAsyncThunk(
                   type: "text",
                 })),
               ],
+              notificationCount: 0,
             }),
           );
         }
@@ -220,6 +226,7 @@ export const createServer = createAsyncThunk(
             type: "text",
           })),
         ],
+        notificationCount: 0,
       }),
     );
     return result;
@@ -275,5 +282,6 @@ export const {
   setCurrentChannel,
   setAllServers,
   clearServers,
+  setExtraServerId,
 } = serverSlice.actions;
 export default serverSlice.reducer;

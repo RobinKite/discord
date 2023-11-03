@@ -4,23 +4,24 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { blurple, darkText, darkTooltip } from "@/constants/designTokens";
 import { darkServerIconBg } from "@/constants/designTokens";
+import { IndicatorState } from "@/constants";
 import { adjustText } from "@/utils";
 import { useSelector } from "react-redux";
+import { Indicator } from "@/components";
 
-const indicatorHeightMap = {
-  active: "h-10",
-  hover: "h-5",
-  notification: "h-2",
-  hidden: "h-0",
-};
-
-export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
+export function ServerButton({
+  children,
+  title,
+  bgcolor,
+  color,
+  onClick,
+  id,
+  notificationCount,
+}) {
   const serverId = useSelector((state) => state.server.serverId);
+  const extraServerId = useSelector((state) => state.server.extraServerId);
 
-  const isActive = serverId === id;
-
-  const [indicatorState, setIndicatorState] = useState("hidden");
-  const [notification] = useState(false);
+  const [indicatorState, setIndicatorState] = useState(IndicatorState.HIDDEN);
   const [adjusted, setAdjusted] = useState({});
 
   useEffect(() => {
@@ -29,27 +30,28 @@ export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
   }, []);
 
   useEffect(() => {
-    if (isActive) {
-      setIndicatorState("active");
-    } else if (notification) {
-      setIndicatorState("notification");
+    if (serverId === id || extraServerId === id) {
+      setIndicatorState(IndicatorState.ACTIVE);
+    } else if (notificationCount > 0) {
+      setIndicatorState(IndicatorState.NOTIFICATION);
     } else {
-      setIndicatorState("hidden");
+      setIndicatorState(IndicatorState.HIDDEN);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [extraServerId, serverId, id, notificationCount]);
 
   const handleMouseEnter = () => {
-    if (indicatorState === "active") return;
-    setIndicatorState("hover");
+    setIndicatorState((prev) => {
+      if (prev === IndicatorState.ACTIVE) return IndicatorState.ACTIVE;
+      return IndicatorState.HOVER;
+    });
   };
 
   const handleMouseLeave = () => {
-    if (indicatorState === "active") return;
-
-    if (notification) {
-      setIndicatorState("notification");
-    } else if (indicatorState === "hover") setIndicatorState("hidden");
+    setIndicatorState((prev) => {
+      if (prev === IndicatorState.ACTIVE) return IndicatorState.ACTIVE;
+      if (notificationCount > 0) return IndicatorState.NOTIFICATION;
+      return IndicatorState.HIDDEN;
+    });
   };
 
   return (
@@ -59,9 +61,7 @@ export function ServerButton({ children, title, bgcolor, color, onClick, id }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       sx={{ position: "relative", width: "100%" }}>
-      <span
-        className={`absolute left-0 top-1/2 w-1 -translate-y-1/2 rounded-r-lg bg-white transition-all duration-300 ${indicatorHeightMap[indicatorState]}`}
-      />
+      <Indicator state={indicatorState} />
       <Tooltip
         title={title || children}
         placement="right"
@@ -125,6 +125,7 @@ ServerButton.propTypes = {
   bgcolor: PropTypes.string,
   onClick: PropTypes.func,
   id: PropTypes.string,
+  notificationCount: PropTypes.number,
   activeServerId: PropTypes.string,
 };
 
@@ -132,5 +133,6 @@ ServerButton.defaultProps = {
   title: "",
   color: "#fff",
   bgcolor: blurple,
+  notificationCount: 0,
   onClick: () => {},
 };

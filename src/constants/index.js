@@ -73,3 +73,10 @@ export class ChannelType {
   static TEXT = "text";
   static VOICE = "voice";
 }
+
+export class IndicatorState {
+  static ACTIVE = "active";
+  static NOTIFICATION = "notification";
+  static HIDDEN = "hidden";
+  static HOVER = "hover";
+}
