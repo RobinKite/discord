@@ -46,11 +46,16 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    dispatch(register(values)).then(() => {
-      navigate(from, { replace: true });
-      actions.resetForm();
-      dispatch(setIsLoading(false));
-    });
+    dispatch(setIsLoading(true));
+    try {
+      dispatch(register(values)).then(() => {
+        navigate(from, { replace: true });
+        actions.resetForm();
+        dispatch(setIsLoading(false));
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -103,7 +108,6 @@ function RegistrationForm() {
             <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval width={20} height={20} />
                   <Oval width={20} height={20} />
                 </span>
               ) : (
