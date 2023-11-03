@@ -104,7 +104,7 @@ export const FilteredServers = () => {
           </IconButton>
           <Typography
             variant="h2"
-            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 600 }}>
+            sx={{ color: "#b5bac1", fontSize: "24px", fontWeight: 700 }}>
             {`${SAMPLE_CARDS.length} Communities for "${decodeURIComponent(
               query,
             )}"`}

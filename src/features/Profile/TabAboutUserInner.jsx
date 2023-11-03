@@ -47,7 +47,7 @@ export const TabAboutUserInner = () => {
         sx={{
           fontSize: "12px",
           textTransform: "uppercase",
-          fontWeight: 700,
+          fontWeight: "700",
           marginBottom: 1.5,
         }}>
         Note

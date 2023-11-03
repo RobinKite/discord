@@ -83,7 +83,7 @@ export const GuildDiscovery = () => {
           }}>
           <Typography
             variant="h1"
-            sx={{ color: "#fff", fontSize: "20px", fontWeight: 500 }}>
+            sx={{ color: "#fff", fontSize: "20px", fontWeight: 700 }}>
             Find your community on Discord
           </Typography>
           <Typography
@@ -140,7 +140,7 @@ export const GuildDiscovery = () => {
       <Stack spacing={4}>
         <Typography
           variant="h2"
-          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 500 }}>
+          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 700 }}>
           Featured communities
         </Typography>
         <Grid
@@ -158,7 +158,7 @@ export const GuildDiscovery = () => {
         <img src={footerImage} alt="footer" />
         <Typography
           variant="h2"
-          sx={{ color: "#f2f3f5", fontSize: "16px", fontWeight: 500 }}>
+          sx={{ color: "#f2f3f5", fontSize: "16px", fontWeight: 700 }}>
           There are more communities out there!
         </Typography>
         <NavLink

@@ -22,7 +22,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
         size="small"
         sx={{
           fontSize: "14px",
-          fontWeight: 500,
+          fontWeight: 700,
           color: "#f2f3f5",
           borderRadius: "3px",
           padding: "8px",
@@ -48,7 +48,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           underline="none"
           sx={{
             fontSize: "24px",
-            fontWeight: 500,
+            fontWeight: 700,
             backgroundColor:
               currentPage === index + 1 ? "#5865f2" : "transparent",
             color: currentPage === index + 1 ? "#ffffff" : "#f2f3f5",
@@ -67,7 +67,7 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
         size="small"
         sx={{
           fontSize: "14px",
-          fontWeight: 500,
+          fontWeight: 700,
           color: "#f2f3f5",
           borderRadius: "3px",
           padding: "8px",

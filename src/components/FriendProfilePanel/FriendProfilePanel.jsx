@@ -3,7 +3,7 @@ import { ProfileBanner } from "../../features/Profile/ProfileBanner";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile, setProfileNote } from "@/redux/slices/profileSlice";
-import PropTypes from "prop-types";
+import { SAMPLE_USERS } from "@/constants/mock";
 import {
   boxSX,
   buttonSX,
@@ -24,6 +24,10 @@ export function FriendProfilePanel() {
   const dispatch = useDispatch();
   const [isShowMutualServers, setShowMutualServers] = useState(false);
   const [isShowMutualFriends, setShowMutualFriends] = useState(false);
+
+  useEffect(() => {
+    dispatch(setProfile(SAMPLE_USERS[0]));
+  }, [dispatch]);
 
   const user = useSelector((state) => state.profile.userProfile);
   const userNote = user?.note || "";
@@ -76,7 +80,7 @@ export function FriendProfilePanel() {
             <Button onClick={showMutualServers} variant="text" sx={buttonSX}>
               <Typography
                 sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualServers?.length && user?.mutualServers?.length}
+                {user?.mutualServers?.length && user?.mutualServers?.length}{" "}
                 Mutual servers
               </Typography>
               {!isShowMutualServers && <KeyboardArrowRightIcon />}
@@ -87,7 +91,7 @@ export function FriendProfilePanel() {
             <Button onClick={showMutualFriends} variant="text" sx={buttonSX}>
               <Typography
                 sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualFriends?.length && user?.mutualFriends?.length}
+                {user?.mutualFriends?.length && user?.mutualFriends?.length}{" "}
                 Mutual friends
               </Typography>
               {!isShowMutualFriends && <KeyboardArrowRightIcon />}

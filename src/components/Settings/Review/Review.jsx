@@ -66,7 +66,7 @@ const Review = () => {
           justifyContent="space-between"
           sx={{ mb: "24px" }}>
           <Stack>
-            <Title>Display Name</Title>
+            <Title component="h3">Display Name</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
               tadimm
             </Typography>
@@ -75,7 +75,7 @@ const Review = () => {
         </Stack>
         <Stack direction="row" justifyContent="space-between">
           <Stack>
-            <Title>UserName</Title>
+            <Title component="h3">UserName</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
               tadimm
             </Typography>
@@ -87,7 +87,7 @@ const Review = () => {
           justifyContent="space-between"
           sx={{ mt: "24px" }}>
           <Stack>
-            <Title>Email</Title>
+            <Title component="h3">Email</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
               td@gmail.com
             </Typography>
@@ -99,7 +99,7 @@ const Review = () => {
           justifyContent="space-between"
           sx={{ mt: "24px" }}>
           <Stack>
-            <Title>Phone Number</Title>
+            <Title component="h3">Phone Number</Title>
             <Typography sx={{ color: "#f2f3f5", fontSize: "16px" }}>
               You haven&apos;t added a phone number yet.
             </Typography>

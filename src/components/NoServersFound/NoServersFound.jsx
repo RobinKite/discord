@@ -21,7 +21,7 @@ const NoServersFound = () => {
         sx={{
           color: "#f2f3f5",
           fontSize: "24px",
-          fontWeight: 500,
+          fontWeight: 700,
           margin: "32px 0 8px",
         }}>
         No results found

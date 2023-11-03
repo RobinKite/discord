@@ -107,7 +107,7 @@ const ServerCard = ({ card }) => {
             sx={{
               color: "#f2f3f5",
               fontSize: "16px",
-              fontWeight: 500,
+              fontWeight: 700,
             }}>
             {card.title}
           </Typography>

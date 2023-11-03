@@ -12,7 +12,6 @@ import SettingsTabContainer from "./SettingsTabContainer";
 import { List, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { CloseButton, LogOutButton } from "./StyledElements";
-import { clearServerSlice } from "@/redux/slices/serverSlice";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -49,9 +48,8 @@ const Settings = () => {
   };
 
   const handleLogout = () => {
-    // TODO: Add auth/logout
+    //TODO: Add auth/logout
     try {
-      dispatch(clearServerSlice());
       dispatch(logoutUser());
       handleCloseModal();
     } catch (e) {
@@ -132,8 +130,7 @@ const Settings = () => {
             />
           </List>
           <CloseButton onClick={handleCloseModal}>
-            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} />
-            Esc
+            <IoCloseCircleOutline size={44} style={{ fill: "#b5bac1" }} /> Esc
           </CloseButton>
         </Stack>
       </Stack>

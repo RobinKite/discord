@@ -51,7 +51,7 @@ const CustomDateSelector = ({
         >
           Date of birth
           {required && (
-            <span className="font-star ml-[3px] whitespace-nowrap text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
+            <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
               *
             </span>
           )}

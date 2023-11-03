@@ -26,7 +26,7 @@ export function User({ user, position, styles }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className={`relative flex  cursor-pointer items-center  rounded p-1 text-[#949ba4] transition duration-300 hover:bg-[#35373d] hover:text-[#f2f3f5] ${styles} `}>
+      className={`relative flex  cursor-pointer items-center  rounded px-1.5 py-1 text-[#949ba4] transition duration-300 hover:bg-[#35373d] hover:text-[#f2f3f5] ${styles} `}>
       <div
         className={
           isOffline

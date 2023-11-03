@@ -1,5 +1,4 @@
-import { Button, List, styled, Stack } from "@mui/material";
-import React from "react";
+import { Button, List, styled } from "@mui/material";
 
 const CategoryButton = styled(Button)(() => ({
   "&": {

@@ -16,10 +16,10 @@ export const AccountTabContent = () => {
     <>
       <Review />
       <SettingsLine styles={{ margin: "40px 0 " }} />
-      <SettingsTitle>Password</SettingsTitle>
+      <SettingsTitle component="h2">Password</SettingsTitle>
       <MainButton>Change Password</MainButton>
       <SettingsLine styles={{ margin: "20px 0 40px 0 " }} />
-      <Title>Account Removal</Title>
+      <Title component="h2">Account Removal</Title>
       <RemovalButton>Delete Account</RemovalButton>
     </>
   );

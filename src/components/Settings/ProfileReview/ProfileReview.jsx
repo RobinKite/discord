@@ -56,7 +56,7 @@ const ProfileReview = () => {
         <Typography
           variant="h6"
           component="h1"
-          sx={{ fontSize: "20px", fontWeight: 700 }}>
+          sx={{ fontSize: "20px", fontWeight: "700" }}>
           tadimm
         </Typography>
         <Typography sx={{ fontSize: "14px" }}>tadimm</Typography>
@@ -71,7 +71,7 @@ const ProfileReview = () => {
             content: "''",
           }}
         />
-        <Title>Customising My Profile</Title>
+        <Title component="h4">Customising My Profile</Title>
         <Stack sx={{ paddingBottom: "12px" }}>
           <Stack
             direction="row"

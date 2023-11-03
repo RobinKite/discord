@@ -58,7 +58,7 @@ export default function Roles() {
     <div key={role.name}>
       {role.users.length > 0 && (
         <div>
-          <h2 className="flex items-center px-1.5 text-xs font-medium uppercase text-[#959ba3]">
+          <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
             {role.name}&nbsp;
             <BiMinus />
             &nbsp;{role.users.length}

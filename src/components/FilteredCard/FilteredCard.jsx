@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Separator from "../Separator/Separator";
 
-const FilteredCard = ({ card }) => {
+export const FilteredCard = ({ card }) => {
   return (
     <>
       <Stack
@@ -51,7 +51,7 @@ const FilteredCard = ({ card }) => {
               sx={{
                 color: "#f2f3f5",
                 fontSize: "16px",
-                fontWeight: 500,
+                fontWeight: 700,
                 p: 0,
                 mb: "6px",
               }}>

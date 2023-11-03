@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { MainButton } from "../StyledElements";
 import { Stack } from "@mui/system";
 
@@ -40,7 +40,7 @@ const MicTest = () => {
             x,
             canvas.height - barHeight / 2,
             barWidth,
-            barHeight / 2
+            barHeight / 2,
           );
 
           x += barWidth + 1;

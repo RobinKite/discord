@@ -15,7 +15,6 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
           fontSize: "16px",
           padding: "4px 10px",
           width: "100%",
-          fontWeight: 400,
           justifyContent: "flex-start",
           textTransform: "capitalize",
           color: isActive ? "white" : "#B5BAC1",

@@ -1,6 +1,6 @@
 import SettingsLine from "../SettingsLine";
 import Typography from "@mui/material/Typography";
-import { Button, Stack, styled } from "@mui/material";
+import { Stack } from "@mui/material";
 import { RiComputerLine } from "react-icons/ri";
 import { FaExclamation, FaMobileAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -20,17 +20,16 @@ export const DevicesTabContent = () => {
         account. You can log out of each one individually or all other devices.
       </DeviceText>
       <DeviceText>
-        If you see an entry you don't recognize, log out of that device and
+        If you see an entry you don&apos;t recognize, log out of that device and
         change your Discord account password immediately.
       </DeviceText>
       <Stack sx={{ margin: "32px 0" }}>
-        <Title>Current Device</Title>
+        <Title component="h3">Current Device</Title>
         <Stack
           direction="row"
           alignItems="center"
           spacing={3}
-          sx={{ paddingY: "20px", mb: "20px" }}
-        >
+          sx={{ paddingY: "20px", mb: "20px" }}>
           <DeviceSpan sx={{ backgroundColor: "#b5bac1" }}>
             <RiComputerLine size={26} />
           </DeviceSpan>
@@ -45,8 +44,7 @@ export const DevicesTabContent = () => {
                 justifyContent: "start",
                 alignItems: "center",
                 gap: "5px",
-              }}
-            >
+              }}>
               Mac Os X <DotSpan /> Chrome
             </Typography>
             <Typography
@@ -55,19 +53,17 @@ export const DevicesTabContent = () => {
                 fontSize: "14px",
                 fontWeight: 500,
                 textTransform: "capitalize",
-              }}
-            >
+              }}>
               Kyiv, Kyiv City, Ukraine
             </Typography>
           </Stack>
         </Stack>
-        <Title>Other Devices</Title>
+        <Title component="h3">Other Devices</Title>
         <Stack
           direction="row"
           alignItems="center"
           spacing={3}
-          sx={{ p: "16px 0" }}
-        >
+          sx={{ p: "16px 0" }}>
           <DeviceSpan sx={{ backgroundColor: "#b5bac1" }}>
             <FaMobileAlt size={26} />
           </DeviceSpan>
@@ -82,24 +78,21 @@ export const DevicesTabContent = () => {
                 justifyContent: "start",
                 alignItems: "center",
                 gap: "5px",
-              }}
-            >
+              }}>
               IOS <DotSpan /> Discord IOS
             </Typography>
             <Stack
               direction="row"
               justifyContent="start"
               alignItems="center"
-              spacing={0.5}
-            >
+              spacing={0.5}>
               <Typography
                 sx={{
                   color: "#dbdee1",
                   fontSize: "14px",
                   fontWeight: 500,
                   textTransform: "capitalize",
-                }}
-              >
+                }}>
                 Kyiv, Kyiv City, Ukraine
               </Typography>
               <DotSpan />
@@ -108,8 +101,7 @@ export const DevicesTabContent = () => {
                   color: "#dbdee1",
                   fontSize: "14px",
                   fontWeight: 500,
-                }}
-              >
+                }}>
                 14 hours ago
               </Typography>
             </Stack>
@@ -120,13 +112,11 @@ export const DevicesTabContent = () => {
           direction="row"
           alignItems="center"
           spacing={3}
-          sx={{ p: "16px 0" }}
-        >
+          sx={{ p: "16px 0" }}>
           <DeviceSpan
             sx={{
               bgcolor: "#4e5058",
-            }}
-          >
+            }}>
             <FaExclamation size={26} color="#2b2d31" />
           </DeviceSpan>
           <Stack>
@@ -137,14 +127,12 @@ export const DevicesTabContent = () => {
                 fontWeight: 700,
                 textTransform: "uppercase",
                 mb: "8px",
-              }}
-            >
+              }}>
               Some older devices may not be shown here
             </Typography>
             <Typography
-              sx={{ color: "#949ba4", fontSize: "14px", fontWeight: 500 }}
-            >
-              To log them out, please{" "}
+              sx={{ color: "#949ba4", fontSize: "14px", fontWeight: 500 }}>
+              To log them out, please
               <NavLink to="#" style={{ color: "#00a8fc" }}>
                 change your password
               </NavLink>
@@ -153,10 +141,16 @@ export const DevicesTabContent = () => {
         </Stack>
         <SettingsLine />
       </Stack>
-      <Title sx={{ mb: "8px" }}>Log out of all known devices</Title>
+      <Title component="h3" sx={{ mb: "8px" }}>
+        Log out of all known devices
+      </Title>
       <Typography
-        sx={{ color: "#949ba4", fontSize: "14px", fontWeight: 500, mb: "16px" }}
-      >
+        sx={{
+          color: "#949ba4",
+          fontSize: "14px",
+          fontWeight: 500,
+          mb: "16px",
+        }}>
         You&apos;ll have to log back in on all logged out devices
       </Typography>
       <RemovalButton>Log out all known devices</RemovalButton>
