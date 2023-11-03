@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, setIsLoading } from "@/redux/slices/authSlice";
 import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
+import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
+import { useRef, useState } from "react";
 
 const StyledStackSX = {
   direction: "column",
@@ -35,6 +37,9 @@ function RegistrationForm() {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const errValue = useRef(null);
+
   const initialValues = {
     email: "test@test.com",
     username: "test.test",
@@ -52,9 +57,12 @@ function RegistrationForm() {
         navigate(from, { replace: true });
         actions.resetForm();
         dispatch(setIsLoading(false));
+        setShowAlert(false);
       });
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      setShowAlert(true);
+      errValue.current = err;
+      console.error(err);
     }
   };
 
@@ -114,6 +122,8 @@ function RegistrationForm() {
                 "Continue"
               )}
             </Button>
+            {showAlert && <OutlinedAlerts error={errValue.current} />}
+
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
               <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
