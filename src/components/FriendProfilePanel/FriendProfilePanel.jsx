@@ -80,7 +80,7 @@ export function FriendProfilePanel() {
             <Button onClick={showMutualServers} variant="text" sx={buttonSX}>
               <Typography
                 sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualServers?.length && user?.mutualServers?.length}{" "}
+                {user?.mutualServers?.length && user?.mutualServers?.length}
                 Mutual servers
               </Typography>
               {!isShowMutualServers && <KeyboardArrowRightIcon />}
@@ -91,7 +91,7 @@ export function FriendProfilePanel() {
             <Button onClick={showMutualFriends} variant="text" sx={buttonSX}>
               <Typography
                 sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualFriends?.length && user?.mutualFriends?.length}{" "}
+                {user?.mutualFriends?.length && user?.mutualFriends?.length}
                 Mutual friends
               </Typography>
               {!isShowMutualFriends && <KeyboardArrowRightIcon />}
