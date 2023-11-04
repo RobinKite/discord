@@ -206,6 +206,8 @@ export const setServers = createAsyncThunk(
           thunkAPI.dispatch(setAreServersLoading(false));
         }
       });
+    } else {
+      thunkAPI.dispatch(setAreServersLoading(false));
     }
     return result;
   },
