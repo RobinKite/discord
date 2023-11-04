@@ -11,3 +11,4 @@ export { Input } from "./Input/Input";
 export { Button } from "./Button/Button";
 export { GuildDiscovery } from "./GuildDiscovery/GuildDiscovery";
 export { FriendProfilePanel } from "./FriendProfilePanel/FriendProfilePanel";
+export { Indicator } from "./Indicator/Indicator";
