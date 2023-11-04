@@ -1,22 +1,19 @@
 import { Endpoint } from "@/constants/api";
-import { SAMPLE_CHANNELS, SAMPLE_SERVER } from "@/constants/mock";
+import { SAMPLE_SERVER } from "@/constants/mock";
 import { api } from "@/services/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const serverSlice = createSlice({
   name: "server",
   initialState: {
-    currentChannel: SAMPLE_CHANNELS[0],
-    currentServer: SAMPLE_SERVER,
-    servers: [SAMPLE_SERVER],
-    // currentChannel: {},
-    // currentServer: {},
+    currentChannel: {},
+    currentServer: {},
     serverId: "",
     channelId: "",
-    // currentChannel: {},
-    // servers: [],
+    servers: [SAMPLE_SERVER],
     allServers: [],
     messages: [],
+    areServersLoading: true,
   },
   reducers: {
     setMessages: (state, action) => {
@@ -43,22 +40,33 @@ const serverSlice = createSlice({
       state.channelId = "";
       state.messages = [];
     },
+    setAreServersLoading(state, action) {
+      state.areServersLoading = action.payload;
+    },
     addServer: (state, action) => {
       state.servers.push(action.payload);
-      if (!Object.keys(state.currentServer).length)
-        state.currentServer = action.payload;
-      if (!Object.keys(state.currentChannel).length)
-        state.currentChannel = action.payload.channels[0];
+      // TODO: Set currentChannel and currentServer using pathname
+      // if (!Object.keys(state.currentServer).length)
+      //   state.currentServer = action.payload;
+      // if (!Object.keys(state.currentChannel).length)
+      //   state.currentChannel = action.payload.channels[0];
+
       // if (!state.serverId) state.serverId = action.payload.id;
       // if (!state.channelId) state.channelId = action.payload.channels[0].id;
     },
+
     removeServer: (state, action) => {
       state.servers = state.servers.filter(
         (room) => room.id !== action.payload,
       );
     },
     setCurrentServer: (state, action) => {
-      //action.payload = serverId
+      state.currentServer = action.payload;
+      state.currentChannel = action.payload.channels[0];
+      state.serverId = action.payload.id;
+      state.channelId = action.payload.channels[0].id;
+    },
+    setCurrentServerId: (state, action) => {
       if (action.payload) {
         const serverToFind = state.servers.find(
           (server) => server.id === action.payload,
@@ -170,7 +178,7 @@ export const setServers = createAsyncThunk(
     const currentServers = thunkAPI.getState().server.servers;
 
     if (servers.length) {
-      servers.forEach((server) => {
+      servers.forEach((server, index, array) => {
         const existingServer = currentServers.find((s) => s.id === server.link);
 
         if (!existingServer) {
@@ -193,6 +201,9 @@ export const setServers = createAsyncThunk(
               ],
             }),
           );
+        }
+        if (index === array.length - 1) {
+          thunkAPI.dispatch(setAreServersLoading(false));
         }
       });
     }
@@ -272,8 +283,10 @@ export const {
   addUserToServerRole,
   removeUserFromServerRole,
   setCurrentServer,
+  setCurrentServerId,
   setCurrentChannel,
   setAllServers,
   clearServers,
+  setAreServersLoading,
 } = serverSlice.actions;
 export default serverSlice.reducer;

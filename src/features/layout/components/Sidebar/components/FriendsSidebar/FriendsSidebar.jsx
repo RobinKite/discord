@@ -13,7 +13,7 @@ import { User } from "@/components";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import { FriendsSideBarMenu } from "./FriendsSideBarMenu";
+import { FriendsSidebarMenu } from "./FriendsSidebarMenu";
 import { BaseSidebar } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { setProfile } from "@/redux/slices/profileSlice";
@@ -72,7 +72,7 @@ export function FriendsSidebar() {
           </Typography>
           <AddIcon sx={addIconSX} onClick={openFriendsList} />
           {showFriedsList && (
-            <FriendsSideBarMenu
+            <FriendsSidebarMenu
               setShowFriedsList={setShowFriedsList}
               addFriendChat={addFriendChat}
             />

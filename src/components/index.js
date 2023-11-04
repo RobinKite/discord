@@ -1,7 +1,5 @@
 export { IconButton } from "./IconButton/IconButton";
-export { PublicLayout } from "./PublicLayout/PublicLayout";
 export { ProtectedLayout } from "./ProtectedLayout/ProtectedLayout";
-export { RequireAuth } from "./RequireAuth/RequireAuth";
 export { ServerButton } from "./ServerButton/ServerButton";
 export { Friends } from "./Friends/Friends";
 export { UserList } from "./UserList/UserList";
@@ -11,3 +9,4 @@ export { Input } from "./Input/Input";
 export { Button } from "./Button/Button";
 export { GuildDiscovery } from "./GuildDiscovery/GuildDiscovery";
 export { FriendProfilePanel } from "./FriendProfilePanel/FriendProfilePanel";
+export { PageLoader } from "./PageLoader/PageLoader";

@@ -2,14 +2,13 @@ import { LiaPlusSolid } from "react-icons/lia";
 import { SiDiscord } from "react-icons/si";
 import { darkText, green } from "@/constants/designTokens";
 import { ServerButton } from "@/components";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "@/constants";
 import { openModal, toggleUserList } from "@/redux/slices/uiSlice";
 import { useNavigate } from "react-router-dom";
 import {
   clearCurrentServer,
-  setCurrentServer,
+  setCurrentServerId,
 } from "@/redux/slices/serverSlice";
 import { IoCompass } from "react-icons/io5";
 import { Stack } from "@mui/material";
@@ -46,7 +45,7 @@ export function ClientSidebar() {
 
   const handleOpenServer = (id) => {
     dispatch(clearCurrentServer());
-    dispatch(setCurrentServer(id));
+    dispatch(setCurrentServerId(id));
     navigate(`/channels/${id}`);
   };
 

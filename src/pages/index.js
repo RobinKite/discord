@@ -1,7 +1,7 @@
 export { Home } from "./Home/Home";
 export { Default } from "./Default/Default";
 export { Login } from "./Login/Login";
-export { Redirect } from "./Redirect/Redirect";
+export { ServerRedirect } from "./ServerRedirect/ServerRedirect";
 export { Friends } from "./Friends/Friends";
 export { Search } from "./Search/Search";
 export { Server } from "./Server/Server";
