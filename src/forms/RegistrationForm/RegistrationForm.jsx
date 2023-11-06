@@ -53,13 +53,18 @@ function RegistrationForm() {
   const onSubmit = (values, actions) => {
     dispatch(setIsLoading(true));
     try {
-      dispatch(register(values)).then(() => {
+      dispatch(register(values)).then((res) => {
+        if (!res.payload) {
+          dispatch(setIsLoading(false));
+          setShowAlert(res.error.message);
+          return new Error();
+        }
         navigate(from, { replace: true });
         actions.resetForm();
         dispatch(setIsLoading(false));
-        setShowAlert(false);
       });
     } catch (err) {
+      console.log("Failed to register log");
       setShowAlert(true);
       errValue.current = err;
       console.error(err);
@@ -122,7 +127,7 @@ function RegistrationForm() {
                 "Continue"
               )}
             </Button>
-            {showAlert && <OutlinedAlerts error={errValue.current} />}
+            {showAlert && <OutlinedAlerts error={showAlert} />}
 
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
