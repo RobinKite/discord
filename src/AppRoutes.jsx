@@ -21,7 +21,9 @@ const ProtectedRoutes = () => {
     <Routes>
       <Route path="/" element={<ProtectedLayout />}>
         <Route path="" element={<Home />} />
+
         <Route path="channels/">
+          <Route path="" element={<Navigate to="@me" replace />} />
           <Route path="@me" element={<Friends />} />
           <Route path="@me/:chatId" element={<Direct />} />
           <Route path=":serverId" element={<ServerRedirect />} />
@@ -30,7 +32,7 @@ const ProtectedRoutes = () => {
 
         <Route path="guild-discovery" element={<Explore />} />
         <Route path="filtered-servers" element={<Search />} />
-        <Route path="*" element={<Navigate to="/channels/@me" />} />
+        <Route path="*" element={<Navigate to="/channels/@me" replace />} />
       </Route>
     </Routes>
   );
@@ -49,7 +51,7 @@ const PublicRoutes = () => {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Login />} />
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 };
@@ -60,6 +62,7 @@ export function AppRoutes() {
   const hasToken = Boolean(getTokens().accessToken);
 
   useEffect(() => {
+    // TODO: Redirect to login page if token is invalid
     if (hasToken) {
       dispatch(setUser()).then(() => {
         dispatch(setServers());
