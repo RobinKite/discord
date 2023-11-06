@@ -598,4 +598,5 @@ export const SAMPLE_SERVER = {
   title: SAMPLE_SERVER_TITLE,
   channels: SAMPLE_CHANNELS,
   users: SAMPLE_USERS,
+  notificationCount: 0,
 };

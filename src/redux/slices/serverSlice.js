@@ -13,11 +13,15 @@ const serverSlice = createSlice({
     servers: [SAMPLE_SERVER],
     allServers: [],
     messages: [],
+    extraServerId: "",
     areServersLoading: true,
   },
   reducers: {
     setMessages: (state, action) => {
       state.messages = action.payload;
+    },
+    setExtraServerId: (state, action) => {
+      state.extraServerId = action.payload;
     },
     addMessage: (state, action) => {
       state.messages.push(action.payload);
@@ -45,14 +49,6 @@ const serverSlice = createSlice({
     },
     addServer: (state, action) => {
       state.servers.push(action.payload);
-      // TODO: Set currentChannel and currentServer using pathname
-      // if (!Object.keys(state.currentServer).length)
-      //   state.currentServer = action.payload;
-      // if (!Object.keys(state.currentChannel).length)
-      //   state.currentChannel = action.payload.channels[0];
-
-      // if (!state.serverId) state.serverId = action.payload.id;
-      // if (!state.channelId) state.channelId = action.payload.channels[0].id;
     },
 
     removeServer: (state, action) => {
@@ -78,11 +74,6 @@ const serverSlice = createSlice({
       state.serverId = action.payload;
     },
     setCurrentChannel: (state, action) => {
-      // if (action.payload) {
-      //   state.currentChannel = state.currentServer.find(
-      //     (channel) => channel.id === action.payload,
-      //   );
-      // }
       state.currentChannel = action.payload;
       state.channelId = action.payload.id;
     },
@@ -199,6 +190,7 @@ export const setServers = createAsyncThunk(
                   type: "text",
                 })),
               ],
+              notificationCount: 0,
             }),
           );
         }
@@ -233,6 +225,7 @@ export const createServer = createAsyncThunk(
             type: "text",
           })),
         ],
+        notificationCount: 0,
       }),
     );
     return result;
@@ -289,6 +282,7 @@ export const {
   setCurrentChannel,
   setAllServers,
   clearServers,
+  setExtraServerId,
   setAreServersLoading,
 } = serverSlice.actions;
 export default serverSlice.reducer;
