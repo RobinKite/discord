@@ -108,20 +108,6 @@ export const login = createAsyncThunk(
   }
 );
 
-// export const register = createAsyncThunk(
-//   Endpoint.REGISTER,
-//   async (data, thunkAPI) => {
-//     const result = await api.post(Endpoint.REGISTER, data);
-//     const { access_token, refresh_token } = result.data;
-//     const { id, email, avatar, name, userName } = result.data.user;
-//     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-//     setAuthToken(access_token);
-//     setRefreshToken(refresh_token);
-//     thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-//     return result;
-//   }
-// );
-
 export const register = createAsyncThunk(
   Endpoint.REGISTER,
   async (data, thunkAPI) => {
@@ -134,13 +120,14 @@ export const register = createAsyncThunk(
       setRefreshToken(refresh_token);
       return result;
     } catch (error) {
-      console.log(error);
       if (axios.isAxiosError(error)) {
         if (error.response) {
           if (error.response.status === 409) {
             throw new Error(
               "Registration failed: " + error.response.data.message
             );
+          } else if (error.response.status === 400) {
+            throw new Error("Network error: " + error.response.data.message);
           } else if (!error.response.status) {
             throw new Error("Network error: " + error.message);
           }
@@ -149,7 +136,9 @@ export const register = createAsyncThunk(
           );
         }
       }
-      throw new Error("Registration failed: " + error);
+      throw new Error(
+        "Registration failed. It's possible that this is due to a lack of internet access."
+      );
     }
   }
 );
