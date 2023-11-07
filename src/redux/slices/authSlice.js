@@ -73,14 +73,30 @@ export const setUser = createAsyncThunk(Endpoint.ME, async (_, thunkAPI) => {
 export const login = createAsyncThunk(
   Endpoint.LOGIN,
   async (data, thunkAPI) => {
-    const result = await api.post(Endpoint.LOGIN, data);
-    const { access_token, refresh_token } = result.data;
-    const { id, email, avatar, name, userName } = result.data.user;
-    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-    thunkAPI.dispatch(setServers());
-    setAuthToken(access_token);
-    setRefreshToken(refresh_token);
-    return result;
+    try {
+      const result = await api.post(Endpoint.LOGIN, data);
+      const { access_token, refresh_token } = result.data;
+      const { id, email, avatar, name, userName } = result.data.user;
+      thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+      thunkAPI.dispatch(setServers());
+      setAuthToken(access_token);
+      setRefreshToken(refresh_token);
+      return result;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response.status === 400) {
+            throw new Error("Login failed: " + error.response.data.message);
+          } else if (!error.response.status) {
+            throw new Error("Network error: " + error.message);
+          }
+          throw new Error("Login failed: " + error.response.data.message);
+        }
+      }
+      throw new Error(
+        "Login failed. It's possible that this is due to a lack of internet access."
+      );
+    }
   }
 );
 
