@@ -6,6 +6,7 @@ import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SAMPLE_FRIENDS } from "@/constants/mock";
 import { setServers } from "./serverSlice";
+import axios from "axios";
 
 const authSlice = createSlice({
   name: "auth",
@@ -34,7 +35,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.avatar = avatar;
     },
-    logoutUser: (state) => {
+    logoutUser: state => {
       state.isLoggedIn = false;
       state.email = null;
       state.userName = null;
@@ -80,21 +81,42 @@ export const login = createAsyncThunk(
     setAuthToken(access_token);
     setRefreshToken(refresh_token);
     return result;
-  },
+  }
 );
 
 export const register = createAsyncThunk(
   Endpoint.REGISTER,
   async (data, thunkAPI) => {
-    const result = await api.post(Endpoint.REGISTER, data);
-    const { access_token, refresh_token } = result.data;
-    const { id, email, avatar, name, userName } = result.data.user;
-    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-    setAuthToken(access_token);
-    setRefreshToken(refresh_token);
-    thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
-    return result;
-  },
+    try {
+      const result = await api.post(Endpoint.REGISTER, data);
+      const { access_token, refresh_token } = result.data;
+      const { id, email, avatar, name, userName } = result.data.user;
+      thunkAPI.dispatch(loginUser({ id, email, avatar, name, userName }));
+      setAuthToken(access_token);
+      setRefreshToken(refresh_token);
+      return result;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response.status === 409) {
+            throw new Error(
+              "Registration failed: " + error.response.data.message
+            );
+          } else if (error.response.status === 400) {
+            throw new Error("Network error: " + error.response.data.message);
+          } else if (!error.response.status) {
+            throw new Error("Network error: " + error.message);
+          }
+          throw new Error(
+            "Registration failed: " + error.response.data.message
+          );
+        }
+      }
+      throw new Error(
+        "Registration failed. It's possible that this is due to a lack of internet access."
+      );
+    }
+  }
 );
 
 export const {
