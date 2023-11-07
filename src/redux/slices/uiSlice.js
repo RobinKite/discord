@@ -11,10 +11,14 @@ const uiSlice = createSlice({
     popupPosition: [],
     currentPage: null,
     friendsTab: Tab.ONLINE,
+    nextPagePathname: null,
   },
   reducers: {
     setPopUpPosition: (state, action) => {
       state.popupPosition = action.payload;
+    },
+    setNextPagePathname: (state, action) => {
+      state.nextPagePathname = action.payload;
     },
     updateCurrentPage: (state, action) => {
       state.currentPage = action.payload;
@@ -53,6 +57,7 @@ export const {
   toggleUserList,
   updateCurrentPage,
   setFriendsTab,
+  setNextPagePathname,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

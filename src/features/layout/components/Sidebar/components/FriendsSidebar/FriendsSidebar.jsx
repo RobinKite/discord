@@ -1,6 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import { List, ListItem, Stack, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaUserFriends } from "react-icons/fa";
+import { User } from "@/components";
+import { setProfile } from "@/redux/slices/profileSlice";
 import {
   titleSX,
   itemSX,
@@ -9,14 +15,8 @@ import {
   addIconSX,
   innerBoxSX,
 } from "./stylesSX";
-import { User } from "@/components";
-import CloseIcon from "@mui/icons-material/Close";
-import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
-import { FriendsSideBarMenu } from "./FriendsSideBarMenu";
+import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
-import { useNavigate } from "react-router-dom";
-import { setProfile } from "@/redux/slices/profileSlice";
 
 export function FriendsSidebar() {
   const navigate = useNavigate();
@@ -45,7 +45,6 @@ export function FriendsSidebar() {
   };
 
   const openChat = (friend) => {
-    console.log(friend); //TODO: implement the transition to personal chat
     navigate("/channels/@me/" + friend.userId);
     dispatch(setProfile(friend));
   };
@@ -72,7 +71,7 @@ export function FriendsSidebar() {
           </Typography>
           <AddIcon sx={addIconSX} onClick={openFriendsList} />
           {showFriedsList && (
-            <FriendsSideBarMenu
+            <SidebarMenu
               setShowFriedsList={setShowFriedsList}
               addFriendChat={addFriendChat}
             />

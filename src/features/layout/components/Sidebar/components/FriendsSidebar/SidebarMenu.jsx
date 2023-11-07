@@ -6,7 +6,7 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 
-export function FriendsSideBarMenu({ setShowFriedsList, addFriendChat }) {
+export function SidebarMenu({ setShowFriedsList, addFriendChat }) {
   const friends = useSelector((state) => state.auth.friends);
   const friendsListRef = useRef(null);
 
@@ -30,7 +30,7 @@ export function FriendsSideBarMenu({ setShowFriedsList, addFriendChat }) {
   );
 }
 
-FriendsSideBarMenu.propTypes = {
+SidebarMenu.propTypes = {
   setShowFriedsList: PropTypes.func.isRequired,
   addFriendChat: PropTypes.func.isRequired,
 };

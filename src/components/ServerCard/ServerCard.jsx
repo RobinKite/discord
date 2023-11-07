@@ -70,8 +70,8 @@ const ServerCard = ({ card }) => {
             ...(card.icon
               ? {}
               : {
-                  bgcolor: theme.palette.blurple,
-                }),
+                bgcolor: theme.palette.blurple,
+              }),
           })}>
           {card.icon ? (
             <img
