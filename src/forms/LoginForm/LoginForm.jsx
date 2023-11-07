@@ -9,7 +9,6 @@ import { login, setIsLoading } from "@/redux/slices/authSlice";
 const StyledStackSX = {
   direction: "column",
   justifyContent: "flex-start",
-  // justifyContent: "center",
   p: "28px",
   bgcolor: "#2c2f33",
   borderRadius: { xs: 0, sm: 1 },
@@ -59,8 +58,6 @@ function LoginForm() {
     } catch (e) {
       console.error(e);
     }
-
-    // actions.resetForm();
   };
   return (
     <Formik

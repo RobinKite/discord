@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, setIsLoading } from "@/redux/slices/authSlice";
 import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
+import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
+import { useRef, useState } from "react";
 
 const StyledStackSX = {
   direction: "column",
@@ -35,6 +37,9 @@ function RegistrationForm() {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const errValue = useRef(null);
+
   const initialValues = {
     email: "test@test.com",
     username: "test.test",
@@ -46,11 +51,24 @@ function RegistrationForm() {
   };
 
   const onSubmit = (values, actions) => {
-    dispatch(register(values)).then(() => {
-      navigate(from, { replace: true });
-      actions.resetForm();
-      dispatch(setIsLoading(false));
-    });
+    dispatch(setIsLoading(true));
+    try {
+      dispatch(register(values)).then((res) => {
+        if (!res.payload) {
+          dispatch(setIsLoading(false));
+          setShowAlert(res.error.message);
+          return new Error();
+        }
+        navigate(from, { replace: true });
+        actions.resetForm();
+        dispatch(setIsLoading(false));
+      });
+    } catch (err) {
+      console.log("Failed to register log");
+      setShowAlert(true);
+      errValue.current = err;
+      console.error(err);
+    }
   };
 
   return (
@@ -104,12 +122,13 @@ function RegistrationForm() {
               {isLoading ? (
                 <span className="flex justify-center">
                   <Oval width={20} height={20} />
-                  <Oval width={20} height={20} />
                 </span>
               ) : (
                 "Continue"
               )}
             </Button>
+            {showAlert && <OutlinedAlerts error={showAlert} />}
+
             <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
               <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
