@@ -13,6 +13,7 @@ export const useBbox = () => {
     throttledSetBbox();
     window.addEventListener("resize", throttledSetBbox);
     return () => window.removeEventListener("resize", throttledSetBbox);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [bbox, ref];

@@ -4,14 +4,14 @@
 @tailwind utilities;
 
 :root {
-  font-family: NotoSans, system-ui, sans-serif;
+  font-family: Roboto, system-ui, sans-serif;
   line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
-  background-color: #242424;
+  background-color: #313338;
 }
 
 body {

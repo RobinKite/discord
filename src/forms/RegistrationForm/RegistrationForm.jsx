@@ -1,11 +1,33 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
-import CustomInput from "@/components/CustomInput/CustomInput";
+import { Button, Input } from "@/components";
 import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
 import { useDispatch, useSelector } from "react-redux";
 import { register, setIsLoading } from "@/redux/slices/authSlice";
 import { Oval } from "react-loader-spinner";
+import { Link, Stack, Typography } from "@mui/material";
+import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
+import { useRef, useState } from "react";
+
+const StyledStackSX = {
+  direction: "column",
+  justifyContent: "flex-start",
+  p: "28px",
+  bgcolor: "#2c2f33",
+  borderRadius: { xs: 0, sm: 1 },
+  maxWidth: {
+    xs: "480px",
+  },
+  minWidth: {
+    xs: "100vw",
+    sm: "450px",
+  },
+  height: {
+    xs: "100vh",
+    sm: "auto",
+  },
+};
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -15,55 +37,70 @@ function RegistrationForm() {
 
   const isLoading = useSelector((state) => state.auth.isLoading);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const errValue = useRef(null);
+
   const initialValues = {
-    email: "",
-    username: "",
-    password: "",
-    name: "",
-    day: "",
-    month: "",
-    year: "",
+    email: "test@test.com",
+    username: "test.test",
+    password: "testpassword",
+    name: "Test",
+    day: "30",
+    month: "11",
+    year: "2022",
   };
 
   const onSubmit = (values, actions) => {
-    console.log(values);
-    dispatch(register(values)).then(() => {
-      navigate(from, { replace: true });
-      actions.resetForm();
-      dispatch(setIsLoading(false));
-    });
+    dispatch(setIsLoading(true));
+    try {
+      dispatch(register(values)).then((res) => {
+        if (!res.payload) {
+          dispatch(setIsLoading(false));
+          setShowAlert(true);
+          errValue.current = res.error.message;
+          return new Error();
+        }
+        navigate(from, { replace: true });
+        actions.resetForm();
+        dispatch(setIsLoading(false));
+      });
+    } catch (err) {
+      setShowAlert(true);
+      errValue.current = err;
+    }
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       {({ isValid }) => (
         <Form>
-          <div className="grid w-[480px] grid-cols-1 rounded bg-[#2c2f33] p-8">
-            <h1 className="mb-5 text-center text-2xl font-medium text-white">
+          <Stack sx={StyledStackSX}>
+            <Typography
+              variant="h2"
+              mb="12px"
+              sx={{
+                textAlign: "center",
+                fontWeight: "medium",
+                color: "#fff",
+                fontSize: "1.5rem",
+              }}
+            >
               Create an account
-            </h1>
-            <CustomInput
+            </Typography>
+            <Input
               id="email"
               label="E-mail"
               type="email"
               name="email"
               required
             />
-            <CustomInput
-              id="name"
-              label="Display name"
-              name="name"
-            />
-            <CustomInput
-              id="username"
-              label="Username"
-              name="username"
-              required
-            />
-            <CustomInput
+            <Input id="name" label="Display name" name="name" />
+            <Input id="username" label="Username" name="username" required />
+            <Input
               id="password"
               label="Password"
               type="password"
@@ -79,41 +116,32 @@ function RegistrationForm() {
               yearLabel="Year"
               required={true}
             />
-            <button
-              disabled={!isValid}
-              type="submit"
-              className="mb-2 rounded bg-[#5865f2] py-[10px] leading-6 text-white hover:bg-[#4752c4] disabled:bg-[#4752c4]">
+
+            <Button disabled={!isValid} type="submit" sx={{ mb: 3 }}>
               {isLoading ? (
                 <span className="flex justify-center">
-                  <Oval
-                    width={20}
-                    height={20}
-                  />
+                  <Oval width={20} height={20} />
                 </span>
               ) : (
                 "Continue"
               )}
-            </button>
-            <p className="mb-5 text-xs text-[#ffffffbb]">
+            </Button>
+            {showAlert && <OutlinedAlerts error={errValue.current} />}
+
+            <Typography sx={{ mb: 4, fontSize: "12px", color: "#ffffffbb" }}>
               By registering, you agree to Discord&apos;s&#32;
-              <a
-                href="#"
-                className="text-[#00a8fc]">
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Term&apos;s of Service&#32;
-              </a>
+              </Link>
               and &#32;
-              <a
-                href="#"
-                className="text-[#00a8fc]">
+              <Link href="#" underline="none" sx={{ color: "#00a8fc" }}>
                 Privacy Policy.
-              </a>
-            </p>
-            <NavLink
-              to="/login"
-              className="text-sm font-medium text-[#00a8fc]">
+              </Link>
+            </Typography>
+            <NavLink to="/login" className="text-sm font-medium text-[#00a8fc]">
               Already have an account?
             </NavLink>
-          </div>
+          </Stack>
         </Form>
       )}
     </Formik>

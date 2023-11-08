@@ -7,17 +7,17 @@ import {
 } from "@/redux/slices/uiSlice";
 import { useDispatch } from "react-redux";
 import { offlineRoles, statusMap } from "@/constants/userStatus";
-import { Modal, PopUpPositions } from "@/constants";
+import { Modal } from "@/constants";
 import { useBbox } from "@/hooks/useBbox";
 
-export default function User({ user }) {
+export function User({ user, position, styles }) {
   const dispatch = useDispatch();
   const isOffline = offlineRoles.includes(user.status);
   const [bbox, ref] = useBbox();
 
   const handleModalOpen = (user) => {
     dispatch(openModal(Modal.POPUP));
-    dispatch(setPopUpPosition([PopUpPositions.USER_LIST, bbox]));
+    dispatch(setPopUpPosition([position, bbox]));
     dispatch(fillPopupContent(user));
   };
 
@@ -26,7 +26,7 @@ export default function User({ user }) {
     <div
       ref={ref}
       onClick={() => handleModalOpen(user)}
-      className="relative flex cursor-pointer items-center rounded bg-[#2b2d31] px-1.5 py-1 hover:bg-[#35373d]">
+      className={`relative flex  cursor-pointer items-center  rounded px-1.5 py-1 text-[#949ba4] transition duration-300 hover:bg-[#35373d] hover:text-[#f2f3f5] ${styles} `}>
       <div
         className={
           isOffline
@@ -35,15 +35,9 @@ export default function User({ user }) {
         }
         style={{ backgroundColor: bannerColor }}>
         {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt="user avatar"
-          />
+          <img src={user.avatar} alt="user avatar" />
         ) : (
-          <SiDiscord
-            size={20}
-            color="white"
-          />
+          <SiDiscord size={20} color="white" />
         )}
       </div>
       {!isOffline && (
@@ -55,8 +49,8 @@ export default function User({ user }) {
       <p
         className={
           isOffline
-            ? "text-[#9b59b6] opacity-30 transition-opacity hover:opacity-100"
-            : "text-[#9b59b6]"
+            ? "text-inherit opacity-30 transition-opacity  hover:opacity-100"
+            : "text-inherit "
         }>
         {user.name}
       </p>
@@ -66,4 +60,10 @@ export default function User({ user }) {
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  position: PropTypes.string,
+  styles: PropTypes.string,
+};
+
+User.defaultProps = {
+  styles: "bg-[#2b2d31]",
 };

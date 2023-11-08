@@ -20,10 +20,10 @@ const PopUp = () => {
   };
 
   const userRegistrationDate = formatRegistrationDate(
-    user.userRegistrationDate
+    user.userRegistrationDate,
   );
   const serverRegistrationDate = formatRegistrationDate(
-    user.serverRegistrationDate
+    user.serverRegistrationDate,
   );
 
   const handleModalClose = () => {
@@ -50,8 +50,10 @@ const PopUp = () => {
         borderRadius: "8px",
         overflow: "hidden",
         position: "fixed",
+        zIndex: 12,
         ...styled,
-      }}>
+      }}
+    >
       <PopUpInner
         user={user}
         userRegistrationDate={userRegistrationDate}

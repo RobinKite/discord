@@ -1,14 +1,13 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const Home = () => {
-  const navigate = useNavigate();
+export function Home() {
+  const nextPagePathname = useSelector((state) => state.ui.nextPagePathname);
 
-  useEffect(() => {
-    navigate("/channels/@me", { replace: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return <p>Home</p>;
-};
+  const navigateTo =
+    !nextPagePathname || nextPagePathname === "/"
+      ? "/channels/@me"
+      : nextPagePathname;
 
-export default Home;
+  return <Navigate to={navigateTo} replace />;
+}

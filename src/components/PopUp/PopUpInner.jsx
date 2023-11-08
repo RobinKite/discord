@@ -18,10 +18,7 @@ const PopUpInner = ({
   return (
     <>
       <Stack>
-        <Stack
-          backgroundColor={user.bannerColor}
-          sx={{ height: "60px" }}
-        />
+        <Stack backgroundColor={user.bannerColor} sx={{ height: "60px" }} />
         {user.avatar ? (
           <img
             src={user.avatar}
@@ -88,10 +85,7 @@ const PopUpInner = ({
               height: "16px",
               padding: "3.5px",
             }}>
-            <FaHashtag
-              color="black"
-              size={9}
-            />
+            <FaHashtag color="black" size={9} />
           </Link>
         </Stack>
       </Tooltip>
@@ -125,7 +119,7 @@ const PopUpInner = ({
             paddingTop: 3,
             marginBottom: "6px",
             fontSize: "12px",
-            fontWeight: "700",
+            fontWeight: 700,
             textTransform: "uppercase",
           }}>
           Member Since
@@ -148,9 +142,7 @@ const PopUpInner = ({
                 />
               </Stack>
             </Tooltip>
-            <Typography
-              variant="span"
-              sx={{ color: "#dbdee1" }}>
+            <Typography variant="span" sx={{ color: "#dbdee1" }}>
               {userRegistrationDate}
             </Typography>
           </Stack>
@@ -175,7 +167,7 @@ const PopUpInner = ({
                 fontSize: "8px",
                 p: 0.5,
               }}>
-              {adjustText(user.serverName, 2, false).serverName}
+              {adjustText(user.serverName, 1.75, 2, false).serverName}
             </Stack>
           </Tooltip>
           <Typography
@@ -191,7 +183,7 @@ const PopUpInner = ({
               sx={{
                 fontSize: "12px",
                 textTransform: "uppercase",
-                fontWeight: "700",
+                fontWeight: 700,
                 marginBottom: 1.5,
               }}>
               Role
@@ -219,7 +211,7 @@ const PopUpInner = ({
           sx={{
             fontSize: "12px",
             textTransform: "uppercase",
-            fontWeight: "700",
+            fontWeight: 700,
             marginBottom: 1.5,
           }}>
           Note

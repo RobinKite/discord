@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import extendPalette, { darkText, darkTooltip } from "./designTokens";
 
+const defaultTheme = createTheme();
 const { buttonBgHover, buttonBgDefault, buttonBgDisabled, white } =
   extendPalette;
 
@@ -10,6 +11,11 @@ const theme = createTheme({
     ...extendPalette,
   },
   spacing: 4,
+  shadows: [
+    "none",
+    "0 1px 2px 0 rgba(0,0,0,0.35)",
+    ...defaultTheme.shadows.slice(2),
+  ],
   breakpoints: {
     values: { xs: 0, sm: 450, md: 700, lg: 1200, xl: 1536 },
   },
@@ -40,9 +46,7 @@ const theme = createTheme({
           fontSize: "12px",
           color: "#ffffffaa",
           textTransform: "uppercase",
-          fontWeight: "700",
-          marginBottom: "8px",
-
+          fontWeight: 700,
           "& .MuiFormLabel-asterisk": {
             color: "#dd3f41",
           },
@@ -76,7 +80,7 @@ const theme = createTheme({
         tooltip: {
           backgroundColor: darkTooltip,
           fontSize: "12px",
-          fontWeight: "600",
+          fontWeight: 500,
           padding: "8px 12px",
           color: darkText,
           "& .MuiTooltip-arrow": {
