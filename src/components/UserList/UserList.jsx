@@ -2,6 +2,8 @@ import { Stack } from "@mui/material";
 import Roles from "../Roles/Roles";
 
 const StyledStackSX = (theme) => ({
+  maxHeight: "calc(100vh - 48px)", //dumb fix
+  overflowY: "auto",
   display: "flex",
   flexDirection: "column",
   minWidth: "240px",

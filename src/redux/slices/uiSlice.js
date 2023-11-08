@@ -7,6 +7,8 @@ const uiSlice = createSlice({
     modalStack: [],
     isLoading: false,
     isUserListShown: false,
+    isStreamingChatShown: false,
+    isFullScreen: false,
     popupContent: {},
     popupPosition: [],
     currentPage: null,
@@ -44,6 +46,12 @@ const uiSlice = createSlice({
     setFriendsTab: (state, action) => {
       state.friendsTab = action.payload;
     },
+    toggleStreamingChatShown: (state) => {
+      state.isStreamingChatShown = !state.isStreamingChatShown;
+    },
+    toggleFullScreen: (state) => {
+      state.isFullScreen = !state.isFullScreen;
+    },
   },
 });
 
@@ -55,6 +63,8 @@ export const {
   fillPopupContent,
   setPopUpPosition,
   toggleUserList,
+  toggleStreamingChatShown,
+  toggleFullScreen,
   updateCurrentPage,
   setFriendsTab,
   setNextPagePathname,
