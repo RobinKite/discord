@@ -22,7 +22,8 @@ export function SidebarMenu({ setShowFriedsList, addFriendChat }) {
           key={friend.name}
           onClick={(e) => {
             addFriendChat(e, friend);
-          }}>
+          }}
+        >
           <User user={friend} />
         </ListItem>
       ))}

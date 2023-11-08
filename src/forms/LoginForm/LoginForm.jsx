@@ -6,6 +6,8 @@ import { Oval } from "react-loader-spinner";
 import { Input, Button } from "@/components";
 import { login, setIsLoading } from "@/redux/slices/authSlice";
 import validationSchema from "./validationSchema";
+import { useRef, useState } from "react";
+import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
 
 const StyledStackSX = {
   direction: "column",
@@ -40,6 +42,9 @@ function LoginForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [showAlert, setShowAlert] = useState(false);
+  const errValue = useRef(null);
+
   const from = location.state?.from?.pathname || "/";
   const isLoading = useSelector((state) => state.auth.isLoading);
 
@@ -51,13 +56,22 @@ function LoginForm() {
   const handleSubmit = (values, actions) => {
     dispatch(setIsLoading(true));
     try {
-      dispatch(login(values)).then(() => {
+      dispatch(login(values)).then((res) => {
+        console.log(res);
+        if (!res.payload) {
+          dispatch(setIsLoading(false));
+          setShowAlert(true);
+          errValue.current = res.error.message;
+          return new Error();
+        }
         navigate(from, { replace: true });
         actions.resetForm();
         dispatch(setIsLoading(false));
       });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log(err);
+      setShowAlert(true);
+      errValue.current = err;
     }
   };
 
@@ -65,7 +79,8 @@ function LoginForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+    >
       {(form) => (
         <Form>
           <Stack sx={StyledStackSX}>
@@ -77,7 +92,8 @@ function LoginForm() {
                 textAlign: "center",
                 mb: "4px",
                 fontSize: "1.5rem",
-              }}>
+              }}
+            >
               Welcome back!
             </Typography>
 
@@ -87,7 +103,8 @@ function LoginForm() {
                 textAlign: "center",
                 mb: 3,
                 fontSize: "1.025rem",
-              }}>
+              }}
+            >
               We&apos;re so exited to see you again!
             </Typography>
 
@@ -114,7 +131,8 @@ function LoginForm() {
             <Button
               disabled={!form.isValid || isLoading}
               sx={{ mb: 3 }}
-              type="submit">
+              type="submit"
+            >
               {isLoading ? (
                 <span className="flex justify-center">
                   <Oval width={20} height={20} />
@@ -124,11 +142,14 @@ function LoginForm() {
               )}
             </Button>
 
+            {showAlert && <OutlinedAlerts error={errValue.current} />}
+
             <Typography sx={{ fontSize: "0.875rem", color: "#949ba4" }}>
               Need an account? &#32;
               <NavLink
                 to="/register"
-                className="text-sm font-medium text-[#00a8fc]">
+                className="text-sm font-medium text-[#00a8fc]"
+              >
                 Register
               </NavLink>
             </Typography>

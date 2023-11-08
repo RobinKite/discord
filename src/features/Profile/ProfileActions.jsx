@@ -3,15 +3,20 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ActionMenu } from "./ActionMenu";
 import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components";
+import { createFriendRequest } from "@/redux/slices/friendsSlice";
 
 export const ProfileActions = () => {
   const actionMenuRef = useRef(null);
   const userProfile = useSelector((state) => state.profile.userProfile);
-  const authFriends = useSelector((state) => state.auth.friends);
+  // const authFriends = useSelector((state) => state.auth.friends);
+  const authFriends = useSelector((state) => state.friends.friendsList);
+  const friendRequestStatus = useSelector((state) => state.friends.status);
   const [toggleActionMenu, setToggleActionMenu] = useState(false);
   const [isInAuthFriends, setIsInAuthFriends] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsInAuthFriends(
@@ -26,8 +31,9 @@ export const ProfileActions = () => {
   const handleSendMessageButton = () => {
     console.log("handleSendMessageButton");
   };
-  const handleSendRequestButton = () => {
+  const handleSendRequestButton = (userId) => {
     console.log("handleSendRequestButton");
+    dispatch(createFriendRequest(userId));
   };
 
   useOnClickOutside(actionMenuRef, handleAdditionalActionsButton);
@@ -55,14 +61,29 @@ export const ProfileActions = () => {
           "&:hover": {
             bgcolor: theme.palette.darkgreen[20],
           },
+          ...(friendRequestStatus === "pending"
+            ? {
+              "&.Mui-disabled": {
+                backgroundColor: "#24804670",
+                color: "#ffffff70",
+                cursor: "not-allowed",
+                pointerEvents: "auto",
+              },
+            }
+            : ""),
         })}
+        disabled={friendRequestStatus === "pending"}
         onClick={() => {
           isInAuthFriends
             ? handleSendMessageButton()
-            : handleSendRequestButton();
+            : handleSendRequestButton(userProfile.userId);
         }}
       >
-        {isInAuthFriends ? "Send a message" : "Send a friend request"}
+        {isInAuthFriends
+          ? "Send a message"
+          : friendRequestStatus === "pending"
+            ? "Friend Request Sent"
+            : "Send a friend request"}
       </Button>
       <Button
         sx={{
