@@ -67,28 +67,33 @@ const StreamingChat = () => {
           bgcolor: "#313338",
           borderTopLeftRadius: "10px",
           borderBottomLeftRadius: "10px",
-          height: "100vh",
-        }}
-      >
+          height: "100%",
+        }}>
         <Stack
           direction="row"
           justifyContent="space-between"
-          sx={{ p: "8px", borderBottom: "1px solid #242425" }}
-        >
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <IoChatboxSharp color="#80848e" size={24} />
+          sx={{ p: "8px", borderBottom: "1px solid #242425" }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}>
+            <IoChatboxSharp
+              color="#80848e"
+              size={24}
+            />
             <Typography
               variant="h1"
               sx={{
                 fontSize: "16px",
                 color: "#f2f3f5",
                 fontWeight: 600,
-              }}
-            >
+              }}>
               General
             </Typography>
           </Stack>
-          <Tooltip arrow title="Close">
+          <Tooltip
+            arrow
+            title="Close">
             <IconButton onClick={toggleChat}>
               <RxCross2 color="#b5bac1" />
             </IconButton>
@@ -99,11 +104,13 @@ const StreamingChat = () => {
           sx={{
             overflowY: "auto",
             flex: 1,
-          }}
-        >
+          }}>
           <SystemMessage />
           {messages.map((message) => (
-            <Message key={message.messageID} {...message} />
+            <Message
+              key={message.messageID}
+              {...message}
+            />
           ))}
         </Stack>
         <Input submitCallback={createMessage} />
