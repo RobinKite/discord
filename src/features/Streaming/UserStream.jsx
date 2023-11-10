@@ -1,10 +1,23 @@
+import { DailyVideo, useMediaTrack } from "@daily-co/daily-react";
 import { Stack, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import { BiSolidMicrophoneOff } from "react-icons/bi";
+import { BiSolidMicrophoneOff, BiSolidMicrophone } from "react-icons/bi";
 import { SiDiscord } from "react-icons/si";
+import { useSelector } from "react-redux";
 
-const UserStream = ({ user, isHovered, cardHeight }) => {
-  const idCheck = user.userId == 1 ? "local-video" : "remote-video"; //mock
+const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
+  const idCheck = isSelf ? "local-video" : "remote-video"; //mock
+
+  const videoState = useMediaTrack(user.userId, "video");
+
+  // console.log(videoState);
+
+  const isMicActive = useSelector((state) => state.ui.isMicActive);
+
+  // const isAlone = useMemo(
+  //   () => remoteParticipantIds?.length < 1 || screens?.length < 1,
+  //   [remoteParticipantIds, screens]
+  // );
 
   return (
     <Stack
@@ -19,11 +32,21 @@ const UserStream = ({ user, isHovered, cardHeight }) => {
         borderRadius: "8px",
         position: "relative",
         margin: "0 auto",
-      }}
-    >
-      <Stack>
-        <SiDiscord color="#fff" size={50} />
-      </Stack>
+      }}>
+      {videoState ? (
+        <DailyVideo
+          automirror
+          sessionId={user.userId}
+          type={isScreenShare ? "screenVideo" : "video"}
+        />
+      ) : (
+        <Stack>
+          <SiDiscord
+            color="#fff"
+            size={50}
+          />
+        </Stack>
+      )}
       {isHovered && (
         <Typography
           sx={{
@@ -35,9 +58,8 @@ const UserStream = ({ user, isHovered, cardHeight }) => {
             position: "absolute",
             bottom: "8px",
             left: "8px",
-          }}
-        >
-          {user.name}
+          }}>
+          {user.name ? user.name : "anonymous"}
         </Typography>
       )}
       <Stack
@@ -51,18 +73,32 @@ const UserStream = ({ user, isHovered, cardHeight }) => {
           position: "absolute",
           bottom: "8px",
           right: "8px",
-        }}
-      >
-        <BiSolidMicrophoneOff color="#fff" size={24} />
+        }}>
+        {isMicActive ? (
+          <BiSolidMicrophone
+            color="#fff"
+            size={24}
+          />
+        ) : (
+          <BiSolidMicrophoneOff
+            color="#fff"
+            size={24}
+          />
+        )}
       </Stack>
     </Stack>
   );
 };
 
 UserStream.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   isHovered: PropTypes.bool.isRequired,
   cardHeight: PropTypes.number.isRequired,
+  isSelf: PropTypes.bool,
+};
+
+UserStream.defaultProps = {
+  isSelf: false,
 };
 
 export default UserStream;

@@ -14,8 +14,16 @@ const uiSlice = createSlice({
     currentPage: null,
     friendsTab: Tab.ONLINE,
     nextPagePathname: null,
+    isMicActive: true,
+    isVideoActive: true,
   },
   reducers: {
+    setIsMicActive: (state) => {
+      state.isMicActive = !state.isMicActive;
+    },
+    setIsVideoActive: (state) => {
+      state.isVideoActive = !state.isVideoActive;
+    },
     setPopUpPosition: (state, action) => {
       state.popupPosition = action.payload;
     },
@@ -68,6 +76,8 @@ export const {
   updateCurrentPage,
   setFriendsTab,
   setNextPagePathname,
+  setIsMicActive,
+  setIsVideoActive,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

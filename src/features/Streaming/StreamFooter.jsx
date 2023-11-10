@@ -1,8 +1,11 @@
 import { IconButton, Slide, Stack, Tooltip } from "@mui/material";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { toggleFullScreen } from "@/redux/slices/uiSlice";
+import {
+  setIsMicActive,
+  setIsVideoActive,
+  toggleFullScreen,
+} from "@/redux/slices/uiSlice";
 import {
   FullScreenButton,
   StreamButtonOff,
@@ -20,30 +23,44 @@ import {
 } from "react-icons/bs";
 import { HiPhoneXMark } from "react-icons/hi2";
 import { MdScreenShare, MdStopScreenShare } from "react-icons/md";
+import useDailyStreaming from "@/hooks/useDailyStreaming";
 
 const StreamFooter = ({ isHovered, handleStopStreaming }) => {
-  const [isMicActive, setIsMicActive] = useState(false);
-  const [isVideoActive, setIsVideoActive] = useState(false);
-  const [isStreamActive, setIsStreamActive] = useState(true);
   const isFullScreen = useSelector((state) => state.ui.isFullScreen);
+  const isMicActive = useSelector((state) => state.ui.isMicActive);
+  const isVideoActive = useSelector((state) => state.ui.isVideoActive);
   const dispatch = useDispatch();
+
+  const {
+    callObject,
+    isSharingScreen,
+    mutedVideo,
+    mutedAudio,
+    toggleScreenShare,
+  } = useDailyStreaming();
 
   const enterFullScreen = () => {
     dispatch(toggleFullScreen());
   };
 
   const toggleMicButton = () => {
-    setIsMicActive((prev) => !prev);
+    callObject.setLocalAudio(mutedAudio);
+    dispatch(setIsMicActive());
   };
   const toggleVideoButton = () => {
-    setIsVideoActive((prev) => !prev);
+    callObject.setLocalVideo(mutedVideo);
+    dispatch(setIsVideoActive());
   };
   const toggleStreamButton = () => {
-    setIsStreamActive((prev) => !prev);
+    toggleScreenShare();
   };
 
   return (
-    <Slide direction="up" in={isHovered} mountOnEnter unmountOnExit>
+    <Slide
+      direction="up"
+      in={isHovered}
+      mountOnEnter
+      unmountOnExit>
       <Stack
         direction="row"
         justifyContent="center"
@@ -55,67 +72,83 @@ const StreamFooter = ({ isHovered, handleStopStreaming }) => {
           bottom: "10px",
           left: 0,
           width: "100%",
-        }}
-      >
+        }}>
         {isMicActive ? (
-          <Tooltip arrow title="Mute">
+          <Tooltip
+            arrow
+            title="Mute">
             <StreamButtonOn onClick={toggleMicButton}>
               <BiSolidMicrophone color="#fff" />
             </StreamButtonOn>
           </Tooltip>
         ) : (
-          <Tooltip arrow title="Unmute">
+          <Tooltip
+            arrow
+            title="Unmute">
             <StreamButtonOff onClick={toggleMicButton}>
               <BiSolidMicrophoneOff color="#000" />
             </StreamButtonOff>
           </Tooltip>
         )}
         {isVideoActive ? (
-          <Tooltip arrow title="Turn On Camera">
+          <Tooltip
+            arrow
+            title="Turn On Camera">
             <StreamButtonOn onClick={toggleVideoButton}>
               <BsFillCameraVideoFill color="#fff" />
             </StreamButtonOn>
           </Tooltip>
         ) : (
-          <Tooltip arrow title="Turn Off Camera">
+          <Tooltip
+            arrow
+            title="Turn Off Camera">
             <StreamButtonOff onClick={toggleVideoButton}>
               <BsFillCameraVideoOffFill color="#000" />
             </StreamButtonOff>
           </Tooltip>
         )}
-        {isStreamActive ? (
-          <Tooltip arrow title="Share Your Screen">
-            <StreamButtonOn onClick={toggleStreamButton}>
-              <MdScreenShare color="#fff" />
-            </StreamButtonOn>
-          </Tooltip>
-        ) : (
-          <Tooltip arrow title="Stop Streaming">
+        {isSharingScreen ? (
+          <Tooltip
+            arrow
+            title="Stop Streaming">
             <StreamButtonOff onClick={toggleStreamButton}>
               <MdStopScreenShare color="#000" />
             </StreamButtonOff>
           </Tooltip>
+        ) : (
+          <Tooltip
+            arrow
+            title="Share Your Screen">
+            <StreamButtonOn onClick={toggleStreamButton}>
+              <MdScreenShare color="#fff" />
+            </StreamButtonOn>
+          </Tooltip>
         )}
-        <Tooltip arrow title="Disconnect">
+        <Tooltip
+          arrow
+          title="Disconnect">
           <IconButton
             onClick={handleStopStreaming}
             sx={{
               bgcolor: "#f23f42",
               padding: "16px",
               "&:hover": { backgroundColor: "#f23f42" },
-            }}
-          >
+            }}>
             <HiPhoneXMark color="#fff" />
           </IconButton>
         </Tooltip>
         {isFullScreen ? (
-          <Tooltip arrow title="Exit Full Screen">
+          <Tooltip
+            arrow
+            title="Exit Full Screen">
             <FullScreenButton onClick={enterFullScreen}>
               <BiExitFullscreen color="#fff" />
             </FullScreenButton>
           </Tooltip>
         ) : (
-          <Tooltip arrow title="Full Screen">
+          <Tooltip
+            arrow
+            title="Full Screen">
             <FullScreenButton onClick={enterFullScreen}>
               <BiFullscreen color="#fff" />
             </FullScreenButton>
