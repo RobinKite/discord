@@ -5,8 +5,11 @@ import StreamHeader from "./StreamHeader";
 import StreamFooter from "./StreamFooter";
 import { SAMPLE_USERS } from "@/constants/mock";
 import { calculateGridDimensions, shortenArray } from "@/utils";
+import { useSelector } from "react-redux";
 
 const Streaming = () => {
+  const isFullScreen = useSelector((state) => state.ui.isFullScreen);
+
   const [isHovered, setIsHovered] = useState(false);
   const users = shortenArray(SAMPLE_USERS, 12);
   const totalUsers = users.length;
@@ -28,10 +31,12 @@ const Streaming = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         sx={{
-          position: "relative",
           bgcolor: "#000",
           width: "100%",
           overflow: "hidden",
+          ...(isFullScreen
+            ? { position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }
+            : { position: "relative" }),
         }}>
         {isHovered && <StreamHeader isHovered={isHovered} />}
         <Stack
