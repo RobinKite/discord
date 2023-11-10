@@ -8,7 +8,7 @@ export function Layout({ withHeader, children }) {
       <ClientSidebar />
       <div className="flex max-h-screen min-h-screen grow flex-col">
         {withHeader && <Header />}
-        <main className="flex grow">{children}</main>
+        <main className="flex min-h-[80vh] grow">{children}</main>
       </div>
     </div>
   );
