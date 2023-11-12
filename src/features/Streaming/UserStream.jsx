@@ -15,6 +15,7 @@ const UserStream = ({ user, isHovered, cardHeight }) => {
         cursor: "pointer",
         bgcolor: user.bannerColor ? user.bannerColor : "#5c64f4",
         maxWidth: "592px",
+        minWidth: "65px",
         minHeight: `${cardHeight}px`,
         borderRadius: "8px",
         position: "relative",

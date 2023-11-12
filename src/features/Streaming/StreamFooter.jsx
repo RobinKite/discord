@@ -49,6 +49,7 @@ const StreamFooter = ({ isHovered, handleStopStreaming }) => {
         justifyContent="center"
         spacing={4}
         sx={{
+          pt: 2,
           backgroundColor: "#000",
           boxShadow: "0 -20px 60px rgba(0, 0, 0, 0.9)",
           position: "absolute",

@@ -32,24 +32,28 @@ const Streaming = () => {
           bgcolor: "#000",
           width: "100%",
           overflow: "hidden",
-        }}>
+        }}
+      >
         {isHovered && <StreamHeader isHovered={isHovered} />}
         <Stack
           alignItems="center"
           justifyContent="center"
-          sx={{ width: "100%", padding: "16px" }}>
+          sx={{ width: "100%", padding: "16px" }}
+        >
           <Grid
             container
             spacing={4}
             alignContent="center"
-            justifyContent="center">
+            justifyContent="center"
+          >
             {users.map((user) => (
               <Grid
                 item
                 xs={12 / gridColumns}
                 key={user.userId}
                 alignContent="center"
-                justifyContent="center">
+                justifyContent="center"
+              >
                 <UserStream
                   user={user}
                   isHovered={isHovered}
