@@ -17,13 +17,24 @@ import {
 } from "./stylesSX";
 import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
+import useContextmenu from "@/hooks/useContextmenu";
+import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
 
 export function FriendsSidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const friends = useSelector((state) => state.friends.friendsList);
+  const contextmenuButtons = useDirectMessageContextmenuButtons();
+
+  const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
+    useContextmenu();
+
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);
+
+  useOnClickOutside(contextMenuRef, resetContextMenu);
 
   const deleteFriendChat = (friend) => {
     setFiltredFriends((prev) =>
@@ -78,7 +89,6 @@ export function FriendsSidebar() {
             />
           )}
         </Stack>
-
         <List sx={{ width: "100%", p: 0 }}>
           {filtredFriends.length ? (
             filtredFriends.map((friend) => (
@@ -86,6 +96,10 @@ export function FriendsSidebar() {
                 key={`${friend.name} ${friend.userId}`}
                 sx={itemSX}
                 onClick={() => openChat(friend)}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  handleOnContextMenu(e, friend);
+                }}
               >
                 <User user={friend} styles="w-[100%] bg-[#2b2d31]" />
                 <CloseIcon
@@ -102,6 +116,13 @@ export function FriendsSidebar() {
             </Typography>
           )}
         </List>
+        <ContextMenu
+          contextMenuRef={contextMenuRef}
+          isToggled={contextMenu.toggled}
+          positionX={contextMenu.position.x}
+          positionY={contextMenu.position.y}
+          buttons={contextmenuButtons}
+        />
       </Stack>
     </BaseSidebar>
   );

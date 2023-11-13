@@ -7,6 +7,7 @@ import { PopUpPositions } from "@/constants";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import useContextmenu from "@/hooks/useContextmenu";
+import { useProfileContextMenuButtons } from "@/hooks/useProfileContextmenuButtons";
 
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);
@@ -14,13 +15,14 @@ export default function Roles() {
 
   const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
     useContextmenu();
+  const contextmenuButtons = useProfileContextMenuButtons();
 
   useOnClickOutside(contextMenuRef, resetContextMenu);
 
   return sortedUsers.map((role) => (
     <div key={role.name}>
       {role.users.length > 0 && (
-        <div>
+        <>
           <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
             {role.name}&nbsp;
             <BiMinus />
@@ -46,8 +48,9 @@ export default function Roles() {
             isToggled={contextMenu.toggled}
             positionX={contextMenu.position.x}
             positionY={contextMenu.position.y}
+            buttons={contextmenuButtons}
           />
-        </div>
+        </>
       )}
     </div>
   ));

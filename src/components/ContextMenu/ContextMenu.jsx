@@ -10,19 +10,18 @@ import {
   styledFormControlLabelSX,
   styledMenuSX,
 } from "./stylesSX";
-import { useProfileContextMenuButtons } from "@/hooks/useProfileContextmenuButtons";
 
 export const ContextMenu = ({
   positionY,
   positionX,
   isToggled,
   contextMenuRef,
+  buttons,
 }) => {
   const user = useSelector((state) => state.profile.userProfile);
   const modalStack = useSelector((state) => state.ui.modalStack);
   const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
 
-  const buttons = useProfileContextMenuButtons();
   return (
     !isSettingsModalOpen && (
       <Stack
@@ -85,4 +84,5 @@ ContextMenu.propTypes = {
   positionX: PropTypes.number.isRequired,
   isToggled: PropTypes.bool.isRequired,
   contextMenuRef: PropTypes.object.isRequired,
+  buttons: PropTypes.array.isRequired,
 };

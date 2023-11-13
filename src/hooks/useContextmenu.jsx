@@ -2,6 +2,7 @@ import { setProfile } from "@/redux/slices/profileSlice";
 import { useState } from "react";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export default function useContextmenu() {
   const dispatch = useDispatch();
@@ -15,14 +16,25 @@ export default function useContextmenu() {
     toggled: false,
   });
 
+  let location = useLocation();
+
   const handleOnContextMenu = (e, user) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(setProfile(user));
 
     const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
-    let x = e.clientX - contextMenuAttr.width - 4;
-    let y = e.clientY - 5;
+
+    let x = e.clientX;
+    let y = e.clientY;
+
+    if (location.pathname === "/channels/@me") {
+      x = x + 4;
+      y = y - 5;
+    } else {
+      x = e.clientX - contextMenuAttr.width - 4;
+      y = e.clientY - 5;
+    }
 
     setContextMenu({
       user,
