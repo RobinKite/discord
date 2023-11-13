@@ -1,10 +1,10 @@
 import { Stack } from "@mui/system";
+import PropTypes from "prop-types";
 
 const SettingsLine = ({ styles }) => (
   <Stack
     variant="span"
     sx={{
-      // marginY: "20px",
       boxSizing: "border-box",
       display: "block",
       height: "1px",
@@ -14,5 +14,9 @@ const SettingsLine = ({ styles }) => (
     }}
   />
 );
+
+SettingsLine.propTypes = {
+  styles: PropTypes.object,
+};
 
 export default SettingsLine;

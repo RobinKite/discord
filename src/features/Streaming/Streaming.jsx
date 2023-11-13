@@ -1,21 +1,25 @@
-import { useState } from "react";
 import { Grid, Stack } from "@mui/material";
-import UserStream from "./UserStream";
-import StreamHeader from "./StreamHeader";
-import StreamFooter from "./StreamFooter";
-import { calculateGridDimensions } from "@/utils";
-import { useSelector } from "react-redux";
 import {
   DailyAudio,
   useLocalParticipant,
   useParticipantIds,
   useScreenShare,
 } from "@daily-co/daily-react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { CallState } from "@/constants";
 import { useUser } from "@/hooks/useUser";
-import { STATE_IDLE } from "@/constants/streaming";
+import { calculateGridDimensions } from "@/utils";
+import UserStream from "./UserStream";
+import StreamHeader from "./StreamHeader";
+import StreamFooter from "./StreamFooter";
 
-const Streaming = ({ handleStopStreaming, appState }) => {
+const Streaming = ({ handleStopStreaming, callState }) => {
   const isFullScreen = useSelector((state) => state.ui.isFullScreen);
+  const currentUser = useUser();
+  const localParticipant = useLocalParticipant();
+  const { screens } = useScreenShare();
 
   const remoteParticipantIds = useParticipantIds({ filter: "remote" });
   const users = remoteParticipantIds.map((id) => ({
@@ -34,14 +38,9 @@ const Streaming = ({ handleStopStreaming, appState }) => {
     setIsHovered(false);
   };
 
-  const currentUser = useUser();
-
-  const localParticipant = useLocalParticipant();
-  const { screens } = useScreenShare();
-
   return (
     <>
-      {appState !== STATE_IDLE && (
+      {callState !== CallState.IDLE && (
         <Stack
           alignItems="center"
           justifyContent="center"
@@ -59,7 +58,7 @@ const Streaming = ({ handleStopStreaming, appState }) => {
           <Stack
             alignItems="center"
             justifyContent="center"
-            sx={{ width: "100%", padding: "16px" }}>
+            sx={{ width: "100%", padding: "1rem" }}>
             <Grid
               container
               spacing={4}
@@ -118,6 +117,11 @@ const Streaming = ({ handleStopStreaming, appState }) => {
       )}
     </>
   );
+};
+
+Streaming.propTypes = {
+  handleStopStreaming: PropTypes.func.isRequired,
+  callState: PropTypes.string.isRequired,
 };
 
 export default Streaming;

@@ -7,6 +7,7 @@ import { BsFillGrid1X2Fill, BsPersonPlusFill } from "react-icons/bs";
 import { HiMiniSpeakerWave } from "react-icons/hi2";
 import { IoChatboxSharp, IoGrid } from "react-icons/io5";
 import { TfiMoreAlt } from "react-icons/tfi";
+import { SwitchButton } from "./SwitchButton/SwitchButton";
 
 const StreamHeader = ({ isHovered }) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -33,17 +34,15 @@ const StreamHeader = ({ isHovered }) => {
           top: 0,
           left: 0,
           width: "100%",
-        }}
-      >
+        }}>
         <Stack direction="row" alignItems="center" justifyContent="start">
           <HiMiniSpeakerWave
             size={24}
-            style={{ color: "#80848e", margin: "0 8px" }}
+            style={{ color: "#80848e", margin: "0 0.5rem" }}
           />
           <Typography
             variant="h1"
-            sx={{ color: "#f2f3f5", fontSize: "16px", fontWeight: 600 }}
-          >
+            sx={{ color: "#f2f3f5", fontSize: "1rem", fontWeight: 500 }}>
             General
           </Typography>
         </Stack>
@@ -53,17 +52,23 @@ const StreamHeader = ({ isHovered }) => {
               <BsPersonPlusFill color="#fff" size={26} />
             </IconButton>
           </Tooltip>
-          <Tooltip arrow title="Focus">
-            {isClicked ? (
-              <IconButton onClick={toggleGrid} sx={{ rotate: "90deg" }}>
-                <BsFillGrid1X2Fill size={21} color="#fff" />
-              </IconButton>
-            ) : (
-              <IconButton onClick={toggleGrid}>
-                <IoGrid size={21} color="#fff" />
-              </IconButton>
-            )}
-          </Tooltip>
+          <SwitchButton
+            expression={isClicked}
+            onClick={toggleGrid}
+            tooltipTitles={{ onTrue: "Focus", onFalse: "Focus" }}
+            icons={{
+              onTrue: (
+                <BsFillGrid1X2Fill
+                  size={21}
+                  style={{ rotate: "90deg" }}
+                  color="#fff"
+                />
+              ),
+              onFalse: <IoGrid size={21} color="#fff" />,
+            }}
+            buttons={{ onTrue: IconButton, onFalse: IconButton }}
+          />
+
           <Tooltip arrow title="More">
             <IconButton>
               <TfiMoreAlt size={24} color="#fff" />
@@ -77,7 +82,7 @@ const StreamHeader = ({ isHovered }) => {
                   width: "1px",
                   height: "24px",
                   bgcolor: "#1e1f22",
-                  m: "0 16px 0 8px",
+                  m: "0 1rem 0 0.5rem",
                 }}
               />
               <Tooltip arrow title="Show Chat">

@@ -29,7 +29,7 @@ export function removeFromArray(array, item) {
   return shallowCopy;
 }
 
-export const formatRegistrationDate = dateString => {
+export const formatRegistrationDate = (dateString) => {
   const date = new Date(dateString);
   const options = { month: "short", day: "numeric", year: "numeric" };
   return date.toLocaleDateString("en-US", options);
@@ -59,13 +59,13 @@ export const getRandomColor = () => {
 };
 
 export function filterChannelsByType(channels, type) {
-  return channels.filter(channel => channel.type === type);
+  return channels.filter((channel) => channel.type === type);
 }
 
 export function trimTheLine(line) {
   return line
     .split(" ")
-    .map(s => s[0])
+    .map((s) => s[0])
     .join("");
 }
 

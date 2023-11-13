@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import Separator from "../Separator/Separator";
 
 export const FilteredCard = ({ card }) => {
@@ -88,6 +89,10 @@ export const FilteredCard = ({ card }) => {
       <Separator />
     </>
   );
+};
+
+FilteredCard.propTypes = {
+  card: PropTypes.object.isRequired,
 };
 
 export default FilteredCard;

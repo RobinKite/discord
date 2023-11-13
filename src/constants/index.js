@@ -80,3 +80,13 @@ export class IndicatorState {
   static HIDDEN = "hidden";
   static HOVER = "hover";
 }
+
+export class CallState {
+  static IDLE = "STATE_IDLE";
+  static CREATING = "STATE_CREATING";
+  static JOINING = "STATE_JOINING";
+  static JOINED = "STATE_JOINED";
+  static LEAVING = "STATE_LEAVING";
+  static ERROR = "STATE_ERROR";
+  static HAIRCHECK = "STATE_HAIRCHECK";
+}

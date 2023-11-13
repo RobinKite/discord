@@ -1,5 +1,6 @@
 import { IconButton, Link, Stack } from "@mui/material";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import PropTypes from "prop-types";
 
 const PageControl = ({ currentPage, totalPages, onPageChange }) => {
   const handlePrevPage = () => {
@@ -87,6 +88,12 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
       </IconButton>
     </Stack>
   );
+};
+
+PageControl.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func,
 };
 
 export default PageControl;

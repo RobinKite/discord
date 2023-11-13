@@ -1,22 +1,16 @@
 import { DailyProvider } from "@daily-co/daily-react";
+import DailyIframe from "@daily-co/daily-js";
+import { useCallback, useEffect, useState } from "react";
+import { CallState } from "@/constants";
+// import { pageUrlFromRoomUrl } from "@/utils/streaming";
 import Streaming from "./Streaming";
 import StreamingChat from "./StreamingChat/StreamingChat";
-import { useCallback, useEffect, useState } from "react";
-import {
-  STATE_CREATING,
-  STATE_ERROR,
-  STATE_IDLE,
-  STATE_JOINED,
-  STATE_JOINING,
-  STATE_LEAVING,
-} from "@/constants/streaming";
 import streamingApi from "./streamingApi";
-// import { pageUrlFromRoomUrl } from "./streamingUtils";
-import DailyIframe from "@daily-co/daily-js";
 
 const StreamingGroup = () => {
-  const [appState, setAppState] = useState(STATE_IDLE);
+  const [callState, setCallState] = useState(CallState.IDLE);
   const [callObject, setCallObject] = useState(null);
+
   // const [roomUrl, setRoomUrl] = useState(null);
 
   // useEffect(() => {
@@ -24,66 +18,69 @@ const StreamingGroup = () => {
   //   if (pageUrl === window.location.href) return;
   //   // window.history.replaceState(null, null, pageUrl);
   // }, [roomUrl]);
+  // console.log(appState);
 
-  console.log(appState);
+  useEffect(() => {
+    if (callObject) return;
+    createCall().then((url) => startJoiningCall(url));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!callObject) return;
 
     const events = ["joined-meeting", "left-meeting", "error", "camera-error"];
+    const eventToHandler = {
+      "joined-meeting": () => {
+        setCallState(CallState.JOINED);
+      },
+      "left-meeting": () => {
+        callObject.destroy().then(() => {
+          // setRoomUrl(null);
+          setCallObject(null);
+          setCallState(CallState.IDLE);
+        });
+      },
+      error: () => {
+        setCallState(CallState.ERROR);
+      },
+    };
 
-    function handleNewMeetingState() {
-      switch (callObject.meetingState()) {
-        case "joined-meeting":
-          setAppState(STATE_JOINED);
-          break;
-        case "left-meeting":
-          callObject.destroy().then(() => {
-            // setRoomUrl(null);
-            setCallObject(null);
-            setAppState(STATE_IDLE);
-          });
-          break;
-        case "error":
-          setAppState(STATE_ERROR);
-          break;
-        default:
-          break;
-      }
-    }
+    const handleMeetingState = () => {
+      const handler = eventToHandler[callObject.meetingState()];
+      handler && handler();
+    };
 
-    handleNewMeetingState();
-
-    events.forEach((event) => callObject.on(event, handleNewMeetingState));
-
+    handleMeetingState();
+    events.forEach((event) => callObject.on(event, handleMeetingState));
     return () => {
-      events.forEach((event) => callObject.off(event, handleNewMeetingState));
+      events.forEach((event) => callObject.off(event, handleMeetingState));
     };
   }, [callObject]);
 
   const handleStopStreaming = useCallback(() => {
     if (!callObject) return;
-    if (appState === STATE_ERROR) {
+    if (callState === CallState.ERROR) {
       callObject.destroy().then(() => {
         // setRoomUrl(null);
         setCallObject(null);
-        setAppState(STATE_IDLE);
+        setCallState(CallState.IDLE);
       });
     } else {
-      setAppState(STATE_LEAVING);
+      setCallState(CallState.LEAVING);
       callObject.leave();
     }
-  }, [callObject, appState]);
+  }, [callObject, callState]);
 
   const createCall = useCallback(() => {
-    setAppState(STATE_CREATING);
+    setCallState(CallState.CREATING);
     return streamingApi
       .createRoom()
       .then((room) => room.url)
       .catch((error) => {
         console.error("Error creating room", error);
         // setRoomUrl(null);
-        setAppState(STATE_IDLE);
+        setCallState(CallState.IDLE);
       });
   }, []);
 
@@ -91,22 +88,15 @@ const StreamingGroup = () => {
     const newCallObject = DailyIframe.createCallObject();
     // setRoomUrl(url);
     setCallObject(newCallObject);
-    setAppState(STATE_JOINING);
+    setCallState(CallState.JOINING);
     newCallObject.join({ url });
-  }, []);
-
-  useEffect(() => {
-    if (callObject) return;
-    createCall().then((url) => {
-      startJoiningCall(url);
-    });
   }, []);
 
   return (
     <DailyProvider callObject={callObject}>
       <Streaming
         handleStopStreaming={handleStopStreaming}
-        appState={appState}
+        callState={callState}
       />
       <StreamingChat />
     </DailyProvider>

@@ -7,13 +7,10 @@ import { useSelector } from "react-redux";
 
 const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
   const idCheck = isSelf ? "local-video" : "remote-video"; //mock
-
   const videoState = useMediaTrack(user.userId, "video");
-
-  // console.log(videoState);
-
   const isMicActive = useSelector((state) => state.ui.isMicActive);
 
+  // console.log(videoState);
   // const isAlone = useMemo(
   //   () => remoteParticipantIds?.length < 1 || screens?.length < 1,
   //   [remoteParticipantIds, screens]
@@ -26,10 +23,10 @@ const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
       id={idCheck}
       sx={{
         cursor: "pointer",
-        bgcolor: user.bannerColor ? user.bannerColor : "#5c64f4",
+        bgcolor: user.bannerColor || "#5c64f4",
         maxWidth: "592px",
         minHeight: `${cardHeight}px`,
-        borderRadius: "8px",
+        borderRadius: "0.5rem",
         position: "relative",
         margin: "0 auto",
       }}>
@@ -41,10 +38,7 @@ const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
         />
       ) : (
         <Stack>
-          <SiDiscord
-            color="#fff"
-            size={50}
-          />
+          <SiDiscord color="#fff" size={50} />
         </Stack>
       )}
       {isHovered && (
@@ -53,13 +47,13 @@ const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
             textTransform: "capitalize",
             bgcolor: "#0000008c",
             color: "#fff",
-            borderRadius: "8px",
-            p: "6px 12px",
+            borderRadius: "0.5rem",
+            p: "0.375rem 0.75rem",
             position: "absolute",
-            bottom: "8px",
-            left: "8px",
+            bottom: "0.5rem",
+            left: "0.5rem",
           }}>
-          {user.name ? user.name : "anonymous"}
+          {user.name || "anonymous"}
         </Typography>
       )}
       <Stack
@@ -71,19 +65,13 @@ const UserStream = ({ user, isHovered, cardHeight, isSelf, isScreenShare }) => {
           bgcolor: "#0000008c",
           borderRadius: "50%",
           position: "absolute",
-          bottom: "8px",
-          right: "8px",
+          bottom: "0.5rem",
+          right: "0.5rem",
         }}>
         {isMicActive ? (
-          <BiSolidMicrophone
-            color="#fff"
-            size={24}
-          />
+          <BiSolidMicrophone color="#fff" size={24} />
         ) : (
-          <BiSolidMicrophoneOff
-            color="#fff"
-            size={24}
-          />
+          <BiSolidMicrophoneOff color="#fff" size={24} />
         )}
       </Stack>
     </Stack>
@@ -95,6 +83,7 @@ UserStream.propTypes = {
   isHovered: PropTypes.bool.isRequired,
   cardHeight: PropTypes.number.isRequired,
   isSelf: PropTypes.bool,
+  isScreenShare: PropTypes.bool,
 };
 
 UserStream.defaultProps = {

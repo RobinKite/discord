@@ -9,11 +9,10 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import { useEffect, useRef, useState } from "react";
-import NoServersFound from "@/components/NoServersFound/NoServersFound";
+import { Link, useLocation } from "react-router-dom";
 import { SAMPLE_CARDS } from "@/constants/mock";
 import FilteredCard from "@/components/FilteredCard/FilteredCard";
 import PageControl from "@/components/PageControl/PageControl";
-import { Link, useLocation } from "react-router-dom";
 import ServerCard from "@/components/ServerCard/ServerCard";
 
 const DiscoverTextField = styled(TextField)`
@@ -40,7 +39,6 @@ export const FilteredServers = () => {
     "query",
   );
   const containerRef = useRef(null);
-  // const refWidth = containerRef?.current.getBoundingClientRect().width || 0;
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -48,7 +46,7 @@ export const FilteredServers = () => {
 
   const totalPages = 3;
 
-  const [isWideContainer, setIsWideContainer] = useState(true);
+  const [, setIsWideContainer] = useState(true);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -129,13 +127,6 @@ export const FilteredServers = () => {
             ),
           }}
         />
-        {/* {inputValue && (
-          <IconButton onClick={handleClearInput}>
-            <ClearIcon />
-          </IconButton>
-        )} */}
-        {/* <NoServersFound /> */}
-        {/* <Categories /> */}
         <Grid
           justifyContent="center"
           alignItems="center"
@@ -144,14 +135,12 @@ export const FilteredServers = () => {
             width: "100%",
             maxWidth: "720px",
           }}>
-          {SAMPLE_CARDS.map(
-            (card) =>
-              containerWidth > 500 ? (
-                <FilteredCard key={card.serverId} card={card} />
-              ) : (
-                <ServerCard key={card.serverId} card={card} />
-              ),
-            // <FilteredCard key={card.serverId} card={card} />
+          {SAMPLE_CARDS.map((card) =>
+            containerWidth > 500 ? (
+              <FilteredCard key={card.serverId} card={card} />
+            ) : (
+              <ServerCard key={card.serverId} card={card} />
+            ),
           )}
           <PageControl
             currentPage={currentPage}
