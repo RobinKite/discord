@@ -7,7 +7,8 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 
 export function SidebarMenu({ setShowFriedsList, addFriendChat }) {
-  const friends = useSelector((state) => state.auth.friends);
+  const friends = useSelector((state) => state.friends.friendsList);
+
   const friendsListRef = useRef(null);
 
   useOnClickOutside(friendsListRef, () => {

@@ -36,33 +36,6 @@ export const SAMPLE_CHANNELS = [
 
 const SAMPLE_SERVER_TITLE = "default";
 
-export const SAMPLE_FRIENDS = [
-  {
-    userId: "1",
-    name: "Eric",
-    userName: "eric54",
-    userRegistrationDate: "07.07.2018",
-    role: "role-1",
-    note: "",
-    status: Status.ONLINE,
-    serverRegistrationDate: "09.09.2023",
-    bannerColor: "gold",
-  },
-
-  {
-    userId: "3",
-    name: "Wendy",
-    userName: "wendy033",
-    userRegistrationDate: "07.10.2020",
-    avatar: null,
-    role: "role-2",
-    status: Status.ONLINE,
-    serverRegistrationDate: "09.09.2023",
-    note: "",
-    bannerColor: "blue",
-  },
-];
-
 export const SAMPLE_CARDS = [
   {
     serverId: "1",
@@ -695,6 +668,12 @@ export const SAMPLE_USERS = [
     ],
     mutualServers: [],
   },
+];
+
+export const SAMPLE_FRIENDS = [
+  SAMPLE_USERS[0],
+  SAMPLE_USERS[1],
+  SAMPLE_USERS[3],
 ];
 
 export const SAMPLE_MESSAGES = [

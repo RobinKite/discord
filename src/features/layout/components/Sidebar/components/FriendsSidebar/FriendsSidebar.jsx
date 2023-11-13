@@ -21,19 +21,19 @@ import { BaseSidebar } from "../../components";
 export function FriendsSidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const friends = useSelector((state) => state.auth.friends);
+  const friends = useSelector((state) => state.friends.friendsList);
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);
 
   const deleteFriendChat = (friend) => {
     setFiltredFriends((prev) =>
-      prev.filter((filterFriend) => filterFriend.name !== friend.name),
+      prev.filter((filterFriend) => filterFriend.name !== friend.name)
     );
   };
 
-  const addFriendChat = (e, friend) => {
+  const addFriendChat = (friend) => {
     const foundFriend = filtredFriends.find(
-      (findFriend) => findFriend.name === friend.name,
+      (findFriend) => findFriend.name === friend.name
     );
     if (!foundFriend) {
       setFiltredFriends((prev) => [...prev, friend]);
@@ -59,7 +59,8 @@ export function FriendsSidebar() {
             itemSX,
             { "&:hover svg": { fill: "#f2f3f5" } },
             { cursor: "pointer" },
-          ]}>
+          ]}
+        >
           <FaUserFriends color="#81848D" size={20} />
           <Typography variant="span" fontWeight={500}>
             Friends
@@ -82,9 +83,10 @@ export function FriendsSidebar() {
           {filtredFriends.length ? (
             filtredFriends.map((friend) => (
               <ListItem
-                key={friend.name}
+                key={`${friend.name} ${friend.userId}`}
                 sx={itemSX}
-                onClick={() => openChat(friend)}>
+                onClick={() => openChat(friend)}
+              >
                 <User user={friend} styles="w-[100%] bg-[#2b2d31]" />
                 <CloseIcon
                   sx={closeIconSX}
@@ -94,7 +96,8 @@ export function FriendsSidebar() {
             ))
           ) : (
             <Typography
-              sx={{ fontSize: "14px", color: "#81848D", ml: "0.5rem" }}>
+              sx={{ fontSize: "14px", color: "#81848D", ml: "0.5rem" }}
+            >
               You have no friends
             </Typography>
           )}

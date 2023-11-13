@@ -4,7 +4,6 @@ import { api } from "@/services/client";
 import { blurple } from "@/theme/designTokens";
 import { setAuthToken, setRefreshToken } from "@/utils/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { SAMPLE_FRIENDS } from "@/constants/mock";
 import { setServers } from "./serverSlice";
 import axios from "axios";
 
@@ -22,7 +21,6 @@ const authSlice = createSlice({
     userRegistrationDate: "09.19.2023", //mock
     serverRegistrationDate: "09.10.2023", //mock
     bannerColor: blurple, //mock
-    friends: SAMPLE_FRIENDS,
   },
   reducers: {
     loginUser: (state, action) => {
