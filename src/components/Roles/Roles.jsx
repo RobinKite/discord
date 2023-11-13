@@ -1,56 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 import { PopUpPositions } from "@/constants";
-import { useRef, useState } from "react";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { setProfile } from "@/redux/slices/profileSlice";
+import useContextmenu from "@/hooks/useContextmenu";
 
 export default function Roles() {
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
-  // TODO: create correct list of users
 
-  const contextMenuRef = useRef(null);
-  const [contextMenu, setContextMenu] = useState({
-    user: null,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    toggled: false,
-  });
-
-  const handleOnContextMenu = (e, user) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(setProfile(user));
-
-    const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
-    let x = e.clientX - contextMenuAttr.width - 4;
-    let y = e.clientY - 5;
-
-    setContextMenu({
-      user,
-      position: { x, y },
-      toggled: true,
-    });
-  };
-
-  const resetContextMenu = () => {
-    setContextMenu({
-      user: null,
-      position: {
-        x: 0,
-        y: 0,
-      },
-      toggled: false,
-    });
-  };
+  const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
+    useContextmenu();
 
   useOnClickOutside(contextMenuRef, resetContextMenu);
 
@@ -72,7 +35,8 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }
-                onContextMenu={(e) => handleOnContextMenu(e, user)}>
+                onContextMenu={(e) => handleOnContextMenu(e, user)}
+              >
                 <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}

@@ -14,9 +14,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { FriendsSideBarMenu } from "./FriendsSideBarMenu";
+// import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
 
 export function FriendsSideBar() {
   const friends = useSelector((state) => state.friends.friendsList);
+  // const contextmenuButtons = useDirectMessageContextmenuButtons();
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);
 
@@ -72,6 +74,7 @@ export function FriendsSideBar() {
               key={friend.name}
               sx={itemSX}
               onClick={() => openChat(friend)}
+              onContextMenu={() => {}}
             >
               <User user={friend} styles="w-[100%] bg-[#2b2d31]" />
               <CloseIcon
