@@ -1,14 +1,10 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import { darkServerIconBg } from "@/theme/designTokens";
 import { trimTheLine } from "@/utils";
+import PropTypes from "prop-types";
 
-export const TabSharedServers = () => {
-  const userServers = useSelector(
-    (state) => state.profile.userProfile.mutualServers
-  );
-
-  return userServers.length ? (
+export const TabSharedServers = ({ userServers }) => {
+  return userServers?.length ? (
     userServers.map((server) => {
       const abbrTitle = trimTheLine(server.title);
 
@@ -66,4 +62,8 @@ export const TabSharedServers = () => {
   ) : (
     <Typography sx={{ fontSize: "14px" }}>Have not shared servers</Typography>
   );
+};
+
+TabSharedServers.propTypes = {
+  userServers: PropTypes.array.isRequired,
 };

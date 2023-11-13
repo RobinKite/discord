@@ -40,12 +40,12 @@ export const ContextMenu = ({
           if (button.isSelector)
             return (
               <Stack key={index} sx={styleSelectSX}>
-                <button>
+                <button onClick={button.onClick}>
                   <span>{button.text}</span>
                   <KeyboardArrowRightIcon />
                 </button>
                 <Stack>
-                  <button>
+                  <button onClick={button.onClick}>
                     {button.text.toLowerCase() === "role" && (
                       <span>{user?.role}</span>
                     )}

@@ -25,6 +25,10 @@ export function FriendProfilePanel() {
   const [isShowMutualServers, setShowMutualServers] = useState(false);
   const [isShowMutualFriends, setShowMutualFriends] = useState(false);
 
+  const userServers = useSelector(
+    (state) => state.profile.userProfile?.mutualServers
+  );
+
   useEffect(() => {
     dispatch(setProfile(SAMPLE_USERS[0]));
   }, [dispatch]);
@@ -56,7 +60,8 @@ export function FriendProfilePanel() {
           <Stack sx={boxSX}>
             <Typography
               component="h3"
-              sx={{ fontSize: "16px", fontWeight: "700" }}>
+              sx={{ fontSize: "16px", fontWeight: "700" }}
+            >
               {user.name}
             </Typography>
             <Typography sx={{ fontSize: "14px" }}>{user.userName}</Typography>
@@ -78,19 +83,25 @@ export function FriendProfilePanel() {
           <Stack sx={boxSX}>
             <Button onClick={showMutualServers} variant="text" sx={buttonSX}>
               <Typography
-                sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualServers?.length && user?.mutualServers?.length}
+                sx={{ fontSize: "14px", textTransform: "capitalize" }}
+              >
+                {user?.mutualServers?.length &&
+                  `${user?.mutualServers?.length} `}
                 Mutual servers
               </Typography>
               {!isShowMutualServers && <KeyboardArrowRightIcon />}
               {isShowMutualServers && <KeyboardArrowDownIcon />}
             </Button>
-            {isShowMutualServers && <TabSharedServers />}
+            {isShowMutualServers && (
+              <TabSharedServers userServers={userServers} />
+            )}
             <Separator />
             <Button onClick={showMutualFriends} variant="text" sx={buttonSX}>
               <Typography
-                sx={{ fontSize: "14px", textTransform: "capitalize" }}>
-                {user?.mutualFriends?.length && user?.mutualFriends?.length}
+                sx={{ fontSize: "14px", textTransform: "capitalize" }}
+              >
+                {user?.mutualFriends?.length &&
+                  `${user?.mutualFriends?.length} `}
                 Mutual friends
               </Typography>
               {!isShowMutualFriends && <KeyboardArrowRightIcon />}

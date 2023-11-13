@@ -1,4 +1,14 @@
+import { Modal } from "@/constants";
+import { openModal } from "@/redux/slices/uiSlice";
+import { useDispatch } from "react-redux";
+
 export default function useDirectMessageContextmenuButtons() {
+  const dispatch = useDispatch();
+
+  const handleOpenProfile = () => {
+    dispatch(openModal(Modal.PROFILE));
+  };
+
   const buttons = [
     {
       text: "Mark as read",
@@ -14,6 +24,7 @@ export default function useDirectMessageContextmenuButtons() {
       text: "Profile",
       onClick: (e) => {
         e.stopPropagation();
+        handleOpenProfile();
       },
       isSpacer: false,
     },
@@ -48,15 +59,11 @@ export default function useDirectMessageContextmenuButtons() {
     {
       isSpacer: true,
     },
-    {
-      text: "Invite to server",
-      onClick: (e, user) => {
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isSelector: true,
-      isSpacer: false,
-    },
+    // {
+    //   text: "Invite to server",
+    //   isSelector: true,
+    //   isSpacer: false,
+    // },
     {
       text: "Remove friend",
       onClick: (e) => {

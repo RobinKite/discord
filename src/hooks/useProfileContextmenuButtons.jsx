@@ -20,21 +20,21 @@ export function useProfileContextMenuButtons() {
     },
     {
       text: "Mention",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
       },
       isSpacer: false,
     },
     {
       text: "Message",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
       },
       isSpacer: false,
     },
     {
       text: "Call",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
       },
       isSpacer: false,
@@ -49,7 +49,7 @@ export function useProfileContextMenuButtons() {
     },
     {
       text: "Add Friend Nickname",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
       },
       isSpacer: false,
@@ -62,42 +62,42 @@ export function useProfileContextMenuButtons() {
       onClick: (e, user) => {
         e.stopPropagation();
         console.log(user);
-        alert(`click by ${user.userName}`);
+        alert(`click by ${user?.userName}`);
       },
       isCheckbox: true,
       isSpacer: false,
     },
     {
       text: "Mute Soundboard",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
-        alert(`click by ${user.userName}`);
+        alert(`click by ${user?.userName}`);
       },
       isCheckbox: true,
       isSpacer: false,
     },
     {
       text: "Invite to server",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
-        alert(`click by ${user.userName}`);
+        alert(`click by ${user?.userName}`);
       },
       isSelector: true,
       isSpacer: false,
     },
     {
       text: "Remote Friend",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
-        alert(`click by ${user.userName}`);
+        alert(`click by ${user?.userName}`);
       },
       isSpacer: false,
     },
     {
       text: "Block",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
-        alert(`click by ${user.userName}`);
+        alert(`click by ${user?.userName}`);
       },
       isSpacer: false,
     },
@@ -106,7 +106,7 @@ export function useProfileContextMenuButtons() {
     },
     {
       text: "Role",
-      onClick: (e, user) => {
+      onClick: (user) => {
         console.log(user);
       },
       isSelector: true,
