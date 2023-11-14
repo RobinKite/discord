@@ -17,10 +17,10 @@ import {
 } from "./stylesSX";
 import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
-import useContextMenu from "@/hooks/useContextMenu";
 import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export function FriendsSidebar() {
   const navigate = useNavigate();

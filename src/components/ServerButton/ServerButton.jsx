@@ -9,9 +9,9 @@ import { adjustText } from "@/utils";
 import { useSelector } from "react-redux";
 import { Indicator } from "@/components";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
-import useContextMenu from "@/hooks/useContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import useServersContextMenuButtons from "@/hooks/useServersContextMenuButtons";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export function ServerButton({
   children,
