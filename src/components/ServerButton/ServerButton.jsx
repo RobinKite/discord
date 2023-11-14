@@ -8,6 +8,10 @@ import { IndicatorState } from "@/constants";
 import { adjustText } from "@/utils";
 import { useSelector } from "react-redux";
 import { Indicator } from "@/components";
+import { ContextMenu } from "../ContextMenu/ContextMenu";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import useServersContextMenuButtons from "@/hooks/useServersContextMenuButtons";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export function ServerButton({
   children,
@@ -23,6 +27,13 @@ export function ServerButton({
 
   const [indicatorState, setIndicatorState] = useState(IndicatorState.HIDDEN);
   const [adjusted, setAdjusted] = useState({});
+
+  const contextmenuButtons = useServersContextMenuButtons();
+
+  const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
+    useContextMenu();
+
+  useOnClickOutside(contextMenuRef, resetContextMenu);
 
   useEffect(() => {
     setAdjusted(adjustText(children || title, 2, 6));
@@ -58,9 +69,11 @@ export function ServerButton({
     <Stack
       justifyContent="center"
       alignItems="center"
+      onContextMenu={handleOnContextMenu}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      sx={{ position: "relative", width: "100%" }}>
+      sx={{ position: "relative", width: "100%" }}
+    >
       <Indicator state={indicatorState} />
       <Tooltip
         title={title || children}
@@ -81,7 +94,8 @@ export function ServerButton({
               },
             },
           },
-        }}>
+        }}
+      >
         <Button
           onClick={onClick}
           variant="text"
@@ -110,10 +124,18 @@ export function ServerButton({
             "&:active": {
               transform: "translateY(2px)",
             },
-          }}>
+          }}
+        >
           {adjusted?.serverName}
         </Button>
       </Tooltip>
+      <ContextMenu
+        contextMenuRef={contextMenuRef}
+        isToggled={contextMenu.toggled}
+        positionX={contextMenu.position.x}
+        positionY={contextMenu.position.y}
+        buttons={contextmenuButtons}
+      />
     </Stack>
   );
 }

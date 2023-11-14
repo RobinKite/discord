@@ -17,23 +17,34 @@ import {
 } from "./stylesSX";
 import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
+import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export function FriendsSidebar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const friends = useSelector((state) => state.auth.friends);
+  const friends = useSelector((state) => state.friends.friendsList);
+  const contextmenuButtons = useDirectMessageContextmenuButtons();
+
+  const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
+    useContextMenu();
+
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);
 
+  useOnClickOutside(contextMenuRef, resetContextMenu);
+
   const deleteFriendChat = (friend) => {
     setFiltredFriends((prev) =>
-      prev.filter((filterFriend) => filterFriend.name !== friend.name),
+      prev.filter((filterFriend) => filterFriend.name !== friend.name)
     );
   };
 
-  const addFriendChat = (e, friend) => {
+  const addFriendChat = (friend) => {
     const foundFriend = filtredFriends.find(
-      (findFriend) => findFriend.name === friend.name,
+      (findFriend) => findFriend.name === friend.name
     );
     if (!foundFriend) {
       setFiltredFriends((prev) => [...prev, friend]);
@@ -59,7 +70,8 @@ export function FriendsSidebar() {
             itemSX,
             { "&:hover svg": { fill: "#f2f3f5" } },
             { cursor: "pointer" },
-          ]}>
+          ]}
+        >
           <FaUserFriends color="#81848D" size={20} />
           <Typography variant="span" fontWeight={500}>
             Friends
@@ -77,14 +89,18 @@ export function FriendsSidebar() {
             />
           )}
         </Stack>
-
         <List sx={{ width: "100%", p: 0 }}>
           {filtredFriends.length ? (
             filtredFriends.map((friend) => (
               <ListItem
-                key={friend.name}
+                key={`${friend.name} ${friend.userId}`}
                 sx={itemSX}
-                onClick={() => openChat(friend)}>
+                onClick={() => openChat(friend)}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  handleOnContextMenu(e, friend);
+                }}
+              >
                 <User user={friend} styles="w-[100%] bg-[#2b2d31]" />
                 <CloseIcon
                   sx={closeIconSX}
@@ -94,11 +110,19 @@ export function FriendsSidebar() {
             ))
           ) : (
             <Typography
-              sx={{ fontSize: "14px", color: "#81848D", ml: "0.5rem" }}>
+              sx={{ fontSize: "14px", color: "#81848D", ml: "0.5rem" }}
+            >
               You have no friends
             </Typography>
           )}
         </List>
+        <ContextMenu
+          contextMenuRef={contextMenuRef}
+          isToggled={contextMenu.toggled}
+          positionX={contextMenu.position.x}
+          positionY={contextMenu.position.y}
+          buttons={contextmenuButtons}
+        />
       </Stack>
     </BaseSidebar>
   );

@@ -1,63 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 import { PopUpPositions } from "@/constants";
-import { useRef, useState } from "react";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import { setProfile } from "@/redux/slices/profileSlice";
+import { useProfileContextMenuButtons } from "@/hooks/useProfileContextmenuButtons";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export default function Roles() {
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
-  // TODO: create correct list of users
 
-  const contextMenuRef = useRef(null);
-  const [contextMenu, setContextMenu] = useState({
-    user: null,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    toggled: false,
-  });
-
-  const handleOnContextMenu = (e, user) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(setProfile(user));
-
-    const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
-    let x = e.clientX - contextMenuAttr.width - 4;
-    let y = e.clientY - 5;
-
-    setContextMenu({
-      user,
-      position: { x, y },
-      toggled: true,
-    });
-  };
-
-  const resetContextMenu = () => {
-    setContextMenu({
-      user: null,
-      position: {
-        x: 0,
-        y: 0,
-      },
-      toggled: false,
-    });
-  };
+  const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
+    useContextMenu();
+  const contextmenuButtons = useProfileContextMenuButtons();
 
   useOnClickOutside(contextMenuRef, resetContextMenu);
 
   return sortedUsers.map((role) => (
     <div key={role.name}>
       {role.users.length > 0 && (
-        <div>
+        <>
           <h2 className="flex items-center px-1.5 text-xs font-semibold uppercase text-[#959ba3]">
             {role.name}&nbsp;
             <BiMinus />
@@ -72,7 +37,8 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }
-                onContextMenu={(e) => handleOnContextMenu(e, user)}>
+                onContextMenu={(e) => handleOnContextMenu(e, user)}
+              >
                 <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}
@@ -82,8 +48,9 @@ export default function Roles() {
             isToggled={contextMenu.toggled}
             positionX={contextMenu.position.x}
             positionY={contextMenu.position.y}
+            buttons={contextmenuButtons}
           />
-        </div>
+        </>
       )}
     </div>
   ));

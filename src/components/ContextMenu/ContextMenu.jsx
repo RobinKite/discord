@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { openModal } from "@/redux/slices/uiSlice";
 import { Modal } from "@/constants";
 import { Checkbox, Stack } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -17,120 +16,11 @@ export const ContextMenu = ({
   positionX,
   isToggled,
   contextMenuRef,
+  buttons,
 }) => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.userProfile);
   const modalStack = useSelector((state) => state.ui.modalStack);
   const isSettingsModalOpen = modalStack.includes(Modal.SETTINGS);
-
-  const handleOpenProfile = () => {
-    dispatch(openModal(Modal.PROFILE));
-  };
-
-  const buttons = [
-    {
-      text: "Profile",
-      onClick: (e) => {
-        e.stopPropagation();
-        handleOpenProfile();
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Mention",
-      onClick: (e, user) => {
-        console.log(user);
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Message",
-      onClick: (e, user) => {
-        console.log(user);
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Call",
-      onClick: (e, user) => {
-        console.log(user);
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Edit note",
-      onClick: (e) => {
-        e.stopPropagation();
-        handleOpenProfile();
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Add Friend Nickname",
-      onClick: (e, user) => {
-        console.log(user);
-      },
-      isSpacer: false,
-    },
-    {
-      isSpacer: true,
-    },
-    {
-      text: "Mute",
-      onClick: (e, user) => {
-        e.stopPropagation();
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isCheckbox: true,
-      isSpacer: false,
-    },
-    {
-      text: "Mute Soundboard",
-      onClick: (e, user) => {
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isCheckbox: true,
-      isSpacer: false,
-    },
-    {
-      text: "Invite to server",
-      onClick: (e, user) => {
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isSelector: true,
-      isSpacer: false,
-    },
-    {
-      text: "Remote Friend",
-      onClick: (e, user) => {
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isSpacer: false,
-    },
-    {
-      text: "Block",
-      onClick: (e, user) => {
-        console.log(user);
-        alert(`click by ${user.userName}`);
-      },
-      isSpacer: false,
-    },
-    {
-      isSpacer: true,
-    },
-    {
-      text: "Role",
-      onClick: (e, user) => {
-        console.log(user);
-      },
-      isSelector: true,
-      isSpacer: false,
-    },
-  ];
 
   return (
     !isSettingsModalOpen && (
@@ -150,12 +40,12 @@ export const ContextMenu = ({
           if (button.isSelector)
             return (
               <Stack key={index} sx={styleSelectSX}>
-                <button>
+                <button onClick={button.onClick}>
                   <span>{button.text}</span>
                   <KeyboardArrowRightIcon />
                 </button>
                 <Stack>
-                  <button>
+                  <button onClick={button.onClick}>
                     {button.text.toLowerCase() === "role" && (
                       <span>{user?.role}</span>
                     )}
@@ -194,4 +84,5 @@ ContextMenu.propTypes = {
   positionX: PropTypes.number.isRequired,
   isToggled: PropTypes.bool.isRequired,
   contextMenuRef: PropTypes.object.isRequired,
+  buttons: PropTypes.array.isRequired,
 };

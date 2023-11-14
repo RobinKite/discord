@@ -1,11 +1,12 @@
 import { api } from "@/services/client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Endpoint } from "@/constants/api";
+import { SAMPLE_FRIENDS } from "@/constants/mock";
 
 const friendsSlice = createSlice({
   name: "friends",
   initialState: {
-    friendsList: [],
+    friendsList: [...SAMPLE_FRIENDS],
     friendRequests: [],
     status: null,
   },
