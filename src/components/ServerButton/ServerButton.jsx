@@ -9,7 +9,7 @@ import { adjustText } from "@/utils";
 import { useSelector } from "react-redux";
 import { Indicator } from "@/components";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
-import useContextmenu from "@/hooks/useContextmenu";
+import useContextMenu from "@/hooks/useContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import useServersContextMenuButtons from "@/hooks/useServersContextMenuButtons";
 
@@ -31,7 +31,7 @@ export function ServerButton({
   const contextmenuButtons = useServersContextMenuButtons();
 
   const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
-    useContextmenu();
+    useContextMenu();
 
   useOnClickOutside(contextMenuRef, resetContextMenu);
 
@@ -136,7 +136,6 @@ export function ServerButton({
         positionY={contextMenu.position.y}
         buttons={contextmenuButtons}
       />
-      ;
     </Stack>
   );
 }

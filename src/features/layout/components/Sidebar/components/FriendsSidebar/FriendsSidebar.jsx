@@ -17,7 +17,7 @@ import {
 } from "./stylesSX";
 import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
-import useContextmenu from "@/hooks/useContextMenu";
+import useContextMenu from "@/hooks/useContextMenu";
 import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
@@ -29,7 +29,7 @@ export function FriendsSidebar() {
   const contextmenuButtons = useDirectMessageContextmenuButtons();
 
   const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
-    useContextmenu();
+    useContextMenu();
 
   const [filtredFriends, setFiltredFriends] = useState([...friends]);
   const [showFriedsList, setShowFriedsList] = useState(false);

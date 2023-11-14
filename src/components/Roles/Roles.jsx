@@ -6,15 +6,15 @@ import { mapUserData } from "@/utils/user";
 import { PopUpPositions } from "@/constants";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import useContextmenu from "@/hooks/useContextMenu";
 import { useProfileContextMenuButtons } from "@/hooks/useProfileContextmenuButtons";
+import useContextMenu from "@/hooks/useContextMenu";
 
 export default function Roles() {
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
 
   const { contextMenuRef, contextMenu, handleOnContextMenu, resetContextMenu } =
-    useContextmenu();
+    useContextMenu();
   const contextmenuButtons = useProfileContextMenuButtons();
 
   useOnClickOutside(contextMenuRef, resetContextMenu);

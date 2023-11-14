@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-export default function useContextmenu() {
+export default function useContextMenu() {
   const dispatch = useDispatch();
   const contextMenuRef = useRef(null);
   const [contextMenu, setContextMenu] = useState({
