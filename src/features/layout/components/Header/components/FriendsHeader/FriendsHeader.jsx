@@ -34,8 +34,9 @@ export function FriendsHeader() {
                 onClick={() => dispatch(setFriendsTab(value))}
                 className={clsx(
                   "rounded bg-[#313338] px-2 py-[0.1rem] font-medium transition-all hover:brightness-125",
-                  tab === value && "brightness-150",
-                )}>
+                  tab === value && "brightness-150"
+                )}
+              >
                 {capitalize(value)}
               </button>
             ))}
@@ -43,8 +44,10 @@ export function FriendsHeader() {
               onClick={() => dispatch(setFriendsTab(Tab.ADD_FRIEND))}
               className={clsx(
                 "rounded bg-[#417E4C] px-2 py-[0.1rem] font-medium text-white transition-all",
-                tab === Tab.ADD_FRIEND && "bg-transparent text-[#00C770]",
-              )}>
+                tab === Tab.ADD_FRIEND &&
+                  "bg-transparent text-[#00C770] hover:text-[#00C770] focus:text-[#00C770]"
+              )}
+            >
               {capitalize(Tab.ADD_FRIEND)}
             </button>
           </div>
