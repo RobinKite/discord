@@ -17,7 +17,7 @@ import {
 } from "./stylesSX";
 import { SidebarMenu } from "./SidebarMenu";
 import { BaseSidebar } from "../../components";
-import useContextmenu from "@/hooks/useContextmenu";
+import useContextmenu from "@/hooks/useContextMenu";
 import useDirectMessageContextmenuButtons from "@/hooks/useDirectMessageContextmenuButtons";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { ContextMenu } from "@/components/ContextMenu/ContextMenu";

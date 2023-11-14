@@ -6,7 +6,7 @@ import { mapUserData } from "@/utils/user";
 import { PopUpPositions } from "@/constants";
 import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import useContextmenu from "@/hooks/useContextmenu";
+import useContextmenu from "@/hooks/useContextMenu";
 import { useProfileContextMenuButtons } from "@/hooks/useProfileContextmenuButtons";
 
 export default function Roles() {

@@ -1,5 +1,5 @@
 import { setProfile } from "@/redux/slices/profileSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -18,6 +18,14 @@ export default function useContextmenu() {
 
   let location = useLocation();
 
+  const [friendPath, setFriendPath] = useState(null);
+
+  useEffect(() => {
+    setFriendPath(`/channels/@me/${contextMenu.user?.userId}`);
+  }, [contextMenu]);
+
+  console.log(friendPath);
+
   const handleOnContextMenu = (e, user) => {
     e.preventDefault();
     e.stopPropagation();
@@ -28,7 +36,11 @@ export default function useContextmenu() {
     let x = e.clientX;
     let y = e.clientY;
 
-    if (location.pathname === "/channels/@me") {
+    if (
+      //location.pathname.contains("/channels/@me")
+      location.pathname === "/channels/@me" ||
+      location.pathname === `/channels/@me/${contextMenu.user?.userId}`
+    ) {
       x = x + 4;
       y = y - 5;
     } else {
