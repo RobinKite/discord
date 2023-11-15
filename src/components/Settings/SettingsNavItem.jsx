@@ -14,7 +14,7 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
           borderRadius: "4px",
           fontWeight: 400,
           fontSize: "16px",
-          padding: "4px 10px",
+          padding: "6px 10px",
           width: "100%",
           justifyContent: "flex-start",
           textTransform: "capitalize",
@@ -25,7 +25,8 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
             color: isActive ? "white" : "#B5BAC1",
           },
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         {name}
       </Button>
     </ListItem>
