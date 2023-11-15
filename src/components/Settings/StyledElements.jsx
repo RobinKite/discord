@@ -232,8 +232,8 @@ export const EditButton = styled(Button)(() => ({
 
 export const CloseButton = styled(Button)(() => ({
   "&": {
-    position: "absolute",
-    right: "-50px",
+    position: "fixed",
+    right: "80px",
     top: "60px",
     display: "flex",
     flexDirection: "column",
@@ -256,8 +256,9 @@ export const CloseButton = styled(Button)(() => ({
 export const LogOutButton = styled(Button)(() => ({
   "&": {
     width: "100%",
+    position: "relative",
     borderRadius: "4px",
-    padding: "4px 10px ",
+    padding: "6px 10px ",
     justifyContent: "flex-start",
     color: "#b5bac1",
     fontSize: "16px",
