@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { MainButton } from "../StyledElements";
 import { Stack } from "@mui/system";
 
-const MicTest = () => {
+export const MicTest = () => {
   const canvasRef = useRef(null);
   const audioContext = useRef(null);
   const analyser = useRef(null);
@@ -40,7 +40,7 @@ const MicTest = () => {
             x,
             canvas.height - barHeight / 2,
             barWidth,
-            barHeight / 2,
+            barHeight / 2
           );
 
           x += barWidth + 1;
@@ -62,5 +62,3 @@ const MicTest = () => {
     </Stack>
   );
 };
-
-export default MicTest;

@@ -1,9 +1,8 @@
 import { List, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import SettingsNavItem from "./SettingsNavItem";
-import SettingsLine from "./SettingsLine";
+import { SettingsLine, SettingsNavItem } from "..";
 
-const SettingsNavSection = ({
+export const SettingsNavSection = ({
   header,
   items,
   activeTab,
@@ -21,7 +20,8 @@ const SettingsNavSection = ({
           textTransform: "uppercase",
           color: "#949ba4",
           fontWeight: 700,
-        }}>
+        }}
+      >
         {header}
       </Typography>
     )}
@@ -53,5 +53,3 @@ SettingsNavSection.propTypes = {
 SettingsNavSection.defaultProps = {
   header: "",
 };
-
-export default SettingsNavSection;

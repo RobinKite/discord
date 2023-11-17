@@ -1,6 +1,6 @@
 import { Stack } from "@mui/system";
 
-const SettingsLine = ({ styles }) => (
+export const SettingsLine = ({ styles }) => (
   <Stack
     variant="span"
     sx={{
@@ -14,5 +14,3 @@ const SettingsLine = ({ styles }) => (
     }}
   />
 );
-
-export default SettingsLine;

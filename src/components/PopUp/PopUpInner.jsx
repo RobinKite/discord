@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 
 //TODO: change "add note" to "change status" if original user
 
-const PopUpInner = ({
+export const PopUpInner = ({
   user,
   userRegistrationDate,
   serverRegistrationDate,
@@ -58,7 +58,8 @@ const PopUpInner = ({
             left: "66px",
             borderRadius: "50%",
           }}
-          size={28}>
+          size={28}
+        >
           {statusMap[user.status]}
         </Stack>
       </Stack>
@@ -74,7 +75,8 @@ const PopUpInner = ({
             right: "16px",
             top: "70px",
             borderRadius: "8px",
-          }}>
+          }}
+        >
           <Link
             href="#"
             sx={{
@@ -84,7 +86,8 @@ const PopUpInner = ({
               width: "16px",
               height: "16px",
               padding: "3.5px",
-            }}>
+            }}
+          >
             <FaHashtag color="black" size={9} />
           </Link>
         </Stack>
@@ -95,11 +98,13 @@ const PopUpInner = ({
           padding: 3,
           margin: "64px 16px 16px",
           borderRadius: "8px",
-        }}>
+        }}
+      >
         <Typography
           variant="h6"
           component="h1"
-          sx={{ fontSize: "20px", fontWeight: "700" }}>
+          sx={{ fontSize: "20px", fontWeight: "700" }}
+        >
           {user.name}
         </Typography>
         <Typography sx={{ fontSize: "14px", marginBottom: 3 }}>
@@ -121,19 +126,22 @@ const PopUpInner = ({
             fontSize: "12px",
             fontWeight: 700,
             textTransform: "uppercase",
-          }}>
+          }}
+        >
           Member Since
         </Typography>
         <Stack
           direction="row"
           spacing={2}
           alignItems="center"
-          sx={{ mb: "12px" }}>
+          sx={{ mb: "12px" }}
+        >
           <Stack
             direction="row"
             alignItems="center"
             spacing={2}
-            sx={{ fontSize: "14px", marginBottom: "6px" }}>
+            sx={{ fontSize: "14px", marginBottom: "6px" }}
+          >
             <Tooltip title="Discord">
               <Stack>
                 <SiDiscord
@@ -166,13 +174,15 @@ const PopUpInner = ({
                 textAlign: "center",
                 fontSize: "8px",
                 p: 0.5,
-              }}>
+              }}
+            >
               {adjustText(user.serverName, 1.75, 2, false).serverName}
             </Stack>
           </Tooltip>
           <Typography
             variant="span"
-            sx={{ color: "#dbdee1", fontSize: "14px" }}>
+            sx={{ color: "#dbdee1", fontSize: "14px" }}
+          >
             {serverRegistrationDate}
           </Typography>
         </Stack>
@@ -185,7 +195,8 @@ const PopUpInner = ({
                 textTransform: "uppercase",
                 fontWeight: 700,
                 marginBottom: 1.5,
-              }}>
+              }}
+            >
               Role
             </Typography>
             <Stack
@@ -197,7 +208,8 @@ const PopUpInner = ({
                 backgroundColor: "#1e1f22",
                 borderRadius: "6px",
                 width: "66px",
-              }}>
+              }}
+            >
               <BsFillCircleFill
                 style={{ color: "#5d64f4", margin: "4px" }}
                 size={12}
@@ -213,7 +225,8 @@ const PopUpInner = ({
             textTransform: "uppercase",
             fontWeight: 700,
             marginBottom: 1.5,
-          }}>
+          }}
+        >
           Note
         </Typography>
         <CustomNoteTextField
@@ -239,5 +252,3 @@ PopUpInner.propTypes = {
   serverRegistrationDate: PropTypes.string.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
 };
-
-export default PopUpInner;

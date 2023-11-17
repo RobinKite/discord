@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Page } from "@/constants";
-import { FriendsSidebar, ServerSidebar, ExploreSidebar } from "./components";
+import { ServerSidebar, ExploreSidebar, FriendsSidebar } from "./components";
 
 const pageToComponent = new Map([
   [Page.SERVER, ServerSidebar],

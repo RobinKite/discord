@@ -4,16 +4,18 @@ import { useDispatch } from "react-redux";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useState } from "react";
 
-import SettingsNavSection from "./SettingsNavSection";
 import { logoutUser } from "@/redux/slices/authSlice";
-import SettingsLine from "./SettingsLine";
-import { tabsMap } from "./layout";
-import SettingsTabContainer from "./SettingsTabContainer";
 import { List, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { CloseButton, LogOutButton } from "./StyledElements";
+import {
+  SettingsLine,
+  SettingsNavSection,
+  SettingsTabContainer,
+  tabsMap,
+} from "..";
 
-const Settings = () => {
+export const Settings = () => {
   const dispatch = useDispatch();
 
   const appVersion = "Alpha 0.0.1"; //mocking
@@ -26,7 +28,7 @@ const Settings = () => {
 
   const [activeTab, setActiveTab] = useState(initialActiveTabState.header);
   const [activeTabContent, setActiveTabContent] = useState(
-    initialActiveTabState.content,
+    initialActiveTabState.content
   );
 
   const tabArray = Object.entries(tabsMap).map(([name, tab]) => ({
@@ -67,7 +69,8 @@ const Settings = () => {
         bottom: 0,
         left: 0,
         zIndex: 50,
-      }}>
+      }}
+    >
       <Stack
         sx={{
           bgcolor: "#2b2d31",
@@ -77,11 +80,13 @@ const Settings = () => {
           flexBasis: "218px",
           justifyContent: "flex-start",
           alignItems: "end",
-        }}>
+        }}
+      >
         <NavLink
           style={{
             padding: "60px 6px 60px 20px",
-          }}>
+          }}
+        >
           {Object.keys(groupedTabs).map((group) => (
             <SettingsNavSection
               key={group}
@@ -113,7 +118,8 @@ const Settings = () => {
           justifyContent: "flex-start",
           minHeight: "100%",
           overflowY: "scroll",
-        }}>
+        }}
+      >
         <Stack
           sx={{
             minWidth: "460px",
@@ -122,7 +128,8 @@ const Settings = () => {
             pb: "80px",
             pt: "60px",
             paddingX: "40px",
-          }}>
+          }}
+        >
           <List>
             <SettingsTabContainer
               header={activeTab}
@@ -137,5 +144,3 @@ const Settings = () => {
     </Stack>
   );
 };
-
-export default Settings;

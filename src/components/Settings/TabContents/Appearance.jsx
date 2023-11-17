@@ -1,10 +1,10 @@
 import { Radio, Stack, Tooltip } from "@mui/material";
-import SettingsLine from "../SettingsLine";
 import { useState } from "react";
 import { PrettoSlider, Title } from "../StyledElements";
 import { BsCheckLg } from "react-icons/bs";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AntSwitch } from "../StyledElements";
+import { SettingsLine } from "../SettingsLine";
 
 export const AppearanceTabContainer = () => {
   const [selectedValue, setSelectedValue] = useState("dark");
@@ -38,7 +38,8 @@ export const AppearanceTabContainer = () => {
               alignItems: "center",
               border: selectedValue === "light" ? "2px solid #5865f2" : "none",
               position: "relative",
-            }}>
+            }}
+          >
             <Radio
               checked={selectedValue === "light"}
               onChange={handleChange}
@@ -73,7 +74,8 @@ export const AppearanceTabContainer = () => {
               justifyContent: "center",
               alignItems: "center",
               position: "relative",
-            }}>
+            }}
+          >
             <Radio
               checked={selectedValue === "dark"}
               onChange={handleChange}

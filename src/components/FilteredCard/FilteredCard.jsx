@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import Separator from "../Separator/Separator";
+import { Separator } from "..";
 
 export const FilteredCard = ({ card }) => {
   return (
@@ -14,7 +14,8 @@ export const FilteredCard = ({ card }) => {
           "&:hover img": {
             transform: "scale(1.05)",
           },
-        }}>
+        }}
+      >
         <Stack
           sx={{
             width: "240px",
@@ -22,7 +23,8 @@ export const FilteredCard = ({ card }) => {
             flexShrink: 0,
             overflow: "hidden",
             borderRadius: "8px",
-          }}>
+          }}
+        >
           <img
             src={card.banner}
             alt="banner"
@@ -43,7 +45,8 @@ export const FilteredCard = ({ card }) => {
                 p: 0,
                 borderRadius: "8px",
                 mb: "6px",
-              }}>
+              }}
+            >
               <img src={card.icon} style={{ borderRadius: "8px" }} />
             </Stack>
             <Typography
@@ -54,7 +57,8 @@ export const FilteredCard = ({ card }) => {
                 fontWeight: 700,
                 p: 0,
                 mb: "6px",
-              }}>
+              }}
+            >
               {card.title}
             </Typography>
             <Typography
@@ -63,7 +67,8 @@ export const FilteredCard = ({ card }) => {
                 fontSize: "14px",
                 p: 0,
                 mb: "auto",
-              }}>
+              }}
+            >
               {card.description}
             </Typography>
             <Stack
@@ -74,7 +79,8 @@ export const FilteredCard = ({ card }) => {
                 color: "#b5bac1",
                 fontSize: "12px",
                 p: 0,
-              }}>
+              }}
+            >
               <Typography sx={{ fontSize: "12px" }}>
                 {card.onlineUsers} Online
               </Typography>

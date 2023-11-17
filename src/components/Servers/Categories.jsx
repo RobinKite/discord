@@ -14,7 +14,8 @@ const CategoryButton = styled(Button)(() => ({
     "&:focus": { backgroundColor: "#5865f2", color: "#fff" },
   },
 }));
-const Categories = () => {
+
+export const Categories = () => {
   return (
     <List
       sx={{
@@ -24,7 +25,8 @@ const Categories = () => {
         display: "inline-flex",
         flexWrap: "wrap",
         width: "848px",
-      }}>
+      }}
+    >
       <CategoryButton>All (0)</CategoryButton>
       <CategoryButton>Gaming (0)</CategoryButton>
       <CategoryButton>Entertainment (0)</CategoryButton>
@@ -36,5 +38,3 @@ const Categories = () => {
     </List>
   );
 };
-
-export default Categories;

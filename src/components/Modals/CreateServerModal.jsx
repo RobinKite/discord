@@ -3,11 +3,11 @@ import { closeModal } from "@/redux/slices/uiSlice";
 import { Dialog, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
-import DialogInner from "./DialogInner";
 import { IoClose } from "react-icons/io5";
 import { createServer } from "@/redux/slices/serverSlice";
+import { DialogInner } from "..";
 
-const CreateServerModal = () => {
+export const CreateServerModal = () => {
   const [step, setStep] = useState(1);
   const [option, setOption] = useState(null);
   const dispatch = useDispatch();
@@ -82,7 +82,8 @@ const CreateServerModal = () => {
             transition: "fill",
             transitionDuration: "0.3s",
           },
-        }}>
+        }}
+      >
         <IoClose size={32} />
       </IconButton>
       <DialogInner
@@ -101,5 +102,3 @@ const CreateServerModal = () => {
     </Dialog>
   );
 };
-
-export default CreateServerModal;

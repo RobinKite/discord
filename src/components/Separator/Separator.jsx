@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 
-const Separator = () => {
+export const Separator = () => {
   return (
     <Stack
       variant="span"
@@ -15,5 +15,3 @@ const Separator = () => {
     />
   );
 };
-
-export default Separator;

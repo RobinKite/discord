@@ -1,8 +1,8 @@
-import SettingsLine from "../SettingsLine";
 import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AntSwitch } from "../StyledElements";
+import { SettingsLine } from "../SettingsLine";
 
 export const NotificationsTabContent = () => {
   return (

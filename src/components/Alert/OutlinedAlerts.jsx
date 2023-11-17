@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material";
 import PropTypes from "prop-types";
 
-export default function OutlinedAlerts({ error }) {
+export function OutlinedAlerts({ error }) {
   return (
     <Alert
       className="mb-6 text-center text-sm"

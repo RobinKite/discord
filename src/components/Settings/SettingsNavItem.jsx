@@ -1,7 +1,7 @@
 import { Button, ListItem } from "@mui/material";
 import PropTypes from "prop-types";
 
-const SettingsNavItem = ({ name, isActive, onClick }) => {
+export const SettingsNavItem = ({ name, isActive, onClick }) => {
   return (
     <ListItem sx={{ p: 0, mb: "2px" }}>
       <Button
@@ -25,7 +25,8 @@ const SettingsNavItem = ({ name, isActive, onClick }) => {
             color: isActive ? "white" : "#B5BAC1",
           },
         }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         {name}
       </Button>
     </ListItem>
@@ -42,5 +43,3 @@ SettingsNavItem.defaultProps = {
   isActive: false,
   onClick: null,
 };
-
-export default SettingsNavItem;

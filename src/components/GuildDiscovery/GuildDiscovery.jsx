@@ -1,7 +1,6 @@
 import { Grid, IconButton, Input, Stack, Typography } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import ServerCard from "../ServerCard/ServerCard";
 import { NavLink, useNavigate } from "react-router-dom";
 import footerImage from "../../assets/footer_image.svg";
 import headerImage from "../../assets/discover_header.svg";
@@ -9,6 +8,7 @@ import { SAMPLE_CARDS } from "@/constants/mock";
 import { useEffect, useState } from "react";
 import { setUnsubbedServers } from "@/redux/slices/serverSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ServerCard } from "..";
 
 const DiscoverTextField = {
   fontSize: "16px",
@@ -59,7 +59,8 @@ export const GuildDiscovery = () => {
         width: "100%",
         maxHeight: "100vh",
         overflow: "auto",
-      }}>
+      }}
+    >
       <Stack
         alignItems="center"
         justifyContent="center"
@@ -71,7 +72,8 @@ export const GuildDiscovery = () => {
           backgroundRepeat: "no-repeat",
           paddingY: "110px",
           borderRadius: "8px",
-        }}>
+        }}
+      >
         <Stack
           alignItems="center"
           spacing={3}
@@ -80,14 +82,17 @@ export const GuildDiscovery = () => {
             minWidth: "360px",
             maxWidth: "720px",
             margin: "0 240px",
-          }}>
+          }}
+        >
           <Typography
             variant="h1"
-            sx={{ color: "#fff", fontSize: "20px", fontWeight: 700 }}>
+            sx={{ color: "#fff", fontSize: "20px", fontWeight: 700 }}
+          >
             Find your community on Discord
           </Typography>
           <Typography
-            sx={{ color: "#fff", fontSize: "14px", textAlign: "center" }}>
+            sx={{ color: "#fff", fontSize: "14px", textAlign: "center" }}
+          >
             From gaming, to music, to learning, theres a place for you.
           </Typography>
           <Stack sx={{ position: "relative" }}>
@@ -96,7 +101,8 @@ export const GuildDiscovery = () => {
                 inputValue
                   ? `/filtered-servers?query=${encodeURIComponent(inputValue)}`
                   : null
-              }>
+              }
+            >
               <Input
                 sx={DiscoverTextField}
                 placeholder="Explore communities"
@@ -112,7 +118,8 @@ export const GuildDiscovery = () => {
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}
-                sx={{ position: "absolute", top: "8px", right: "8px" }}>
+                sx={{ position: "absolute", top: "8px", right: "8px" }}
+              >
                 <Typography sx={{ color: "#a9a7a7", fontSize: "12px" }}>
                   &quot;Enter&quot; to Search
                 </Typography>
@@ -123,7 +130,8 @@ export const GuildDiscovery = () => {
                     width: "25px",
                     p: "0 4px",
                     "&:hover": { bgcolor: "#313338" },
-                  }}>
+                  }}
+                >
                   <RxCross2 color="#fff" />
                 </IconButton>
               </Stack>
@@ -140,7 +148,8 @@ export const GuildDiscovery = () => {
       <Stack spacing={4}>
         <Typography
           variant="h2"
-          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 700 }}>
+          sx={{ color: "#f2f3f5", fontSize: "20px", fontWeight: 700 }}
+        >
           Featured communities
         </Typography>
         <Grid
@@ -148,7 +157,8 @@ export const GuildDiscovery = () => {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill,minmax(248px, 1fr))",
             gap: "16px",
-          }}>
+          }}
+        >
           {allServers.map((card) => (
             <ServerCard key={card.serverId} card={card} />
           ))}
@@ -158,7 +168,8 @@ export const GuildDiscovery = () => {
         <img src={footerImage} alt="footer" />
         <Typography
           variant="h2"
-          sx={{ color: "#f2f3f5", fontSize: "16px", fontWeight: 700 }}>
+          sx={{ color: "#f2f3f5", fontSize: "16px", fontWeight: 700 }}
+        >
           There are more communities out there!
         </Typography>
         <NavLink
@@ -168,7 +179,8 @@ export const GuildDiscovery = () => {
             fontSize: "14px",
             fontWeight: 500,
             "&:hover": { border: "1px solid #00a8fc" },
-          }}>
+          }}
+        >
           Try searching for them
         </NavLink>
       </Stack>

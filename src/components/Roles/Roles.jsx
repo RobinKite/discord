@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "@/components";
+import { ContextMenu, User } from "@/components";
 import { BiMinus } from "react-icons/bi";
 import { Status } from "@/constants";
 import { mapUserData } from "@/utils/user";
 import { PopUpPositions } from "@/constants";
 import { useRef, useState } from "react";
-import { ContextMenu } from "../ContextMenu/ContextMenu";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { setProfile } from "@/redux/slices/profileSlice";
 
-export default function Roles() {
+export function Roles() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.server.currentServer.users);
   const sortedUsers = mapUserData(users);
@@ -72,7 +71,8 @@ export default function Roles() {
                     ? "opacity-30 transition-opacity hover:opacity-100"
                     : ""
                 }
-                onContextMenu={(e) => handleOnContextMenu(e, user)}>
+                onContextMenu={(e) => handleOnContextMenu(e, user)}
+              >
                 <User user={user} position={PopUpPositions.USER_LIST} />
               </li>
             ))}

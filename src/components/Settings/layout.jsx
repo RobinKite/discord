@@ -1,10 +1,12 @@
-import { AccountTabContent } from "./TabContents/Account";
-import { AppearanceTabContainer } from "./TabContents/Appearance";
-import { DevicesTabContent } from "./TabContents/Devices";
-import { FriendsTabContent } from "./TabContents/Friends";
-import { NotificationsTabContent } from "./TabContents/Notifications";
-import { ProfileTabContent } from "./TabContents/Profile";
-import { VoiceVideoTabContent } from "./TabContents/VoiceVideo";
+import {
+  AccountTabContent,
+  AppearanceTabContainer,
+  DevicesTabContent,
+  FriendsTabContent,
+  NotificationsTabContent,
+  ProfileTabContent,
+  VoiceVideoTabContent,
+} from "..";
 
 export const tabsMap = {
   "My Account": {

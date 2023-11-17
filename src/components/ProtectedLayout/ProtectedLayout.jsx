@@ -2,13 +2,11 @@ import { Modal } from "@/constants";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import Settings from "../Settings/Settings";
-import PopUp from "../PopUp/PopUp";
-import CreateServerModal from "../Modals/CreateServerModal";
 import { Profile } from "@/features/Profile/Profile";
 import { addNotification } from "@/redux/slices/notificationsSlice";
 import { updateNotificationCount } from "@/redux/slices/serverSlice";
 import { useDispatch } from "react-redux";
+import { CreateServerModal, PopUp, Settings } from "..";
 
 export function ProtectedLayout() {
   const modalStack = useSelector((state) => state.ui.modalStack);
@@ -21,7 +19,7 @@ export function ProtectedLayout() {
 
   useEffect(() => {
     dispatch(
-      addNotification({ id: "0", message: "test", type: "", serverId: "1" }),
+      addNotification({ id: "0", message: "test", type: "", serverId: "1" })
     );
     dispatch(updateNotificationCount("1"));
   }, [dispatch]);

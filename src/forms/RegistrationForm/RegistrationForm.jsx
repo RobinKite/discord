@@ -1,13 +1,16 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import validationSchema from "./validationSchema";
-import { Button, Input } from "@/components";
-import CustomDateSelector from "@/components/CustomDateSelector/CustomDateSelector";
+import {
+  Button,
+  CustomDateSelector,
+  Input,
+  OutlinedAlerts,
+} from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { register, setIsLoading } from "@/redux/slices/authSlice";
 import { Oval } from "react-loader-spinner";
 import { Link, Stack, Typography } from "@mui/material";
-import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
 import { useRef, useState } from "react";
 
 const StyledStackSX = {

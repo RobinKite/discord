@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { useState, useEffect } from "react";
 
-const Stopwatch = () => {
+export const Stopwatch = () => {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -30,5 +30,3 @@ const Stopwatch = () => {
     </Stack>
   );
 };
-
-export default Stopwatch;

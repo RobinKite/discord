@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import Roles from "../Roles/Roles";
+import { Roles } from "..";
 
 const StyledStackSX = (theme) => ({
   overflowY: "auto",

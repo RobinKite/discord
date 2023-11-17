@@ -3,9 +3,9 @@ import { BsCircleFill } from "react-icons/bs";
 import { SiDiscord } from "react-icons/si";
 import { EditButton, Title } from "../StyledElements";
 import Pencil from "@/assets/pencil.png";
-import Stopwatch from "../StopWatch/StopWatch";
+import { Stopwatch } from "../StopWatch/StopWatch";
 
-const ProfileReview = () => {
+export const ProfileReview = () => {
   return (
     <Stack
       sx={{
@@ -13,14 +13,16 @@ const ProfileReview = () => {
         bgcolor: "#1e1f22",
         borderRadius: "8px",
         position: "relative",
-      }}>
+      }}
+    >
       <Stack
         sx={{
           height: "60px",
           bgcolor: "#f45db0",
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
-        }}></Stack>
+        }}
+      ></Stack>
       <SiDiscord
         size={86}
         color="white"
@@ -52,11 +54,13 @@ const ProfileReview = () => {
           margin: "48px 16px 16px",
           borderRadius: "8px",
           color: "#fff",
-        }}>
+        }}
+      >
         <Typography
           variant="h6"
           component="h1"
-          sx={{ fontSize: "20px", fontWeight: "700" }}>
+          sx={{ fontSize: "20px", fontWeight: "700" }}
+        >
           tadimm
         </Typography>
         <Typography sx={{ fontSize: "14px" }}>tadimm</Typography>
@@ -77,7 +81,8 @@ const ProfileReview = () => {
             direction="row"
             alignItems="center"
             spacing={2}
-            sx={{ mb: "12px" }}>
+            sx={{ mb: "12px" }}
+          >
             <img
               src={Pencil}
               style={{
@@ -98,5 +103,3 @@ const ProfileReview = () => {
     </Stack>
   );
 };
-
-export default ProfileReview;

@@ -1,5 +1,4 @@
 import { MenuItem, Stack, Typography } from "@mui/material";
-import SettingsLine from "../SettingsLine";
 import {
   Title,
   CustomSelect,
@@ -7,9 +6,10 @@ import {
   SettingsTitle,
   MainButton,
 } from "../StyledElements";
-import MicTest from "../MicTest/MicTest";
 import camera from "../../../assets/camera.svg";
 import { useEffect, useState } from "react";
+import { MicTest } from "../MicTest/MicTest";
+import { SettingsLine } from "../SettingsLine";
 
 export const VoiceVideoTabContent = () => {
   const [inputDevice, setInputDevice] = useState("");
@@ -23,10 +23,10 @@ export const VoiceVideoTabContent = () => {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
       localInputDevices = devices.filter(
-        (device) => device.kind === "audioinput",
+        (device) => device.kind === "audioinput"
       );
       localOutputDevices = devices.filter(
-        (device) => device.kind === "audiooutput",
+        (device) => device.kind === "audiooutput"
       );
       setInputDevices(localInputDevices);
       setOutputDevices(localOutputDevices);
@@ -50,7 +50,8 @@ export const VoiceVideoTabContent = () => {
           <Title component="h3">Input device</Title>
           <CustomSelect
             value={inputDevice}
-            onChange={(e) => setInputDevice(e.target.value)}>
+            onChange={(e) => setInputDevice(e.target.value)}
+          >
             {inputDevices.map((device) => (
               <MenuItem key={device.deviceId} value={device.deviceId}>
                 {device.label}
@@ -68,7 +69,8 @@ export const VoiceVideoTabContent = () => {
           <Title component="h3">Output device</Title>
           <CustomSelect
             value={outputDevice}
-            onChange={(e) => setOutputDevice(e.target.value)}>
+            onChange={(e) => setOutputDevice(e.target.value)}
+          >
             {outputDevices.map((device) => (
               <MenuItem key={device.deviceId} value={device.deviceId}>
                 {device.label}
@@ -103,7 +105,8 @@ export const VoiceVideoTabContent = () => {
           bgcolor: "#2b2d31",
           border: "1px solid #1e1f22",
           borderRadius: "4px",
-        }}>
+        }}
+      >
         <Stack sx={{ width: "166px", height: "101px" }}>
           <img src={camera} />
         </Stack>

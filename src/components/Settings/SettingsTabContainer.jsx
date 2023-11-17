@@ -1,7 +1,7 @@
 import { List, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
-const SettingsTabContainer = ({ header, content }) => {
+export const SettingsTabContainer = ({ header, content }) => {
   return (
     <List>
       <Typography
@@ -11,7 +11,8 @@ const SettingsTabContainer = ({ header, content }) => {
           fontWeight: 500,
           color: "#f2f3f5",
           fontSize: "16px",
-        }}>
+        }}
+      >
         {header}
       </Typography>
       {content}
@@ -27,5 +28,3 @@ SettingsTabContainer.propTypes = {
 SettingsTabContainer.defaultProps = {
   header: "",
 };
-
-export default SettingsTabContainer;

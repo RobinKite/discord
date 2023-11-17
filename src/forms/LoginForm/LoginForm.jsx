@@ -3,11 +3,10 @@ import { Formik, Form } from "formik";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Oval } from "react-loader-spinner";
-import { Input, Button } from "@/components";
+import { Input, Button, OutlinedAlerts } from "@/components";
 import { login, setIsLoading } from "@/redux/slices/authSlice";
 import validationSchema from "./validationSchema";
 import { useRef, useState } from "react";
-import OutlinedAlerts from "@/components/Alert/OutlinedAlerts";
 
 const StyledStackSX = {
   direction: "column",

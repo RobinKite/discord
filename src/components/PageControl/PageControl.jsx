@@ -1,7 +1,7 @@
 import { IconButton, Link, Stack } from "@mui/material";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const PageControl = ({ currentPage, totalPages, onPageChange }) => {
+export const PageControl = ({ currentPage, totalPages, onPageChange }) => {
   const handlePrevPage = () => {
     onPageChange(currentPage - 1);
   };
@@ -15,7 +15,8 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
       direction="row"
       alignItems="center"
       justifyContent="center"
-      sx={{ mt: "20px", p: "4px" }}>
+      sx={{ mt: "20px", p: "4px" }}
+    >
       <IconButton
         onClick={handlePrevPage}
         disabled={currentPage === 1}
@@ -33,7 +34,8 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:disabled": {
             color: "#c0c1c2",
           },
-        }}>
+        }}
+      >
         <IoIosArrowBack
           size={16}
           style={{ marginRight: "4px", fill: "current" }}
@@ -57,7 +59,8 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
             margin: "4px",
             cursor: "pointer",
           }}
-          onClick={() => onPageChange(index + 1)}>
+          onClick={() => onPageChange(index + 1)}
+        >
           {index + 1}
         </Link>
       ))}
@@ -78,7 +81,8 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
           "&:disabled": {
             color: "#a4a5a7",
           },
-        }}>
+        }}
+      >
         Next
         <IoIosArrowForward
           size={16}
@@ -88,5 +92,3 @@ const PageControl = ({ currentPage, totalPages, onPageChange }) => {
     </Stack>
   );
 };
-
-export default PageControl;

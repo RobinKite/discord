@@ -23,7 +23,7 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-const CustomDateSelector = ({
+export const CustomDateSelector = ({
   required,
   dayId,
   monthId,
@@ -51,7 +51,7 @@ const CustomDateSelector = ({
         >
           Date of birth
           {required && (
-            <span className="ml-[3px] whitespace-nowrap font-star text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
+            <span className="font-star ml-[3px] whitespace-nowrap text-xs leading-[1.4375em] tracking-[0.00938em] text-[#dd3f41]">
               *
             </span>
           )}
@@ -119,8 +119,6 @@ const DateSelect = ({ field, meta, label, id, array, required }) => {
     </FormControl>
   );
 };
-
-export default CustomDateSelector;
 
 CustomDateSelector.propTypes = {
   dayId: PropTypes.string,

@@ -1,7 +1,7 @@
-import SettingsLine from "../SettingsLine";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AntSwitch, Title } from "../StyledElements";
+import { SettingsLine } from "../SettingsLine";
 
 export const FriendsTabContent = () => {
   return (

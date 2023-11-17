@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SettingsLine from "../SettingsLine";
 import {
   Input,
   Stack,
@@ -14,8 +13,9 @@ import {
   Title,
   UserTextField,
 } from "../StyledElements";
-import ProfileReview from "../ProfileReview/ProfileReview";
 import { BsPencilFill } from "react-icons/bs";
+import { ProfileReview } from "../ProfileReview/ProfileReview";
+import { SettingsLine } from "../SettingsLine";
 
 export const ProfileTabContent = () => {
   const [language, setLanguage] = useState("");
@@ -30,7 +30,8 @@ export const ProfileTabContent = () => {
         gridTemplateColumns: "1fr 1fr",
         gap: "35px",
         alignItems: "start",
-      }}>
+      }}
+    >
       <Stack>
         <Stack direction="column">
           <Title component="h3">Display Name</Title>
@@ -123,7 +124,8 @@ export const ProfileTabContent = () => {
             <CustomSelect
               id="demo-select-small"
               value={language}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <MenuItem value={"ua"}>Ukrainian</MenuItem>
               <MenuItem value={"en"}>English</MenuItem>
               <MenuItem value={"fr"}>French</MenuItem>

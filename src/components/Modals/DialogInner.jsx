@@ -36,7 +36,7 @@ const Input = styled(TextField)(() => ({
   },
 }));
 
-const DialogInner = ({
+export const DialogInner = ({
   inputRef,
   handleFileSelect,
   handleFileChange,
@@ -68,14 +68,16 @@ const DialogInner = ({
               fontSize: "24px",
               marginBottom: "8px",
               paddingBottom: 0,
-            }}>
+            }}
+          >
             Create a server
           </DialogTitle>
 
           <DialogContent sx={{ padding: "16px" }}>
             <Typography
               align={"center"}
-              sx={{ color: "#4e5058", marginBottom: "24px" }}>
+              sx={{ color: "#4e5058", marginBottom: "24px" }}
+            >
               Your server is where you and your friends hang out. Make yours and
               start talking.
             </Typography>
@@ -88,7 +90,8 @@ const DialogInner = ({
                 "&:hover": { backgroundColor: "#4e5058" },
                 textTransform: "none",
               }}
-              onClick={handleChooseCreate}>
+              onClick={handleChooseCreate}
+            >
               Create my own
             </Button>
           </DialogContent>
@@ -101,7 +104,8 @@ const DialogInner = ({
                 fontSize: "20px",
                 marginBottom: "8px",
               }}
-              variant={"h2"}>
+              variant={"h2"}
+            >
               Have an invite already?
             </Typography>
             <Button
@@ -113,7 +117,8 @@ const DialogInner = ({
                 "&:hover": { backgroundColor: "#4e5058" },
                 textTransform: "none",
               }}
-              onClick={handleChooseJoin}>
+              onClick={handleChooseJoin}
+            >
               Join a server
             </Button>
           </DialogContent>
@@ -132,31 +137,30 @@ const DialogInner = ({
                   fontSize: "24px",
                   marginBottom: "8px",
                   paddingBottom: 0,
-                }}>
+                }}
+              >
                 Customize your server
               </DialogTitle>
               <DialogContent>
-                <Typography
-                  color="#4e5058"
-                  align="center">
+                <Typography color="#4e5058" align="center">
                   Give your new server a personality with a name and an icon.
                   You can always change it later.
                 </Typography>
                 <Formik
                   initialValues={initialValuesCreateForm}
-                  onSubmit={handleConfirmCreate}>
+                  onSubmit={handleConfirmCreate}
+                >
                   {(form) => (
                     <Form>
-                      <FormControl
-                        fullWidth
-                        variant="standard">
+                      <FormControl fullWidth variant="standard">
                         <IconButton
                           sx={{
                             "&:hover": {
                               bgcolor: "transparent",
                             },
                           }}
-                          onClick={handleFileSelect}>
+                          onClick={handleFileSelect}
+                        >
                           <UploadSVG />
                         </IconButton>
                         <input
@@ -172,23 +176,18 @@ const DialogInner = ({
                         fullWidth
                         variant="standard"
                         required
-                        sx={{ marginTop: "18px" }}>
-                        <Label
-                          shrink
-                          htmlFor="title">
+                        sx={{ marginTop: "18px" }}
+                      >
+                        <Label shrink htmlFor="title">
                           Server name
                         </Label>
-                        <Field
-                          as={Input}
-                          id="title"
-                          label=""
-                          name="title"
-                        />
+                        <Field as={Input} id="title" label="" name="title" />
                       </FormControl>
                       <Typography
                         color="#5c5e66"
                         fontSize="12px"
-                        sx={{ marginBottom: "16px" }}>
+                        sx={{ marginBottom: "16px" }}
+                      >
                         By creating a server, you agree to Discord&apos;s
                         Community Guidelines.
                       </Typography>
@@ -197,7 +196,8 @@ const DialogInner = ({
                         sx={{
                           justifyContent: "space-between",
                           // bgcolor: "#f2f3f5",
-                        }}>
+                        }}
+                      >
                         <Button
                           variant="text"
                           onClick={handleBack}
@@ -211,13 +211,15 @@ const DialogInner = ({
                               bgcolor: "transparent",
                               textDecoration: "underline",
                             },
-                          }}>
+                          }}
+                        >
                           Back
                         </Button>
                         <Button
                           disabled={!form.isValid}
                           type="submit"
-                          sx={{ textTransform: "none", padding: "10px 28px" }}>
+                          sx={{ textTransform: "none", padding: "10px 28px" }}
+                        >
                           Create
                         </Button>
                       </Stack>
@@ -237,29 +239,31 @@ const DialogInner = ({
                   fontSize: "24px",
                   marginBottom: "8px",
                   paddingBottom: 0,
-                }}>
+                }}
+              >
                 Join a Server
               </DialogTitle>
               <DialogContent>
                 <Typography
                   color="#4e5058"
                   align="center"
-                  sx={{ marginBottom: "16px" }}>
+                  sx={{ marginBottom: "16px" }}
+                >
                   Enter an invite below to join an existing server
                 </Typography>
                 <Formik
                   initialValues={initialValuesJoinForm}
-                  onSubmit={handleConfirmJoin}>
+                  onSubmit={handleConfirmJoin}
+                >
                   {(form) => (
                     <Form>
                       <FormControl
                         fullWidth
                         variant="standard"
                         required
-                        sx={{ marginTop: "18px", marginBottom: "12px" }}>
-                        <Label
-                          shrink
-                          htmlFor="inviteLink">
+                        sx={{ marginTop: "18px", marginBottom: "12px" }}
+                      >
+                        <Label shrink htmlFor="inviteLink">
                           Invite link
                         </Label>
                         <Field
@@ -277,13 +281,15 @@ const DialogInner = ({
                         sx={{
                           marginBottom: "8px",
                           textTransform: "uppercase",
-                        }}>
+                        }}
+                      >
                         Invites should look like
                       </Typography>
                       <Typography
                         color="#5c5e66"
                         fontSize="14px"
-                        sx={{ marginBottom: "16px" }}>
+                        sx={{ marginBottom: "16px" }}
+                      >
                         hTKzmak
                       </Typography>
                       <Button
@@ -292,10 +298,7 @@ const DialogInner = ({
                         color="inherit"
                         startIcon={<DiscoverSVG />}
                         endIcon={
-                          <IoChevronForwardSharp
-                            color="#4f5660"
-                            size="20"
-                          />
+                          <IoChevronForwardSharp color="#4f5660" size="20" />
                         }
                         sx={{
                           marginBottom: "16px",
@@ -307,18 +310,18 @@ const DialogInner = ({
                           "&:hover": {
                             bgcolor: "#80848e29",
                           },
-                        }}>
+                        }}
+                      >
                         <Stack>
                           <Typography
                             variant="h3"
                             color="#060607"
                             fontSize="16px"
-                            fontWeight="bold">
+                            fontWeight="bold"
+                          >
                             Don&apos;t have an invite?
                           </Typography>
-                          <Typography
-                            color="#313338"
-                            fontSize="12px">
+                          <Typography color="#313338" fontSize="12px">
                             Check out Discoverable communities in Server
                             Discovery.
                           </Typography>
@@ -329,7 +332,8 @@ const DialogInner = ({
                         sx={{
                           justifyContent: "space-between",
                           // bgcolor: "#f2f3f5",
-                        }}>
+                        }}
+                      >
                         <Button
                           variant="text"
                           onClick={handleBack}
@@ -343,7 +347,8 @@ const DialogInner = ({
                               bgcolor: "transparent",
                               textDecoration: "underline",
                             },
-                          }}>
+                          }}
+                        >
                           Back
                         </Button>
                         <Button
@@ -352,7 +357,8 @@ const DialogInner = ({
                           sx={{ textTransform: "none", padding: "10px 16px" }}
                           onClick={() => {
                             handleModalClose();
-                          }}>
+                          }}
+                        >
                           Join Server
                         </Button>
                       </Stack>
@@ -382,5 +388,3 @@ DialogInner.propTypes = {
   option: PropTypes.string,
   step: PropTypes.number,
 };
-
-export default DialogInner;

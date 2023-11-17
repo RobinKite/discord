@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import SettingsLine from "../SettingsLine";
-import Review from "@/components/Settings/Review/Review";
 import {
   MainButton,
   RemovalButton,
   SettingsTitle,
   Title,
 } from "../StyledElements";
+import { Review } from "../Review/Review";
+import { SettingsLine } from "../SettingsLine";
 
 export const AccountTabContent = () => {
   const name = useSelector((state) => state.auth.name);

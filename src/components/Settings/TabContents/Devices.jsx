@@ -1,4 +1,4 @@
-import SettingsLine from "../SettingsLine";
+
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import { RiComputerLine } from "react-icons/ri";
@@ -11,6 +11,7 @@ import {
   RemovalButton,
   Title,
 } from "../StyledElements";
+import { SettingsLine } from "../SettingsLine";
 
 export const DevicesTabContent = () => {
   return (

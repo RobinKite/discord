@@ -4,12 +4,12 @@ import { closeModal, fillPopupContent } from "@/redux/slices/uiSlice";
 import { formatRegistrationDate } from "@/utils";
 import { useBbox } from "@/hooks/useBbox";
 // import { useEffect, useState, useMemo } from "react";
-import { getPosition } from "./positions";
-import PopUpInner from "./PopUpInner";
+// import { getPosition } from "./positions";
 import { useMemo } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
+import { PopUpInner, getPosition } from "..";
 
-const PopUp = () => {
+export const PopUp = () => {
   const user = useSelector((state) => state.ui.popupContent);
   const [calledAt, parentBBox] = useSelector((state) => state.ui.popupPosition);
   const [bbox, ref] = useBbox();
@@ -20,10 +20,10 @@ const PopUp = () => {
   };
 
   const userRegistrationDate = formatRegistrationDate(
-    user.userRegistrationDate,
+    user.userRegistrationDate
   );
   const serverRegistrationDate = formatRegistrationDate(
-    user.serverRegistrationDate,
+    user.serverRegistrationDate
   );
 
   const handleModalClose = () => {
@@ -63,5 +63,3 @@ const PopUp = () => {
     </Stack>
   );
 };
-
-export default PopUp;
